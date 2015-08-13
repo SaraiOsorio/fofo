@@ -1,0 +1,7 @@
+*.pyc
+*.jasper
+.project
+.pydevproject
+*.settings
+*.*~
+openerp-server.conf
