@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_lazada_import_wizard" model="ir.ui.view">
+            <field name="name">lazad.import.form</field>
+            <field name="model">lazada.import</field>
+            <field name="arch" type="xml">
+                <form string="Import">
+                <sheet>
+                    <group>
+                        <field name="input_file"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="journal_id" domain="[('type', '=', 'sale')]"/>
+                        </group>
+                        <group/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button special="cancel" string="Cancel"  icon="terp-gtk-stop"/>
+                    <button name="import_orders" string="Import" type="object" icon="terp-camera_test" class="oe_highlight"/>
+                </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_import_lazada" model="ir.actions.act_window">
+            <field name="name">Import Lazada Order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">lazada.import</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lazada_import_wizard"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem id="lazada_import_wiz_menu" name="Sales Lazada Import" action="action_import_lazada"
+                   parent= "lazada_main_menu"/>
+
+    </data>
+</openerp>

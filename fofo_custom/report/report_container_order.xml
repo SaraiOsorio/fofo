@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <template id="report_container">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.external_layout">
+                        <div class="oe_structure"/>
+                        <div class="page">
+                            <div>
+                                <span><h2>Container Order : <t t-esc="o.number"/></h2></span>
+                            </div>
+                            <div></div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Order Reference</th>
+                                        <th class="text-center">Order Date</th>
+                                        <th class="text-center">Inbound Shipper</th>
+                                        <th class="text-center">Outbound Shipper</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <td>
+                                            <span><t t-esc="o.number"/></span>
+                                        </td>
+                                        <td>
+                                            <span><t t-esc="o.date"/></span>
+                                        </td>
+                                        <td>
+                                            <span><t t-esc="o.inbound_shipper_id.name"/></span>
+                                        </td>
+                                        <td>
+                                            <span><t t-esc="o.outbound_shipper_id.name"/></span>
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Loading Date</th>
+                                        <th class="text-center">Shipping Date</th>
+                                        <th class="text-center">Arrival Date</th>
+                                        <th class="text-center">Destination</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <td>
+                                            <span><t t-esc="o.load_date"/></span>
+                                        </td>
+                                        <td>
+                                            <span><t t-esc="o.ship_date"/></span>
+                                        </td>
+                                        <td>
+                                            <span><t t-esc="o.arrive_date"/></span>
+                                        </td>
+                                        <td>
+                                            <span><t t-esc="o.location_id.name"/></span>
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>PO Number</th>
+                                        <th>Product</th>
+                                        <th>Supplier</th>
+                                        <th>Quantity</th>
+                                        <th>Product Unit of Measure</th>
+                                        <th>Volume</th>
+                                        <th>Weight</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.co_line_ids" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <span><t t-esc="line.reference"/></span>
+                                            </td>
+                                            <td>
+                                                <span><t t-esc="line.product_id.name"/></span>
+                                            </td>
+                                            <td>
+                                                <span><t t-esc="line.supplier_id.name"/></span>
+                                            </td>
+                                            <td>
+                                                <span><t t-esc="line.product_qty"/></span>
+                                            </td>
+                                            <td>
+                                                <span><t t-esc="line.product_uom.name"/></span>
+                                            </td>
+                                            <td>
+                                                <span><t t-esc="line.volume"/></span>
+                                            </td>
+                                            <td>
+                                                <span><t t-esc="line.weight"/></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            
+                            <div>
+                                <span><t t-esc="o.notes"/></span>
+                            </div>                            
+                            
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>

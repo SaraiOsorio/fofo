@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- Sequences for Internal Reference -->
+        <record id="seq_container_type" model="ir.sequence.type">
+            <field name="name">Container</field>
+            <field name="code">container.order</field>
+        </record>
+
+        <record id="seq_container_order" model="ir.sequence">
+            <field name="name">Container</field>
+            <field name="code">container.order</field>
+            <field name="prefix">CO</field>
+            <field name="padding">5</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+        </record>
+        
+        <record id="mt_co_confirmed" model="mail.message.subtype">
+            <field name="name">Container Order Sent to Shipper</field>
+            <field name="default" eval="False"/>
+            <field name="res_model">container.order</field>
+        </record>
+        <record id="mt_co_approved" model="mail.message.subtype">
+            <field name="name">Container Order Confirmed</field>
+            <field name="default" eval="False"/>
+            <field name="res_model">container.order</field>
+        </record>
+        <record id="mt_co_done" model="mail.message.subtype">
+            <field name="name">Container Order Done</field>
+            <field name="default" eval="False"/>
+            <field name="res_model">container.order</field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="sale_lazada_order_form">
+            <field name="name">lazada.sale.view.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="is_lazada_order"/>
+                    <field name="lazada_order_no"/>
+                </xpath>
+                <xpath expr="//tree[@string='Sales Order Lines']/field[@name='product_id']" position="before">
+                    <field name="is_lazada_order" invisible="True"/>
+                    <field name="lazada_order_no" invisible="True"/>
+                </xpath>
+                <xpath expr="//form[@string='Sales Order Lines']/group/group/field[@name='product_id']" position="before">
+                    <field name="is_lazada_order" invisible="True"/>
+                    <field name="lazada_order_no" invisible="True"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="sale_lazada_order_search">
+            <field name="name">lazada.sale.view.inherit.search</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@string='My']" position="after">
+                    <filter string="Lazada Order" domain="[('is_lazada_order','=',True)]" name="my_lazada_orders_filter"/>
+                </xpath>
+            </field>
+        </record>
+        
+        
+        <record id="lazada_sale_order_action" model="ir.actions.act_window">
+            <field name="name">Lazada Order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="context">{
+                    'default_is_lazada_order': 1
+                }
+            </field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel')),('is_lazada_order','=',True)]</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+        </record>
+        <menuitem action="lazada_sale_order_action" id="menu_lazada_order" parent="base.menu_sales" sequence="5"/>
+        
+       <record id="sale.action_orders" model="ir.actions.act_window">
+            <field name="name">Sales Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="context">{
+                    'search_default_my_sale_orders_filter': 1
+                }
+            </field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel')),('is_lazada_order','=',False)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a quotation that can be converted into a sales
+                    order.
+                </p><p>
+                    Odoo will help you efficiently handle the complete sales flow:
+                    quotation, sales order, delivery, invoicing and payment.
+                </p>
+            </field>
+        </record>
+            
+            
+    </data>
+</openerp>

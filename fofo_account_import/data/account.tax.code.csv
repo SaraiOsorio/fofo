@@ -1,0 +1,10 @@
+id,name,code,parent_id/id,sign,info
+Thai Chart of Taxes,Thai Chart of Taxes_Fofo,,,,1
+Taxable amounts,Taxable amounts,,Thai Chart of Taxes,1,
+Value Added Tax Base,Value Added Tax Base,,Taxable amounts,1,
+Output Tax Base,Output Tax Base,PP30_4,Value Added Tax Base,1,
+Input Tax Base,Input Tax Base,PP30_6,Value Added Tax Base,1,
+Taxes to be paid,Taxes to be paid,,Thai Chart of Taxes,1,
+Value Added Tax,Value Added Tax,,Taxes to be paid,1,
+Output Tax,Output Tax,PP30_5,Value Added Tax,1,
+Input Tax,Input Tax,PP30_7,Value Added Tax,-1,

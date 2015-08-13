@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <report 
+            id="container_order_reg"
+            model="container.order"
+            string="Container Order"
+            report_type="qweb-pdf"
+            name="fofo_custom.report_container"
+            file="fofo_custom.report_container"
+        />
+
+    </data>
+</openerp>

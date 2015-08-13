@@ -1,0 +1,11 @@
+
+<openerp>
+    <data>
+         <record id="res_partner_lazada" model="res.partner">
+            <field name="name">Lazada</field>
+            <field name="customer">1</field>
+            <field eval="0"  name="supplier"/>
+            <field name="is_company"></field>
+        </record>
+    </data>
+</openerp>

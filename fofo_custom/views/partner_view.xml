@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="partner_view_shipper">
+            <field name="name">partner.view.shipper</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Sales &amp; Purchases']/group/group/field[@name='supplier']" position="after">
+                    <field name="shipper" />
+                </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_res_partner_filter_shipper">
+            <field name="name">partner.view.shipper</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter" />
+            <field name="arch" type="xml">
+                <filter string="Suppliers" name="supplier" domain="[('supplier','=',1)]" help="Supplier Partners"  position="after">
+                    <filter string="Shippers" name="shipper" domain="[('shipper','=',1)]" help="Show Only Shippers"/>
+                </filter>
+            </field>
+        </record>
+
+    </data>
+</openerp>

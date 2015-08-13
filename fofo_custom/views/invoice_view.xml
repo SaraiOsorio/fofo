@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    
+        <record model="ir.ui.view" id="invoice_form_container_order">
+            <field name="name">account.invoice.form2.container</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="container_id" readonly="True"/>
+                    <field name="is_shipper_invoice" readonly="True"/>
+                </xpath>
+            </field>
+        </record>     
+
+    </data>
+</openerp>

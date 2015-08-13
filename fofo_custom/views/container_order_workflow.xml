@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record id="act_contain" model="workflow.activity">
+            <field name="wkf_id" ref="purchase.purchase_order"/>
+            <field name="name">contained</field>
+            <field name="kind">function</field>
+            <field name="action">wkf_order_contained()</field>
+        </record>    
+
+        <!--<record id="trans_confirm_contain" model="workflow.transition">
+            <field name="act_from" ref="purchase.act_router"/>
+            <field name="act_to" ref="act_contain"/>
+            <field name="condition">is_contained== True</field>
+        </record> -->
+
+        <record id="trans_confirm_contain_signal" model="workflow.transition">
+            <field name="act_from" ref="purchase.act_router"/>
+            <field name="act_to" ref="act_contain"/>
+            <field name="signal">purchase_contained</field>
+        </record>
+
+        <!--<record id="trans_contain_end_done" model="workflow.transition">
+            <field name="act_from" ref="act_contain"/>
+            <field name="act_to" ref="purchase.act_done"/>
+            <field name="condition">is_contained == True</field>
+        </record>-->
+        
+        
+
+        <record id="purchase.trans_router_invoice" model="workflow.transition">
+            <field name="act_from" ref="purchase.act_router"/>
+            <field name="act_to" ref="purchase.act_invoice"/>
+            <field name="condition">invoice_method=='order' and purchase_by_container == False</field>
+        </record>
+        <record id="purchase.trans_router_invoice_no_order" model="workflow.transition">
+            <field name="act_from" ref="purchase.act_router"/>
+            <field name="act_to" ref="purchase.act_invoice_end"/>
+            <field name="condition">invoice_method&lt;&gt;'order' and purchase_by_container == False</field>
+        </record>
+        
+        <record id="purchase.trans_router_picking" model="workflow.transition">
+            <field name="act_from" ref="purchase.act_router"/>
+            <field name="act_to" ref="purchase.act_picking"/>
+            <field name="condition">has_stockable_product()</field>
+        </record>
+
+        <record id="trans_confirmed_contain" model="workflow.transition">
+            <field name="act_from" ref="purchase.act_confirmed"/>
+            <field name="act_to" ref="act_contain"/>
+            <field name="signal">purchase_contained</field>
+        </record>
+
+    </data>
+</openerp>
+    

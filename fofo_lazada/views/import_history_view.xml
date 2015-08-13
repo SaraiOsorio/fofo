@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="lazada_import_history_form">
+            <field name="name">lazada.import.history.form</field>
+            <field name="model">import.history</field>
+            <field name="arch" type="xml">
+                 <form string="Lazada Import History" create="false" edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_id"/>
+                                <field name="created_at"/> 
+                                <field name="import_time"/> 
+                                 <field name="unit_price"/>
+                                 <field name="sale_line_id"/>
+                            </group>
+                            <group>
+                                <field name="seller_sku"/>
+                                <field name="order_number"/> 
+                                <field name="user_id"/> 
+                                <field name="status"/>
+                                <field name="order_status"/>
+                            </group>
+                            <group/>
+                        </group>
+                        <group>
+                            <field name="notes"/>
+                        </group>
+                    </sheet>
+                 </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="lazada_import_history_tree">
+            <field name="name">lazada.import.history.tree</field>
+            <field name="model">import.history</field>
+            <field name="arch" type="xml">
+                 <tree string="Lazada Import History" create="false" edit="false">
+                    <field name="product_id"/>
+                    <field name="order_number"/>
+                    <field name="user_id"/> 
+                     <field name="order_status"/>
+                 </tree>
+            </field>
+        </record>
+
+        <record id='lazada_import_history_action' model='ir.actions.act_window'>
+            <field name='name'>Lazada Import History</field>
+            <field name='res_model'>import.history</field>
+            <field name='view_type'>form</field>
+            <field name='view_mode'>tree,form</field>
+        </record>
+
+        <menuitem id="lazada_main_menu" name="Lazada Sales" parent="base.menu_base_partner"/>
+        <menuitem id="lazada_import_history_menu" name="Lazada History" parent="lazada_main_menu"
+                action="lazada_import_history_action" />
+    </data>
+</openerp>

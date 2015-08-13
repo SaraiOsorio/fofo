@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="container_size_form">
+            <field name="name">container.size.form</field>
+            <field name="model">container.size</field>
+            <field name="arch" type="xml">
+                 <form string="Container Size">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" placeholder="Width/Length/Height...."/>
+                            </group>
+                            <group>
+                                <field name="max_weight"/>
+                                <field name="max_volume"/>
+                            </group>                            
+                            <group/>
+                        </group>
+                    </sheet>
+                 </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="container_size_tree">
+            <field name="name">container.size.tree</field>
+            <field name="model">container.size</field>
+            <field name="arch" type="xml">
+                 <tree string="Container Size">
+                    <field name="name"/>
+                    <field name="max_weight"/>
+                    <field name="max_volume"/>
+                 </tree>
+            </field>
+        </record>
+
+        <record id='container_size_action' model='ir.actions.act_window'>
+            <field name='name'>Container Size</field>
+            <field name='res_model'>container.size</field>
+            <field name='view_type'>form</field>
+            <field name='view_mode'>tree,form</field>
+        </record>
+
+        <menuitem id="container_config_menu" name="Container" parent="purchase.menu_purchase_config_purchase"/>
+        <menuitem id="container_size_menu" name="Container Size" parent="container_config_menu"
+                action="container_size_action"/>
+
+        <record model="ir.ui.view" id="container_order_form">
+            <field name="name">container.order.form</field>
+            <field name="model">container.order</field>
+            <field name="arch" type="xml">
+                 <form string="Container Order"> 
+                    <header>
+                        <!-- <button name="send_to_shipper" string="Send to Inbound Shipper" 
+                                type="object" 
+                                attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"
+                                context="{'send_to_inbound':True}" class="oe_highlight"/>
+                        <button name="send_to_shipper" string="Send to Outbound Shipper" 
+                                type="object"
+                                attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"
+                                context="{'send_to_inbound':False}" class="oe_highlight"/> -->
+                        <button name="action_invoice_create" string="Create Shipper Invoices" 
+                                type="object"
+                                attrs="{'invisible': ['|', ('invoice_count', '>', 1), ('state', '!=', 'confirm')]}"
+                                class="oe_highlight"/>
+                        <button name="confirm_order" string="Confirm"
+                                attrs="{'invisible':[('state','not in',('draft','sent_to_shipper'))]}"
+                                class="oe_highlight" type="object"/> 
+                        <button name="cancel_order" type="object" string="Cancel" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                           <field name="number" class="oe_inline"/>
+                        </h1>
+                        <div class="oe_right oe_button_box" name="buttons" groups="base.group_user">
+                            <button type="object"
+                                name="view_picking"
+                                class="oe_stat_button"
+                                icon="fa-truck"
+                                attrs="{'invisible': [('shipment_count', '=', 0)]}">
+                                <field name="shipment_count" widget="statinfo" string="In Shipments" help="Incoming Shipments"/>
+                            </button> 
+                            <button type="object"
+                                name="view_invoice"
+                                class="oe_stat_button"
+                                icon="fa-truck"
+                                attrs="{'invisible': [('invoice_count', '=', 0)]}">
+                                <field name="invoice_count" widget="statinfo" string="Related Invoices" help="Inbound / Outbound Shipper Invoices"/>
+                            </button> 
+                        </div>                               
+                        <group>
+                            <group>
+                                <field name="container_size" on_change="onchange_container_size(container_size)" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                <field name="outbound_shipper_id" attrs="{'readonly':[('state','in',('done', 'cancel'))]}" domain="[('shipper','=',True)]"/>
+                                <field name="outbound_shipper_expense_id" on_change="onchange_shipper_cost(outbound_shipper_expense_id, inbound_shipper_expense_id)" domain="[('type','=', 'service')]"  attrs="{'readonly':[('state','in',( 'done', 'cancel'))]}"/>
+                                <field name="outbound_shipper_cost" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
+                                <field name="load_date" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
+                                <field name="ship_date" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
+                                <field name="container_shipper_number" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
+                            </group>
+                            <group>
+                                <field name="date" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                <field name="inbound_shipper_id" attrs="{'readonly':[('state','in',('done', 'cancel'))]}" domain="[('shipper','=',True)]"/>
+                                <field name="inbound_shipper_expense_id" on_change="onchange_shipper_cost(outbound_shipper_expense_id, inbound_shipper_expense_id)" domain="[('type','=', 'service')]" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
+                                <field name="inbound_shipper_cost" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
+                                <!-- <field name="etd" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/> -->
+                                <field name="arrive_date" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
+                                <field name="picking_type_id" on_change="onchange_picking_type_id(picking_type_id)" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                <field name="location_id" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                <field name="currency_id" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                            </group>
+                        </group>
+                        <notebook string="Container">
+                            <page string="Container Order Lines">
+                                <field name="co_line_ids" context="{'only_confirmed': True}" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}">
+                                    <tree string="Container Order Lines">
+                                        <field name="reference"/>
+                                        <field name="supplier_id"/>
+                                        <field name="product_id" context="{'co_line_ids': parent.co_line_ids}"/>
+                                        <field name="total_purchase_qty"/>
+                                        <field name="product_qty"/>
+                                        <field name="product_uom" string="Product UOM"/>
+                                        <field name="product_packaging" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                                        <field name="qty_package" string="Qty/Packages" invisible="0"/>
+                                        <field name="number_packages" invisible="0" string="Total Packages"/>
+                                        <field name="weight"/>
+                                        <field name="volume"/>
+                                        <field name="price_subtotal"/>
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <div>
+                                        <label for="amount_tax"/>
+                                        <button name="button_reset_taxes" states="draft,proforma2"
+                                            string="(update)" class="oe_link oe_edit_only"
+                                            help="Recompute taxes and total"/>
+                                    </div>
+                                    <field name="amount_tax" nolabel="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="amount_total" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <group  string="Weight / Volume Information">
+	                                <field name="max_weight"/>
+	                                <field name="max_volume"/>
+	                                <field name="total_weight"/>
+	                                <field name="total_volume"/>
+	                                <field name="total_shipping_cost"/>
+	                                <field name="shipping_cost_by_volume"/>
+                                </group>
+                                <separator string="Notes"/>
+                                <field name="notes" class="oe_inline" placeholder="Additional notes..."/>
+                            </page>
+                            <page string="Other Info">
+                                <group>
+                                    <group>
+                                        <field name="resp_user_id" required="1"  attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                        <field name="confirm_date"  attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                        <field name="confirm_by_id"  attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="company_id"  attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                        <field name="incoterm_id"  attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                        <field name="reference"  attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                        <field name="is_received" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Pickings">
+                                <field name="picking_ids"/>
+                            </page>
+                            <page string="Invoices">
+                                <field name="invoice_ids"  >
+                                    <tree colors="blue:state == 'draft';black:state in ('proforma','proforma2','open');gray:state == 'cancel'" string="Invoice">
+                                        <field name="partner_id" string="Supplier" groups="base.group_user"/>
+                                        <field name="commercial_partner_id" invisible="1"/>
+                                        <field name="date_invoice"/>
+                                        <field name="number"/>
+                                        <field name="reference" invisible="1"/>
+                                        <field name="name" invisible="1"/>
+                                        <field name="journal_id" invisible="1"/>
+                                        <field name="period_id" invisible="1" groups="account.group_account_user"/>
+                                        <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                                        <field name="user_id" string="Responsible"/>
+                                        <field name="date_due"/>
+                                        <field name="origin"/>
+                                        <field name="currency_id" groups="base.group_multi_currency"/>
+                                        <field name="residual" sum="Residual Amount"/>
+                                        <field name="amount_untaxed" sum="Untaxed Amount"/>
+                                        <field name="amount_total" sum="Total Amount"/>
+                                        <field name="state"/>
+                                        <field name="type" invisible="context.get('type',True)"/>
+                                    </tree>
+                                </field>
+                            </page>                            
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                 </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="container_order_tree">
+            <field name="name">container.order.tree</field>
+            <field name="model">container.order</field>
+            <field name="arch" type="xml">
+                 <tree string="Container Order">
+                    <field name="number" string="Number"/>
+                    <field name="container_size"/>
+                    <field name="date"/>
+                    <field name="load_date"/>
+                    <field name="ship_date"/>
+                    <field name="arrive_date"/>
+                    <field name="amount_total" />
+                    <field name="container_shipper_number"/>
+                    <field name="company_id" />
+                    <field name="resp_user_id"/>
+                    <field name="state"/>
+                 </tree>
+            </field>
+        </record>
+
+       <record id="search_view_container_order" model="ir.ui.view">
+            <field name="name">search.view.container.order</field>
+            <field name="model">container.order</field>
+            <field name="arch" type="xml">
+                <search string="Container Order">
+                    <field name="number" string="Number"/>
+                    <field name="container_size" string="Container Size"/>
+                    <field name="resp_user_id" string="Responsible User"/>
+                    <field name="outbound_shipper_id" string="Out Bound Shipper"/>
+                    <field name="inbound_shipper_id" string="In Bound Shipper"/>
+                    <filter name="draft" string="Draft" domain="[('state','in',('draft','sent_to_shipper'))]"/>
+                    <filter name="confirm" string="Confirmed" domain="[('state','not in',('draft','cancel','done'))]"/>
+                    <filter name="done" string="Done" domain="[('state','=','done')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Responsible User" icon="terp-partner" domain="[]" context="{'group_by':'resp_user_id'}"/>
+                        <filter string="State" icon="terp-go-month" domain="[]" context="{'group_by':'state'}"/>
+                        <filter string="Date" icon="terp-go-month" domain="[]" context="{'group_by':'date'}"/>
+                        <filter string="Load Date" icon="terp-go-month" domain="[]" context="{'group_by':'load_date'}"/>
+                        <filter string="Ship Date" icon="terp-go-month" domain="[]" context="{'group_by':'ship_date'}"/>
+                        <filter string="Container Size" icon="terp-go-month" domain="[]" context="{'group_by':'container_size'}"/>
+                        <filter string="Deliver To" icon="terp-go-month" domain="[]" context="{'group_by':'picking_type_id'}"/>
+                        <filter string="Destination" icon="terp-go-month" domain="[]" context="{'group_by':'location_id'}"/>
+                        <filter string="Company" icon="terp-go-month" domain="[]" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="container_order_graph">
+            <field name="name">container.order.graph</field>
+            <field name="model">container.order</field>
+            <field name="arch" type="xml">
+                <graph string="Container Order" type="bar">
+                    <field name="date"/>
+                    <field name="amount_total" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="container_order_calendar">
+            <field name="name">container.order.calendar</field>
+            <field name="model">container.order</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendar View" date_start="load_date" color="container_size">
+                    <field name="number"/>
+                    <field name="amount_total"/>
+                    <field name="container_size"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id='container_order_action' model='ir.actions.act_window'>
+            <field name='name'>Container Order</field>
+            <field name='res_model'>container.order</field>
+            <field name='view_type'>form</field>
+            <field name='view_mode'>tree,form,graph,calendar</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a container order. 
+              </p><p>
+                Use this menu to search within your container orders by
+                references, user, size, etc. For each container order,
+                you can track the related discussion with the shippers, control
+                the products received and control the supplier and shipper invoices.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem id="container_order_menu" name="Container Orders" parent="purchase.menu_procurement_management"
+               action="container_order_action" sequence="7"/>
+
+        <!--Container Order Line Form View-->
+        <record id="container_order_line_form" model="ir.ui.view">
+            <field name="name">container.order.line.form</field>
+            <field name="model">container.order.line</field>
+            <field name="arch" type="xml">
+                <form string="Container Order Line">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="po_line_id" context="{'only_confirmed': True, 'co_line_ids': parent.co_line_ids}"/>
+                                <field name="product_id" context="{'co_line_ids': parent.co_line_ids}"/>
+                                <field name="total_purchase_qty"/>
+                                <label for="product_qty"/>
+                                <div>
+                                    
+                                    <field name="product_qty" class="oe_inline"/>
+                                    <field name="product_uom" groups="product.group_uom" class="oe_inline"/>
+                                </div>
+                                <!-- label for="co_product_qty"/>
+                                <div>
+                                    <field name="co_product_qty" class="oe_inline"/>
+                                    <field name="co_product_uom" groups="product.group_uom" class="oe_inline"/>
+                                </div-->
+                                <field name="price_unit"/>
+                                <field name="price_subtotal"/>
+                                <field name="state"/>
+                            </group>
+                            <group>
+                                <field name="taxes_id" widget="many2many_tags" domain="[('parent_id','=',False),('type_tax_use','!=','sale')]"/>
+                                <field name="product_tmpl_id" invisible="1"/>
+                                <field name="product_packaging" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                                <field name="number_packages" invisible="0"/>
+                                <field name="qty_package" invisible="0"/>
+                                <field name="date_planned" widget="date"/>
+                                <field name="account_analytic_id" colspan="2" groups="purchase.group_analytic_accounting"/>
+                                <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                        <page string="Notes">
+                            <field name="name"/>
+                        </page><page string="Invoices and Incoming Shipments">
+                            <field name="invoice_lines"/>
+                            <field name="move_ids"/>
+                        </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!--Container Order Line Tree View-->
+        <record id="container_order_line_tree" model="ir.ui.view">
+            <field name="name">container.order.line.tree</field>
+            <field name="model">container.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="Container Order Lines" create="false">
+                    <field name="reference"/>
+                    <field name="product_id"/>
+                    <field name="supplier_id"/>
+                    <field name="price_unit"/>
+                    <field name="product_qty"/>
+                    <field name="product_uom" groups="product.group_uom"/>
+                    <field name="weight"/>
+                    <field name="volume"/>
+                </tree>
+            </field>
+        </record>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </data>
+</openerp>

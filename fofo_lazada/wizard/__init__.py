@@ -1,0 +1,2 @@
+import import_lazada
+import import_customer_payment

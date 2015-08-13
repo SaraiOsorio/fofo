@@ -1,0 +1,3 @@
+id,description,type_tax_use,name,type,amount,base_code_id:id,tax_code_id:id,ref_base_code_id:id,ref_tax_code_id:id,tax_sign,base_sign,ref_base_sign,ref_tax_sign,parent_id:id
+tax_input_vat,,purchase,Input VAT,percent,0.07,Input Tax Base,Input Tax,,,1,1,1,1,
+tax_output_vat,,sale,Output VAT,percent,0.07,Output Tax Base,Output Tax,,,1,1,1,1,

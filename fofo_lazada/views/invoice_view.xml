@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="invoice_lazada_form">
+            <field name="name">lazada.invoice.view.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_invoice']" position="after">
+                    <field name="is_lazada_order" invisible="True"/>
+                    <field name="lazada_order_no" invisible="True"/>
+                </xpath>
+                <xpath expr="//tree[@string='Invoice Lines']/field[@name='product_id']" position="before">
+                    <field name="is_lazada_order" invisible="True"/>
+                    <field name="lazada_order_no" invisible="True"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

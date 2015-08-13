@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    
+        <record model="ir.ui.view" id="purchase_container_form_view">
+            <field name="name">purchase.order.form.view</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_ref']" position="after">
+                    <field name="purchase_by_container"/>
+                </xpath>
+                <xpath expr="//field[@name='shipped']" position="after">
+                    <field name="is_contained"/>
+                </xpath>
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="statusbar_visible">draft,sent,bid,approved,contained,done</attribute>
+                </xpath>
+                <button name="view_picking" string="Receive Products" type="object" attrs="{'invisible': ['|', ('shipped','=',True), ('state','!=', 'approved')]}" class="oe_highlight" position="replace">
+                    <button name="view_picking" string="Receive Products" type="object" attrs="{'invisible': ['|', ('shipped','=',True),  '|',('state','!=', 'approved'), ('purchase_by_container','!=', False)]}" class="oe_highlight"/>
+                </button>
+                <button name="view_invoice" string="Receive Invoice" type="object" attrs="{'invisible': ['|', ('invoice_method','in', ['picking', 'manual']), '|', ('state','!=', 'approved'), ('invoiced','=',True) ]}" class="oe_highlight" position="replace">
+                    <button name="view_invoice" string="Receive Invoice" type="object" attrs="{'invisible': ['|', ('invoice_method','in', ['picking', 'manual']), '|', ('state','!=', 'approved'),'|' , ('invoiced','=',True), '|' , ('purchase_by_container','!=', False) ]}" class="oe_highlight"/>
+                </button>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_order_line_form_container1">
+            <field name="name">purchase.container.line.form1.view</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_order_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='price_unit']" position="after">
+                    <field name="state"/>
+                    <field name="contained_qty"/>
+                    <field name="contained_qty_draft"/>
+                    <field name="remain_contain_qty"/>
+                </xpath>
+                <xpath expr="//field[@name='taxes_id']" position="before">
+                    <field name="product_tmpl_id" invisible="1"/>
+                    <field name="product_packaging" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                    <field name="number_packages" invisible="0"/>
+                    <field name="qty_package" invisible="0"/>
+                </xpath>
+                <xpath expr="//page[@string='Notes']" position="after">
+                    <page string="Container Order Lines">
+                        <field name="co_line_ids"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="purchase_order_line_form_container2">
+            <field name="name">purchase.container.line.form2.view</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='price_unit']" position="after">
+                    <field name="state"/>
+                    <field name="contained_qty"/>
+                    <field name="contained_qty_draft"/>
+                    <field name="remain_contain_qty"/>
+                </xpath>
+                <xpath expr="//field[@name='taxes_id']" position="before">
+                    <field name="product_tmpl_id" invisible="1"/>
+                    <field name="product_packaging" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                    <field name="number_packages" invisible="0"/>
+                    <field name="qty_package" invisible="0"/>
+                </xpath>
+            </field>
+        </record>     
+
+        <record id="purchase_purchase_order_form_container_tab" model="ir.ui.view">
+            <field name="name">purchase.order.inherit.container</field>
+            <field name="model">purchase.order</field>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <page string="Deliveries &amp; Invoices" position="after">
+                    <page string="Related Container Orders" attrs="{'invisible': [('purchase_by_container', '=', False)]}">
+                        <field name="container_ids"/>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <record id="purchase_order_2_container_order" model="ir.ui.view">
+            <field name="name">Purchase CO Inherited</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_2_stock_picking"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//button[@name='invoice_open']" position="after">
+                        <button type="object"  name="container_open"
+                            class="oe_stat_button"
+                            icon="fa-truck"
+                            attrs="{'invisible': [('container_count', '=', 0)]}">
+                            <field name="container_count" widget="statinfo" string="Container Orders"/>
+                        </button> 
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

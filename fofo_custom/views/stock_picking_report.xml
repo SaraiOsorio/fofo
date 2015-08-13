@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="report_picking_package_add" inherit_id="stock.report_picking">
+            <xpath expr="//div/table[2]/thead/tr/th[2]" position="after">
+                <t t-if="o.picking_type_id.code == 'incoming'">
+                <th class="text-right">Qty/Package</th>
+                <th class="text-right">Total Package</th>
+                </t>
+            </xpath>
+            <xpath expr="//div/table[2]/tbody/tr/t/td[2]" position="after">
+                <t t-if="o.picking_type_id.code == 'incoming'">
+                <td class="text-right"><span t-field="o.qty_package"/></td>
+                <td class="text-right"><span t-esc="o.number_packages or 0"/></td>
+                </t>
+            </xpath>
+            <xpath expr="//div/table[3]/thead/tr/th[2]" position="after">
+                <t t-if="o.picking_type_id.code == 'incoming'">
+                <th class="text-right">Qty/Package</th>
+                <th class="text-right">Total Package</th>
+                </t>
+            </xpath>
+            <xpath expr="//div/table[3]/tbody/tr/td[2]" position="after">
+                <t t-if="o.picking_type_id.code == 'incoming'">
+                <td class="text-right"><span t-field="pack_operation.qty_package"/></td>
+                <td class="text-right"><span t-esc="pack_operation.number_packages or 0"/></td>
+                </t>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>

@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="product_normal_form_view_inherit_container_product" model="ir.ui.view">
+            <field name="name">product.normal.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                    <field name="virtual_available" position="before">
+                            <field name="qty_contained" />
+                    </field>
+                    <field name="virtual_available" position="after">
+                            <field name="virtual_qty_contained" />
+                    </field>
+                    <group name="general" position="inside">
+                            <field name="landed_cost" />
+                            <field name="total_standard_landed" />
+                    </group>
+<!--                    <xpath expr="//field[@name='landed_cost_call']" position="attributes">-->
+<!--                        <attribute name="invisible">1</attribute>-->
+<!--                    </xpath>-->
+                    <!-- <field name="volume" position="before">
+                            <field name="length" />
+                            <field name="height" />
+                            <field name="width" />
+                    </field>             -->         
+            </field>
+        </record>
+
+        <!-- <record id="product_sales_history" model="ir.ui.view">
+            <field name="name">product.product.form.inherit.sale history</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <page string="Sales" position="after">
+                    <page string="Sales History" groups="base.group_sale_manager">
+                        <field name='sale_line_ids'>
+                               <tree string="Sales Order Lines" editable="bottom">
+                                    <field name="product_id"  groups="base.group_user" invisible="1"  />
+                                    <field name="name"/>
+                                    <field name="state" invisible="1" />
+                                    <field name="order_id"/>
+                                    <field name="date_order"/>
+                                    <field name="product_uom_qty"
+                                        context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom}"
+                                        on_change="product_id_change(parent.pricelist_id, product_id, product_uom_qty, product_uom, product_uos_qty, product_uos, name, parent.partner_id, False, False, parent.date_order, False, parent.fiscal_position, True, context)"/>
+                                    <field name="product_uom"
+                                        on_change="product_uom_change(parent.pricelist_id, product_id, product_uom_qty, product_uom, product_uos_qty, product_uos, name, parent.partner_id, False, False, parent.date_order, context)"
+                                        groups="product.group_uom" options='{"no_open": True}'/>
+                                    <field name="product_uos_qty" groups="product.group_uos" invisible="1"/>
+                                    <field name="product_uos" string="UoS" groups="product.group_uos" invisible="1"/>
+                                    <field name="price_unit"/>
+                                    <field name="discount" groups="sale.group_discount_per_so_line"/>
+                                    <field name="price_subtotal"/>
+                                </tree>
+                        
+                        </field>
+                    </page>
+                </page>
+            </field>
+        </record> -->
+
+            
+         <record id="product_template_only_form_view_cost" model="ir.ui.view">
+            <field name="name">product.template.form.inherit.cost</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//page[@string='Variants'] " position="after">
+                    <page string='Landed Costs' groups="base.group_user">
+                        <group>
+                            <group>
+                                <field name="landed_cost_call"/>
+                            </group>
+                            <group>
+                                <field name="total_cost_call"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath> -->
+                <group name="general" position="inside">
+                    <field name="landed_cost_call"/>
+                    <field name="total_cost_call"/>
+                </group>
+            </field>
+        </record>
+        
+        <record id="product_template_form_view_sales_history" model="ir.ui.view">
+            <field name="name">product.template.form.inherit.sale history</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <page string="Sales" position="after">
+                    <page string="Sales History" groups="base.group_sale_manager">
+                        <field name='sale_line_ids'>
+                               <tree string="Sales Order Lines" editable="bottom">
+                                    <field name="product_id"  groups="base.group_user" invisible="1"  />
+                                    <field name="name"/>
+                                    <field name="state" invisible="1" />
+                                    <field name="order_id"/>
+                                    <field name="date_order"/>
+                                    <field name="product_uom_qty"
+                                        context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom}"
+                                        on_change="product_id_change(parent.pricelist_id, product_id, product_uom_qty, product_uom, product_uos_qty, product_uos, name, parent.partner_id, False, False, parent.date_order, False, parent.fiscal_position, True, context)"/>
+                                    <field name="product_uom"
+                                        on_change="product_uom_change(parent.pricelist_id, product_id, product_uom_qty, product_uom, product_uos_qty, product_uos, name, parent.partner_id, False, False, parent.date_order, context)"
+                                        groups="product.group_uom" options='{"no_open": True}'/>
+                                    <field name="product_uos_qty" groups="product.group_uos" invisible="1"/>
+                                    <field name="product_uos" string="UoS" groups="product.group_uos" invisible="1"/>
+                                    <field name="price_unit"/>
+                                    <field name="discount" groups="sale.group_discount_per_so_line"/>
+                                    <field name="price_subtotal"/>
+                                </tree>
+                        </field>
+                    </page>
+                </page>
+                <xpath expr="//sheet/notebook/page[3]/group[1]/group[2]/field[@name='volume']" position="attributes">
+                    <attribute name="digits"></attribute>
+                </xpath>                
+                <!--xpath expr="//field[@name='standard_price']" position="after">
+                    <field name="landed_cost_call"/>
+                    <field name="total_cost_call"/>
+                </xpath-->
+            </field>
+        </record>
+        
+        <record id="product_ul_view_plu_gross_weight" model="ir.ui.view">
+            <field name="name">product.ul.plu.gross.weight</field>
+            <field name="model">product.ul</field>
+            <field name="inherit_id" ref="product.product_ul_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='length']" position="after">
+                    <field name="plu_gross_weight"/>
+                </xpath>
+                <xpath expr="//field[@name='height']" position="attributes">
+                    <attribute name="help">The height of package in cm.</attribute>
+                </xpath>
+                <xpath expr="//field[@name='length']" position="attributes">
+                    <attribute name="help">The length of package in cm.</attribute>
+                </xpath>
+                <xpath expr="//field[@name='width']" position="attributes">
+                    <attribute name="help">The width of package in cm.</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+         <record id="product_packaging_form_view_weights" model="ir.ui.view">
+            <field name="name">product.packaging.form.view.weights</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref="product.product_packaging_form_view_without_product"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ul'] " position="after">
+                    <separator colspan="4" string="Weights"/>
+                    <field name="volume"/>
+                    <field name="weight_gross"/>
+                    <field name="weight_net"/>
+                </xpath>
+            </field>
+         </record>
+        
+         <record id="product_packaging_tree_view_product_weights" model="ir.ui.view">
+            <field name="name">product.packaging.tree.view.weights</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref="product.product_packaging_tree_view_product"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='qty'] " position="after">
+                    <field name="volume"/>
+                    <field name="weight_gross"/>
+                    <field name="weight_net"/>
+                </xpath>
+            </field>
+         </record>
+         
+         
+    </data>
+</openerp>

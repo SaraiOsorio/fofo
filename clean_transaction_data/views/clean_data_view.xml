@@ -1,0 +1,126 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <!--Clean Data Main Menu-->
+        <menuitem id="clean_data_main_menu" name="Run Query" parent="base.menu_administration"/>
+        
+        <!--Clean Data Line Form View-->
+        <record id="clean_data_line_form" model="ir.ui.view">
+            <field name='name'>res.data.clean.line.form</field>
+            <field name='model'>res.data.clean.line</field>
+            <field name='type'>form</field>
+            <field name='arch' type='xml'>
+                <form string="Clean Data Line">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="query"/>
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Clean Data Line Tree View-->
+        <record id='clean_data_line_tree' model='ir.ui.view'>
+            <field name='name'>res.data.clean.line.tree</field>
+            <field name='model'>res.data.clean.line</field>
+            <field name='type'>tree</field>
+            <field name='arch' type='xml'>
+                <tree string='Clean Data Line'>
+                    <field name='query'/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Clean Data Line Action-->
+        <record id='clean_data_line_action' model='ir.actions.act_window'>
+            <field name='name'>Clean Data Line</field>
+            <field name='res_model'>res.data.clean.line</field>
+            <field name='view_type'>form</field>
+            <field name='view_mode'>tree,form</field>
+        </record>
+
+        
+        <!--Clean Data Line Menu-->
+        <menuitem id="clean_data_line_menu" name="Sql Queries" action="clean_data_line_action" parent="clean_data_main_menu" sequence="50"/>
+        
+        <!--Clean Data Form View-->
+        <record id="clean_data_form" model="ir.ui.view">
+            <field name='name'>res.data.clean.form</field>
+            <field name='model'>res.data.clean</field>
+            <field name='type'>form</field>
+            <field name='arch' type='xml'>
+                <form string="Clean Data">
+                <header>
+                    <button groups="base.group_system" name="confirm" string='Confirm'  states="draft" type='object' class="oe_highlight"/>
+                    <button name="run_query" 
+                            string='Run' 
+                            confirm="Are you sure you want to run this operation? Please make sure this operation will removes the records permanentally." 
+                            states="confirm" 
+                            type='object'
+                            colspan="2"
+                            class="oe_highlight"
+                            groups="base.group_system" />
+                    <button name="reset_to_draft" groups="base.group_system" string='Reset to Draft' states="confirm" type='object' class="oe_highlight"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                            <field name="resp_user_id"/>
+                            <field name="processed_user_id"/>
+                        </group>
+                        <group>
+                            <field name="date" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                            <field name="process_date"/>
+                        </group>
+                    </group>
+                    <notebook string='Clean Data'>
+                        <page string='Queries'>
+                            <field name="query_line_ids" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <!--Clean Data Tree View-->
+        <record id='clean_data_tree' model='ir.ui.view'>
+            <field name='name'>res.data.clean.tree</field>
+            <field name='model'>res.data.clean</field>
+            <field name='type'>tree</field>
+            <field name='arch' type='xml'>
+                <tree string='Clean Data'>
+                    <field name='name'/>
+                    <field name="resp_user_id"/>
+                    <field name="date"/>
+                    <field name="processed_user_id"/>
+                    <field name="process_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Clean Data Action-->
+        <record id='clean_data_action' model='ir.actions.act_window'>
+            <field name='name'>Clean Data</field>
+            <field name='res_model'>res.data.clean</field>
+            <field name='view_type'>form</field>
+            <field name='view_mode'>tree,form</field>
+        </record>
+
+        
+        <!--Clean Data Menu-->
+        <menuitem id="clean_data_query_menu" name="Run Sql Query" action="clean_data_action" parent="clean_data_main_menu" sequence="50"/>
+            
+                 
+    </data>
+</openerp>

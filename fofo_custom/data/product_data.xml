@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+    
+        <record forcecreate="True" id="decimal_product_volume" model="decimal.precision">
+            <field name="name">Product Volume</field>
+            <field name="digits">6</field>
+        </record>    
+    
+    </data>
+</openerp>
+    
