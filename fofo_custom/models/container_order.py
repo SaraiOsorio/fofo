@@ -135,7 +135,7 @@ class container_order_line(models.Model):
                                           readonly=True, copy=False)
     weight = fields.Float(string="Weight", digits=dp.get_precision('Stock Weight'), store=True, compute='_compute_volume')
     volume = fields.Float(string="Volume", digits=dp.get_precision('Product Volume'), store=True, compute='_compute_volume')
-    reference = fields.Char(related = 'po_line_id.order_id.name', string='PO number')
+    reference = fields.Char(related = 'po_line_id.order_id.name', string='PO Number')
     purchase_by_container = fields.Boolean(related = 'po_line_id.order_id.purchase_by_container', string='Purchase by Container', store=True)
     supplier_id = fields.Many2one('res.partner', related='po_line_id.order_id.partner_id', string="Supplier")
     product_packaging =  fields.Many2one('product.packaging', string='Packaging')

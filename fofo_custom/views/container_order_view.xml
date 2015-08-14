@@ -308,6 +308,8 @@
                         <group>
                             <group>
                                 <field name="po_line_id" context="{'only_confirmed': True, 'co_line_ids': parent.co_line_ids}"/>
+                                <field name="reference" readonly="1"/>
+                                <field name="supplier_id"  readonly="1"/>
                                 <field name="product_id" context="{'co_line_ids': parent.co_line_ids}"/>
                                 <field name="total_purchase_qty"/>
                                 <label for="product_qty"/>
