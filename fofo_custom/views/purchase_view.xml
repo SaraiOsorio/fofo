@@ -101,14 +101,14 @@
             </field>
         </record>
 
-    	<record id="purchase_order_line_tree" model="ir.ui.view">
+        <record id="purchase_order_line_tree" model="ir.ui.view">
             <field name="name">purchase.order.line.tree</field>
             <field name="model">purchase.order.line</field>
             <field eval="1" name="priority"/>
             <field name="arch" type="xml">
                 <tree string="Purchase Order Lines" create="false" colors="blue:state == 'confirmed';gray:state == 'cancel'">
                     <field name="order_id"/>
-                	<field name="name"/>
+                    <field name="name"/>
                     <field name="partner_id" string="Supplier" />
                     <field name="product_id"/>
                     <field name="price_unit"/>
