@@ -91,8 +91,9 @@ class container_order_line(models.Model):
             except:
                 self.number_packages = 0
 
-    @api.onchange('product_packaging')
-    def on_change_packaging_product(self):
+    @api.one
+    @api.depends('product_packaging')
+    def _compute_qty_package(self):
         if self.product_packaging:
             self.qty_package = self.product_packaging.qty
         else:
@@ -140,7 +141,7 @@ class container_order_line(models.Model):
     product_packaging =  fields.Many2one('product.packaging', string='Packaging')
     product_tmpl_id = fields.Many2one(related='product_id.product_tmpl_id', type='many2one', relation='product.template', string='Product Template')
     number_packages =  fields.Integer(compute=_number_packages, string='Total Number of Packages', store=True)
-    qty_package = fields.Float(string='Quantity / Package')
+    qty_package = fields.Float(string='Quantity / Package', compute='_compute_qty_package', store=True)
     price_subtotal = fields.Float(compute=_amount_line, string='Subtotal', digits= dp.get_precision('Account'))
     order_id = fields.Many2one(relation='purchase.order',related='po_line_id.order_id', string='Purchase Order')
     
