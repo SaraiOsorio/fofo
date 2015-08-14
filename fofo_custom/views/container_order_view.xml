@@ -94,7 +94,8 @@
                             <group>
                                 <field name="container_size" on_change="onchange_container_size(container_size)" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
                                 <field name="outbound_shipper_id" attrs="{'readonly':[('state','in',('done', 'cancel'))]}" domain="[('shipper','=',True)]"/>
-                                <field name="outbound_shipper_expense_id" on_change="onchange_shipper_cost(outbound_shipper_expense_id, inbound_shipper_expense_id)" domain="[('type','=', 'service')]"  attrs="{'readonly':[('state','in',( 'done', 'cancel'))]}"/>
+                                <field name="outbound_pricelist_id" groups="product.group_purchase_pricelist" domain="[('type','=','purchase')]"  attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
+                                <field name="outbound_shipper_expense_id" domain="[('type','=', 'service'), ('shipping_ok', '=', True)]"  attrs="{'readonly':[('state','in',( 'done', 'cancel'))]}"/>
                                 <field name="outbound_shipper_cost" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
                                 <field name="load_date" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
                                 <field name="ship_date" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
@@ -103,9 +104,9 @@
                             <group>
                                 <field name="date" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
                                 <field name="inbound_shipper_id" attrs="{'readonly':[('state','in',('done', 'cancel'))]}" domain="[('shipper','=',True)]"/>
-                                <field name="inbound_shipper_expense_id" on_change="onchange_shipper_cost(outbound_shipper_expense_id, inbound_shipper_expense_id)" domain="[('type','=', 'service')]" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
+                                <field name="inbound_pricelist_id" groups="product.group_purchase_pricelist"  domain="[('type','=','purchase')]"  attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
+                                <field name="inbound_shipper_expense_id" domain="[('type','=', 'service'), ('shipping_ok', '=', True)]" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
                                 <field name="inbound_shipper_cost" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
-                                <!-- <field name="etd" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/> -->
                                 <field name="arrive_date" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
                                 <field name="picking_type_id" on_change="onchange_picking_type_id(picking_type_id)" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
                                 <field name="location_id" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>

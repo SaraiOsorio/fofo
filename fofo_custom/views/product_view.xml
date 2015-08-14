@@ -14,6 +14,7 @@
                             <field name="virtual_qty_contained" />
                     </field>
                     <group name="general" position="inside">
+                            <field name="shipping_ok"/>
                             <field name="landed_cost" />
                             <field name="total_standard_landed" />
                     </group>
@@ -79,7 +80,12 @@
                         </group>
                     </page>
                 </xpath> -->
+                <!-- <field for="purchase_ok" position="after">
+                    <field name="shipping_ok"/>
+                    <label for="shipping_ok"/>
+                </field> -->
                 <group name="general" position="inside">
+                    <field name="shipping_ok"/>
                     <field name="landed_cost_call"/>
                     <field name="total_cost_call"/>
                 </group>

@@ -71,6 +71,7 @@ class product_template(models.Model):
     sale_line_ids = fields.One2many('sale.order.line', 'product_tmpl_id_store', 'Sales History')
     landed_cost_call = fields.Float(compute=_get_landed_cost, string='Landed Cost')
     total_cost_call = fields.Float(compute=_total_cost_call, string='Total Cost')
+    shipping_ok = fields.Boolean('Shipping Product', help="Specify if the product can be selected in a container order as shipping product.")
 
 class product_product(models.Model):
     _inherit = 'product.product'

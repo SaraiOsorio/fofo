@@ -42,6 +42,7 @@ from psycopg2 import Binary
 from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
 from openerp.exceptions import except_orm, Warning, RedirectWarning
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT, DATETIME_FORMATS_MAP
 
 from openerp.tools.float_utils import float_compare
 
@@ -264,21 +265,6 @@ class container_order(models.Model):
         return res
 
     @api.multi
-    def onchange_shipper_cost(self, outbound_shipper_expense_id=False, inbound_shipper_expense_id=False):
-        res = {}
-        res['value'] = {}
-        product_obj = self.env['product.product']
-        if not outbound_shipper_expense_id and not inbound_shipper_expense_id:
-            return {}
-        if outbound_shipper_expense_id:
-            product = product_obj.browse(outbound_shipper_expense_id)
-            res['value'].update({'outbound_shipper_cost': product.standard_price or 0.0})
-        if inbound_shipper_expense_id:
-            product = product_obj.browse(inbound_shipper_expense_id)
-            res['value'].update({'inbound_shipper_cost': product.standard_price or 0.0})
-        return res
-
-    @api.multi
     @api.depends('picking_ids', 'picking_ids.state', 'state')#TODO:
     def _check_received(self):
         for order in self:
@@ -368,6 +354,53 @@ class container_order(models.Model):
     total_shipping_cost =  fields.Float(compute=_total_shipping_cost, string='Total Shipping Cost', store=True, help="Total cost of inbound and outbound shippers invoices.")
     shipping_cost_by_volume =  fields.Float(compute=_total_shipping_cost, string='Shipping Cost / Volume', store=True, help="Shipping / Landed cost by Volume.")
     co_line_ids = fields.One2many('container.order.line','container_order_id', string='Container Order Lines' )
+    inbound_pricelist_id = fields.Many2one('product.pricelist', string='Inbound Pricelist', required=False)
+    outbound_pricelist_id = fields.Many2one('product.pricelist', string='Outbound Pricelist', required=False)
+
+    @api.onchange('inbound_shipper_id')
+    def on_change_inbound_shipper_id(self):
+        if self.inbound_shipper_id:
+            self.inbound_pricelist_id = self.inbound_shipper_id.property_product_pricelist_purchase.id
+        else:
+            self.inbound_pricelist_id = False
+
+    @api.onchange('inbound_shipper_expense_id', 'inbound_pricelist_id')
+    def on_change_inbound_shipper_expense_id(self):
+        pricelist_obj = self.env['product.pricelist']
+        if self.inbound_shipper_expense_id and self.inbound_pricelist_id:
+                ctx = dict(self._context or {})
+                date_order_str = datetime.strptime(self.date, DEFAULT_SERVER_DATE_FORMAT).strftime(DEFAULT_SERVER_DATE_FORMAT)
+                ctx.update({'uom': self.inbound_shipper_expense_id.uom_po_id.id, 'date': date_order_str})
+                price = self.inbound_pricelist_id.with_context(ctx).price_get(self.inbound_shipper_expense_id.id, 1.0, self.inbound_shipper_id.id or False)[self.inbound_pricelist_id.id]
+                self.inbound_shipper_cost = price
+                #self.currency_id = self.inbound_pricelist_id.currency_id.id
+
+        elif self.inbound_shipper_expense_id:
+            self.inbound_shipper_cost = self.inbound_shipper_expense_id.standard_price
+        else:
+            self.inbound_shipper_cost = 0.0
+
+    @api.onchange('outbound_shipper_id')
+    def on_change_outbound_shipper_id(self):
+        if self.outbound_shipper_id:
+            self.outbound_pricelist_id = self.outbound_shipper_id.property_product_pricelist_purchase.id
+        else:
+            self.outbound_pricelist_id = False
+
+    @api.onchange('outbound_shipper_expense_id', 'outbound_pricelist_id')
+    def on_change_outbound_shipper_expense_id(self):
+        pricelist_obj = self.env['product.pricelist']
+        if self.outbound_shipper_expense_id and self.outbound_pricelist_id:
+                ctx = dict(self._context or {})
+                date_order_str = datetime.strptime(self.date, DEFAULT_SERVER_DATE_FORMAT).strftime(DEFAULT_SERVER_DATE_FORMAT)
+                ctx.update({'uom': self.outbound_shipper_expense_id.uom_po_id.id, 'date': date_order_str})
+                price = self.outbound_pricelist_id.with_context(ctx).price_get(self.outbound_shipper_expense_id.id, 1.0, self.outbound_shipper_id.id or False)[self.outbound_pricelist_id.id]
+                self.outbound_shipper_cost = price
+                #self.currency_id = self.outbound_pricelist_id.currency_id.id
+        elif self.outbound_shipper_expense_id:
+            self.outbound_shipper_cost = self.outbound_shipper_expense_id.standard_price
+        else:
+            self.outbound_shipper_cost = 0.0
 
     @api.one
     @api.model
