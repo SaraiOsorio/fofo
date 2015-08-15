@@ -26,12 +26,13 @@ class purchase_order(models.Model):
     _inherit = "purchase.order"
 
     def init(self, cr):
-        self.READONLY_STATES.update({'contained': [('readonly', True)]})
+        self.READONLY_STATES.update({'contained': [('readonly', True)], 'cancel': [('readonly', True)]}    )
     READONLY_STATES_CON = {
         'confirmed': [('readonly', True)],
         'approved': [('readonly', True)],
         'done': [('readonly', True)],
-        'contained': [('readonly', True)]
+        'contained': [('readonly', True)],
+        'cancel': [('readonly', True)],
     }
 
     STATE_SELECTION = [
@@ -186,15 +187,15 @@ class purchase_order(models.Model):
 
 
     # Added readonly=True for contained status so override fields as below.
-    picking_type_id = fields.Many2one(states= {'contained': [('readonly', True)], 'confirmed': [('readonly', True)], 'approved': [('readonly', True)], 'done': [('readonly', True)]})
+    picking_type_id = fields.Many2one(states= {'contained': [('readonly', True)], 'confirmed': [('readonly', True)], 'approved': [('readonly', True)], 'done': [('readonly', True)], 'cancel':[('readonly',True)]})
     date_order = fields.Datetime(states={'confirmed':[('readonly',True)],'contained':[('readonly',True)],
-                                                                      'approved':[('readonly',True)]})
-    company_id =  fields.Many2one(states={'contained':[('readonly',True)],'confirmed': [('readonly', True)], 'approved': [('readonly', True)]})
+                                                                      'approved':[('readonly',True)], 'cancel':[('readonly',True)]})
+    company_id =  fields.Many2one(states={'contained':[('readonly',True)],'confirmed': [('readonly', True)], 'approved': [('readonly', True)], 'cancel':[('readonly',True)]})
     partner_ref =  fields.Char( states={'contained':[('readonly',True)], 'confirmed':[('readonly',True)],
                                                                  'approved':[('readonly',True)],
-                                                                 'done':[('readonly',True)]},)
+                                                                 'done':[('readonly',True)], 'cancel':[('readonly',True)]},)
     order_line = fields.One2many( states={'contained':[('readonly',True)],'approved':[('readonly',True)],
-                                              'done':[('readonly',True)]},
+                                              'done':[('readonly',True)], 'cancel':[('readonly',True)]},
                                       )
 
 class purchase_order_line(models.Model):
