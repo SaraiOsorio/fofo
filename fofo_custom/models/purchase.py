@@ -243,11 +243,16 @@ class purchase_order_line(models.Model):
                 skip_po_line_ids = []
                 for co_line in self.env.context['co_line_ids']:
                     if len(co_line) > 1:
-                        if co_line[2]:
+                        if co_line[2] and co_line[2].get('po_line_id', False):
                             skip_po_line_ids.append(co_line[2]['po_line_id'])
+                        elif co_line[2] and not co_line[2].get('po_line_id', False):
+                            co_line_data = self.env['container.order.line'].browse(co_line[1])
+                            skip_po_line_ids.append(co_line_data.po_line_id.id)
                         elif not co_line[2] and co_line[1]:
                             co_line_data = self.env['container.order.line'].browse(co_line[1])
                             skip_po_line_ids.append(co_line_data.po_line_id.id)
+                        else:
+                            pass
                 if skip_po_line_ids:
                     args.append(['id', 'not in', skip_po_line_ids])#CO: Purchase order line - please list only UNContained + Selected item on current CO - Issue Bug #2789
             args.append(['state', '=', 'confirmed'])
