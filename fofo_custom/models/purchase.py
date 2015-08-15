@@ -304,14 +304,24 @@ class purchase_order_line(models.Model):
                 self.number_packages = 0
 
     @api.one
-    @api.depends('co_line_ids','co_line_ids.product_qty', 'co_line_ids.state', 'state', 'product_qty', 'product_id', 'order_id.state')
+    @api.depends('co_line_ids','co_line_ids.product_qty', 'co_line_ids.state', 'state', 'product_qty', 'product_id', 'order_id.state', 'move_ids', 'move_ids.state')
     def _contained_qty(self):
         self.contained_qty = 0.0
         self.remain_contain_qty = self.product_qty
         contain_qty = 0.0
+        cancel_qty = 0.0
         for co in self.co_line_ids:
             if co.state == 'confirmed' or co.state == 'done':
-                contain_qty += co.product_qty
+                if co.move_ids:
+                    for move in co.move_ids:
+                        if move.state != 'cancel':# Fix for: Cancelled IN does not add back its Quantity for next CO - Bug #3105
+                            contain_qty += co.product_qty
+                        else:
+                            contain_qty += co.product_qty
+                            cancel_qty += move.product_uom_qty
+                else:
+                    contain_qty += co.product_qty
+        contain_qty = contain_qty - cancel_qty
         self.contained_qty = contain_qty
         self.remain_contain_qty = self.product_qty - self.contained_qty
 

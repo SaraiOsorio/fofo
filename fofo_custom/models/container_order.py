@@ -129,7 +129,7 @@ class container_order_line(models.Model):
     account_analytic_id = fields.Many2one('account.analytic.account', 'Analytic Account')
     name = fields.Text('Description', required=True)
     company_id = fields.Many2one('res.company', string='Company')
-    move_ids =  fields.One2many('stock.move', 'purchase_line_id', 'Reservation', readonly=True, ondelete='set null')
+    move_ids =  fields.One2many('stock.move', 'co_line_id', 'Reservation', readonly=True, ondelete='set null')
     invoice_lines =  fields.Many2many('account.invoice.line', 'container_order_line_invoice_rel',
                                           'order_line_id', 'invoice_id', 'Invoice Lines',
                                           readonly=True, copy=False)
@@ -628,6 +628,7 @@ class container_order(models.Model):
             'group_id': group_id.id,
             'procurement_id': False,
             'origin': order.number,
+            'co_line_id': order_line.id,
             'route_ids': order.picking_type_id.warehouse_id and [(6, 0, [x.id for x in order.picking_type_id.warehouse_id.route_ids])] or [],
             'warehouse_id':order.picking_type_id.warehouse_id.id,
             'invoice_state': '2binvoiced',#For moment use static. Todo Ecosoft Check.
