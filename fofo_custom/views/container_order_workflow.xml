@@ -26,8 +26,6 @@
             <field name="act_to" ref="purchase.act_done"/>
             <field name="condition">is_contained == True</field>
         </record>-->
-        
-        
 
         <record id="purchase.trans_router_invoice" model="workflow.transition">
             <field name="act_from" ref="purchase.act_router"/>

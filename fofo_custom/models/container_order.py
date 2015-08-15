@@ -122,7 +122,7 @@ class container_order_line(models.Model):
     total_purchase_qty = fields.Float(compute=_amount_purchase_qty, string='Total Purchase Quantity', digits=dp.get_precision('Product Unit of Measure'), required=True, help="Qty from purchase order line.")
     product_uom = fields.Many2one('product.uom', 'Product Unit of Measure', required=True)
     price_unit = fields.Float('Unit Price', required=True, digits= dp.get_precision('Product Price'))
-    state =  fields.Selection([('draft', 'Draft'), ('confirmed', 'Confirmed'),('done', 'Done')],
+    state =  fields.Selection([('draft', 'Draft'), ('confirmed', 'Confirmed'),('done', 'Done'), ('cancel', 'Cancelled')],
                                   'Status', readonly=True, copy=False,default='draft')
     taxes_id = fields.Many2many('account.tax', 'container_order_line_tax', 'ord_id', 'tax_id', 'Taxes')
     date_planned = fields.Date('Scheduled Date', required=True, select=True)
@@ -756,7 +756,12 @@ class container_order(models.Model):
     def cancel_order(self):
         for order in self:
             if order.state == 'confirm':
-                raise Warning(_('You can not cancel container order which already confirmed. Please first cancle all related pickings and invoices.'))
+                for pick in order.picking_ids:
+                    if pick.state != 'cancel':
+                        raise Warning(_('You can not cancel container order which already confirmed. Please first cancle all related pickings and invoices. Please make sure container order may related to more than one purchase so cancelling could effect the other purchase orders.')) #TODO check for invoices is pending ?
+
+        for coline in self.co_line_ids:
+            coline.state = 'cancel'
         self.write({'state': 'cancel'})
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

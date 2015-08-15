@@ -22,6 +22,8 @@
 from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
 
+from openerp.osv import osv
+
 class purchase_order(models.Model):
     _inherit = "purchase.order"
 
@@ -48,6 +50,20 @@ class purchase_order(models.Model):
         ('cancel', 'Cancelled'),
     ]
 
+    #Override from purchase module only to forcefully cancel PO if its related to purchase_by_container....
+    @api.v7
+    def action_cancel(self, cr, uid, ids, context=None):
+        res = super(purchase_order, self).action_cancel(cr, uid, ids, context)
+        purchase = self.browse(cr, uid, ids, context)[0]
+        if purchase.purchase_by_container:
+            for co in purchase.container_ids:
+                if co.state not in ('cancel'):
+                    raise osv.except_osv(
+                        _('Unable to cancel this purchase order.'),
+                        _('You must first cancel all container orders related to this purchase order.'))
+            self.write(cr, uid, ids, {'state': 'cancel'}, context=context)#Forecefully cancel for container case. Ref: def wkf_action_cancel(....) Bug #3080
+        return res
+        
     @api.v7
     def picking_done(self, cr, uid, ids, context=None):#todo remove this.
         #DO NOT ALLOW PURCHASE ORDER TO BE RECEIVED IF PO IS TYPE OF CONTAINER ORDER. CHECK IF ALL CONTAINER ORDERS ARE DONE THAN ONLY RECEIVED...
@@ -155,6 +171,10 @@ class purchase_order(models.Model):
     @api.depends('container_ids', 'purchase_by_container')
     def _count_all(self):
         self.container_count = len(self.container_ids)
+
+    @api.multi
+    def force_done(self):
+        self.state = 'done'
 
     @api.multi
     def container_open(self):
