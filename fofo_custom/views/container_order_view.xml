@@ -68,7 +68,7 @@
                                 attrs="{'invisible':[('state','not in',('draft','sent_to_shipper'))]}"
                                 class="oe_highlight" type="object"/> 
                         <button name="cancel_order" type="object" string="Cancel" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"/>
-                        <field name="state" widget="statusbar"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done,cancel"/>
                     </header>
                     <sheet>
                         <h1>
