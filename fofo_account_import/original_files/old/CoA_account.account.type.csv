@@ -1,0 +1,12 @@
+name,code,report_type,close_method,note
+Root/View,view,/,None,this is for financial report grouping
+View,view,/,None,this is for summary account
+Asset,asset,Balance Sheet (Asset account),Balance,
+Receivable,receivable,Balance Sheet (Asset account),Unreconciled,
+Liability,liability,Balance Sheet (Liability account),Balance,
+Payable,payable,Balance Sheet (Liability account),Unreconciled,
+Equity,equity,Balance Sheet (Liability account),Balance,
+Revenue,revenue,Profit & Loss (Income account),None,
+Expense,expense,Profit & Loss (Expense account),None,
+Other,other,/,Balance,
+Reconciled,reconciled,/,Unreconciled,

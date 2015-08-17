@@ -1,0 +1,10 @@
+name	code	parent_id/id	sign	info
+Thai Chart of Taxes_Sing Loey Yang Co., Ltd.			1	
+Taxable amounts		Thai Chart of Taxes	1	
+Value Added Tax Base		Taxable amounts	1	
+Output Tax Base	PP30_4	Value Added Tax Base	1	
+Input Tax Base	PP30_6	Value Added Tax Base	1	
+Taxes to be paid		Thai Chart of Taxes	1	
+Value Added Tax		Taxes to be paid	1	
+Output Tax	PP30_5	Value Added Tax	1	
+Input Tax	PP30_7	Value Added Tax	-1	

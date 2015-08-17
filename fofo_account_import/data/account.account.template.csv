@@ -1,0 +1,113 @@
+id,name,code,parent_id/id,type,user_type/id,reconcile
+0,Chart of Account – Fofo,0,,View,account.data_account_type_view,FALSE
+1,Statement of Financial Position,1,0,View,account.data_account_type_view,FALSE
+100000,Asset,100000,1,View,account.account_type_asset_view1,FALSE
+110000,Current Asset,110000,100000,View,account.account_type_asset_view1,FALSE
+111000,Cash and Cash Equivalent,111000,110000,View,account.account_type_asset_view1,FALSE
+111100,Cash,111100,111000,View,account.account_type_asset_view1,FALSE
+111101,Cash on hand,111101,111100,Liquidity,account.data_account_type_asset,FALSE
+111102,Petty Cash ,111102,111100,Liquidity,account.data_account_type_asset,FALSE
+111200,Cheque,111200,111000,Liquidity,account.data_account_type_asset,FALSE
+111300,Bank,111300,111000,Liquidity,account.data_account_type_asset,FALSE
+112000,Account Receivables,112000,110000,View,account.account_type_asset_view1,FALSE
+112100,Account Receivables,112100,112000,Receivable,account.data_account_type_receivable,TRUE
+112200,Allowance for doubtful account,112200,112000,Regular,account.data_account_type_asset,FALSE
+113000,Inventory,113000,110000,Regular,account.data_account_type_asset,FALSE
+114000,Short term Investment,114000,110000,Regular,account.data_account_type_asset,FALSE
+115000,Prepaid Expense,115000,110000,Regular,account.data_account_type_asset,FALSE
+116000,Other Current Asset,116000,110000,Regular,account.data_account_type_asset,FALSE
+116100,Input Vat,116100,116000,Regular,account.data_account_type_asset,FALSE
+117000,Note Receivable,117000,110000,Regular,account.data_account_type_asset,FALSE
+120000,Fixed Asset,120000,100000,View,account.account_type_asset_view1,FALSE
+121000,PP&E,121000,120000,View,account.account_type_asset_view1,FALSE
+121100,Warehouse ,121100,121000,Regular,account.data_account_type_asset,FALSE
+121200,Vehicle,121200,121000,Regular,account.data_account_type_asset,FALSE
+121300,Computer,121300,121000,Regular,account.data_account_type_asset,FALSE
+121400,Software,121400,121000,Regular,account.data_account_type_asset,FALSE
+122000,Accumulated Depreciation,122000,120000,View,account.account_type_asset_view1,FALSE
+122100,Accum. Depre. Warehouse ,122100,122000,Regular,account.data_account_type_asset,FALSE
+122200,Accum. Depre. Vehicle,122200,122000,Regular,account.data_account_type_asset,FALSE
+122300,Accum. Depre. Computer,122300,122000,Regular,account.data_account_type_asset,FALSE
+122400,Accum. Depre. Software,122400,122000,Regular,account.data_account_type_asset,FALSE
+123000,Land,123000,120000,Regular,account.data_account_type_asset,FALSE
+124000,Long term investment,124000,120000,Regular,account.data_account_type_asset,FALSE
+125000,Other Non Current Asset,125000,120000,Regular,account.data_account_type_asset,FALSE
+200000,Liability,200000,1,View,account.account_type_liability_view1,FALSE
+210000,Current Liability,210000,200000,View,account.account_type_liability_view1,FALSE
+211000,Account Payable,211000,210000,Payable,account.data_account_type_payable,TRUE
+212000,Short Term Debt,212000,210000,Regular,account.data_account_type_liability,FALSE
+213000,Salary Payable,213000,210000,Regular,account.data_account_type_liability,FALSE
+214000,Dividend Payable,214000,210000,Regular,account.data_account_type_liability,FALSE
+215000,Tax Payable,215000,210000,Regular,account.data_account_type_liability,FALSE
+216000,Current Portion of Long-term Debt,216000,210000,Regular,account.data_account_type_liability,FALSE
+217000,Note Payable (CL),217000,210000,Regular,account.data_account_type_liability,FALSE
+218000,Other Current liability,218000,210000,Regular,account.data_account_type_liability,FALSE
+218100,Output Vat,218100,218000,Regular,account.data_account_type_liability,FALSE
+218200,Withholding tax,218200,218000,Regular,account.data_account_type_liability,FALSE
+220000,Non Current Liability,220000,200000,View,account.account_type_liability_view1,FALSE
+221000,Note Payable (NCL),221000,220000,Regular,account.data_account_type_liability,FALSE
+222000,Loan Payable,222000,220000,Regular,account.data_account_type_liability,FALSE
+223000,Other Non Current Liability,223000,220000,Regular,account.data_account_type_liability,FALSE
+300000,Owner's Equity,300000,1,View,account.conf_account_type_equity,FALSE
+310000,Common Stock,310000,300000,Regular,account.conf_account_type_equity,FALSE
+320000,Capital,320000,300000,Regular,account.conf_account_type_equity,FALSE
+330000,Retained Earning ,330000,300000,Regular,account.conf_account_type_equity,FALSE
+331000,Net Income,331000,330000,Regular,account.conf_account_type_equity,FALSE
+332000,Dividend,332000,330000,Regular,account.conf_account_type_equity,FALSE
+2,Statement of Income,2,0,View,account.data_account_type_view,FALSE
+400000,Operating Revenues,400000,2,View,account.account_type_income_view1,FALSE
+410000,Sales Revenue,410000,400000,View,account.account_type_income_view1,FALSE
+411000,Sales Revenue,411000,410000,Regular,account.data_account_type_income,FALSE
+412000,Sales Return and Allowance,412000,410000,Regular,account.data_account_type_income,FALSE
+413000,Sales Discount,413000,410000,Regular,account.data_account_type_income,FALSE
+420000,Other Revenue,420000,400000,View,account.account_type_income_view1,FALSE
+420100,Interest Revenue,420100,420000,Regular,account.data_account_type_income,FALSE
+420200,Dividend Revenue,420200,420000,Regular,account.data_account_type_income,FALSE
+420300,Gain/(Loss) on Sale of Financial Asset,420300,420000,Regular,account.data_account_type_income,FALSE
+420400,Foreign Exchange Gain/(Loss),420400,420000,Regular,account.data_account_type_income,FALSE
+420500,Gain/(Loss) on Sale of Other Asset,420500,420000,Regular,account.data_account_type_income,FALSE
+500000,Operating Expense,500000,2,View,account.account_type_expense_view1,FALSE
+510000,Cost of Good Sold,510000,500000,View,account.account_type_expense_view1,FALSE
+511000,Product Cost,511000,510000,Regular,account.data_account_type_expense,FALSE
+512000,Logistic,512000,510000,Regular,account.data_account_type_expense,FALSE
+513000,packaging,513000,510000,Regular,account.data_account_type_expense,FALSE
+514000,Price Difference Account,514000,510000,Regular,account.data_account_type_expense,FALSE
+520000,Sales Expense,520000,500000,View,account.account_type_expense_view1,FALSE
+520100,Commission,520100,520000,Regular,account.data_account_type_expense,FALSE
+520200,Wages,520200,520000,Regular,account.data_account_type_expense,FALSE
+520300,Travel,520300,520000,Regular,account.data_account_type_expense,FALSE
+520400,Fleet Expense,520400,520000,Regular,account.data_account_type_expense,FALSE
+520401,Gas,520401,520000,Regular,account.data_account_type_expense,FALSE
+520402,Repair,520402,520000,Regular,account.data_account_type_expense,FALSE
+520500,Other sales expense,520500,520000,Regular,account.data_account_type_expense,FALSE
+530000,Administrative Expense,530000,500000,View,account.account_type_expense_view1,FALSE
+530100,Utility,530100,530000,Regular,account.data_account_type_expense,FALSE
+530200,Gas and Oil,530200,530000,Regular,account.data_account_type_expense,FALSE
+530300,Bank Charge,530300,530000,Regular,account.data_account_type_expense,FALSE
+530400,Insurance,530400,530000,Regular,account.data_account_type_expense,FALSE
+530500,Salaries and Wages - Admin,530500,530000,Regular,account.data_account_type_expense,FALSE
+530600,Office Supplies,530600,530000,Regular,account.data_account_type_expense,FALSE
+530700,Management Bonus,530700,530000,Regular,account.data_account_type_expense,FALSE
+530800,Professional Fees,530800,530000,Regular,account.data_account_type_expense,FALSE
+530900,Rent,530900,530000,Regular,account.data_account_type_expense,FALSE
+531000,Advertising,531000,530000,Regular,account.data_account_type_expense,FALSE
+531100,Social Security,531100,530000,Regular,account.data_account_type_expense,FALSE
+531200,Taxes and License,531200,530000,Regular,account.data_account_type_expense,FALSE
+531300,Other Administrative Expense,531300,530000,Regular,account.data_account_type_expense,FALSE
+540000,General Expense,540000,500000,View,account.account_type_expense_view1,FALSE
+540100,Repairs and Maintenance,540100,540000,Regular,account.data_account_type_expense,FALSE
+540200,Entertainment and Recreation,540200,540000,Regular,account.data_account_type_expense,FALSE
+540300,Penalties and Fine,540300,540000,Regular,account.data_account_type_expense,FALSE
+540400,Cash over and Short,540400,540000,Regular,account.data_account_type_expense,FALSE
+540500,Bad Debt Expense,540500,540000,Regular,account.data_account_type_expense,FALSE
+550000,Depreciation and Amortization,550000,500000,View,account.account_type_expense_view1,FALSE
+550100,depreciation Expense - Building,550100,550000,Regular,account.data_account_type_expense,FALSE
+550200,Depreciation Expense - Vehicle,550200,550000,Regular,account.data_account_type_expense,FALSE
+550300,Depreciation Expense - Other PP&E,550300,550000,Regular,account.data_account_type_expense,FALSE
+560000,Impairment loss,560000,500000,View,account.account_type_expense_view1,FALSE
+560100,Impairment Losses Investment,560100,560000,Regular,account.data_account_type_expense,FALSE
+560200,Impairment Losses Inventory,560200,560000,Regular,account.data_account_type_expense,FALSE
+560300,Impairment Losses PP&E,560300,560000,Regular,account.data_account_type_expense,FALSE
+570000,Interest Expense,570000,500000,Regular,account.data_account_type_expense,FALSE
+580000,Miscellaneous Expense,580000,500000,Regular,account.data_account_type_expense,FALSE
+590000,Tax,590000,500000,Regular,account.data_account_type_expense,FALSE

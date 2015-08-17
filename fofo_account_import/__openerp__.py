@@ -20,7 +20,7 @@
 ##############################################################################
 {
     'name': 'Fofo Accounting',
-    'category': 'Accounting & Finance',
+    "category" : 'Localization/Account Charts',
     'version': '1.0',
     'author': 'Ecosoft',
     'depends': ['base', 'account','account_chart'],
@@ -28,12 +28,13 @@
     'description': """ 
     """,
     'data': [
-             'data/account.account.csv',
-#              'data/account.account.type.csv',
-             'data/account.tax.code.csv',
-             'data/account.tax.csv',
+             'data/account.account.template.csv',
+            'data/account.tax.code.template.csv',
+            'data/account.chart.template.csv',
+            'data/account.tax.template.csv',
              'fofo_import_wizard.xml'
     ],
+    'auto_install': False,
     'installable': True,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
