@@ -1,0 +1,4 @@
+id,key,value
+ir_config_parameter_create,web_m2x_options.create,False
+ir_config_parameter_create_edit,web_m2x_options.create_edit,False
+ir_config_parameter_limit,web_m2x_options.limit,8
