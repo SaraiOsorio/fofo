@@ -760,7 +760,7 @@ class container_order(models.Model):
             if order.state == 'confirm':
                 for pick in order.picking_ids:
                     if pick.state != 'cancel':
-                        raise Warning(_('You can not cancel container order which already confirmed. Please first cancle all related pickings and invoices. Please make sure container order may related to more than one purchase so cancelling could effect the other purchase orders.')) #TODO check for invoices is pending ?
+                        raise Warning(_('You can not cancel container order which already confirmed. Please first cancel all related pickings and invoices.\n Please beware that container order may related to more than one purchase so cancelling could effect the other purchase orders.')) #TODO check for invoices is pending ?
 
         for coline in self.co_line_ids:
             coline.state = 'cancel'

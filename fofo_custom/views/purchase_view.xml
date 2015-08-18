@@ -113,6 +113,9 @@
                             groups="purchase.group_purchase_manager"
                             class="oe_highlight"/>
                 </xpath>
+                <button name="action_cancel"  position="attributes">
+                    <attribute name="states">"draft,confirmed,contained,sent,bid,approved,except_picking,except_invoice"</attribute>   
+                </button>
             </field>
         </record>
 
