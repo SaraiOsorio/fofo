@@ -692,6 +692,8 @@ class container_order(models.Model):
     @api.multi
     def confirm_order(self):
         purchase_line_obj = self.env['purchase.order.line']
+        if not self.co_line_ids:
+            raise Warning (_('Error!'), ('You cannot confirm a container order without any container order line.'))
         self.action_picking_create()
         for line in self.co_line_ids:
             line_purchase = purchase_line_obj.browse(line.po_line_id.id)
