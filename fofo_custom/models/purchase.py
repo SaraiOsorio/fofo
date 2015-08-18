@@ -62,6 +62,7 @@ class purchase_order(models.Model):
                         _('Unable to cancel this purchase order.'),
                         _('You must first cancel all container orders related to this purchase order.'))
             self.write(cr, uid, ids, {'state': 'cancel'}, context=context)#Forecefully cancel for container case. Ref: def wkf_action_cancel(....) Bug #3080
+            self.set_order_line_status(cr, uid, ids, 'cancel', context=context)
         return res
         
     @api.v7
