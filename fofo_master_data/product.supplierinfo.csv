@@ -1,0 +1,701 @@
+id,product_tmpl_id,product_tmpl_id_not_used,name_temp,name/id,min_qty,pricelist_ids/price,pricelist_ids/min_quantity
+product.product_supplierinfo_1,ชามแบ่ง 5 นิ้ว . (100ใบ),CA105,Gangyi 刚毅,base.partner_14,1,0.95,1
+product.product_supplierinfo_2,ชามแบ่ง 5 นิ้ว . (100ใบ),CA105,Xingye 兴业,base.partner_55,1,0.9,1
+product.product_supplierinfo_3,ชามแบ่ง 5 นิ้ว . (100ใบ),CA105,Zhenxing 振兴,base.partner_86,1,0.9,1
+product.product_supplierinfo_4,ชามกระเบื้องปากกลม 6 นิ้ว (84ใบ),CA106,Dongyue 东岳,base.partner_10,1,1.1,1
+product.product_supplierinfo_5,ชามกระเบื้องปากกลม 6 นิ้ว (84ใบ),CA106,Yinshan 银山,base.partner_68,1,1.1,1
+product.product_supplierinfo_6,ชามกระเบื้องปากกลม 6 นิ้ว (84ใบ),CA106,Yuanda 元大,base.partner_84,1,1.11,1
+product.product_supplierinfo_7,ชามกระเบื้องปากกลม 6 นิ้ว (84ใบ),CA106,Zhenxing 振兴,base.partner_86,1,1.11,1
+product.product_supplierinfo_8,ชามกระเบื้องปากกลม 7 นิ้ว (72ใบ),CA107,Jingxin 景新,base.partner_27,1,1.12,1
+product.product_supplierinfo_9,ชามกระเบื้องปากกลม 7 นิ้ว (72ใบ),CA107,Yinshan 银山,base.partner_68,1,1.13,1
+product.product_supplierinfo_10,ชามกระเบื้องปากกลม 7 นิ้ว (72ใบ),CA107,Yuanda 元大,base.partner_84,1,1.16,1
+product.product_supplierinfo_11,ชามกระเบื้องปากกลม 7 นิ้ว (72ใบ) (barcode),CA107B,Jiaheng 嘉恒,base.partner_25,1,1.15,1
+product.product_supplierinfo_12,ชามกระเบื้องปากกลม 7 นิ้ว (72ใบ) (barcode),CA107B,Yinshan 银山,base.partner_68,1,1.16,1
+product.product_supplierinfo_13,ชามกระเบื้องขาวล้วน 7 นิ้ว (72ใบ),CA107W,Jiaheng 嘉恒,base.partner_25,1,1.06,1
+product.product_supplierinfo_14,ชามกระเบื้องขาวล้วน 7 นิ้ว (72ใบ),CA107W,Yuanda 元大,base.partner_84,1,1.09,1
+product.product_supplierinfo_15,ชามกระเบื้องขาวล้วน 8 นิ้ว (40ใบ),CA108W,Gangyi 刚毅,base.partner_14,1,1.42,1
+product.product_supplierinfo_16,ชามกระเบื้องขาวล้วน 8 นิ้ว (40ใบ),CA108W,Zhenxing 振兴,base.partner_86,1,1.42,1
+product.product_supplierinfo_17,จานลึก 6 นิ้ว (120ใบ),CB106,Gangyi 刚毅,base.partner_14,1,0.87,1
+product.product_supplierinfo_18,จานลึก 6 นิ้ว (120ใบ),CB106,Gangyi 刚毅,base.partner_14,1,0.87,1
+product.product_supplierinfo_19,จานลึก 6 นิ้ว (120ใบ),CB106,Xingye 兴业,base.partner_55,1,0.88,1
+product.product_supplierinfo_20,จานลึกขอบเรียบ 7 นิ้ว (100ใบ),CB107,Gangyi 刚毅,base.partner_14,1,1.07,1
+product.product_supplierinfo_21,จานลึกขอบเรียบ 7 นิ้ว (100ใบ),CB107,Meihua 美华,base.partner_39,1,1.07,1
+product.product_supplierinfo_22,จานลึกขอบเรียบ 7 นิ้ว (100ใบ),CB107,Xingye 兴业,base.partner_55,1,1.07,1
+product.product_supplierinfo_23,จานลึกขอบเรียบ 7 นิ้ว (100ใบ),CB107,Yuanda 元大,base.partner_84,1,1.03,1
+product.product_supplierinfo_24,จานกระเบื้องลึกขอบเรียบ 8 นิ้ว (80ใบ),CB108,Gangyi 刚毅,base.partner_14,1,1.14,1
+product.product_supplierinfo_25,จานกระเบื้องลึกขอบเรียบ 8 นิ้ว (80ใบ),CB108,Jiaheng 嘉恒,base.partner_25,1,1.12,1
+product.product_supplierinfo_26,จานกระเบื้องลึกขอบเรียบ 8 นิ้ว (80ใบ),CB108,Jiaheng 嘉恒,base.partner_25,1,1.15,1
+product.product_supplierinfo_27,จานกระเบื้องลึกขอบเรียบ 8 นิ้ว (80ใบ),CB108,Meihua 美华,base.partner_39,1,1.12,1
+product.product_supplierinfo_28,จานกระเบื้องลึกขอบเรียบ 8 นิ้ว (80ใบ),CB108,Yinshan 银山,base.partner_68,1,1.14,1
+product.product_supplierinfo_29,จานกระเบื้องลึกขอบเรียบ 8 นิ้ว (80ใบ),CB108,Yuanda 元大,base.partner_84,1,1.16,1
+product.product_supplierinfo_30,จานกระเบื้องลึกขอบเรียบ 8 นิ้ว (80ใบ),CB108,Zhenxing 振兴,base.partner_86,1,1.15,1
+product.product_supplierinfo_31,จานลึกขาวล้วน 8 นิ้ว (80ใบ),CB108W,Jiaheng 嘉恒,base.partner_25,1,1.05,1
+product.product_supplierinfo_32,จานลึกขาวล้วน 8 นิ้ว (80ใบ),CB108W,Meihua 美华,base.partner_39,1,1.38,1
+product.product_supplierinfo_33,จานลึก 9 นิ้ว (48ใบ),CB109,Gangyi 刚毅,base.partner_14,1,1.5,1
+product.product_supplierinfo_34,จานลึก 9 นิ้ว (48ใบ),CB109,Meihua 美华,base.partner_39,1,1.47,1
+product.product_supplierinfo_35,จานลึก 9 นิ้ว (48ใบ),CB109,Yinshan 银山,base.partner_68,1,1.49,1
+product.product_supplierinfo_36,จานลึก 9 นิ้ว (48ใบ),CB109,Yuanda 元大,base.partner_84,1,1.49,1
+product.product_supplierinfo_37,จานลึก 9 นิ้ว (48ใบ),CB109,Zhenxing 振兴,base.partner_86,1,1.47,1
+product.product_supplierinfo_38,ถาดบุฟเฟต์ STL 1 ช่อง(1ชุด),SA701,Chuangfeng 创丰,base.partner_4,1,21.25,1
+product.product_supplierinfo_39,ถาดบุฟเฟต์ STL 1 ช่อง(1ชุด),SA701,Chuangfeng 创丰,base.partner_4,1,68.75,1
+product.product_supplierinfo_40,ถาดบุฟเฟต์ STL 2 ช่อง(1ชุด),SA702,Chuangfeng 创丰,base.partner_4,1,21.25,1
+product.product_supplierinfo_41,ถาดบุฟเฟต์ STL 2 ช่อง(1ชุด),SA702,Chuangfeng 创丰,base.partner_4,1,68.75,1
+product.product_supplierinfo_42,百合盘24寸 薄,SB1124,Lele 乐乐,base.partner_32,1,9.8,1
+product.product_supplierinfo_43,百合盘24寸 厚,SB1124,Lele 乐乐,base.partner_32,1,12,1
+product.product_supplierinfo_44,百合盘26寸 厚,SB1126,Lele 乐乐,base.partner_32,1,13.8,1
+product.product_supplierinfo_45,百合盘26寸 薄,SB1126,Lele 乐乐,base.partner_32,1,12.5,1
+product.product_supplierinfo_46,百合盘28寸 厚,SB1128,Lele 乐乐,base.partner_32,1,16.5,1
+product.product_supplierinfo_47,百合盘28寸 薄,SB1128,Lele 乐乐,base.partner_32,1,14.5,1
+product.product_supplierinfo_48,ถาดกลมลายหอย STL 16 นิ้ว (40 ซม.) (80ใบ),SB116,Fengdeli 丰得利,base.partner_12,1,5.9,1
+product.product_supplierinfo_49,ถาดกลมลายหอย STL 16 นิ้ว (40 ซม.) (50ใบ),SB116,Fengdeli 丰得利,base.partner_12,1,5.9,1
+product.product_supplierinfo_50,ถาดกลมลายหอย STL 22 นิ้ว (55 ซม.) (24ใบ),SB122,Fengdeli 丰得利,base.partner_12,1,10.6,1
+product.product_supplierinfo_51,ถาดกลมลายหอย STL 22 นิ้ว (55 ซม.) (24ใบ),SB122,Lele 乐乐,base.partner_32,1,9.6,1
+product.product_supplierinfo_52,ถาดหลุม STL  30 ซม. (72ใบ),SB530,Haifa 海发,base.partner_18,1,7.2,1
+product.product_supplierinfo_53,ถาดหลุม STL  30 ซม. (72ใบ),SB530,Liantong 联通,base.partner_34,1,6.912,1
+product.product_supplierinfo_54,ชามผสมแป้ง STL 30 ซม. (36ใบ),SC230,Fengdeli 丰得利,base.partner_12,1,7.5,1
+product.product_supplierinfo_55,ชามผสมแป้ง STL 30 ซม. (36ใบ),SC230,Hongyuan 宏源,base.partner_21,1,7,1
+product.product_supplierinfo_56,ชามผสม STL 43 ซม.  สับปะรด (36ใบ),SC243,Hongyuan 宏源,base.partner_21,1,9,1
+product.product_supplierinfo_57,ชามผสม STL 43 ซม.  สับปะรด (36ใบ),SC243,Youfa 有发,base.partner_83,1,9,1
+product.product_supplierinfo_58,กะละมังล้างผักรูเล็ก STL 40  ซม. (60ใบ),SC740,Jinyu 金育,base.partner_29,1,9.5,1
+product.product_supplierinfo_59,กะละมังล้างผักรูเล็ก STL 40  ซม. (60ใบ),SC740,Youfa 有发,base.partner_83,1,7.6,1
+product.product_supplierinfo_60,หม้อสุกี้ 2 ช่อง 28 ซม.(18ใบ),SD628,Guijiasheng 桂佳盛,base.partner_17,1,20.43,1
+product.product_supplierinfo_61,หม้อสุกี้ 2 ช่อง 28 ซม.(18ใบ),SD628,Haifa 海发,base.partner_18,1,15,1
+product.product_supplierinfo_62,ตะกร้อ STL ด้ามไม้ (120อัน),SJ101,Dongtai 东泰,base.partner_9,1,3.7,1
+product.product_supplierinfo_63,ตะกร้อ STL ด้ามไม้ (120อัน),SJ101,Xudongkun 许冬坤,base.partner_58,1,4.1,1
+product.product_supplierinfo_64,ตะแกรงขดลวดด้ามไม้ 8 นิ้ว (60อัน),SJ208,Juncheng 君诚,base.partner_30,1,6.6,1
+product.product_supplierinfo_65,ตะแกรงขดลวดด้ามไม้ 8 นิ้ว (60อัน),SJ208,Shunfa 顺发,base.partner_48,1,8.2,1
+product.product_supplierinfo_66,ตะแกรงขดลวดด้ามไม้ 9 นิ้ว (60อัน),SJ209,Juncheng 君诚,base.partner_30,1,8.6,1
+product.product_supplierinfo_67,ตะแกรงขดลวดด้ามไม้ 9 นิ้ว (60อัน),SJ209,Shunfa 顺发,base.partner_48,1,9.2,1
+product.product_supplierinfo_68,ตะแกรงขดลวดด้ามไม้ 10 นิ้ว (60อัน),SJ210,Juncheng 君诚,base.partner_30,1,9.6,1
+product.product_supplierinfo_69,ตะแกรงขดลวดด้ามไม้ 10 นิ้ว (60อัน),SJ210,Shunfa 顺发,base.partner_48,1,10.2,1
+product.product_supplierinfo_70,ตะแกรงขดลวดด้ามไม้ 11 นิ้ว (60อัน),SJ211,Juncheng 君诚,base.partner_30,1,10.6,1
+product.product_supplierinfo_71,ตะแกรงขดลวดด้ามไม้ 11 นิ้ว (60อัน),SJ211,Shunfa 顺发,base.partner_48,1,11.2,1
+product.product_supplierinfo_72,ตะแกรงขดลวดด้ามไม้ 12 นิ้ว (60อัน),SJ212,Juncheng 君诚,base.partner_30,1,11.6,1
+product.product_supplierinfo_73,ตะแกรงขดลวดด้ามไม้ 12 นิ้ว (60อัน),SJ212,Shunfa 顺发,base.partner_48,1,12.2,1
+product.product_supplierinfo_74,เก้าอี้กลม STL 4 ขาสูง 22 ซม. (14อัน),SR222,Canguang 灿光,base.partner_3,1,15,1
+product.product_supplierinfo_75,เก้าอี้กลม STL 4 ขาสูง 22 ซม. (14อัน),SR222,Yazhijia 雅之佳,base.partner_66,1,14.5,1
+product.product_supplierinfo_76,เก้าอี้กลม STL 4 ขาสูง 30 ซม. (14อัน),SR230,Canguang 灿光,base.partner_3,1,16,1
+product.product_supplierinfo_77,เก้าอี้กลม STL 4 ขาสูง 30 ซม. (14อัน),SR230,Yazhijia 雅之佳,base.partner_66,1,18,1
+product.product_supplierinfo_78,เก้าอี้กลม STL 4 ขาสูง 47 ซม. (12อัน),SR247,Canguang 灿光,base.partner_3,1,19,1
+product.product_supplierinfo_79,เก้าอี้กลม STL 4 ขาสูง 47 ซม. (12อัน),SR247,Yazhijia 雅之佳,base.partner_66,1,18.5,1
+product.product_supplierinfo_80,ชามกระเบื้องขาวล้วน 6นิ้ว (84ใบ),CA106W,Yuanda 元大,base.partner_84,1,1.06,1
+product.product_supplierinfo_81,ชามกระเบื้อง 8นิ้ว(48ใบ),CA108,Yuanda 元大,base.partner_84,1,1.5,1
+product.product_supplierinfo_82,ชามกระเบื้องปากกลม 8 นิ้ว (60ใบ),CA108A,Zhenxing 振兴,base.partner_86,1,1.47,1
+product.product_supplierinfo_83,3.5碗,CA135W,Hengda 恒达,base.partner_19,1,0.73,1
+product.product_supplierinfo_84,3.5碗（正品）,CA135WA,Hengda 恒达,base.partner_19,1,0.53,1
+product.product_supplierinfo_85,ถ้วยข้าวต้ม 4.5 นิ้ว (120ใบ),CA145,Hengda 恒达,base.partner_19,1,0.808,1
+product.product_supplierinfo_86,ถ้วยข้าวต้มอย่างดีมุก 4.5 นิ้ว  เกร็ดบี  (120ใบ)  ,CA145B,Hengda 恒达,base.partner_19,1,0.742,1
+product.product_supplierinfo_87, ชามใบบัว 6 นิ้ว (80ใบ),CA406,Hongshun 宏顺,base.partner_93,1,1.48,1
+product.product_supplierinfo_88,ชามใบบัว 7  นิ้ว (70ใบ),CA407,Hongshun 宏顺,base.partner_93,1,1.64,1
+product.product_supplierinfo_89,ชามใบบัว 8  นิ้ว (50ใบ),CA408,Hongshun 宏顺,base.partner_93,1,2.13,1
+product.product_supplierinfo_90,จานลึกขาวล้วน 9 นิ้ว (48ใบ),CB109W,Meihua 美华,base.partner_39,1,1.38,1
+product.product_supplierinfo_91,จานรองขาวล้วน 6 นิ้ว (120ใบ),CB206W,Zhenxing 振兴,base.partner_86,1,0.81,1
+product.product_supplierinfo_92,CE131A (16ชุด),CE131,Sentai 森泰,base.partner_46,1,17.58,1
+product.product_supplierinfo_93,CE132 (16ชุด),CE132,Sentai 森泰,base.partner_46,1,18.05,1
+product.product_supplierinfo_94,ชุดของขวัญ(4ช้อน4ถ้วย) (20ชุด),CE241,Sentai 森泰,base.partner_46,1,13,1
+product.product_supplierinfo_95,แก้วน้ำชาเซรามิกพร้อมจานรอง (72ใบ),CF101,Yiwuxilu 曦露,base.partner_77,1,9.8,1
+product.product_supplierinfo_96,ถังกรองน้ำเซรามิก ใหญ่   (ขาเซรามิก)  .(1ชุด),CG101,Zhuoyuan 卓源,base.partner_89,1,170,1
+product.product_supplierinfo_97,ถังกรองน้ำเซรามิก ใหญ่   (ขาไม้)  .(1ชุด),CG102,Zhuoyuan 卓源,base.partner_89,1,150,1
+product.product_supplierinfo_98,ถังกรองน้ำเซรามิก  เล็ก (ขาเซรามิก) . (2ชุด),CG103,Zhuoyuan 卓源,base.partner_89,1,105,1
+product.product_supplierinfo_99,ถังกรองน้ำเซรามิก  เล็ก  (ขาไม้)  .(2ชุด),CG104,Zhuoyuan 卓源,base.partner_89,1,85,1
+product.product_supplierinfo_102,ชุดมีดเซรามิคใบขาวพร้อมแท่นวาง. (1ชุด),CN101,Yangjiangjixing 阳江吉星,base.partner_63,1,5.9,1
+product.product_supplierinfo_103,ชุดมีดเซรามิคใบขาวพร้อมแท่นวาง .(4ชด),CN201,Yangjiangjixing 阳江吉星,base.partner_63,1,40.4,1
+product.product_supplierinfo_104,ชุดมีดเซรามิคใบดำ 5ชั้น . (1ชุด),CN202,Yangjiangjixing 阳江吉星,base.partner_63,1,36.4,1
+product.product_supplierinfo_105,ชุดมีดเซรามิคใบดำด้ามไม้ 4 ชั้น (2ชุด),CN203,Yangjiangzhenjin 阳江振锦,base.partner_64,1,51,1
+product.product_supplierinfo_106,ช้อนคาว (800อัน),CW11001,Wangziru 王自如,base.partner_49,1,0.33,1
+product.product_supplierinfo_107,ทัพพี (200อัน),CW11002,Wangziru 王自如,base.partner_49,1,1.22,1
+product.product_supplierinfo_108,จานปีกสีครีม 6 นิ้ว  (100ใบ),CW1106,Wangziru 王自如,base.partner_49,1,0.89,1
+product.product_supplierinfo_109,จานปีกสีครีม 7 นิ้ว  (80ใบ),CW1107,Wangziru 王自如,base.partner_49,1,1.34,1
+product.product_supplierinfo_110,จานปีกสีครีม 8 นี้ว  (60ใบ),CW1108,Wangziru 王自如,base.partner_49,1,1.62,1
+product.product_supplierinfo_111,จานปีกสีครีม 9 นิ้ว  (40ใบ),CW1109,Wangziru 王自如,base.partner_49,1,2.06,1
+product.product_supplierinfo_112,จานปีกสีครีม 10 น้ว (36ใบ),CW1110,Wangziru 王自如,base.partner_49,1,2.9,1
+product.product_supplierinfo_113,ถ้วยน้ำจิ้มทรงติ้น (800ใบ),CW11103,Wangziru 王自如,base.partner_49,1,0.42,1
+product.product_supplierinfo_114,จานบัวตี้นสีครีม 8 นิ้ว  (60ใบ),CW1208,Wangziru 王自如,base.partner_49,1,1.62,1
+product.product_supplierinfo_115,จานบัวตี้นสีครีม 9 นิ้ว  (40ใบ),CW1209,Wangziru 王自如,base.partner_49,1,2.06,1
+product.product_supplierinfo_116,จานบัวตี้นสีครีม 10 นิ้ว (36ใบ),CW1210,Wangziru 王自如,base.partner_49,1,2.95,1
+product.product_supplierinfo_117,จานบัวลึกสีครีม 6 นิ้ว (100ใบ),CW1306,Wangziru 王自如,base.partner_49,1,0.94,1
+product.product_supplierinfo_118,จานบัวลึกสีครีม 8 นิ้ว (60ใบ),CW1308,Wangziru 王自如,base.partner_49,1,1.62,1
+product.product_supplierinfo_119,จานบัวลึกสีครีม 9 นิ้ว  (40ใบ),CW1309,Wangziru 王自如,base.partner_49,1,2.06,1
+product.product_supplierinfo_120,จานบัวลึกสีครีม 10 นิ้ว (35ใบ),CW1310,Wangziru 王自如,base.partner_49,1,2.95,1
+product.product_supplierinfo_121,จานบัวลึกสีครีม 12 นิ้ว (35ใบ),CW1312,Wangziru 王自如,base.partner_49,1,6.2,1
+product.product_supplierinfo_122,ชามลึกสีครีม 5 นิ้ว (100ใบ),CW1405,Wangziru 王自如,base.partner_49,1,1.08,1
+product.product_supplierinfo_123,ชามลึกสีครีม 6 นิ้ว (40ใบ),CW1406,Wangziru 王自如,base.partner_49,1,2,1
+product.product_supplierinfo_124,ชามลึกสีครีม 7 นิ้ว (40ใบ),CW1407,Wangziru 王自如,base.partner_49,1,2.53,1
+product.product_supplierinfo_125,ชามลึกสีครีม 8 นิ้ว (30ใบ),CW1408,Wangziru 王自如,base.partner_49,1,3.89,1
+product.product_supplierinfo_126,ถ้วยน้ำจิ้ม 3.7นิ้ว (160ใบ),CW1437,Wangziru 王自如,base.partner_49,1,0.75,1
+product.product_supplierinfo_127,ถ้วยข้าวต้มขาวล้วน 4.5 นิ้ว  (100ใบ),CW1445,Wangziru 王自如,base.partner_49,1,,1
+product.product_supplierinfo_128,ชามมีขอบสีครีม 8 นิ้ว (30ใบ),CW1508,Wangziru 王自如,base.partner_49,1,3.08,1
+product.product_supplierinfo_129,ชามมีขอบสีครีม 9 นิ้ว (26ใบ),CW1509,Wangziru 王自如,base.partner_49,1,4.32,1
+product.product_supplierinfo_130,จานลึกมีหูสีครีม 7 นิ้ว (50ใบ),CW1607,Wangziru 王自如,base.partner_49,1,2.02,1
+product.product_supplierinfo_131,จานลึกมีหูสีครีม 8 นิ้ว (50ใบ),CW1608,Wangziru 王自如,base.partner_49,1,2.4,1
+product.product_supplierinfo_132,จานลึกมีหูสีครีม 9 นิ้ว (40ใบ),CW1609,Wangziru 王自如,base.partner_49,1,3.43,1
+product.product_supplierinfo_133,山西12寸鲍鱼盘,CW1712,Wangziru 王自如,base.partner_49,1,,1
+product.product_supplierinfo_134,山西14寸鲍鱼盘,CW1714,Wangziru 王自如,base.partner_49,1,,1
+product.product_supplierinfo_135,山西16寸鲍鱼盘,CW1716,Wangziru 王自如,base.partner_49,1,,1
+product.product_supplierinfo_136,山西12寸厚边鱼盘,CW1812,Wangziru 王自如,base.partner_49,1,,1
+product.product_supplierinfo_137,山西14寸厚边鱼盘,CW1814,Wangziru 王自如,base.partner_49,1,,1
+product.product_supplierinfo_138,山西16寸厚边鱼盘,CW1816,Wangziru 王自如,base.partner_49,1,,1
+product.product_supplierinfo_139,จานบัวขาวล้วน 8 นิ้ว (60ใบ),CW2108,Guangxiwuxin 武鑫,base.partner_16,1,,1
+product.product_supplierinfo_140,จานบัวขาวล้วน 9 นิ้ว (48ใบ),CW2109,Guangxiwuxin 武鑫,base.partner_16,1,,1
+product.product_supplierinfo_141,จานบัวขาวล้วน 10นิ้ว (30ใบ),CW2110,Guangxiwuxin 武鑫,base.partner_16,1,,1
+product.product_supplierinfo_142,จานปีกขาวล้วน  8.25 นิ้ว  .(60ใบ),CW2208,Guangxiwuxin 武鑫,base.partner_16,1,,1
+product.product_supplierinfo_143,จานปีกขาวล้วน  9.25 นิ้ว  .(48ใบ),CW2209,Guangxiwuxin 武鑫,base.partner_16,1,,1
+product.product_supplierinfo_144,จานปีกขาวล้วน  10.25 นิ้ว .(30ใบ),CW2210,Guangxiwuxin 武鑫,base.partner_16,1,,1
+product.product_supplierinfo_145,จาน  SOUP ขาวล้วน  9 นิ้ว . (48ใบ),CW2309,Guangxiwuxin 武鑫,base.partner_16,1,,1
+product.product_supplierinfo_146,จานตี้นขาวล้วนขอบหยัก 10 นิ้ว  .(30ใบ),CW2410,Guangxiwuxin 武鑫,base.partner_16,1,,1
+product.product_supplierinfo_147,ชามลึกขาวล้วนขอบหยัก 5.5 นิ้ว .(72ใบ),CW2455,Guangxiwuxin 武鑫,base.partner_16,1,,1
+product.product_supplierinfo_148,จานตี้นขาวล้วนขอบหยัก 7.5 นิ้ว .(72ใบ),CW2475,Guangxiwuxin 武鑫,base.partner_16,1,,1
+product.product_supplierinfo_149,จานตี้นขาวล้วนขอบหยัก 9.5 น้ว .(48ใบ),CW2495,Guangxiwuxin 武鑫,base.partner_16,1,,1
+product.product_supplierinfo_150,ชาม BONE ขาวล้วน 6น้ว. (60ใบ),CW3406,Sentai 森泰,base.partner_46,1,,1
+product.product_supplierinfo_151,ชาม BONE ขาวล้วน 7นิ้ว .(40ใบ),CW3407,Sentai 森泰,base.partner_46,1,,1
+product.product_supplierinfo_152,ชาม BONE ขาวล้วน 8นิ้ว .(30ใบ),CW3408,Sentai 森泰,base.partner_46,1,,1
+product.product_supplierinfo_153,กาต้มน้ำไฟฟ้า 1.5 L  (18ใบ) ,EA115,Yiwusanqian 三钱,base.partner_74,1,35,1
+product.product_supplierinfo_154,กาต้มน้ำไฟฟ้า 1.7 L  (18ใบ),EA117,Yiwusanqian 三钱,base.partner_74,1,42,1
+product.product_supplierinfo_155,กระทะก้นลึกคาร์บอนเคลือบเซรามิก 11 นิ้ว (6ชุด),EC011711,ETAC 珠海锅,base.partner_11,1,37.8,1
+product.product_supplierinfo_156,กระทะก้นลึกคาร์บอนเคลือบเซรามิก 12 นิ้ว (6ชุด),EC011712,ETAC 珠海锅,base.partner_11,1,66.7,1
+product.product_supplierinfo_157,หม้อซอสคาร์บอนเคลือบเซรามิก 18 ซม.(6ชุด),EC014518,ETAC 珠海锅,base.partner_11,1,41.5,1
+product.product_supplierinfo_158,หม้อคาร์บอนเคลือบเซรามิก 26 ซม. (6ชุด),EC014626,ETAC 珠海锅,base.partner_11,1,71.3,1
+product.product_supplierinfo_159,ฝาปิดซิลิโคน (เล็ก) (360ชิ้น),EC02G2317,Yiwuhuayou 华友,base.partner_71,1,6.6,1
+product.product_supplierinfo_160,ฝาปิดซิลิโคน (ใหญ่) (240ชิ้น),EC02G2322,Yiwuhuayou 华友,base.partner_71,1,7.6,1
+product.product_supplierinfo_167,เบาะนั้งเย็น (30อัน),EC04BD72,Yiwushuer 淑尔,base.partner_75,1,5,1
+product.product_supplierinfo_168,หมอนหนุนเย็น (18อัน),EC04BZ81,Yiwushuer 淑尔,base.partner_75,1,6,1
+product.product_supplierinfo_169,ฝักบัว สีขาว ตัวใหญ่ .(100อัน),EC05D101,Daxiang 大祥,base.partner_6,1,6.5,1
+product.product_supplierinfo_170,ฝักบัว สีน้ำเงิน ตัวใหญ่ .(100อัน),EC05D102,Daxiang 大祥,base.partner_6,1,6.5,1
+product.product_supplierinfo_171,เม็ดฝักบัว สีเทา,EC05S101,Daxiang 大祥,base.partner_6,1,20,1
+product.product_supplierinfo_172,เม็ดฝักบัว สีส้ม,EC05S102,Daxiang 大祥,base.partner_6,1,20,1
+product.product_supplierinfo_173,เม็ดฟักบัว สีขาว,EC05S103,Daxiang 大祥,base.partner_6,1,20,1
+product.product_supplierinfo_174,ฝักบัว สีขาว ตัวเล็ก .(200อัน),EC05X101,Daxiang 大祥,base.partner_6,1,5,1
+product.product_supplierinfo_175,ฝักบัว สีน้ำเงิน ตัวเล็ก .(200อัน),EC05X102,Daxiang 大祥,base.partner_6,1,5,1
+product.product_supplierinfo_176,กระทะเคลือบเซรามิก 28 ซม. (ชมพู) (4ใบ),EC062028,Nanlong 南龙,base.partner_41,1,30.4,1
+product.product_supplierinfo_177,หม้อ 2 หูอลูมีเนียมที่จับซิลิโคน 20 ซม. (6ชุด),EC063020,Nanlong 南龙,base.partner_41,1,32.1,1
+product.product_supplierinfo_178,หม้อ 2 หูอลูมีเนียมที่จับซิลิโคน 24 ซม. (6ชุด),EC063024,Nanlong 南龙,base.partner_41,1,41.3,1
+product.product_supplierinfo_179,หม้อด้ามอลูมีเนียมที่จับซิลิโคน 16 ซม. (6ชุด),EC064016,Nanlong 南龙,base.partner_41,1,26.6,1
+product.product_supplierinfo_180,หม้ออลูมีเนียมหล้อ 20 ซม.(แดง),EC065020,Nanlong 南龙,base.partner_41,1,24.4,1
+product.product_supplierinfo_184,ไม้ถูพื้นเชื่อกเกลียว ปิดน้ำได้ (50อัน),FB103,Liangxin 良信,base.partner_33,1,,1
+product.product_supplierinfo_187,ผ้าเช็ดมือชุดกระโปรงลายตาราง  (280ผืน),Fd101,Yiwuxiyang 希阳,base.partner_79,1,10,1
+product.product_supplierinfo_188,ผ้าเช็ดมือชุดกระโปรงลายดอก  (280ผืน),FD102,Yiwuxiyang 希阳,base.partner_79,1,10,1
+product.product_supplierinfo_189,ซิลิโคนจับของร้อน  .(500อัน),GA101,Yiwuhuayou 华友,base.partner_71,1,,1
+product.product_supplierinfo_190,500 กาแก้วชงชาทรงตรง 500 ML (60ใบ),GA1500,Lishun 理顺,base.partner_36,1,6,1
+product.product_supplierinfo_191,509 กาแก้วชงชาทรงโค้ง 500 ML (60ใบ),GA1509,Lishun 理顺,base.partner_36,1,6,1
+product.product_supplierinfo_192,搪瓷碗16cm,KA116,Hongsheng 红盛,base.partner_20,1,18.37,1
+product.product_supplierinfo_193,搪瓷碗18cm,KA118,Hongsheng 红盛,base.partner_20,1,23.37,1
+product.product_supplierinfo_194,搪瓷碗20cm,KA120,Hongsheng 红盛,base.partner_20,1,28.23,1
+product.product_supplierinfo_195,จานเคลือบ 20 ซม. (10โหล),KB120,Hongsheng 红盛,base.partner_20,1,20.03,1
+product.product_supplierinfo_196,จานเคลือบ 22 ชม. (10 โหล),KB122,Hongsheng 红盛,base.partner_20,1,22.7,1
+product.product_supplierinfo_197,ถาดกลมเคลีอบ 40ซม ( 2 โหล),KB140,Hongsheng 红盛,base.partner_20,1,111,1
+product.product_supplierinfo_198,ถาดกลมเคลีอบ 45ซม ( 2 โหล),KB145,Hongsheng 红盛,base.partner_20,1,141.5,1
+product.product_supplierinfo_199,หม้อเคลีอบดอก 5ใบ/ชุด 16-24 ( 4 ชุด ),KD11624,Hongsheng 红盛,base.partner_20,1,88,1
+product.product_supplierinfo_200,หม้อเคลีอบดอก 2หู 20ซม  ( 12 ชุด),KD220,Hongsheng 红盛,base.partner_20,1,26.5,1
+product.product_supplierinfo_201,หม้อเคลีอบดอก 2หู 24ซม  ( 8 ชุด ) ,KD324,Hongsheng 红盛,base.partner_20,1,36,1
+product.product_supplierinfo_202,หม้อเคลีอบดอก 2หู 28ซม  ( 8 ชุด ) ,KD328,Hongsheng 红盛,base.partner_20,1,50,1
+product.product_supplierinfo_203,34-21-0.8   เขียงเหลี่ยมพลาสติก เล็ก (36อัน),PC101,Yiwufangshi 方氏,base.partner_69,1,5.3,1
+product.product_supplierinfo_204,37.5-23.5-0.8   เขียงเหลี่ยมพลาสติก กลาง (36อัน),PC102,Yiwufangshi 方氏,base.partner_69,1,7.1,1
+product.product_supplierinfo_205,40.5-25.5-0.8 เขียงเหลี่ยมพลาสติก ใหญ่ (36อัน),PC103,Yiwufangshi 方氏,base.partner_69,1,8.4,1
+product.product_supplierinfo_206,白色塑料砧板(6805),PC104,Yiwufangshi 方氏,base.partner_69,1,1.9,1
+product.product_supplierinfo_207,ตะเกียบเมลามีน สีขาว (8011) (100แพ็ค),PD101,Dongbao 东宝,base.partner_7,1,2.2,1
+product.product_supplierinfo_211,ชุดถ้วยคัพเค้กซิลิโคน 18 ชิ้น  (48ชุด),PI127,Yiwuhuayou 华友,base.partner_71,1,15,1
+product.product_supplierinfo_212,ชุดซิลิโคนด้ามไม้เบเกอรี่  SET 1 (72ชุด),PJ131,Yiwuhuayou 华友,base.partner_71,1,12.5,1
+product.product_supplierinfo_213,ชุดซิลิโคนด้ามไม้เบเกอรี่  SET 2 (72ชุด),PJ132,Yiwuhuayou 华友,base.partner_71,1,12.5,1
+product.product_supplierinfo_214,แผ่นซฺิลิโคนสำหรับรองทำขนม .(4ชุด),PJ201,Yiwuhuayou 华友,base.partner_71,1,13,1
+product.product_supplierinfo_215,ชุดอุปกรณ์ทำครัวครบครัน 6 ชิ้น  (144อัน),PK101,Yiwuhuayou 华友,base.partner_71,1,2.7,1
+product.product_supplierinfo_216,ชุดอุปกรณ์ทำครัวครบครัน 6 ชิ้น  (144อัน),PK102,Yiwuhuayou 华友,base.partner_71,1,2.7,1
+product.product_supplierinfo_217,ชุดอุปกรณ์ทำครัวครบครัน 6 ชิ้น  (144อัน),PK103,Yiwuhuayou 华友,base.partner_71,1,2.7,1
+product.product_supplierinfo_218,ชุดอุปกรณ์ทำครัวครบครัน 6 ช้น  (144อัน),PK104,Yiwuhuayou 华友,base.partner_71,1,2.7,1
+product.product_supplierinfo_219,ชุดอุปกรณ์ทำครัวครบครัน 6 ช้น  (144อัน),PK105,Yiwuhuayou 华友,base.partner_71,1,2.7,1
+product.product_supplierinfo_220,ชุดอุปกรณ์ทำครัวครบครัน 6 ช้น  (144อัน),PK106,Yiwuhuayou 华友,base.partner_71,1,2.7,1
+product.product_supplierinfo_221,ไม้คลึงแป้ง,PL201,Yiwuhuayou 华友,base.partner_71,1,11,1
+product.product_supplierinfo_223,ชุดที่ตัดคุกกี้ . (144อัน),PN101,Yiwuhuayou 华友,base.partner_71,1,3.2,1
+product.product_supplierinfo_224,ถาดชาเหลี่ยมพร้อมถาดมีรู STL 36X27 (50ชุด),SA13627,Hongyuan 宏源,base.partner_21,1,6.2,1
+product.product_supplierinfo_225,ถาดชาเหลี่ยมพร้อมถาดมีรู STL 40X30 (50ชุด),SA14030,Hongyuan 宏源,base.partner_21,1,7.8,1
+product.product_supplierinfo_226,ถาดชาเหลี่ยมพร้อมถาดมีรู STL 45X35 (50ชุด),SA14535,Hongyuan 宏源,base.partner_21,1,9.8,1
+product.product_supplierinfo_227,ถาดชาเหลี่ยมพร้อมถาดมีรู STL 50X35 (50ชุด),SA15035,Hongyuan 宏源,base.partner_21,1,10.8,1
+product.product_supplierinfo_228,ถาดชาเหลี่ยมพร้อมถาดมีรู STL 60X40 (24ชุด),SA16040,Hongyuan 宏源,base.partner_21,1,16,1
+product.product_supplierinfo_229,ถาดเสริฟมีทีจับตรง 33X24X2 (120ใบ),SA233242,Guijiasheng 桂佳盛,base.partner_17,1,4,1
+product.product_supplierinfo_230,ถาดเสริฟมีทีจับตรง 36X27 (120ใบ),SA236272,Guijiasheng 桂佳盛,base.partner_17,1,5,1
+product.product_supplierinfo_231,ถาดเสริฟมีทีจับตรง 43X31X2 (60ใบ),SA243312,Guijiasheng 桂佳盛,base.partner_17,1,6.2,1
+product.product_supplierinfo_232,ถาดเสริฟมีทีจับตรง STL 48X34 (36ใบ),SA248342,Xianshun 贤顺,base.partner_51,1,6,1
+product.product_supplierinfo_233,ถาดเสริฟมีทีจับตรง STL 58X42 (36ใบ),SA258422A,Xianshun 贤顺,base.partner_51,1,10,1
+product.product_supplierinfo_234,ถาดเสริฟ STL  27X20X2 (120ใบ),SA327202,Hongyuan 宏源,base.partner_21,1,1.6,1
+product.product_supplierinfo_235,ถาดอาหาร 3 มิล STL  27X20X4 (120ใบ),SA327204,Hongyuan 宏源,base.partner_21,1,2.3,1
+product.product_supplierinfo_236,ถาดเสริฟ STL  32X22X2 (120ใบ),SA332222,Hongyuan 宏源,base.partner_21,1,1.9,1
+product.product_supplierinfo_237,ถาดอาหาร STL  32X22X4 (120ใบ),SA332224,Hongyuan 宏源,base.partner_21,1,2.5,1
+product.product_supplierinfo_238,ถาดเสริฟ STL  36X27X2   (หนา)   (84ใบ),SA336272,Hongyuan 宏源,base.partner_21,1,2.2,1
+product.product_supplierinfo_239,ถาดเสริฟ STL  36X27X2   (หนา)   (120ใบ),SA336272A,Hongyuan 宏源,base.partner_21,1,0,1
+product.product_supplierinfo_240,ถาดเสริฟ STL  36X27X2   (หนา)   (15 โหล),SA336272B,Hongyuan 宏源,base.partner_21,1,2,1
+product.product_supplierinfo_241,ถาดอาหาร STL  36X27X4 (84ใบ),SA336274,Hongyuan 宏源,base.partner_21,1,3.1,1
+product.product_supplierinfo_242,ถาดลึก STL  36X27X7 (48ใบ),SA336277,Hongyuan 宏源,base.partner_21,1,5.8,1
+product.product_supplierinfo_243,ถาดเสริฟ STL  40X30X2  (72ใบ),SA340302,Hongyuan 宏源,base.partner_21,1,3.9,1
+product.product_supplierinfo_244,ถาดเสริฟ STL  40X30X2  (72ใบ),SA340302A,Hongyuan 宏源,base.partner_21,1,3.75,1
+product.product_supplierinfo_246,ถาดอาหาร STL  40X30X4 (72ใบ),SA340304,Hongyuan 宏源,base.partner_21,1,4.6,1
+product.product_supplierinfo_247,ถาดอาหารลึก STL  40X30X7 (48ใบ),SA340307,Hongyuan 宏源,base.partner_21,1,6.4,1
+product.product_supplierinfo_248,ถาดเสริฟ STL  45X35X2 (60ใบ),SA345352,Hongyuan 宏源,base.partner_21,1,5.4,1
+product.product_supplierinfo_249,ถาดอาหาร STL  45X35X4 (60ใบ),SA345354A,Hongyuan 宏源,base.partner_21,1,6.6,1
+product.product_supplierinfo_250,ถาดอาหารลึก STL  45X35X7(หนา) (36ใบ),SA345357,Hongyuan 宏源,base.partner_21,1,8,1
+product.product_supplierinfo_252,ถาดเสริฟ STL 50X35X2    (48ใบ),SA350352,Hongyuan 宏源,base.partner_21,1,5.8,1
+product.product_supplierinfo_253,ถาดเสริฟ STL 50X35X2    (48ใบ),SA350352A,Hongyuan 宏源,base.partner_21,1,5.65,1
+product.product_supplierinfo_254,ถาดอาหาร STL 50X35X4    (48ใบ),SA350354,Hongyuan 宏源,base.partner_21,1,7,1
+product.product_supplierinfo_255,ถาดอาหาร STL 50X35X4    (60ใบ),SA350354A,Hongyuan 宏源,base.partner_21,1,7,1
+product.product_supplierinfo_256,ถาดอาหารลึก STL 50X35X7    (36ใบ),SA350357,Hongyuan 宏源,base.partner_21,1,8.9,1
+product.product_supplierinfo_257,ถาดเสริฟ STL 50X40X2    (48ใบ),SA350402,Hongyuan 宏源,base.partner_21,1,7.8,1
+product.product_supplierinfo_258,ถาดอาหาร STL 50X40X4  (48ใบ),SA350404,Hongyuan 宏源,base.partner_21,1,8.5,1
+product.product_supplierinfo_259,ถาดเสริฟ STL 60X40X2  (36ใบ),SA360402,Hongyuan 宏源,base.partner_21,1,8,1
+product.product_supplierinfo_260,ถาดเสริฟ STL 60X40X2  (36ใบ),SA360402A,Hongyuan 宏源,base.partner_21,1,7.85,1
+product.product_supplierinfo_261,ถาดอาหาร STL 60X40X4  (36ใบ),SA360404,Hongyuan 宏源,base.partner_21,1,9,1
+product.product_supplierinfo_262,ถาดอาหารลึก STL 60X40X7 (24ใบ),SA360407,Hongyuan 宏源,base.partner_21,1,11.5,1
+product.product_supplierinfo_263,ถาดลึกม้วนขอบ STL 35X24X6 (หนา)  (36ใบ),SA435246,Liantong 联通,base.partner_34,1,12.48,1
+product.product_supplierinfo_264,ถาดลึกม้วนขอบ STL 40X28X8 (หนา) (30ใบ),SA440288,Liantong 联通,base.partner_34,1,16.32,1
+product.product_supplierinfo_265,ถาดลึกม้วนขอบ STL 43X28X7  (36ใบ),SA443287,Xianshun 贤顺,base.partner_51,1,9.2,1
+product.product_supplierinfo_266,ถาดลึกม้วนขอบ STL 45X31X8 (หนา) (24ใบ),SA445318,Liantong 联通,base.partner_34,1,20.16,1
+product.product_supplierinfo_267,ถาดผ้าขนหนูเช็ดปาก STL  25 ซม.  (100ใบ),SA525,Liantong 联通,base.partner_34,1,8.16,1
+product.product_supplierinfo_268,ถาดผ้าขนหนูเช็ดปาก STL  30 ซม.  (80ใบ),SA530,Liantong 联通,base.partner_34,1,10.56,1
+product.product_supplierinfo_269,ถาดผ้าขนหนูเช็ดปาก STL  35 ซม.  (70ใบ),SA535,Liantong 联通,base.partner_34,1,12.96,1
+product.product_supplierinfo_270,ถาดผ้าขนหนูเช็ดปาก STL  40 ซม.  (60ใบ),SA540,Liantong 联通,base.partner_34,1,15.36,1
+product.product_supplierinfo_271,ถาดอุ่นอาหารพร้อมฝาแก้ว 36*27 (12ชุด),SA601,Xianshun 贤顺,base.partner_51,1,8.3,1
+product.product_supplierinfo_272,ถาดอุ่นอาหารพร้อมฝาแก้ว?ขาถอดได้? 36*27 (12ชุด),SA601A,Xianshun 贤顺,base.partner_51,1,8.7,1
+product.product_supplierinfo_273,ถาดอุ่นอาหารพร้อมฝาแก้ว (ไม่มีขา)    36*27 (12ชุด),SA601B,Xianshun 贤顺,base.partner_51,1,7.9,1
+product.product_supplierinfo_274,ถาดอุ่นอาหารเหลี่ยมฝาSTL+แก้ว 36*27 (12ชุด),SA602,Xianshun 贤顺,base.partner_51,1,10,1
+product.product_supplierinfo_275,ถาดอุ่นอาหารพร้อมฝาแก้ว 40*30  (12ชุด),SA603,Xianshun 贤顺,base.partner_51,1,12.5,1
+product.product_supplierinfo_276,ถาดอุ่นอาหารเหลี่ยมฝาSTL+แก้ว 40*30(12ชุด),SA604,Xianshun 贤顺,base.partner_51,1,11.5,1
+product.product_supplierinfo_277,ถาดอุ่นอาหารลายฝาแก้วมีขา 36*27(24ชุด),SA605,Xianshun 贤顺,base.partner_51,1,15.5,1
+product.product_supplierinfo_278,ถาดอุ่นอาหารลายฝาSTL+แก้วมีขา 36*27(24ชุด),SA606,Xianshun 贤顺,base.partner_51,1,17.5,1
+product.product_supplierinfo_279,ถาดอุ่นอาหารลายฝาแก้วขาโครง36*27(24ชุด),SA607,Xianshun 贤顺,base.partner_51,1,18.5,1
+product.product_supplierinfo_280,ถาดอุ่นอาหารลายฝาSTL+แก้วขาโครง  36*27(24ชุด),SA608,Xianshun 贤顺,base.partner_51,1,20,1
+product.product_supplierinfo_281,ถาดอุ่นอาหารลายฝาแก้วมีขา 40*30 (18ชุด),SA609,Xianshun 贤顺,base.partner_51,1,19.5,1
+product.product_supplierinfo_282,ถาดอุ่นอาหารลายฝาSTL+แก้วมีขา 40*30(18ชุด),SA610,Xianshun 贤顺,base.partner_51,1,18.5,1
+product.product_supplierinfo_283,ถาดอุ่นอาหารลายฝาแก้วขาโครง 40*30(18ชุด),SA611,Xianshun 贤顺,base.partner_51,1,22.5,1
+product.product_supplierinfo_284,ถาดอุ่นอาหารลายฝาSTL+แก้วขาโครง 40*30(18ชุด),SA612,Xianshun 贤顺,base.partner_51,1,21.5,1
+product.product_supplierinfo_285,ถาดอุ่นอาหารลายฝามีลายSTL+แก้วมีขา36*27. (24ชุด),SA613,Xianshun 贤顺,base.partner_51,1,19,1
+product.product_supplierinfo_286,ถาดบุฟเฟต์ STL เหลี่ยม (หนา) (1ชุด),SA703,Chuangfeng 创丰,base.partner_4,1,,1
+product.product_supplierinfo_287,ถาดล้างผักมีรู  STL  28 ซม. (120ใบ),SB028,Hongyuan 宏源,base.partner_21,1,2.7,1
+product.product_supplierinfo_288,ถาดล้างผักมีรู  STL  30 ซม. (120ใบ),SB030,Hongyuan 宏源,base.partner_21,1,3.7,1
+product.product_supplierinfo_289,ถาดล้างผักมีรู  STL  32 ซม. (80ใบ),SB032,Hongyuan 宏源,base.partner_21,1,4.3,1
+product.product_supplierinfo_290,ถาดล้างผักมีรู  STL  34 ซม. (80ใบ),SB034,Hongyuan 宏源,base.partner_21,1,5.2,1
+product.product_supplierinfo_291,ถาดล้างผักมีรู  STL  36 ซม. (80ใบ),SB036,Hongyuan 宏源,base.partner_21,1,6.1,1
+product.product_supplierinfo_292,椭圆盘22cm,SB1022,Haifa 海发,base.partner_18,1,7.5,1
+product.product_supplierinfo_293,椭圆盘26cm,SB1026,Haifa 海发,base.partner_18,1,8.8,1
+product.product_supplierinfo_294,椭圆盘30cm,SB1030,Haifa 海发,base.partner_18,1,10.7,1
+product.product_supplierinfo_295,椭圆盘35cm,SB1035,Haifa 海发,base.partner_18,1,13,1
+product.product_supplierinfo_296,ถาดกลมลายหอย STL 10 นิ้ว (25 ซม.) (120ใบ),SB110,Fengdeli 丰得利,base.partner_12,1,3,1
+product.product_supplierinfo_297,ถาดร้ำรวย 12 นิ้ว สีเงินรวมดำ .(84ใบ),SB1112B,Lele 乐乐,base.partner_32,1,7.6,1
+product.product_supplierinfo_298,ถาดร้ำรวย 12 นิ้ว สีทอง .(84ใบ),SB1112G,Lele 乐乐,base.partner_32,1,8.6,1
+product.product_supplierinfo_299,ถาดร้ำรวย 12 นิ้ว สีทองแดง .(84ใบ),SB1112R,Lele 乐乐,base.partner_32,1,7.6,1
+product.product_supplierinfo_300,ถาดกลมลายหอย STL 12 นิ้ว (30 ซม.) (120ใบ),SB112,Fengdeli 丰得利,base.partner_12,1,3.4,1
+product.product_supplierinfo_301,ถาดกลมลายหอย STL 14 นิ้ว (35 ซม.) (100ใบ),SB114,Fengdeli 丰得利,base.partner_12,1,4.7,1
+product.product_supplierinfo_302,ถาดกลมลายหอย STL 18 นิ้ว (45 ซม.) (50ใบ),SB118,Fengdeli 丰得利,base.partner_12,1,8.1,1
+product.product_supplierinfo_303,ถาดกลมลายหอย STL 20 นิ้ว (50 ซม.) (36ใบ),SB120,Fengdeli 丰得利,base.partner_12,1,9.5,1
+product.product_supplierinfo_304,ถาดกลมลายหอย STL 20 นิ้ว (50 ซม.) (24ใบ หนา) ,SB1202,Fengdeli 丰得利,base.partner_12,1,11.1,1
+product.product_supplierinfo_305,ถาดกลมลายหอย STL 24 นิ้ว (60 ซม.) (24ใบ),SB124,Lele 乐乐,base.partner_32,1,11.6,1
+product.product_supplierinfo_306,ถาดกลมลายหอย STL 24 นิ้ว (60 ซม.) (20ใบ หนา),SB1242,Fengdeli 丰得利,base.partner_12,1,12.5,1
+product.product_supplierinfo_307,ถาดกลมลายหอย STL 60 ซม (24ใบ),SB170,Fengdeli 丰得利,base.partner_12,1,,1
+product.product_supplierinfo_308,ถาดกลมลายจำปี STL  24 ซม. (24โหล),SB224,Guijiasheng 桂佳盛,base.partner_17,1,1.89,1
+product.product_supplierinfo_309,ถาดกลมลายจำปี STL  34 ซม. (120ใบ),SB234,Guijiasheng 桂佳盛,base.partner_17,1,,1
+product.product_supplierinfo_310,ถาดกลมลายฟักทอง STL  36 ซม. (120ใบ),SB236,Guijiasheng 桂佳盛,base.partner_17,1,,1
+product.product_supplierinfo_311,จาน STL 8 นิ้ว (28โหล),SB308,Youfa 有发,base.partner_83,1,1.45,1
+product.product_supplierinfo_312,จาน STL 9 นิ้ว (24โหล),SB309,Youfa 有发,base.partner_83,1,1.8,1
+product.product_supplierinfo_316,ถาดกลมลายไทย STL  50 ซม. (36ใบ),SB450,Xinwei 新伟,base.partner_56,1,7.8,1
+product.product_supplierinfo_317,ถาดกลมลายไทย STL  55 ซม. (36ใบ),SB455,Xinwei 新伟,base.partner_56,1,8.7,1
+product.product_supplierinfo_318,ถาดกลมลายไทย STL  60 ซม. (24ใบ),SB460,Xinwei 新伟,base.partner_56,1,10.5,1
+product.product_supplierinfo_319,ถาดหลุม STL  26 ซม. (72ใบ),SB526,Haifa 海发,base.partner_18,1,5.9,1
+product.product_supplierinfo_320,ถาดหลุม STL  28 ซม. (72ใบ),SB528,Haifa 海发,base.partner_18,1,6.5,1
+product.product_supplierinfo_321,ถาดหลุม STL  32 ซม. (60ใบ),SB532,Haifa 海发,base.partner_18,1,8.5,1
+product.product_supplierinfo_322,ถาดหลุม STL  35 ซม. (48ใบ),SB535,Haifa 海发,base.partner_18,1,9.5,1
+product.product_supplierinfo_323,ถาดอุ่นอาหารกลมฝาแก้ว (18ชุด),SB601,Xianshun 贤顺,base.partner_51,1,8,1
+product.product_supplierinfo_324,ถาดบุฟเฟต์ STL กลม (หนา) (1ชุด),SB701,Chuangfeng 创丰,base.partner_4,1,,1
+product.product_supplierinfo_325,ถาดบุฟเฟต์ STL กลม (เล็ก) (หนา) (4ชุด),SB702,Chuangfeng 创丰,base.partner_4,1,,1
+product.product_supplierinfo_326,จานกลมลายไทย STL 22 ซม. (24โหล),SB822,Guijiasheng 桂佳盛,base.partner_17,1,1.89,1
+product.product_supplierinfo_327,โถข้าว STL 12  ซม. (60ใบ),SC1012,Zhida 志达,base.partner_87,1,5.1,1
+product.product_supplierinfo_328,โถข้าว STL 20  ซม. (24ใบ),SC1020,Xuye 旭业,base.partner_59,1,10.3,1
+product.product_supplierinfo_329,ชามผสมแป้ง STL 16 ซม. (20โหล),SC116,Fengdeli 丰得利,base.partner_12,1,1.43,1
+product.product_supplierinfo_330,ชามผสมแป้ง STL 18 ซม. (16โหล),SC118,Fengdeli 丰得利,base.partner_12,1,1.76,1
+product.product_supplierinfo_331,ชามผสมแป้ง STL 20 ซม. (16โหล),SC120,Fengdeli 丰得利,base.partner_12,1,2,1
+product.product_supplierinfo_332,ชามผสมแป้ง STL 22 ซม. (16โหล),SC122,Fengdeli 丰得利,base.partner_12,1,2.28,1
+product.product_supplierinfo_333,SC1232(60)ใบ,SC1232,Hongyuan 宏源,base.partner_21,1,3.8,1
+product.product_supplierinfo_334,SC1236(60)ใบ,SC1236,Hongyuan 宏源,base.partner_21,1,1.6,1
+product.product_supplierinfo_335,ชามผสมแป้ง STL 24 ซม. (บาง) (16โหล),SC124,Fengdeli 丰得利,base.partner_12,1,34.2,1
+product.product_supplierinfo_336,SC1240(60)ใบ,SC1240,Hongyuan 宏源,base.partner_21,1,5.5,1
+product.product_supplierinfo_337,ชามผสมแป้ง STL 26 ซม. (12โหล),SC126,Fengdeli 丰得利,base.partner_12,1,46.8,1
+product.product_supplierinfo_338,กะละมังกังนัม STL 18 ซม.(36ใบ),SC1318,Haifa 海发,base.partner_18,1,6.9,1
+product.product_supplierinfo_339,กะละมังกังนัม STL 20 ซม. (36ใบ),SC1320,Haifa 海发,base.partner_18,1,8.1,1
+product.product_supplierinfo_340,กะละมังกังนัม STL 22 ซม. (36ใบ),SC1322,Haifa 海发,base.partner_18,1,9.2,1
+product.product_supplierinfo_341,กะละมังกังนัม STL 24 ซม. (36ใบ),SC1324,Haifa 海发,base.partner_18,1,10.4,1
+product.product_supplierinfo_342,กะละมังกังนัม STL 26 ซม. (36ใบ),SC1326,Haifa 海发,base.partner_18,1,11.8,1
+product.product_supplierinfo_343,กะละมังกังนัม STL 28 ซม. (24ใบ),SC1328,Haifa 海发,base.partner_18,1,13.3,1
+product.product_supplierinfo_344,กะละมังกังนัม STL  30ซม.(24ใบ),SC1330,Haifa 海发,base.partner_18,1,15.6,1
+product.product_supplierinfo_345,กะละมังกังนัม STL  32 ซม.(24ใบ),SC1332,Haifa 海发,base.partner_18,1,17.5,1
+product.product_supplierinfo_346,กะละมังกังนัม STL  34ซม.(24ใบ),SC1334,Haifa 海发,base.partner_18,1,19.8,1
+product.product_supplierinfo_347,กะละมังเจาะรู้ขอบสุงสองหู 18 ซม (60อัน),SC1418,Dongtai 东泰,base.partner_9,1,11,1
+product.product_supplierinfo_348,กะละมังเจาะรู้ขอบสุงสองหู 21 ซม (60อัน),SC1421,Dongtai 东泰,base.partner_9,1,12,1
+product.product_supplierinfo_349,กะละมังเจาะรู้ขอบสุงสองหู 24 ซม (40อัน),SC1424,Dongtai 东泰,base.partner_9,1,14,1
+product.product_supplierinfo_350,กะละมังเจาะรู้ขอบสุงสองหู 27 ซม (40อัน),SC1427,Dongtai 东泰,base.partner_9,1,16,1
+product.product_supplierinfo_351,กะละมังเจาะรู้ขอบสุงสองหู 29 ซม (40อัน) ,SC1429,Dongtai 东泰,base.partner_9,1,18,1
+product.product_supplierinfo_352,กะละมังเจาะรู้ขอบสุงสองหู 32 ซม (40อัน),SC1432,Dongtai 东泰,base.partner_9,1,20,1
+product.product_supplierinfo_353,กะละมังเจาะรู้ขอบสุงสองหู 35 ซม (40อัน),SC1435,Dongtai 东泰,base.partner_9,1,25,1
+product.product_supplierinfo_354,16cm冲孔篮（双耳）DT-W0104-16,SC1516,Dongtai 东泰,base.partner_9,1,7,1
+product.product_supplierinfo_355,20cm冲孔篮（双耳）DT-W0104-20,SC1520,Dongtai 东泰,base.partner_9,1,8,1
+product.product_supplierinfo_356,22cm冲孔篮（双耳）DT-W0104-22,SC1522,Dongtai 东泰,base.partner_9,1,9,1
+product.product_supplierinfo_357,25cm冲孔篮（双耳）DT-W0104-25,SC1525,Dongtai 东泰,base.partner_9,1,12,1
+product.product_supplierinfo_358,28cm冲孔篮（双耳）DT-W0104-28,SC1528,Dongtai 东泰,base.partner_9,1,14,1
+product.product_supplierinfo_359,31cm冲孔篮（双耳）DT-W0104-31,SC1531,Dongtai 东泰,base.partner_9,1,16,1
+product.product_supplierinfo_360,34cm冲孔篮（双耳）DT-W0104-34,SC1534,Dongtai 东泰,base.partner_9,1,19,1
+product.product_supplierinfo_361,37cm冲孔篮（双耳）DT-W0104-37,SC1537,Dongtai 东泰,base.partner_9,1,22,1
+product.product_supplierinfo_362,40cm冲孔篮（双耳）DT-W0104-40,SC1540,Dongtai 东泰,base.partner_9,1,26,1
+product.product_supplierinfo_363,SC1623  ( 40อัน ),SC1623,Dongtai 东泰,base.partner_9,1,12.5,1
+product.product_supplierinfo_364,ชามผสมแป้ง STL 24 ซม. (หนา) (48ใบ),SC224,Fengdeli 丰得利,base.partner_12,1,4.85,1
+product.product_supplierinfo_365,ชามผสมแป้ง STL 27 ซม. (48ใบ),SC227,Fengdeli 丰得利,base.partner_12,1,5.8,1
+product.product_supplierinfo_366,กะละมังทรงชามผสม STL 32 ซม.   กระต่ายทอง (72ใบ),SC232,Jinyu 金育,base.partner_29,1,5.1,1
+product.product_supplierinfo_367,ชามผสมแป้ง STL 33 ซม. (36ใบ),SC233,Fengdeli 丰得利,base.partner_12,1,8.3,1
+product.product_supplierinfo_368,ชามผสมแป้ง STL 36 ซม. (36ใบ),SC236,Fengdeli 丰得利,base.partner_12,1,10.1,1
+product.product_supplierinfo_369,กะละมังทรงชามผสม STL 36 ซม.   กระต่ายทอง (48ใบ),SC236A,Jinyu 金育,base.partner_29,1,6.7,1
+product.product_supplierinfo_370,ชามผสมแป้ง STL 40 ซม. (24ใบ),SC240,Fengdeli 丰得利,base.partner_12,1,12.2,1
+product.product_supplierinfo_371,ชามผสมแป้ง STL 47 ซม. (24ใบ),SC247,Fengdeli 丰得利,base.partner_12,1,18.5,1
+product.product_supplierinfo_372,ชามผสมแป้ง STL 50 ซม. (12ใบ),SC250,Fengdeli 丰得利,base.partner_12,1,26,1
+product.product_supplierinfo_376,กะละมังพับขอบ 45  ซม. (50ใบ) (AA),SC345AA,Huahao 华浩,base.partner_22,1,9.486,1
+product.product_supplierinfo_377,กะละมังพับขอบ 50  ซม. (40ใบ) (AA),SC350AA,Huahao 华浩,base.partner_22,1,11.63,1
+product.product_supplierinfo_378,กะละมังพับขอบ 55  ซม. (30ใบ) (AA),SC355AA,Huahao 华浩,base.partner_22,1,14.42,1
+product.product_supplierinfo_379,กะละมังพับขอบ 60  ซม. (25ใบ) (AA),SC360AA,Huahao 华浩,base.partner_22,1,17.21,1
+product.product_supplierinfo_380,กะละมังพับขอบ 65  ซม  ( 25ใบ) (AA)       ,SC365AA,Huahao 华浩,base.partner_22,1,20,1
+product.product_supplierinfo_381,กะละมังพับขอบ 70  ซม. (20ใบ) (AA),SC370AA,Huahao 华浩,base.partner_22,1,24.18,1
+product.product_supplierinfo_382,กะละมังพับขอบ 80  ซม. (15ใบ) (AA),SC380AA,Huahao 华浩,base.partner_22,1,37.2,1
+product.product_supplierinfo_383,กะละมังทรงเคลือบ STL 18 ซม.  (30โหล),SC418,Hongyuan 宏源,base.partner_21,1,1.485,1
+product.product_supplierinfo_384,กะละมังทรงเคลือบ STL 20 ซม. (30โหล),SC420,Hongyuan 宏源,base.partner_21,1,1.733,1
+product.product_supplierinfo_385,กะละมังทรงเคลือบ STL 22 ซม. (24โหล),SC422,Hongyuan 宏源,base.partner_21,1,1.98,1
+product.product_supplierinfo_386,ขันน้ำ STL 11  ซม.   บาง (35โหล),SC511,Youfa 有发,base.partner_83,1,0.88,1
+product.product_supplierinfo_387,ขันน้ำ STL 14  ซม.   หนา (12โหล),SC514,Hongyuan 宏源,base.partner_21,1,1.455,1
+product.product_supplierinfo_388,ขันน้ำ STL 16  ซม.   หนา (12โหล),SC516,Hongyuan 宏源,base.partner_21,1,2,1
+product.product_supplierinfo_389,ขันน้ำ STL 18  ซม.   หนา (12โหล),SC518,Hongyuan 宏源,base.partner_21,1,2.1,1
+product.product_supplierinfo_390,กะละมังลึก STL 18 ซม.  (28โหล),SC618,Haifa 海发,base.partner_18,1,1.62,1
+product.product_supplierinfo_391,กะละมังลึก STL 20 ซม. (25โหล),SC620,Haifa 海发,base.partner_18,1,1.98,1
+product.product_supplierinfo_392,กะละมังลึก STL 22 ซม. (25โหล),SC622,Haifa 海发,base.partner_18,1,2.28,1
+product.product_supplierinfo_393,กะละมังลึก STL 24 ซม. (15โหล),SC624,Haifa 海发,base.partner_18,1,0,1
+product.product_supplierinfo_394,กะละมังลึก STL 26 ซม. (12โหล),SC626,Haifa 海发,base.partner_18,1,0,1
+product.product_supplierinfo_395,กะละมังล้างผักรูเล็ก STL 22  ซม. (200ใบ),SC722,Jinyu 金育,base.partner_29,1,3.4,1
+product.product_supplierinfo_396,กะละมังล้างผักรูเล็ก STL 24  ซม. (200ใบ),SC724,Jinyu 金育,base.partner_29,1,3.9,1
+product.product_supplierinfo_397,กะละมังล้างผักรูเล็ก STL 26  ซม. (200ใบ),SC726,Jinyu 金育,base.partner_29,1,4.6,1
+product.product_supplierinfo_398,กะละมังล้างผักรูเล็ก STL 28  ซม. (120ใบ),SC728,Jinyu 金育,base.partner_29,1,5.1,1
+product.product_supplierinfo_399,กะละมังล้างผักรูเล็ก STL 30  ซม. (96ใบ),SC730,Jinyu 金育,base.partner_29,1,5.6,1
+product.product_supplierinfo_400,กะละมังล้างผักรูเล็ก STL 32  ซม. (96ใบ),SC732,Jinyu 金育,base.partner_29,1,6.1,1
+product.product_supplierinfo_401,กะละมังล้างผักรูเล็ก STL 34  ซม. (80ใบ),SC734,Jinyu 金育,base.partner_29,1,6.7,1
+product.product_supplierinfo_402,กะละมังล้างผักรูเล็ก STL 36  ซม. (60ใบ),SC736,Jinyu 金育,base.partner_29,1,7.3,1
+product.product_supplierinfo_403,กะละมังล้างผัก 20 ซม (12ไหล),SC820,Fengdeli 丰得利,base.partner_12,1,36,1
+product.product_supplierinfo_404,กะละมังล้างผักรูใหญ่ 28 ซม (120ใบ),SC828,Hongyuan 宏源,base.partner_21,1,4.6,1
+product.product_supplierinfo_405,กะละมังล้างผักรูใหญ่ 30 ซม (120ใบ),SC830,Hongyuan 宏源,base.partner_21,1,5.2,1
+product.product_supplierinfo_406,กะละมังล้างผักรูใหญ่ 32 ซม (60ใบ),SC832,Hongyuan 宏源,base.partner_21,1,5.8,1
+product.product_supplierinfo_407,กะละมังล้างผักรูใหญ่ 36 ซม (60ใบ),SC836,Hongyuan 宏源,base.partner_21,1,6.6,1
+product.product_supplierinfo_408,กะละมังล้างผักรูใหญ่ 36 ซม (60ใบ),SC836A,Hongyuan 宏源,base.partner_21,1,7,1
+product.product_supplierinfo_409,กะละมังล้างผักรูใหญ่ 42  ซม. (60ใบ)          ,SC842,Hongyuan 宏源,base.partner_21,1,10.2,1
+product.product_supplierinfo_410,กะละมังล้างผักรูใหญ่  43  (48ใบ),SC843,Youfa 有发,base.partner_83,1,13,1
+product.product_supplierinfo_411,กะละมังล้างผักรูเล็กมีหู 28 ซม. (30ใบ),SC928,Yongfa 永发,base.partner_80,1,10.3,1
+product.product_supplierinfo_412,กะละมังล้างผักรูเล็กมีหู 30 ซม. (30ใบ),SC930,Yongfa 永发,base.partner_80,1,11.3,1
+product.product_supplierinfo_413,กะละมังล้างผักรูเล็กมีหู 32 ซม. (30ใบ),SC932,Yongfa 永发,base.partner_80,1,12.3,1
+product.product_supplierinfo_414,กะละมังล้างผักรูเล็กมีหู 36 ซม. (30ใบ),SC936,Yongfa 永发,base.partner_80,1,14.6,1
+product.product_supplierinfo_415,กะละมังล้างผักรูเล็กมีหู 40 ซม. (30ใบ),SC940,Yongfa 永发,base.partner_80,1,16.6,1
+product.product_supplierinfo_416,韩式特厚单底高锅20cm,SD1020,Haifa 海发,base.partner_18,1,29.5,1
+product.product_supplierinfo_417,หม้อ 2 หูพร้อมซึงนีง  STL 22 ซม  (12ใบ)   (หนา),SD1022,Haifa 海发,base.partner_18,1,32.5,1
+product.product_supplierinfo_418,หม้อ 2 หูพร้อมซึงนีง  STL  24ซม  (12ใบ)   (หนา),SD1024,Haifa 海发,base.partner_18,1,36,1
+product.product_supplierinfo_419,หม้อ 2 หูพร้อมซึงนีง  STL  26ซม  (12ใบ)   (หนา),SD1026,Haifa 海发,base.partner_18,1,40,1
+product.product_supplierinfo_420,หม้อสตูว์ 30 ซม.(20ใบ),SD1130,Longsheng 龙生,base.partner_38,1,25.2,1
+product.product_supplierinfo_421,หม้อสตูว์ 30 ซม.(หนา) (1ใบ) ,SD1130A,Oudun 欧顿,base.partner_42,1,45.59,1
+product.product_supplierinfo_422,หม้อสตูว์ 35 ซม.(16ใบ),SD1135,Longsheng 龙生,base.partner_38,1,34.2,1
+product.product_supplierinfo_423,หม้อสตูว์ 35 ซม.(หนา) (1ใบ),SD1135A,Oudun 欧顿,base.partner_42,1,57.23,1
+product.product_supplierinfo_424,หม้อสตูว์ 40 ซม.(10ใบ),SD1140,Longsheng 龙生,base.partner_38,1,43.2,1
+product.product_supplierinfo_425,หม้อสตูว์ 40 ซม.(หนา) (1ใบ),SD1140A,Oudun 欧顿,base.partner_42,1,71.78,1
+product.product_supplierinfo_426,หม้อสตูว์ 45 ซม.(10ใบ),SD1145,Longsheng 龙生,base.partner_38,1,54.9,1
+product.product_supplierinfo_427,หม้อสตูว์ 45 ซม.(หนา) (1ใบ),SD1145A,Oudun 欧顿,base.partner_42,1,88.27,1
+product.product_supplierinfo_428,หม้อสตูว์ 50ซม. (6ใบ),SD1150,Longsheng 龙生,base.partner_38,1,64.8,1
+product.product_supplierinfo_429,หม้อสตูว์ 50 ซม.(หนา) (1ใบ),SD1150A,Oudun 欧顿,base.partner_42,1,104.8,1
+product.product_supplierinfo_430,หม้อสตูว์ 60 ซม.(หนา) (1ใบ) ,SD1160A,Oudun 欧顿,base.partner_42,1,155.2,1
+product.product_supplierinfo_431,หม้อสตูว์ 60 ซม.(หนา) (1ใบ) (ทอง),SD1161,Oudun 欧顿,base.partner_42,1,157.1,1
+product.product_supplierinfo_432,หม้อด้าม 16 ซม. (อย่างหนา)  (20ใบ) ,SD1216,Chuangfeng 创丰,base.partner_4,1,22,1
+product.product_supplierinfo_433,หม้อ 2 หู 20 ซม. (18ใบ),SD1220,Chuangfeng 创丰,base.partner_4,1,27,1
+product.product_supplierinfo_434,หม้อสตูว์สูง  22 ซม. (24ใบ),SD122A,Xianshun 贤顺,base.partner_51,1,10.1,1
+product.product_supplierinfo_435,หม้อตุ๋นพร้อมตะแกรง  24 ซม . (16ใบ),SD1324,Chuangfeng 创丰,base.partner_4,1,40,1
+product.product_supplierinfo_436,หม้อสตูว์ STL 3 ใบ/ชุด 30-35-40 ซม. (2ชุด),SD133040,Longsheng 龙生,base.partner_38,1,94.5,1
+product.product_supplierinfo_437,"หม้อสตูว์มีซึ้งนึ่ง 4 ใบ/ชุด 22,24,26,28 ซม. (6ชุด)",SD142228,Xianshun 贤顺,base.partner_51,1,50,1
+product.product_supplierinfo_438,หม้อสตูว์ทรงสูง STL 4 ใบ/ชุด 24-30 ซม. (6ชุด),SD142430,Xianshun 贤顺,base.partner_51,1,50,1
+product.product_supplierinfo_439,汤锅24-26-28-30(低)（兔子牌）,SD142430D,Xianshun 贤顺,base.partner_51,1,32,1
+product.product_supplierinfo_440,หม้อสตูว์มีซึ้งนึ่ง 4 ใบ/ชุด 25-31 ซม. (6ชุด),SD142531,Fengdeli 丰得利,base.partner_12,1,57,1
+product.product_supplierinfo_441,หม้อนี่งเกาหลีฝาโค้ง (หนา) .(8ชุด),SD1426,Haifa 海发,base.partner_18,1,76.5,1
+product.product_supplierinfo_442,หม้อนี่งเกาหลีฝาโค้ร (หนา) .(8ชุด),SD1428,Haifa 海发,base.partner_18,1,84,1
+product.product_supplierinfo_443,"หม้อสตูว์ทรงสูง 5 ใบ/ชุด 22,24,26,28,30 ซม.  (6ชุด)",SD152230,Dongning 东宁,base.partner_8,1,62,1
+product.product_supplierinfo_444,多用桶30-35-40-45-50(08厚),SD153050,Longsheng 龙生,base.partner_38,1,180,1
+product.product_supplierinfo_445,หม้อสตูว์ STL 5 ใบ/ชุด 30-35-40-45-50 ซม. (1ชุด),SD153050D,Longsheng 龙生,base.partner_38,1,207,1
+product.product_supplierinfo_446,หม้อด้าม STL  ฝาแก้ว 16  ซม. (1โหล),SD216,Haifa 海发,base.partner_18,1,4.8,1
+product.product_supplierinfo_447,หม้อด้าม STL  ฝาแก้ว 17  ซม. (56ใบ),SD217,Haifa 海发,base.partner_18,1,,1
+product.product_supplierinfo_448,หม้อด้าม STL  ฝาแก้ว 19  ซม. (48ใบ),SD219,Haifa 海发,base.partner_18,1,6,1
+product.product_supplierinfo_449,หม้อด้าม STL  ฝาแก้ว 21  ซม. (36ใบ),SD221,Haifa 海发,base.partner_18,1,7.8,1
+product.product_supplierinfo_450,หม้อด้าม STL  ฝา STL    23  ซม.   (36ใบ),SD223A,Haifa 海发,base.partner_18,1,8.8,1
+product.product_supplierinfo_451,หม้อด้าม STL  ฝาแก้ว 23  ซม.    (36ใบ),SD223B,Haifa 海发,base.partner_18,1,8.8,1
+product.product_supplierinfo_452,หม้อแขก STL จิ๋ว 12 ซม.  (480ใบ),SD312,Chuangfeng 创丰,base.partner_4,1,0,1
+product.product_supplierinfo_453,หม้อแขก  25 ซม. (24ใบ),SD325,Chuangfeng 创丰,base.partner_4,1,9.2,1
+product.product_supplierinfo_454,"หม้อแขก 3 ใบ/ชุด 14,18,22 ซม.  (16ชุด)",SD331422,Chuangfeng 创丰,base.partner_4,1,23,1
+product.product_supplierinfo_455,"หม้อแขกมีหูหิ้ว 3 ใบ/ชุด 17,19,23 ซม. (12ชุด)",SD331723,Chuangfeng 创丰,base.partner_4,1,36,1
+product.product_supplierinfo_456,"หม้อแขก 3 ใบ/ชุด 28,32,36 ซม.  (6ชุด)",SD332836,Chuangfeng 创丰,base.partner_4,1,59,1
+product.product_supplierinfo_457,"หม้อแขก 3 ใบ/ชุด 38,  44, 50 ซม.  (1ชุด)",SD333850,Chuangfeng 创丰,base.partner_4,1,175,1
+product.product_supplierinfo_458,หม้อแขก 5 ใบ/ชุด 14-30 ซม.  (เรือหงส์) (6ชุด),SD351430,Chuangfeng 创丰,base.partner_4,1,53,1
+product.product_supplierinfo_459,หม้อแขกมีหูหิ้ว 5 ใบชุด 17-29 ซม. (6ชุด),SD351729,Chuangfeng 创丰,base.partner_4,1,74,1
+product.product_supplierinfo_461,หม้อนึ่งพร้อมซึ้งนึ่ง STL 1 ชั้น 24 ซม.  ฝา STL (18ใบ),SD4124,Liangxin 良信,base.partner_33,1,9.5,1
+product.product_supplierinfo_462,หม้อนึ่งพร้อมซึ้งนึ่ง STL 1 ชั้น 26 ซม.  ฝา STL (18ใบ),SD4126,Liangxin 良信,base.partner_33,1,11.5,1
+product.product_supplierinfo_463,หม้อนึ่ง 2 ชั้นพร้อมซึ้ง STL   28 ซม. (16ใบ),SD4228,Chuangfeng 创丰,base.partner_4,1,22.5,1
+product.product_supplierinfo_464,หม้อนึ่ง 2 ชั้นพร้อมซึ้ง STL  30 ซม. (12ใบ),SD4230,Chuangfeng 创丰,base.partner_4,1,24.5,1
+product.product_supplierinfo_465,หม้อนึ่ง 2 ชั้นพร้อมซึ้ง STL  32 ซม. (12ใบ),SD4232,Chuangfeng 创丰,base.partner_4,1,27.5,1
+product.product_supplierinfo_466,หม้อนึ่ง 2 ชั้นพร้อมซึ้ง STL  34 ซม. (12ใบ),SD4234,Chuangfeng 创丰,base.partner_4,1,32,1
+product.product_supplierinfo_467,หม้อนึ่ง 2 ชั้นพร้อมซึ้ง STL  36 ซม. (8ใบ),SD4236,Chuangfeng 创丰,base.partner_4,1,35.5,1
+product.product_supplierinfo_468,หม้อนึ่ง 2 ชั้นพร้อมซึ้ง STL  38 ซม. (8ใบ),SD4238,Chuangfeng 创丰,base.partner_4,1,41,1
+product.product_supplierinfo_469,หม้อนึ่ง 2 ชั้นพร้อมซึ้ง STL  40 ซม. (8ใบ),SD4240,Chuangfeng 创丰,base.partner_4,1,46,1
+product.product_supplierinfo_470,ซึ้งนึ่ง STL 4 ชั้น  40 ซม.  (1ใบ),SD4440,Chuangfeng 创丰,base.partner_4,1,130,1
+product.product_supplierinfo_471,"หม้อหิ้วโอชา STL 4 ใบ/ชุด 20,22,24,26 ซม. (12ชุด)",SD542026,Fengdeli 丰得利,base.partner_12,1,42,1
+product.product_supplierinfo_472,牛奶锅双耳20cm,SD620,Haifa 海发,base.partner_18,1,7.3,1
+product.product_supplierinfo_473,หม้อ 2 หู STL  23 ซม. (36ใบ),SD623,Haifa 海发,base.partner_18,1,8.8,1
+product.product_supplierinfo_474,หม้อสุกี้ 2หู 26ซม. ( 24 ใบ ),SD626,Haifa 海发,base.partner_18,1,9.4,1
+product.product_supplierinfo_475,หม้อสุกี้ 2 หู 28 ซม. (18ใบ),SD628S,Haifa 海发,base.partner_18,1,13,1
+product.product_supplierinfo_476,หม้อ 2 หู STL 4 ใบ/ชุด 20-26 หูตั้ง (8ชุด),SD642026,Chuangfeng 创丰,base.partner_4,1,50.5,1
+product.product_supplierinfo_478,"หม้อชุป 2 หู5 ใบ/ชุด 16,18,20,22,24 ซม.  (9ชุด)",SD651624,Fengdeli 丰得利,base.partner_12,1,50,1
+product.product_supplierinfo_479,หม้อ 2 หู 5 ใบชุด 19-27 หูตั้ง/ฝา STL (8ชุด),SD651927,Haifa 海发,base.partner_18,1,,1
+product.product_supplierinfo_480,หม้อจุ่มแซ่บ STL + ฝา 20 ซม.(36ชุด),SD701,Guijiasheng 桂佳盛,base.partner_17,1,19,1
+product.product_supplierinfo_481,ถังน้ำแข็ง STL 14 ซม. (72ใบ),SE114,Guijiasheng 桂佳盛,base.partner_17,1,6.7,1
+product.product_supplierinfo_482,ถังน้ำแข็ง STL 16 ซม. (72ใบ),SE116,Guijiasheng 桂佳盛,base.partner_17,1,7.7,1
+product.product_supplierinfo_483,ถังหิ้วน้ำ STL 28 ซม.  (30ใบ),SE228,Youfa 有发,base.partner_83,1,8.1,1
+product.product_supplierinfo_484,ถังหิ้วน้ำ STL 32 ซม. (30ใบ),SE232,Youfa 有发,base.partner_83,1,10.2,1
+product.product_supplierinfo_485,ถังหิ้วน้ำ STL 36 ซม. (30ใบ),SE236,Youfa 有发,base.partner_83,1,12.5,1
+product.product_supplierinfo_486,โถหิ้วสารพัดประโยชน์  4.5L (18ใบ),SE445,Liangxin 良信,base.partner_33,1,2,1
+product.product_supplierinfo_487,แก้วมาม่าทรงเกาหลี  .(60ใบ),SF1101,Chuangfeng 创丰,base.partner_4,1,,1
+product.product_supplierinfo_488,ปิ่นโต STL 10/2 (60เถา),SF1102,Youfa 有发,base.partner_83,1,4.8,1
+product.product_supplierinfo_489,ปิ่นโต STL 10/3 (60เถา),SF1103,Youfa 有发,base.partner_83,1,6,1
+product.product_supplierinfo_490,ปิ่นโต STL 12/2 (48เถา),SF1122,Youfa 有发,base.partner_83,1,5.6,1
+product.product_supplierinfo_491,ปิ่นโต STL 12/3 (48เถา),SF1123,Youfa 有发,base.partner_83,1,6.95,1
+product.product_supplierinfo_492,ปิ่นโต STL 12/4 (48เถา),SF1124,Youfa 有发,base.partner_83,1,8.3,1
+product.product_supplierinfo_493,ปิ่นโต STL 14/3 (36เถา),SF1143,Youfa 有发,base.partner_83,1,7.7,1
+product.product_supplierinfo_494,ปิ่นโต STL 14/4 (24เถา),SF1144,Youfa 有发,base.partner_83,1,9.35,1
+product.product_supplierinfo_495,ปิ่นโต STL 14/4 ด้ามดำ   (24เถา)  ,SF1144A,Fengdeli 丰得利,base.partner_12,1,12.9,1
+product.product_supplierinfo_496,ปิ่นโต STL 14/5 (24เถา),SF1145,Youfa 有发,base.partner_83,1,11.2,1
+product.product_supplierinfo_497,ปิ่นโต STL 16/3 (24เถา),SF1163,Fengdeli 丰得利,base.partner_12,1,12.4,1
+product.product_supplierinfo_498,ปิ่นโต STL 16/4 (24เถา),SF1164,Fengdeli 丰得利,base.partner_12,1,15.2,1
+product.product_supplierinfo_499,ปิ่นโต STL 16/4 ด้ามดำ   (24เถา)  ,SF1164A,Fengdeli 丰得利,base.partner_12,1,18.8,1
+product.product_supplierinfo_500,ปิ่นโต STL 16/5 (24เถา),SF1165,Fengdeli 丰得利,base.partner_12,1,18.1,1
+product.product_supplierinfo_501,กระติกข้าว 2  ชั้น STL  1.2  ลิตร (24ใบ),SF212,Liantong 联通,base.partner_34,1,21.6,1
+product.product_supplierinfo_502,กระติกข้าว 2  ชั้น STL  1.4  ลิตร (24ใบ),SF214,Liantong 联通,base.partner_34,1,22.56,1
+product.product_supplierinfo_503,กระติกข้าว 2  ชั้น STL  1.6  ลิตร (24ใบ),SF216,Liantong 联通,base.partner_34,1,23.04,1
+product.product_supplierinfo_504,กระติกข้าว 2  ชั้น STL  1.8  ลิตร (24ใบ),SF218,Liantong 联通,base.partner_34,1,26.4,1
+product.product_supplierinfo_505,กระติกข้าว 2  ชั้น STL  2.0  ลิตร (18ใบ),SF220,Liantong 联通,base.partner_34,1,,1
+product.product_supplierinfo_506,กระติกข้าว 2  ชั้น STL  2.0  ลิตร (24ใบ),SF220A,Liantong 联通,base.partner_34,1,27.36,1
+product.product_supplierinfo_507,กระติกข้าว 2  ชั้น STL  3.0  ลิตร (18ใบ),SF230,Zhida 志达,base.partner_87,1,38,1
+product.product_supplierinfo_508,保温盒（玫瑰花）四件套,SF604,Guijiasheng 桂佳盛,base.partner_17,1,32.3,1
+product.product_supplierinfo_509,低保温饭盒1.0L,SF710,Chuangfeng 创丰,base.partner_4,1,14.25,1
+product.product_supplierinfo_510,高保温饭盒1.8L,SF718,Chuangfeng 创丰,base.partner_4,1,19.48,1
+product.product_supplierinfo_511,กระติกข้าวเก็บความร้อน STL ด้ามสี  1.5  ลิตร ( 24ใบ )  ,SF815,Chuangfeng 创丰,base.partner_4,1,30,1
+product.product_supplierinfo_512,กระติกข้าวเก็บความร้อน STL ด้ามสี  2.0ลิตร  ( 24ใบ ) ,SF820,Chuangfeng 创丰,base.partner_4,1,36,1
+product.product_supplierinfo_513,กระป๋องน้ำ STL 7 ซม. (28โหล),SG107,Youfa 有发,base.partner_83,1,0.72,1
+product.product_supplierinfo_514,กระป๋องน้ำ STL 7.5 ซม. (28โหล),SG1075,Youfa 有发,base.partner_83,1,0.88,1
+product.product_supplierinfo_515,กระป๋องน้ำ STL 8 ซม. (20โหล),SG108,Youfa 有发,base.partner_83,1,1.37,1
+product.product_supplierinfo_516,กระป๋องน้ำ STL 10 ซม. (20ใบ),SG110,Youfa 有发,base.partner_83,1,,1
+product.product_supplierinfo_517,กระติกสูญอากาศ 0.5 ลิตร (50ใบ),SG250,Xudongkun 许冬坤,base.partner_58,1,7,1
+product.product_supplierinfo_518,保温杯500ml  带把手,SG2500,Xudongkun 许冬坤,base.partner_58,1,8.3,1
+product.product_supplierinfo_519,กระติกสูญอากาศ 0.75 ลิตร (24ใบ),SG275,Xudongkun 许冬坤,base.partner_58,1,9.8,1
+product.product_supplierinfo_520,保温杯750ml  带把手,SG2750,Xudongkun 许冬坤,base.partner_58,1,8.8,1
+product.product_supplierinfo_521,กระติกน้ำมีหูจับใหญ่ 0.75 ลิตร (30ใบ),SG275A,Xudongkun 许冬坤,base.partner_58,1,9,1
+product.product_supplierinfo_522,กระติกน้ำร้อน STL ไส้แก้วปากเท 5 ปอนด์(20ใบ),SG333,Guijiasheng 桂佳盛,base.partner_17,1,19,1
+product.product_supplierinfo_523,กระติกน้ำเก็บอุณหภูมิรุ่นฝากด 350 ML. (60ใบ),SG435,Yiwushuer 淑尔,base.partner_75,1,23,1
+product.product_supplierinfo_524,กระติกน้ำเก็บอุณหภูมิรุ่นฝากด 500 ML. (48ใบ),SG450,Yiwushuer 淑尔,base.partner_75,1,24,1
+product.product_supplierinfo_525,กระติกน้ำเก็บอุณหภูมิรุ่น H2O - 350 ML. (50ใบ),SG535,Yiwushuer 淑尔,base.partner_75,1,19,1
+product.product_supplierinfo_526,กระติกน้ำเก็บอุณหภูมิรุ่น H2O - 500 ML. (50ใบ)  ,SG550,Yiwushuer 淑尔,base.partner_75,1,20,1
+product.product_supplierinfo_527,กระติกน้ำเก็บอุณหภูมิรุ่นฝาแก้วน้ำ 350 ML. (48ใบ),SG635,Yiwushuer 淑尔,base.partner_75,1,23.5,1
+product.product_supplierinfo_528,กระติกน้ำเก็บอุณหภูมิรุ่นฝาแก้วน้ำ 500 ML. (48ใบ),SG650,Yiwushuer 淑尔,base.partner_75,1,24.5,1
+product.product_supplierinfo_529,กระติกสูญอากาศฝาล็อก 350ML. (40ใบ),SG735,Yiwushuer 淑尔,base.partner_75,1,20,1
+product.product_supplierinfo_530,กระติกสูญอากาศฝาล็อก 450ML .(40ใบ),SG750,Yiwushuer 淑尔,base.partner_75,1,21,1
+product.product_supplierinfo_531,กระติกสูญอากาศลายจุด 350ML. (48ใบ),SG835,Yiwushuer 淑尔,base.partner_75,1,21,1
+product.product_supplierinfo_533,กาน้ำ STL 14 ซม. (60ใบ),SH214,Jinhelan 金和兰,base.partner_28,1,9.5,1
+product.product_supplierinfo_534,กาน้ำ STL 16 ซม. (60ใบ),SH216,Jinhelan 金和兰,base.partner_28,1,10.5,1
+product.product_supplierinfo_535,กาน้ำ STL 18 ซม. (48ใบ),SH218,Jinhelan 金和兰,base.partner_28,1,11.5,1
+product.product_supplierinfo_536,กาน้ำ STL 20 ซม. (48ใบ),SH220,Jinhelan 金和兰,base.partner_28,1,12.5,1
+product.product_supplierinfo_537,กาน้ำนกหวีด 20 ซม.  เคลือบแดง   (24ใบ),SH320,Baoxu 宝旭,base.partner_2,1,,1
+product.product_supplierinfo_538,แก้วชงกาแฟ 1.5 (72ใบ),SH415,Fengdeli 丰得利,base.partner_12,1,8.2,1
+product.product_supplierinfo_539,แก้วชงกาแฟ 2.0 (60ใบ),SH420,Fengdeli 丰得利,base.partner_12,1,9.1,1
+product.product_supplierinfo_540,กาน้ำสูญอากาศ .(24ใบ) ,SH520,Chuangfeng 创丰,base.partner_4,1,35,1
+product.product_supplierinfo_541,ตะหลิวด้ามไม้ยาว 7“(100อัน),SI101,Yongxin 永新,base.partner_82,1,11.8,1
+product.product_supplierinfo_542,กระบวยด้ามไม้ยาว 6.5”(100อัน),SI101A,Yongxin 永新,base.partner_82,1,11.5,1
+product.product_supplierinfo_543,带磁17#铲头,SI117,Yongxin 永新,base.partner_82,1,8.8,1
+product.product_supplierinfo_544,带磁18#铲头,SI118,Yongxin 永新,base.partner_82,1,9.8,1
+product.product_supplierinfo_545,604 ตะหลิวด้ามแป็บแบกกะไล้ท์ STL 4 นิ้ว (144อัน),SI201,Linchunhai 林春海,base.partner_35,1,4.25,1
+product.product_supplierinfo_546,604A กระบวยด้ามแป็บแบกกะไล้ท์ STL 4 นิ้ว (144อัน),SI201A,Linchunhai 林春海,base.partner_35,1,4.25,1
+product.product_supplierinfo_547,NO.1  ตะหลิวด้ามไม้ 5.5 นิ้ว (100อัน),SI301,Yongxin 永新,base.partner_82,1,8.1,1
+product.product_supplierinfo_548,NO.2  ตะหลิวด้ามไม้ 5 นิ้ว (100อัน),SI302,Yongxin 永新,base.partner_82,1,7.1,1
+product.product_supplierinfo_549,NO.3  ตะหลิวด้ามไม้ 4.5 นิ้ว (100อัน),SI303,Yongxin 永新,base.partner_82,1,3.1,1
+product.product_supplierinfo_550,กระบวยด้ามไม้ 4.5 นิ้ว  (100อัน),SI306,Yongxin 永新,base.partner_82,1,6.1,1
+product.product_supplierinfo_551,กระบวยด้ามไม้ 5 นิ้ว (100อัน),SI308,Yongxin 永新,base.partner_82,1,7.1,1
+product.product_supplierinfo_552,กระบวยด้ามไม้ 5.5 นิ้ว (100อัน) ,SI310,Yongxin 永新,base.partner_82,1,8.1,1
+product.product_supplierinfo_553,กระบวยสุกี้ (24 โหล),SI3117,Yuegao 粤高,base.partner_85,1,1.25,1
+product.product_supplierinfo_554,กระบวยด้ามไม้ 6 นิ้ว  (100อัน)  ,SI312,Yongxin 永新,base.partner_82,1,9.1,1
+product.product_supplierinfo_555,ตักน้ำแข็งด้าม เล็ก (120อัน),SI401,Xinghua 兴华,base.partner_53,1,5.3,1
+product.product_supplierinfo_556,ตักน้ำแข็งด้าม กลาง (120อัน),SI402,Xinghua 兴华,base.partner_53,1,4,1
+product.product_supplierinfo_557,ตักน้ำแข็งด้าม ใหญ่ (120อัน),SI403,Xinghua 兴华,base.partner_53,1,2.9,1
+product.product_supplierinfo_558,SI8020(120),SI8020,Juncheng 君诚,base.partner_30,1,7.3,1
+product.product_supplierinfo_559,SI8021(120),SI8021,Juncheng 君诚,base.partner_30,1,7.3,1
+product.product_supplierinfo_560,SI8060(120),SI8060,Juncheng 君诚,base.partner_30,1,7.3,1
+product.product_supplierinfo_561,SI8061(120),SI8061,Juncheng 君诚,base.partner_30,1,7.3,1
+product.product_supplierinfo_562,SI8111(120),SI8111,Juncheng 君诚,base.partner_30,1,4.55,1
+product.product_supplierinfo_563,SI8112(120),SI8112,Juncheng 君诚,base.partner_30,1,4.55,1
+product.product_supplierinfo_564,SI8113(120),SI8113,Juncheng 君诚,base.partner_30,1,3.55,1
+product.product_supplierinfo_565,ตะกร้อ STL ด้าม STL 12 นิ้ว. (96อัน),SJ102,Zhouyu  洲宇,base.partner_88,1,10.5,1
+product.product_supplierinfo_566,ตะแกรงลวดดาม STL 24 ซม. (60อัน),SJ1024,Zhouyu  洲宇,base.partner_88,1,12.5,1
+product.product_supplierinfo_567,ตะกร้อทรงกระบอกเจาะรู  STL  14 ซม. (70อัน),SJ103,Dongtai 东泰,base.partner_9,1,13,1
+product.product_supplierinfo_568,ตะแกรงลวดดาม STL 30 ซม. (60อัน),SJ1030,Zhouyu  洲宇,base.partner_88,1,14,1
+product.product_supplierinfo_569,ฅะกร้อลวกยำยาว   (120)  อัน,SJ105,Dongtai 东泰,base.partner_9,1,3.9,1
+product.product_supplierinfo_570,SJ106 (100อัน),SJ106,Dongtai 东泰,base.partner_9,1,7.5,1
+product.product_supplierinfo_571,SJ107 (40อัน),SJ107,Dongtai 东泰,base.partner_9,1,11.5,1
+product.product_supplierinfo_572,SJ108 (40อัน),SJ108,Dongtai 东泰,base.partner_9,1,11.5,1
+product.product_supplierinfo_573,ขอบหนาด้ามลวดมีขา  18 ชม   (100) อัน,SJ1118,Dongtai 东泰,base.partner_9,1,9,1
+product.product_supplierinfo_574,ขอบหนาด้ามลวดมีขา  21 ชม   (100) อัน,SJ1121,Dongtai 东泰,base.partner_9,1,10,1
+product.product_supplierinfo_575,ขอบหนาด้ามลวดมีขา  25 ชม   (100) อัน,SJ1125,Dongtai 东泰,base.partner_9,1,11,1
+product.product_supplierinfo_576,ขอบหนาด้ามลวดมีขา  28 ชม   (50) อัน,SJ1128,Dongtai 东泰,base.partner_9,1,13,1
+product.product_supplierinfo_577,ตะกร้อ STL ด้ามไม้สั้น 14 ซม. (100อัน),SJ114,Dongtai 东泰,base.partner_9,1,4,1
+product.product_supplierinfo_578,กระชอนด้าม  STL  ขอบสูงสองหู 21ซม  (50อัน),SJ1221,Dongtai 东泰,base.partner_9,1,8.3,1
+product.product_supplierinfo_579,กระชอนด้าม  STL  ขอบสูงสองหู 25ซม  (50อัน),SJ1225,Dongtai 东泰,base.partner_9,1,9.3,1
+product.product_supplierinfo_580,กระชอนด้าม  STL  ขอบลูงสองหู 28ซม  (50อัน),SJ1228,Dongtai 东泰,base.partner_9,1,12.3,1
+product.product_supplierinfo_581,ตะแกรงลวดยำด้ามสี   12ซม    (168อัน),SJ1312,Juncheng 君诚,base.partner_30,1,2.85,1
+product.product_supplierinfo_582,ตะแกรงลวดยำด้ามสี   14 ซม   (168อัน),SJ1314,Juncheng 君诚,base.partner_30,1,3.05,1
+product.product_supplierinfo_583,ตะแกรงลวดยำด้ามสี   16ซม    (168อัน),SJ1316,Juncheng 君诚,base.partner_30,1,3.35,1
+product.product_supplierinfo_584,ตะแกรงลวดยำด้ามสี   18ซม    (168อัน),SJ1318,Juncheng 君诚,base.partner_30,1,3.7,1
+product.product_supplierinfo_585,ตะแกรงลวดยำด้ามสี    20ซม   (120อัน),SJ1320,Juncheng 君诚,base.partner_30,1,4.1,1
+product.product_supplierinfo_586,ตะแกรงลวดยำด้ามสี    22ซม    (120อัน),SJ1322,Juncheng 君诚,base.partner_30,1,4.6,1
+product.product_supplierinfo_587,กระชอนสองชั้นด้ามเลส 14ซม. (200อัน),SJ1414,Dongtai 东泰,base.partner_9,1,3.6,1
+product.product_supplierinfo_588,กระชอนสองชั้นด้ามเลส 16ซม. (200อัน),SJ1416,Dongtai 东泰,base.partner_9,1,3.9,1
+product.product_supplierinfo_589,กระชอนสองชั้นด้ามเลส 18ซม. (200อัน),SJ1418,Dongtai 东泰,base.partner_9,1,4.4,1
+product.product_supplierinfo_590,กระชอนสองชั้นด้ามเลส 21ซม. (200อัน),SJ1421,Dongtai 东泰,base.partner_9,1,4.9,1
+product.product_supplierinfo_591,SJ1516 (120อัน),SJ1516,Dongtai 东泰,base.partner_9,1,5,1
+product.product_supplierinfo_592,SJ1518 (120อัน),SJ1518,Dongtai 东泰,base.partner_9,1,5.5,1
+product.product_supplierinfo_593, SJ1520(120อัน),SJ1520,Dongtai 东泰,base.partner_9,1,6,1
+product.product_supplierinfo_594,SJ1714 (60อัน),SJ1714,Dongtai 东泰,base.partner_9,1,6.5,1
+product.product_supplierinfo_595,SJ1716 (60อัน),SJ1716,Dongtai 东泰,base.partner_9,1,7,1
+product.product_supplierinfo_596,SJ1720 (60อัน),SJ1720,Dongtai 东泰,base.partner_9,1,8,1
+product.product_supplierinfo_597,SJ1722 (60อัน),SJ1722,Dongtai 东泰,base.partner_9,1,9,1
+product.product_supplierinfo_598,กระชอนด้ามไม้กลมตาถี่ 22ซม .( 50อัน),SJ1822,Dongtai 东泰,base.partner_9,1,10.5,1
+product.product_supplierinfo_599,กระชอนด้ามไม้กลมตาห่าง 22ซม .(50อัน),SJ1822A,Dongtai 东泰,base.partner_9,1,10.5,1
+product.product_supplierinfo_600,กระชอนด้ามไม้กลมตาถี่  25ซม .(50อัน),SJ1825,Dongtai 东泰,base.partner_9,1,11.5,1
+product.product_supplierinfo_601,กระชอนด้ามไม้กลมตาห่าง 25ซม .(50อัน),SJ1825A,Dongtai 东泰,base.partner_9,1,11.5,1
+product.product_supplierinfo_602,กระชอนด้ามไม้กลมตาถี่ 27ซม .(50อัน),SJ1827,Dongtai 东泰,base.partner_9,1,12.5,1
+product.product_supplierinfo_603,กระชอนด้ามไม้กลมตาห่าง 27ซม .(50อัน),SJ1827A,Dongtai 东泰,base.partner_9,1,12.5,1
+product.product_supplierinfo_604,圆木柄网漏30cm（细网）DT-Y1801,SJ1830,Dongtai 东泰,base.partner_9,1,14,1
+product.product_supplierinfo_605,กระชอนด้ามไม้กลมตาห่าง 30ซม .(30อัน),SJ1830A,Dongtai 东泰,base.partner_9,1,14.5,1
+product.product_supplierinfo_606,圆木柄网漏33cm（细网）DT-Y1801,SJ1833,Dongtai 东泰,base.partner_9,1,15,1
+product.product_supplierinfo_607,กระชอนด้ามไม้กลมตาห่าง 33ซม .(30อัน),SJ1833A,Dongtai 东泰,base.partner_9,1,15.5,1
+product.product_supplierinfo_608,圆木柄网漏35cm（细网）DT-Y1801,SJ1835,Dongtai 东泰,base.partner_9,1,16,1
+product.product_supplierinfo_609,กระชอนด้ามไม้กลมตาห่าง 35ซม .(30อัน),SJ1835A,Dongtai 东泰,base.partner_9,1,16.5,1
+product.product_supplierinfo_610,SJ1906   DT-W0701 (24ชุด),SJ1906,Dongtai 东泰,base.partner_9,1,13,1
+product.product_supplierinfo_611,SJ2010 .(300อัน),SJ2010,Dongtai 东泰,base.partner_9,1,5,1
+product.product_supplierinfo_612,SJ2013 .(200อัน),SJ2013,Dongtai 东泰,base.partner_9,1,7.7,1
+product.product_supplierinfo_613,ตะแกรงลวดด้ามแดง 17 ซม. (100อัน),SJ317,Dongtai 东泰,base.partner_9,1,5.4,1
+product.product_supplierinfo_614,ตะแกรงลวดด้ามแดง 20 ซม. (100อัน),SJ320,Dongtai 东泰,base.partner_9,1,6.4,1
+product.product_supplierinfo_615,ตะแกรงลวดด้ามแดง 22 ซม. (100อัน),SJ322,Dongtai 东泰,base.partner_9,1,7.4,1
+product.product_supplierinfo_616,กระชอนทรงลึกด้ามไม้ 18 ซม.  (100อัน),SJ418,Dongtai 东泰,base.partner_9,1,4.6,1
+product.product_supplierinfo_617,กระชอนทรงลึกด้ามไม้ 21ซม.  (100อัน),SJ421,Dongtai 东泰,base.partner_9,1,5.6,1
+product.product_supplierinfo_618,กระชอนทรงลึกด้ามไม้  25ซม.  (100อัน),SJ425,Dongtai 东泰,base.partner_9,1,6.6,1
+product.product_supplierinfo_619,กระชอนขอบหนาด้ามลวด 12 ซม. (240อัน),SJ512,Dongtai 东泰,base.partner_9,1,2.4,1
+product.product_supplierinfo_620,กระชอนขอบหนาด้ามลวด 14 ซม. (240อัน),SJ514,Dongtai 东泰,base.partner_9,1,3,1
+product.product_supplierinfo_621,กระชอนขอบหนาด้ามลวด 16 ซม. (120อัน),SJ516,Dongtai 东泰,base.partner_9,1,3.5,1
+product.product_supplierinfo_622,กระชอนขอบหนาด้ามลวด 18 ซม. (120อัน),SJ518,Dongtai 东泰,base.partner_9,1,4,1
+product.product_supplierinfo_623,กระชอนขอบหนาด้ามลวด 20 ซม. (120อัน),SJ520,Dongtai 东泰,base.partner_9,1,4.5,1
+product.product_supplierinfo_624,กระชอนขอบหนาด้ามลวด 22 ซม. (120อัน),SJ522,Dongtai 东泰,base.partner_9,1,5,1
+product.product_supplierinfo_625,กระชอนขอบหนาด้ามลวด 24 ซม. (120อัน),SJ524,Dongtai 东泰,base.partner_9,1,5.5,1
+product.product_supplierinfo_626,กระชอนขอบหนาด้ามลวด 26 ซม. (120อัน),SJ526,Dongtai 东泰,base.partner_9,1,5.8,1
+product.product_supplierinfo_627,方网篮29-21,SJ601,Dongtai 东泰,base.partner_9,1,8,1
+product.product_supplierinfo_628,ตะกร้าล้างผักเหลี่ยม(มุ้ง) 25x34 (50ใบ),SJ602,Dongtai 东泰,base.partner_9,1,5.7,1
+product.product_supplierinfo_629,ตะแกรงลวดด้ามยาว 15 ซม (120)อัน,SJ715,Dongtai 东泰,base.partner_9,1,2.7,1
+product.product_supplierinfo_630,ตะแกรงลวดด้ามยาว 17 ซม (120)อัน,SJ717,Dongtai 东泰,base.partner_9,1,3.2,1
+product.product_supplierinfo_631,ตะแกรงลวดด้ามยาว 20 ซม (120)อัน,SJ720,Dongtai 东泰,base.partner_9,1,3.5,1
+product.product_supplierinfo_632,ตะแกรงลวดด้ามยาว 22 ซม (100)อัน,SJ722,Dongtai 东泰,base.partner_9,1,5,1
+product.product_supplierinfo_633,ตะแกรงลวดด้ามยาว 25 ซม (100)อัน,SJ725,Dongtai 东泰,base.partner_9,1,6,1
+product.product_supplierinfo_634,ตะแกรงลวดด้ามยาว 27 (80)อัน,SJ727,Yazhi 雅致,base.partner_91,1,9.45,1
+product.product_supplierinfo_635,ตะแกรงลวดด้ามยาว 30 (80)อัน,SJ730,Yazhi 雅致,base.partner_91,1,10.35,1
+product.product_supplierinfo_636,ตะกร้าล้างผักกลม(มุ้ง) 19 ซม.(100อัน),SJ819,Dongtai 东泰,base.partner_9,1,3.1,1
+product.product_supplierinfo_637,ตะกร้าล้างผักกลม(มุ้ง) 22 ซม.(100อัน),SJ822,Dongtai 东泰,base.partner_9,1,4.15,1
+product.product_supplierinfo_638,ตะกร้าล้างผักกลม(มุ้ง) 25 ซม.(100อัน),SJ825,Dongtai 东泰,base.partner_9,1,4.65,1
+product.product_supplierinfo_639,ตะกร้าล้างผักกลม(มุ้ง) 28 ซม.(50อัน),SJ828,Dongtai 东泰,base.partner_9,1,5.1,1
+product.product_supplierinfo_640,ตะกร้าล้างผักกลม(มุ้ง) 31 ซม.(50อัน),SJ831,Dongtai 东泰,base.partner_9,1,6.1,1
+product.product_supplierinfo_641,กระชอนด้ามแดงสั้น 12.5 ซม. (120อัน),SJ9012,Juncheng 君诚,base.partner_30,1,3.2,1
+product.product_supplierinfo_642,กระชอนด้ามแดงสั้น  14ซม .(120อัน),SJ9014,Juncheng 君诚,base.partner_30,1,3.7,1
+product.product_supplierinfo_643,กระชอนด้ามแดงสั้น 16 ซม. (120) อัน,SJ9016,Juncheng 君诚,base.partner_30,1,4.2,1
+product.product_supplierinfo_644,กระชอนด้ามแดงสั้น 18 ซม. (120) อัน,SJ9018,Juncheng 君诚,base.partner_30,1,4.7,1
+product.product_supplierinfo_645,กระชอนด้ามแดงสั้น 20 ซม. (120) อัน,SJ9020,Juncheng 君诚,base.partner_30,1,5.2,1
+product.product_supplierinfo_646,ตะกร้อลวกลูกชิ้นขดลวด 12 ซม. (60)  อัน,SJ9050,Juncheng 君诚,base.partner_30,1,7.5,1
+product.product_supplierinfo_647,ตะกร้อลวกลูกชิ้นขดลวด 14 ซม. (60)  อัน,SJ9051,Juncheng 君诚,base.partner_30,1,8.5,1
+product.product_supplierinfo_648,A5001R ช้อนส้อม STL (5กุรุส),SK101,Weihuai 伟怀,base.partner_50,1,51.84,1
+product.product_supplierinfo_649,单叉A5001R,SK1011,Weihuai 伟怀,base.partner_50,1,0.18,1
+product.product_supplierinfo_652,A22 ชัอนส้อมแผง 2 คู่ (40กุรุส),SK122,Weihuai 伟怀,base.partner_50,1,0,1
+product.product_supplierinfo_653,921  ช้อนส้อม STL   (2กุรุส),SK1921,Keye 科业,base.partner_31,1,0.8,1
+product.product_supplierinfo_654,923 ช้อนส้อม STL (ลายดอกกุหลาบ) (2กุรุส),SK1923,Keye 科业,base.partner_31,1,10.8,1
+product.product_supplierinfo_655,999  ช้อนส้อม STL   (2กุรุส),SK1999,Keye 科业,base.partner_31,1,0.98,1
+product.product_supplierinfo_656,ช้อม FO-5001R(10กรุส),SK201,Weihuai 伟怀,base.partner_50,1,0.18,1
+product.product_supplierinfo_657,SK202 ช้อน (60โหล),SK202,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_658,SK203 ช้อน (60โหล),SK203,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_659, SK204 ช้อน (60โหล) ,SK204,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_660,SK205 ช้อน (60โหล) ,SK205,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_661,SK206 ช้อน (60โหล) ,SK206,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_662,SK207 ช้อน (60โหล),SK207,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_663,SK208 ช้อน (60โหล),SK208,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_664,SK209 ช้อน (60โหล),SK209,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_665,(157) ช้อนกาแฟขอบตั้ง STL สับปะรด (8กุรุส),SK2157,Keye 科业,base.partner_31,1,8.04,1
+product.product_supplierinfo_666,(159) ช้อนชาขอบตั้ง STL สับปะรด (8กุรุส),SK2159,Keye 科业,base.partner_31,1,8.4,1
+product.product_supplierinfo_667,160 (100โหล),SK2160,Keye 科业,base.partner_31,1,3.36,1
+product.product_supplierinfo_668,SK235 ช้อนกาแฟ  ( 8กุรุส),SK235,Keye 科业,base.partner_31,1,3.36,1
+product.product_supplierinfo_669,236 ช้อนกาแฟ STLสับปะรด ( 8กุรุส),SK236,Keye 科业,base.partner_31,1,3.36,1
+product.product_supplierinfo_670,SK237 ช้อนกาแฟ ( 8กุรุส ),SK237,Keye 科业,base.partner_31,1,3.36,1
+product.product_supplierinfo_671,FO-808  ช้อนสั้น (10กุรุส),SK2808,Weihuai 伟怀,base.partner_50,1,0.145,1
+product.product_supplierinfo_672,8082 ช้อน (10กุรุส) ,SK28082,Weihuai 伟怀,base.partner_50,1,0.14,1
+product.product_supplierinfo_673,861 ช้อนกาแฟ (10กุรุส) ,SK2861,Weixin 伟鑫,base.partner_92,1,0.18,1
+product.product_supplierinfo_674,SK302  ส้อม (60โหล),SK302,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_675,SK303 ส้อม (60โหล),SK303,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_676,SK304 ส้อม (60โหล) ,SK304,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_677,SK305 ส้อม (60โหล) ,SK305,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_678,SK306 ส้อม (60โหล),SK306,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_679,SK307 ส้อม (60โหล),SK307,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_680,SK308 ส้อม (60โหล),SK308,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_681,SK309 ส้อม (60โหล),SK309,Keye 科业,base.partner_31,1,0.36,1
+product.product_supplierinfo_682, (161) ส้อมชาขอบตั้ง STL สับปะรด  (8กุรุส),SK3161,Keye 科业,base.partner_31,1,8.88,1
+product.product_supplierinfo_683,尖尾水果叉,SK3167,Keye 科业,base.partner_31,1,7.68,1
+product.product_supplierinfo_684,SK335 ส้อมกาแฟ  (8กุรุส),SK335,Keye 科业,base.partner_31,1,3.36,1
+product.product_supplierinfo_685,SK336 ส้อมกาแฟ (8กุรุส),SK336,Keye 科业,base.partner_31,1,3.36,1
+product.product_supplierinfo_686,SK337 ส้อมกาแฟ  (8กุรุส),SK337,Keye 科业,base.partner_31,1,3.36,1
+product.product_supplierinfo_687,862 ส้อมกาแฟ (10กุรุส) ,SK3862,Weixin 伟鑫,base.partner_92,1,0,1
+product.product_supplierinfo_688,ที่ตัดเล็บ       ( 60ชุด ),SM1003,Yaqi 雅琪,base.partner_65,1,10.24,1
+product.product_supplierinfo_689,SM111 (55โหล),SM111,Lizhibao 利之宝,base.partner_37,1,0.9,1
+product.product_supplierinfo_690,FO-133 มีดปังตอหัวโค้ง 7 นิ้ว กระต่ายทอง (60ใบ),SM1133,Lizhibao 利之宝,base.partner_37,1,9.6,1
+product.product_supplierinfo_691,FO-155 ปังตอด้ามทองเหลือง กระต่ายทอง (60ใบ),SM1155,Lizhibao 利之宝,base.partner_37,1,,1
+product.product_supplierinfo_692,SM222 (50โหล ),SM222,Lizhibao 利之宝,base.partner_37,1,0.9,1
+product.product_supplierinfo_693,ที่เปิดกระป๋องแบบม้วน(96ใบ),SM301,Xinglong 兴隆,base.partner_54,1,8.5,1
+product.product_supplierinfo_694,SM302  (60โหล),SM302,Yiwuhuixin 慧鑫,base.partner_72,1,10.5,1
+product.product_supplierinfo_695,ที่เปิดกระป๋องสเตนเลส  (72อัน),SM303,Yiwuhuixin 慧鑫,base.partner_72,1,9,1
+product.product_supplierinfo_696,刀444,SM444,Lizhibao 利之宝,base.partner_37,1,19.2,1
+product.product_supplierinfo_697,มีดซอยวุีน  (20โหล),SM501,Lizhibao 利之宝,base.partner_37,1,1.8,1
+product.product_supplierinfo_698,小波浪刀,SM502,Lizhibao 利之宝,base.partner_37,1,0.85,1
+product.product_supplierinfo_699,刀666,SM666,Lizhibao 利之宝,base.partner_37,1,21.6,1
+product.product_supplierinfo_700,ตะเกียบ STL ทรงกลม .(240แพ็ค),SN101,Juncheng 君诚,base.partner_30,1,3,1
+product.product_supplierinfo_701,ตะเกียบ STL ทรงเหลี่ยม .(240แพ็ค),SN102,Juncheng 君诚,base.partner_30,1,8,1
+product.product_supplierinfo_702,กระทะด้ามเคลือบดำ STL  32 ซม. (24ใบ),SO132,Fumantian 福满天,base.partner_13,1,8.3,1
+product.product_supplierinfo_703,กระทะด้ามเคลือบดำ STL  34 ซม. (24ใบ),SO134,Fumantian 福满天,base.partner_13,1,9.3,1
+product.product_supplierinfo_704,กระทะด้ามเคลือบดำ STL  36 ซม. (24ใบ),SO136,Fumantian 福满天,base.partner_13,1,10.3,1
+product.product_supplierinfo_705,กระทะทอดไข่ดาว (10โหล),SO201,Xudongkun 许冬坤,base.partner_58,1,3.2,1
+product.product_supplierinfo_706,คีบใบไม้(เคลือบดำ)STL 9 นิ้ว (24โหล),SP109,Linchunhai 林春海,base.partner_35,1,0,1
+product.product_supplierinfo_707,คีบใบไม้(เคลือบดำ)STL 12 นิ้ว (24โหล),SP112,Linchunhai 林春海,base.partner_35,1,0,1
+product.product_supplierinfo_708,คีบใบไม้(เคลือบดำ)STL 14 นิ้ว (24โหล),SP114,Linchunhai 林春海,base.partner_35,1,0,1
+product.product_supplierinfo_709,คืบใบไม้  STL. (240อัน),SP309,Juncheng 君诚,base.partner_30,1,2.75,1
+product.product_supplierinfo_710,คืบ  STL ครึ่งวงกลม .(288อัน),SP309S,Juncheng 君诚,base.partner_30,1,3.2,1
+product.product_supplierinfo_711,คืบใบไม้  STL. (240อัน),SP312,Juncheng 君诚,base.partner_30,1,3.25,1
+product.product_supplierinfo_712,คืบใบไม้  STL.  (240อัน),SP314,Juncheng 君诚,base.partner_30,1,3.75,1
+product.product_supplierinfo_713,5011  ชั้นคว่ำจาน/ชาม ขาตรง ใหญ่ (10ชุด),SR201,Yangguang 阳光,base.partner_62,1,38.5,1
+product.product_supplierinfo_714,5001  ชั้นคว่ำจาน/ชาม ขาโค้ง ใหญ่ 24*50*30 (10ชุด),SR202,Yangguang 阳光,base.partner_62,1,39,1
+product.product_supplierinfo_715,เก้าอี้โปร่ง STL4ขา. (5อัน),SR401,Yazhijia 雅之佳,base.partner_66,1,80,1
+product.product_supplierinfo_716,ที่ตีแป้งเค้กด้ามจับ STL 10 นิ้ว (120อัน),SR410,Jiaxuan 佳轩,base.partner_26,1,2.6,1
+product.product_supplierinfo_717,ที่ตีแป้งเค้กด้ามจับ STL 12 นิ้ว (120อัน),SR412,Jiaxuan 佳轩,base.partner_26,1,2.9,1
+product.product_supplierinfo_718,ที่ตีแป้งเค้กด้ามจับ STL 14 นิ้ว (120อัน),SR414,Jiaxuan 佳轩,base.partner_26,1,3.3,1
+product.product_supplierinfo_719,ที่ตีแป้งเค้กด้ามจับ STL 16 นิ้ว (120อัน),SR416,Jiaxuan 佳轩,base.partner_26,1,3.6,1
+product.product_supplierinfo_720,ถ้วย  STL .(280ใบ),SR501,Yajiafu 雅佳福,base.partner_60,1,,1
+product.product_supplierinfo_721,ไม้แขวนเสี้อลวดสเตนเลส  40ซม . (40แพ็ค),SY340,Yazhijia 雅之佳,base.partner_66,1,1.05,1
+product.product_supplierinfo_722,ไม้แขวนเสี้อลวดสเตนเลส  45ซม  .(40แพ็ค),SY345,Yazhijia 雅之佳,base.partner_66,1,1.1,1
+product.product_supplierinfo_730,เขียงไม้เนี้อแข็ง  26*38  ซม. (20อัน),WC101,Yiwufangshi 方氏,base.partner_69,1,18.5,1
+product.product_supplierinfo_731,"20"" Shipping Cost (Qingdao)",,Qingdao 青岛,base.partner_43,1,6500,1
+product.product_supplierinfo_732,"20"" Shipping Cost (Hunan)",,Shenzhen 深圳,base.partner_47,1,5150,1
+product.product_supplierinfo_733,"20"" Shipping Cost (Guangxi)",,Shenzhen 深圳,base.partner_47,1,5150,1
+product.product_supplierinfo_734,"20"" Shipping Cost",,Yongliang 永亮,base.partner_81,1,70000,1
+product.product_supplierinfo_735,"40"" Shipping Cost",,Yongliang 永亮,base.partner_81,1,100000,1
+product.product_supplierinfo_736,"40"" Shipping Cost",,Huahong 华宏,base.partner_23,1,8400,1
+product.product_supplierinfo_737,LCL,,Yongliang 永亮,base.partner_81,1,2600,1

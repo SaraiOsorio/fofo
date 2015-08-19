@@ -1,0 +1,11 @@
+id,name,parent_id
+base.partner_category_1,Customer,
+base.partner_category_2,Bangkok,Customer
+base.partner_category_3,PP1,Customer
+base.partner_category_4,PP2,Customer
+base.partner_category_5,Retail,Customer
+base.partner_category_6,Lazada,Customer
+base.partner_category_7,Ecommerce,Customer
+base.partner_category_8,Supplier,
+base.partner_category_9,Ceramic Supplier,Supplier
+base.partner_category_10,STL Supplier,Supplier
