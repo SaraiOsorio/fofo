@@ -26,10 +26,10 @@
     'category': 'Master Data for FOFO',
     'description':"""
 
-* Payment Term
-* Partner Tag
-* Product Category
-    
+* Payment Term [Commented]
+* Partner Tag [Commented]
+* Product Category [Commented]
+* Product 
     """,
     'data':[
 #             'res.partner.category.csv',
