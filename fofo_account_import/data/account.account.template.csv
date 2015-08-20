@@ -35,6 +35,7 @@ id,name,code,parent_id/id,type,user_type/id,reconcile
 200000,Liability,200000,1,View,account.account_type_liability_view1,FALSE
 210000,Current Liability,210000,200000,View,account.account_type_liability_view1,FALSE
 211000,Account Payable,211000,210000,Payable,account.data_account_type_payable,TRUE
+211900,Goods Receipt not Invoiced,211900,210000,Regular,Liabilities,FALSE
 212000,Short Term Debt,212000,210000,Regular,account.data_account_type_liability,FALSE
 213000,Salary Payable,213000,210000,Regular,account.data_account_type_liability,FALSE
 214000,Dividend Payable,214000,210000,Regular,account.data_account_type_liability,FALSE
