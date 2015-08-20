@@ -1,0 +1,5 @@
+id,name,note,line_ids/value,line_ids/days2,line_ids/days,line_ids/value_amount
+account.account_payment_term_immediate,Cash,Cash,Balance,,,
+account.account_payment_term_1month,1 Month,1 Calendar Month. Every invoices issued in current month should be paid on the end of this month,Balance,-1,,
+account.account_payment_term_20days,20 Days,20 Days,Balance,,20,
+account.account_payment_term_2months,2 Month,2 Calendar Month. Every invoices issued in current month should be paid on the end of next month,Balance,-1,20,

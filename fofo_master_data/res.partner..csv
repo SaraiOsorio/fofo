@@ -1,0 +1,94 @@
+id,name,is_company,parent_id,use_parent_address,category_id,street,street2,city,state_id,zip,country_id,website,function,phone,mobile,fax,email,customer,supplier,shipper,property_product_pricelist_purchase/id,property_account_payable,property_supplier_payment_term
+base.partner_1,Shandong Ceramic 山东陶瓷,True,,,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_2,Baoxu 宝旭,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_3,Canguang 灿光,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_4,Chuangfeng 创丰,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_5,CZL,True,,,STL Supplier,,,,,,,,,,,,,True,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_6,Daxiang 大祥,True,,,Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_7,Dongbao 东宝,True,,,Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_8,Dongning 东宁,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_9,Dongtai 东泰,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_10,Dongyue 东岳,False,Shandong Ceramic 山东陶瓷,True,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_11,ETAC 珠海锅,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_12,Fengdeli 丰得利,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_13,Fumantian 福满天,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_14,Gangyi 刚毅,False,Shandong Ceramic 山东陶瓷,True,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_15,Gaosheng 高盛,True,,,Supplier,,,,,,,,,,,,,False,True,True,product.pricelist_chinese_supplier,211000,Cash
+base.partner_16,GuangxiWuxin 广西武鑫,True,,,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_17,Guijiasheng 桂佳盛,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_18,Haifa 海发,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_19,Hengda 恒达,True,,,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_20,Hongsheng 红盛,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_21,Hongyuan 宏源,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_22,Huahao 华浩,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_23,Huahong 华宏,True,,,Supplier,,,,,,,,,,,,,False,True,True,product.pricelist_chinese_supplier,211000,Cash
+base.partner_24,Huixin 慧鑫,True,,,Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_25,Jiaheng 嘉恒,False,Shandong Ceramic 山东陶瓷,True,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_26,Jiaxuan 佳轩,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_27,Jingxin 景新,False,Shandong Ceramic 山东陶瓷,True,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_28,Jinhelan 金和兰,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_29,Jinyu 金育,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_30,Juncheng 君诚,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_31,Keye 科业,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_32,LeLe 乐乐,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_33,Liangxin 良信,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_34,Liantong 联通,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_35,Linchunhai 林春海,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_36,Lishun 理顺,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_37,Lizhibao 利之宝,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_38,Longsheng 龙生,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_39,Meihua 美华,False,Shandong Ceramic 山东陶瓷,True,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_40,MY,True,,,Supplier,,,,,,,,,,,,,True,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_41,Nanlong 南龙,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_42,Oudun 欧顿,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_43,Qingdao 青岛,True,,,Supplier,,,,,,,,,,,,,False,True,True,product.pricelist_chinese_supplier,211000,Cash
+base.partner_44,Qingfeng 清风,True,,,Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_45,Samai,True,,,Supplier,,,,,,,,,,,,,True,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_46,Sentai 森泰,True,,,Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_47,Shenzhen 深圳,True,,,Supplier,,,,,,,,,,,,,False,True,True,product.pricelist_chinese_supplier,211000,Cash
+base.partner_48,Shunfa 顺发,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_49,Wangziru 王自如,False,Shandong Ceramic 山东陶瓷,True,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_50,Weihuai 伟怀,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_51,Xianshun 贤顺,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_52,Xiheng 喜恒,False,Shandong Ceramic 山东陶瓷,True,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_53,Xinghua 兴华,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_54,Xinglong 兴隆,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_55,Xingye 兴业,False,Shandong Ceramic 山东陶瓷,True,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_56,Xinwei 新伟,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_57,Xinyang 鑫洋,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_58,Xudongkun 许冬坤,True,,,Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_59,Xuye 旭业,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,20 Days
+base.partner_60,Yajiafu 雅佳福,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_61,Yalinda 雅琳达,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_62,Yangguang 阳光,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_63,Yangjiangjixing 阳江吉星,True,,,Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_64,Yangjiangzhenjin 阳江振锦,True,,,Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_65,Yaqi 雅琪,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_66,Yazhijia 雅之佳,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_67,YH,True,,,Supplier,,,,,,,,,,,,,True,True,False,product.pricelist_chinese_supplier,211000,1 Month
+base.partner_68,Yinshan 银山,False,Shandong Ceramic 山东陶瓷,True,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_69,Yiwufangshi 方氏,True,,,Supplier,,,义乌,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_70,Yiwuhuahuang 华皇,True,,,Supplier,,,义乌,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_71,Yiwuhuayou 华友,True,,,Supplier,,,义乌,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_72,Yiwuhuixin 慧鑫,True,,,Supplier,,,义乌,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_73,Yiwukalabang 卡拉帮,True,,,Supplier,,,义乌,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_74,Yiwusanqian 三钱,True,,,Supplier,,,义乌,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_75,Yiwushuer 淑尔,True,,,Supplier,,,义乌,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_76,Yiwutaoci 义乌陶瓷,True,,,Supplier,,,义乌,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_77,Yiwuxilu 曦露,True,,,Supplier,,,义乌,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_78,Yiwuxinzhuo 鑫卓,True,,,Supplier,,,义乌,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_79,Yiwuxiyang 希阳,True,,,Supplier,,,义乌,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_80,Yongfa 永发,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_81,Yongliang 永亮,True,,,Supplier,,,,,,,,,,,,,False,True,True,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_82,Yongxin 永新,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_83,Youfa 有发,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_84,Yuanda 元大,False,Shandong Ceramic 山东陶瓷,True,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_85,Yuegao 粤高,True,,,Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_86,Zhenxing 振兴,False,Shandong Ceramic 山东陶瓷,True,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_87,Zhida 志达,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_88,Zhouyu  洲宇,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_89,Zhuoyuan 卓源,True,,,Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
+base.partner_90,เฮียเหน่ง,True,,,Supplier,,,,,,,,,,,,,True,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_91,Yazhi 雅致,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_92,Weixin 伟鑫,True,,,STL Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,Cash
+base.partner_93,Hongshun 宏顺,True,,,Ceramic Supplier,,,,,,,,,,,,,False,True,False,product.pricelist_chinese_supplier,211000,2 Month
