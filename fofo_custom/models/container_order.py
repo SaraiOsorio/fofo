@@ -253,17 +253,17 @@ class container_order(models.Model):
             result['domain'] = "[('id','in', [" + ','.join(map(str, pick_ids)) + "])]" #Ecosoft todo: open single form view instead of list.
         return result
 
-    @api.multi
-    def onchange_container_size(self, container_size=False):
-        res = {}
-        res['value'] = {}
-        size_obj = self.env['container.size']
-        if not container_size:
-            return {}
-        if container_size:
-            size = size_obj.browse(container_size)
-            res['value'].update({'max_weight': size.max_weight or 0.0, 'max_volume': size.max_volume or 0.0})
-        return res
+#    @api.multi
+#    def onchange_container_size(self, container_size=False):
+#        res = {}
+#        res['value'] = {}
+#        size_obj = self.env['container.size']
+#        if not container_size:
+#            return {}
+#        if container_size:
+#            size = size_obj.browse(container_size)
+#            res['value'].update({'max_weight': size.max_weight or 0.0, 'max_volume': size.max_volume or 0.0})
+#        return res
 
     @api.multi
     @api.depends('picking_ids', 'picking_ids.state', 'state')#TODO:
@@ -308,8 +308,8 @@ class container_order(models.Model):
 
     number = fields.Char('Number', readonly=True, copy=False)
     container_shipper_number = fields.Char('Shipper Container Number', readonly=False, copy=False, help='Container number is provided by shipper after the loading process is complete.')
-    max_weight = fields.Float('Max Weight Container', help="Max Weight of Container.", digits=dp.get_precision('Stock Weight'))
-    max_volume = fields.Float('Max Volume Container', help="Max Volume of Container.", digits=dp.get_precision('Product Volume'))
+    max_weight = fields.Float(related='container_size.max_weight', string='Max Weight Container', help="Max Weight of Container.", digits=dp.get_precision('Stock Weight'), store=True, readonly=True)
+    max_volume = fields.Float(related='container_size.max_volume', string='Max Volume Container', help="Max Volume of Container.", digits=dp.get_precision('Product Volume'), store=True, readonly=True)
     container_size = fields.Many2one('container.size', string="Container Size", required=True)
     date = fields.Date('Date', default=fields.Date.today(), required=True, copy=False)
     outbound_shipper_id = fields.Many2one('res.partner', string="Outbound Shipper Name")

@@ -92,7 +92,7 @@
                         </div>                               
                         <group>
                             <group>
-                                <field name="container_size" on_change="onchange_container_size(container_size)" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                <field name="container_size" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
                                 <field name="outbound_shipper_id" attrs="{'readonly':[('state','in',('done', 'cancel'))]}" domain="[('shipper','=',True)]"/>
                                 <field name="outbound_pricelist_id" groups="product.group_purchase_pricelist" domain="[('type','=','purchase')]"  attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
                                 <field name="outbound_shipper_expense_id" domain="[('type','=', 'service'), ('shipping_ok', '=', True)]"  attrs="{'readonly':[('state','in',( 'done', 'cancel'))]}"/>
