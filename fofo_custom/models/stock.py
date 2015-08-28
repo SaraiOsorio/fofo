@@ -51,7 +51,7 @@ class stock_picking(models.Model):
         invoice_obj = self.pool.get('account.invoice')
         move_obj = self.pool.get('stock.move')
         invoices = {}
-        is_extra_move, extra_move_tax = move_obj._get_moves_taxes(cr, uid, moves, inv_type, context=context)
+        is_extra_move, extra_move_tax = move_obj._get_moves_taxes(cr, uid, moves, inv_type, context=context)#TODO check.
         for move in moves:
             company = move.company_id
             origin = move.picking_id.name

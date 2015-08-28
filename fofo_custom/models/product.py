@@ -62,12 +62,12 @@ class product_template(models.Model):
     @api.one
     @api.depends('product_variant_ids','product_variant_ids.total_standard_landed')
     def _total_cost_call(self):
-        cost_sum = 0.0
-        for cost in self.product_variant_ids:
-            cost_sum += cost.total_standard_landed
-        self.total_cost_call = cost_sum
+        #cost_sum = 0.0
+        #for cost in self.product_variant_ids:
+        #    cost_sum += cost.total_standard_landed
+        #self.total_cost_call = cost_sum
+        self.total_cost_call = self.standard_price + self.landed_cost_call
 
-    
     sale_line_ids = fields.One2many('sale.order.line', 'product_tmpl_id_store', 'Sales History')
     landed_cost_call = fields.Float(compute=_get_landed_cost, string='Landed Cost')
     total_cost_call = fields.Float(compute=_total_cost_call, string='Total Cost')
@@ -97,8 +97,9 @@ class product_product(models.Model):
                 self.qty_contained = res[0][0]
         self.virtual_qty_contained = self.virtual_available + self.qty_contained
     
-    @api.onchange('standard_price', 'landed_cost')
-    def onchange_old_standard_price(self):
+    @api.one
+    @api.depends('standard_price', 'landed_cost')
+    def _compute_total_cost(self):
         self.total_standard_landed = self.standard_price + self.landed_cost #we can directly use standard_price.
 
 #Columns
@@ -110,9 +111,8 @@ class product_product(models.Model):
     height =  fields.Float('Height')#unused todo remove
     width =  fields.Float('Width')#unused todo remove
     landed_cost = fields.Float('Landed Cost')
-    total_standard_landed = fields.Float(string='Total Cost', help='Standard Cost + Landed Cost')
+    total_standard_landed = fields.Float(compute=_compute_total_cost, string='Total Cost', help='Standard Cost + Landed Cost')
     sale_line_ids = fields.One2many('sale.order.line', 'product_id', 'Sales History')
-
 
 class product_ul(models.Model):
     _inherit = 'product.ul'
