@@ -20,6 +20,25 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="view_lazada_order_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="priority">2</field>
+            <field name="arch" type="xml">
+                <tree string="Lazada Orders" fonts="bold:message_unread==True" colors="grey:state=='cancel';blue:state in ('waiting_date','manual');red:state in ('invoice_except','shipping_except')">
+                    <field name="message_unread" invisible="1"/>
+                    <field name="name" string="Order Number"/>
+                    <field name="lazada_order_no"/>
+                    <field name="date_order"/>
+                    <field name="partner_id"/>
+                    <field name="user_id"/>
+                    <field name="amount_total" sum="Total Tax Included"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
         
         <record model="ir.ui.view" id="sale_lazada_order_search">
             <field name="name">lazada.sale.view.inherit.search</field>
@@ -34,20 +53,22 @@
         
         
         <record id="lazada_sale_order_action" model="ir.actions.act_window">
-            <field name="name">Lazada Order</field>
+            <field name="name">Lazada Orders</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">sale.order</field>
             <field name="view_type">form</field>
+            <field name="view_id" ref="view_lazada_order_tree"/>
             <field name="view_mode">tree,form,calendar,graph</field>
             <field name="context">{
                     'default_is_lazada_order': 1
                 }
             </field>
-            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel')),('is_lazada_order','=',True)]</field>
+            <field name="domain">[('is_lazada_order','=',True)]</field>
             <field name="search_view_id" ref="sale.view_sales_order_filter"/>
         </record>
         <menuitem action="lazada_sale_order_action" id="menu_lazada_order" parent="base.menu_sales" sequence="5"/>
         
+
        <record id="sale.action_orders" model="ir.actions.act_window">
             <field name="name">Sales Orders</field>
             <field name="type">ir.actions.act_window</field>
