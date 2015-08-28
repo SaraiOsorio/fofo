@@ -8,7 +8,16 @@ id,name,code,parent_id/id,type,user_type/id,reconcile
 111101,Cash on hand,111101,111100,Liquidity,account.data_account_type_asset,FALSE
 111102,Petty Cash ,111102,111100,Liquidity,account.data_account_type_asset,FALSE
 111200,Cheque,111200,111000,Liquidity,account.data_account_type_asset,FALSE
-111300,Bank,111300,111000,Liquidity,account.data_account_type_asset,FALSE
+111300,Bank,111300,111000,View,account.data_account_type_asset,FALSE
+111301,SCB-SLY,111301,111300,Liquidity,account.data_account_type_asset,FALSE
+111302,SCB-GXH,111302,111300,Liquidity,account.data_account_type_asset,FALSE
+111303,SCB-AEM,111303,111300,Liquidity,account.data_account_type_asset,FALSE
+111304,KBANK-GXH,111304,111300,Liquidity,account.data_account_type_asset,FALSE
+111305,KBT-CXJ,111305,111300,Liquidity,account.data_account_type_asset,FALSE
+111306,BBL-SLY-CH,111306,111300,Liquidity,account.data_account_type_asset,FALSE
+111307,BBL-SLY-SV,111307,111300,Liquidity,account.data_account_type_asset,FALSE
+111308,CHINA-LBY,111308,111300,Liquidity,account.data_account_type_asset,FALSE
+111309,CHINA-CJM,111309,111300,Liquidity,account.data_account_type_asset,FALSE
 112000,Account Receivables,112000,110000,View,account.account_type_asset_view1,FALSE
 112100,Account Receivables,112100,112000,Receivable,account.data_account_type_receivable,TRUE
 112200,Allowance for doubtful account,112200,112000,Regular,account.data_account_type_asset,FALSE
@@ -35,7 +44,7 @@ id,name,code,parent_id/id,type,user_type/id,reconcile
 200000,Liability,200000,1,View,account.account_type_liability_view1,FALSE
 210000,Current Liability,210000,200000,View,account.account_type_liability_view1,FALSE
 211000,Account Payable,211000,210000,Payable,account.data_account_type_payable,TRUE
-211900,Goods Receipt not Invoiced,211900,210000,Regular,Liabilities,FALSE
+211900,Goods Receipt not Invoiced,211900,210000,Regular,account.data_account_type_liability,FALSE
 212000,Short Term Debt,212000,210000,Regular,account.data_account_type_liability,FALSE
 213000,Salary Payable,213000,210000,Regular,account.data_account_type_liability,FALSE
 214000,Dividend Payable,214000,210000,Regular,account.data_account_type_liability,FALSE
