@@ -27,11 +27,29 @@ class stock_quant(models.Model):
 
     @api.v7 # Override here to pass partner_id from stock move since for container order case there is no partner on picking.!
     def _prepare_account_move_line(self, cr, uid, move, qty, cost, credit_account_id, debit_account_id, context=None):
+        if context is None:
+            context = {}
+        currency_obj = self.pool.get('res.currency')
         res = super(stock_quant, self)._prepare_account_move_line(cr, uid, move, qty, cost, credit_account_id, debit_account_id, context=context)
         for line in res:
             if line[2] and 'partner_id' in line[2] and not line[2]['partner_id']:
                 if move.co_line_id:
                     line[2]['partner_id'] = move.partner_id and move.partner_id.id or False
+        
+        #Below logic will change the debit/credit value of outgoing shipment. It will use total cost from product form instead of normal standard_price / cost.
+        if res and res[0] and move.location_dest_id and move.location_dest_id.usage == 'customer': #http://128.199.123.133/issues/3159
+            if context.get('force_valuation_amount'):
+                valuation_amount = context.get('force_valuation_amount')
+            else:
+                if move.product_id.cost_method == 'average':
+                    valuation_amount = cost if move.location_id.usage != 'internal' and move.location_dest_id.usage == 'internal' else move.product_id.total_standard_landed #We use total_standard_landed instead of standard_price.
+                else:
+                    valuation_amount = cost if move.product_id.cost_method == 'real' else move.product_id.total_standard_landed #We use total_standard_landed instead of standard_price.
+            valuation_amount = currency_obj.round(cr, uid, move.company_id.currency_id, valuation_amount * qty)
+            res[0][2]['debit'] = valuation_amount > 0 and valuation_amount or 0
+            res[0][2]['credit'] = valuation_amount < 0 and -valuation_amount or 0
+            res[1][2]['debit'] = valuation_amount < 0 and -valuation_amount or 0
+            res[1][2]['credit'] = valuation_amount > 0 and valuation_amount or 0
         return res
 
 class procurement_order(models.Model):
