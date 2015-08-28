@@ -604,9 +604,9 @@ class container_order(models.Model):
         price_unit = order_line.price_unit
         if order_line.product_uom.id != order_line.product_id.uom_id.id:
             price_unit *= order_line.product_uom.factor / order_line.product_id.uom_id.factor
-        if order.currency_id.id != order.company_id.currency_id.id:
+        if order_line.po_line_id.order_id.currency_id.id != order_line.po_line_id.company_id.currency_id.id:
             #we don't round the price_unit, as we may want to store the standard price with more digits than allowed by the currency
-            price_unit = self.env['res.currency'].compute(order.currency_id.id, order.company_id.currency_id.id, price_unit, round=False)
+            price_unit = order_line.po_line_id.order_id.currency_id.compute(price_unit, order_line.po_line_id.company_id.currency_id, round=False)
         res = []
         move_template = {
             'name': order_line.name or '',

@@ -22,6 +22,18 @@
 from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
 
+class stock_quant(models.Model):
+    _inherit = 'stock.quant'
+
+    @api.v7 # Override here to pass partner_id from stock move since for container order case there is no partner on picking.!
+    def _prepare_account_move_line(self, cr, uid, move, qty, cost, credit_account_id, debit_account_id, context=None):
+        res = super(stock_quant, self)._prepare_account_move_line(cr, uid, move, qty, cost, credit_account_id, debit_account_id, context=context)
+        for line in res:
+            if line[2] and 'partner_id' in line[2] and not line[2]['partner_id']:
+                if move.co_line_id:
+                    line[2]['partner_id'] = move.partner_id and move.partner_id.id or False
+        return res
+
 class procurement_order(models.Model):
     _inherit = 'procurement.order'
 
