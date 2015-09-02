@@ -35,7 +35,8 @@
             'wizard/import_wizard_view.xml',
             'views/sale_view.xml',
             'views/invoice_view.xml',
-            'views/stock_view.xml'
+            'views/stock_view.xml',
+            'views/account_move_view.xml',
             ],
     'depends':['fofo_custom'],
     'installable':True,

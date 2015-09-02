@@ -10,10 +10,10 @@
                     <field name="is_lazada_order"/>
                     <field name="lazada_order_no"/>
                 </xpath>
-                <xpath expr="//tree[@string='Journal Items']/field[@name='invoice']" position="before">
-                    <field name="is_lazada_order"/>
+                <!-- <xpath expr="//tree[@string='Journal Items']/field[@name='invoice']" position="before">
+                    <field name="is_lazada_order" />
                     <field name="lazada_order_no"/>
-                </xpath>
+                </xpath> -->
             </field>
         </record>
     </data>

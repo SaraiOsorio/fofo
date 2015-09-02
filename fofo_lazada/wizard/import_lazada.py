@@ -13,7 +13,7 @@ class sale_order(models.Model):
     _inherit = 'sale.order'
     
     is_lazada_order = fields.Boolean('Lazada Order?', readonly=True)
-    lazada_order_no = fields.Char('Lazada Order Number', readonly=True)
+    lazada_order_no = fields.Char('Lazada Order Number', readonly=False)
 
     @api.model
     def create(self, vals):
@@ -73,12 +73,35 @@ class account_invoice(models.Model):
     
     is_lazada_order = fields.Boolean('Lazada Order?', readonly=True)
     lazada_order_no = fields.Char('Lazada Order Number', readonly=True)
+    
+    
+    #probuse override from base to pass the lazada order number from invoice to journal entry(account.move)
+    @api.multi
+    def action_move_create(self):
+        res = super(account_invoice, self).action_move_create()
+        self.move_id.write({'lazada_order_no': self.lazada_order_no, 
+                            'is_lazada_order': self.is_lazada_order})
+        return res
 
 class account_invoice_line(models.Model):
     _inherit = 'account.invoice.line'
     
     is_lazada_order = fields.Boolean(related='invoice_id.is_lazada_order', string='Lazada Order?' ,readonly=True)
     lazada_order_no = fields.Char(related='invoice_id.lazada_order_no', string='Lazada Order Number' ,readonly=True)
+
+
+class account_move(models.Model):#probuse
+    _inherit = 'account.move'
+    
+    is_lazada_order = fields.Boolean('Lazada Order?', readonly=True)
+    lazada_order_no = fields.Char('Lazada Order Number', readonly=True)
+
+class account_move_line(models.Model):#probuse
+    _inherit = 'account.move.line'
+    
+    is_lazada_order = fields.Boolean(related='move_id.is_lazada_order', string='Lazada Order?' ,readonly=True)
+    lazada_order_no = fields.Char(related='move_id.lazada_order_no', string='Lazada Order Number' ,readonly=True)
+
 
 class lazada_import(models.TransientModel):
     _name = 'lazada.import'
@@ -143,7 +166,6 @@ class lazada_import(models.TransientModel):
                 import_date = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
                 history_ids = []
                 ctx = self._context.copy()
-                
                 for item in items_dict:
                     date_convert = tools.ustr(items_dict[item][0]['created_at'])
                     final_date = datetime.strptime(date_convert, '%Y-%m-%d %H:%M:%S').strftime('%m/%d/%Y %H:%M:%S')
@@ -158,7 +180,8 @@ class lazada_import(models.TransientModel):
                         'payment_term': partner_data['value']['payment_term'],
                         'state' : 'draft',
                         'is_lazada_order': True,
-                        'lazada_order_no': int(sheet.row_values(row_no)[order_number]),
+#                         'lazada_order_no': int(sheet.row_values(row_no)[order_number]),#probuse
+                        'lazada_order_no': items_dict[item][0]['order_no'],#probuse
                     }
                     ctx.update({'is_lazada_order': True})
                     
