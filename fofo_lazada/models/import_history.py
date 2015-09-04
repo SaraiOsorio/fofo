@@ -32,8 +32,8 @@ class import_history(models.Model):
     status = fields.Char('Lazada Status', readonly=True)
     import_time = fields.Date('Import Date', readonly=True)
     user_id = fields.Many2one('res.users', string= 'Imported By', readonly=True)
-    order_status = fields.Selection([('done', 'Done'), ('fail', 'Fail')], string='Order Status', readonly=True)
-    notes = fields.Text('Reason')
+    order_status = fields.Selection([('done', 'Succeed'), ('fail', 'Failed')], string='Import Status', readonly=True)
+    notes = fields.Text('Failure Reason')
     sale_line_id = fields.Many2one('sale.order.line', string='Sale Order Line')
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

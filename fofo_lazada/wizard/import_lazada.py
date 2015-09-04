@@ -140,7 +140,6 @@ class lazada_import(models.TransientModel):
             try:
                 lines = xlrd.open_workbook(file_contents=base64.decodestring(self.input_file))
             except IOError as e:
-                print "I/O error({0}): {1}".format(e.errno, e.strerror)
                 raise Warning(_('Import Error!'),_(e.strerror))
             except ValueError as e:
                 raise Warning(_('Import Error!'),_(e.strerror))
@@ -156,7 +155,6 @@ class lazada_import(models.TransientModel):
                 sheet = lines.sheet_by_name(sheet_name) 
                 rows = sheet.nrows
                 columns = sheet.ncols
-                
                 seller_sku = sheet.row_values(0).index('Seller SKU')
                 created_at = sheet.row_values(0).index('Created at')
                 order_number = sheet.row_values(0).index('Order Number')
@@ -208,22 +206,23 @@ class lazada_import(models.TransientModel):
                     final_date = datetime.strptime(date_convert, '%Y-%m-%d %H:%M:%S').strftime('%m/%d/%Y %H:%M:%S')
                     #this section will check if any product is not found then it will not create orderline for that product and also create the history with fail status
                     for line_sku in items_dict[item]:
+                        date_convert_new = tools.ustr(line_sku['created_at'])
+                        final_date_new = datetime.strptime(date_convert_new, '%Y-%m-%d %H:%M:%S').strftime('%m/%d/%Y %H:%M:%S')
                         if not line_sku['order_no']:
                             no_order_number = True
                         if not product_dict[line_sku['seller_sku']]:
                             order_fail = True
-
                             history_vals = {
                                     'product_id':False,
-                                    'seller_sku':seller_sku_value,
-                                    'created_at':final_date,
-                                    'order_number':order,
-                                    'unit_price':sheet.row_values(row_no)[unit_price],
-                                    'status':sheet.row_values(row_no)[status],
+                                    'seller_sku':line_sku['seller_sku'],
+                                    'created_at':final_date_new,
+                                    'order_number':line_sku['order_no'],#order,
+                                    'unit_price': line_sku['unit_price'], #sheet.row_values(row_no)[unit_price],
+                                    'status': line_sku['status'],#sheet.row_values(row_no)[status],
                                     'import_time':import_date,
-                                    'user_id':self.env.user.id,
+                                    'user_id': self.env.user.id,
                                     'order_status':'fail',
-                                    'notes': 'missing product'
+                                    'notes': 'Product/SKU not found in ERP system.'
                             }
                             history = self.env['import.history'].create(history_vals)
                             if sequene_counter == 0:
@@ -325,7 +324,7 @@ class lazada_import(models.TransientModel):
                             'import_time':import_date,
                             'user_id':self.env.user.id,
                             'order_status':'fail',
-                            'notes': 'Missing Order Number'
+                            'notes': 'Missing order number in the ERP system.'
                         }
                         history = self.env['import.history'].create(history_vals)
                         if sequene_counter == 0:

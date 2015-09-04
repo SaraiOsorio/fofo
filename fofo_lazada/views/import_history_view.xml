@@ -42,6 +42,7 @@
                     <field name="product_id"/>
                     <field name="order_number"/>
                     <field name="user_id"/> 
+                    <field name="notes"/>
                     <field name="status"/>
                     <field name="order_status"/>
                  </tree>
@@ -65,7 +66,7 @@
                     </group>
                     <group expand="0" string="Group By...">
                         <filter string="Import Date" name="import_time" context="{'group_by':'import_time'}" />
-                        <filter string="Import Number" name="name" context="{'group_by':'name'}" />
+                        <filter string="History Number" name="name" context="{'group_by':'name'}" />
                         <filter string="Lazada Order" name="order_number" context="{'group_by':'order_number'}" />
                         <filter string="Lazada Status"  name="status" context="{'group_by':'status'}" />
                         <filter string="Product" domain="[]" context="{'group_by':'product_id'}" />

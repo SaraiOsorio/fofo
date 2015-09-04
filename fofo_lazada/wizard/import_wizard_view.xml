@@ -7,8 +7,8 @@
             <field name="model">lazada.import</field>
             <field name="arch" type="xml">
                 <form string="Import">
-                    <separator string="Generate Lazada Order"/>
-                    <label string="This wizard will create lazada order using lazada order file and it will also create log history for same."/>
+                    <separator string="Import Lazada Orders"/>
+                    <label string="This wizard will create lazada orders using lazada order file and it will also create log history to show status of import."/>
                     <group>
                         <group>
                             <field name="input_file"/>
@@ -36,7 +36,7 @@
             <field name="target">new</field>
         </record>
         
-        <menuitem id="lazada_import_wiz_menu" name="Sales Lazada Import" action="action_import_lazada"
+        <menuitem id="lazada_import_wiz_menu" name="Import Lazada Order" action="action_import_lazada"
                    parent= "lazada_main_menu"/>
 
     </data>
