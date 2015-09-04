@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
+    <data noupdate="1">
 
         <!-- Sequences for lazada order history -->
         <record id="seq_type_lazada_import_history" model="ir.sequence.type">
