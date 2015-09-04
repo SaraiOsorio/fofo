@@ -9,6 +9,7 @@
                     <sheet>
                         <group>
                             <group>
+                                <field name="name"/>
                                 <field name="product_id"/>
                                 <field name="created_at"/> 
                                 <field name="import_time"/> 
@@ -37,19 +38,48 @@
             <field name="model">import.history</field>
             <field name="arch" type="xml">
                  <tree string="Lazada Import History" create="false" edit="false">
+                     <field name="name" string="History Number"/>
                     <field name="product_id"/>
                     <field name="order_number"/>
                     <field name="user_id"/> 
-                     <field name="order_status"/>
+                    <field name="status"/>
+                    <field name="order_status"/>
                  </tree>
             </field>
         </record>
 
+        <record id="view_import_history_filter" model="ir.ui.view">
+            <field name="name">import.history.select</field>
+            <field name="model">import.history</field>
+            <field name="arch" type="xml">
+                <search string="Search History">
+                    <group>
+                        <filter name="failed" icon="terp-gtk-media-pause" string="Failed" domain="[('order_status','=','fail')]" help="Failed Order"/>
+                        <field name="name"/>
+                        <field name="sale_line_id" />
+                        <field name="product_id"/>
+                        <field name="order_number"/>
+                        <field name="status" />
+                        <field name="created_at"/> 
+                        <field name="import_time"/>
+                    </group>
+                    <group expand="0" string="Group By...">
+                        <filter string="Import Date" name="import_time" context="{'group_by':'import_time'}" />
+                        <filter string="Import Number" name="name" context="{'group_by':'name'}" />
+                        <filter string="Lazada Order" name="order_number" context="{'group_by':'order_number'}" />
+                        <filter string="Lazada Status"  name="status" context="{'group_by':'status'}" />
+                        <filter string="Product" domain="[]" context="{'group_by':'product_id'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+                
         <record id='lazada_import_history_action' model='ir.actions.act_window'>
-            <field name='name'>Lazada Import History</field>
+            <field name='name'>Import Error Log</field>
             <field name='res_model'>import.history</field>
             <field name='view_type'>form</field>
             <field name='view_mode'>tree,form</field>
+            <field name="context">{'search_default_failed': 1}</field>
         </record>
 
         <menuitem id="lazada_main_menu" name="Lazada Sales" parent="base.menu_base_partner"/>

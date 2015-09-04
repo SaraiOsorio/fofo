@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- Sequences for lazada order history -->
+        <record id="seq_type_lazada_import_history" model="ir.sequence.type">
+            <field name="name">Lazada Import History</field>
+            <field name="code">lazada.import.history</field>
+        </record>
+
+        <record id="seq_lazada_sale_order" model="ir.sequence">
+            <field name="name">Lazada Import History</field>
+            <field name="code">lazada.import.history</field>
+            <field name="prefix">LH</field>
+            <field name="padding">4</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</openerp>
