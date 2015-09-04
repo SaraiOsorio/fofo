@@ -29,9 +29,9 @@
     """,
     'data':[
             'data/lazada_order_sequence.xml',
+            'data/history_sequence.xml',
             'data/partner_data.xml',
             'views/import_history_view.xml',
-            'wizard/import_customer_payment_view.xml',
             'wizard/import_wizard_view.xml',
             'views/sale_view.xml',
             'views/invoice_view.xml',

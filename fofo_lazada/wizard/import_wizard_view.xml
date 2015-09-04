@@ -7,20 +7,19 @@
             <field name="model">lazada.import</field>
             <field name="arch" type="xml">
                 <form string="Import">
-                <sheet>
+                    <separator string="Generate Lazada Order"/>
+                    <label string="This wizard will create lazada order using lazada order file and it will also create log history for same."/>
                     <group>
-                        <field name="input_file"/>
-                    </group>
-                    <group>
+                        <group>
+                            <field name="input_file"/>
+                        </group>
                         <group>
                             <field name="journal_id" domain="[('type', '=', 'sale')]"/>
                         </group>
-                        <group/>
                     </group>
-                </sheet>
                 <footer>
-                    <button special="cancel" string="Cancel"  icon="terp-gtk-stop"/>
-                    <button name="import_orders" string="Import" type="object" icon="terp-camera_test" class="oe_highlight"/>
+                    <button name="import_orders" string="Import" type="object" class="oe_highlight"/> or 
+                    <button special="cancel" string="Cancel" class="oe_link"/>
                 </footer>
                 </form>
             </field>
