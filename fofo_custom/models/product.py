@@ -55,9 +55,11 @@ class product_template(models.Model):
     @api.depends('product_variant_ids','product_variant_ids.landed_cost')
     def _get_landed_cost(self):
         cost_sum = 0.0
+        counter = 0
         for cost in self.product_variant_ids:
             cost_sum += cost.landed_cost
-        self.landed_cost_call = cost_sum
+            counter += 1
+        self.landed_cost_call = cost_sum / counter #Average landed cost. #TODO: need to check cost price method: 1. Standard price 2. Avg price 3 Real price. ? If option 2 is selected then only do average? 
     
     @api.one
     @api.depends('product_variant_ids','product_variant_ids.total_standard_landed')
