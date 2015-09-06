@@ -10,6 +10,7 @@
                 <xpath expr="//field[@name='origin']" position="after">
                     <field name="container_id" readonly="True"/>
                     <field name="is_shipper_invoice" readonly="True"/>
+                    <field name="allocate_land_cost" readonly="True"/>
                 </xpath>
             </field>
         </record>     

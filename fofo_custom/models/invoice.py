@@ -27,13 +27,14 @@ class account_invoice(models.Model):
     
     container_id = fields.Many2one('container.order', string="Related Container Order")
     is_shipper_invoice = fields.Boolean('Shipper Invoice', help='If this check box is ticked that will indicate the invoice is related to shipper.')
+    allocate_land_cost = fields.Boolean('Allocate Landed Cost', help='If this check box is ticked that will indicate the landed cost will go to product and journal entry will be raised for landed cost.')
 
     @api.multi
     def action_move_create(self):
         res = super(account_invoice, self).action_move_create()
         for inv in self:
             if inv.container_id:
-                if inv.is_shipper_invoice:
+                if inv.is_shipper_invoice or inv.allocate_land_cost:
                     ship_cost_by_volume = inv.amount_total / inv.container_id.total_volume #do computation here same like function field on shiping_cost_by_volumne on CO object.
                     for co_line in inv.container_id.co_line_ids:
                         #Update landed cost on product form by volume. Ref: issues/3188 Date: 6 Sep 2015 => Here are we making average landed cost each time so we divide by two.

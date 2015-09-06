@@ -293,7 +293,7 @@ class container_order(models.Model):
         self.total_shipping_cost = 0.0
         for line in self:
             for l in line.invoice_ids:
-                if l.is_shipper_invoice:
+                if l.is_shipper_invoice or l.allocate_land_cost:
                     self.total_shipping_cost += l.amount_total
             if self.total_volume > 0.0:
                 self.shipping_cost_by_volume = float(self.total_shipping_cost) / self.total_volume
@@ -471,7 +471,7 @@ class container_order(models.Model):
 #            'account_analytic_id': order_line.account_analytic_id.id or False,
         }
 
-    @api.multi
+    @api.multi#create in/out shipper invoices.
     def _prepare_invoice(self, order, partner_id, line_ids, type='Inbound Supplier Invoice'):
         journal_ids = self.env['account.journal'].search(
                             [('type', '=', 'purchase'),
@@ -494,6 +494,7 @@ class container_order(models.Model):
             'payment_term': partner_id.property_supplier_payment_term.id or False,
             'company_id': order.company_id.id,
             'is_shipper_invoice': True,
+            'allocate_land_cost': True,
         }
 
     @api.multi
