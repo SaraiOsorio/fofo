@@ -38,7 +38,7 @@ class account_invoice(models.Model):
                     #Update landed cost on product form by volume. Ref: issues/3188 Date: 6 Sep 2015 => Here are we making average landed cost each time so we divide by two.
                     if co_line.product_id.landed_cost > 0.0:
                         #landed_cost = co_line.product_id.landed_cost + ((co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty) / 2
-                        landed_cost = co_line.product_id.landed_cost + ((ship_cost_by_volume * co_line.volume) / co_line.product_qty) / 2
+                        landed_cost = (co_line.product_id.landed_cost + ((ship_cost_by_volume * co_line.volume) / co_line.product_qty)) / 2
                     else:# First time update on product form.
                         if co_line.product_qty > 0.0:
                             #landed_cost = (co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty
