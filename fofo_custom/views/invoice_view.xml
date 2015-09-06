@@ -10,7 +10,25 @@
                 <xpath expr="//field[@name='origin']" position="after">
                     <field name="container_id" readonly="True"/>
                     <field name="is_shipper_invoice" readonly="True"/>
-                    <field name="allocate_land_cost" readonly="True"/>
+                    <field name="allocate_land_cost"/>
+                    <field name="landed_cost_journal_id" attrs="{'invisible': [('allocate_land_cost','=', False)]}" domain="[('company_id', '=', company_id), ('land_cost_journal', '=', True)]"/>
+                    <field name="stock_valuation_landcost_account" attrs="{'invisible': [('allocate_land_cost','=', False)]}"/>
+                    <field name="expense_landcost_account" attrs="{'invisible': [('allocate_land_cost','=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='move_id']" position="after">
+                    <field name="move_landed_cost_id" attrs="{'invisible': [('allocate_land_cost','=', False)]}"/>
+                </xpath>
+
+            </field>
+        </record>     
+
+        <record model="ir.ui.view" id="view_account_journal_form_landed_cost">
+            <field name="name">account.journal.form2.landed cost</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='centralisation']" position="before">
+                    <field name="land_cost_journal" readonly="False"/>
                 </xpath>
             </field>
         </record>     
