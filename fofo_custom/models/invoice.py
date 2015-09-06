@@ -33,17 +33,18 @@ class account_invoice(models.Model):
         res = super(account_invoice, self).action_move_create()
         for inv in self:
             if inv.container_id:
-                ship_cost_by_volume = inv.amount_total / inv.container_id.total_volume #do computation here same like function field on shiping_cost_by_volumne on CO object.
-                for co_line in inv.container_id.co_line_ids:
-                    #Update landed cost on product form by volume. Ref: issues/3188 Date: 6 Sep 2015 => Here are we making average landed cost each time so we divide by two.
-                    if co_line.product_id.landed_cost > 0.0:
-                        #landed_cost = co_line.product_id.landed_cost + ((co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty) / 2
-                        landed_cost = (co_line.product_id.landed_cost + ((ship_cost_by_volume * co_line.volume) / co_line.product_qty)) / 2
-                    else:# First time update on product form.
-                        if co_line.product_qty > 0.0:
-                            #landed_cost = (co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty
-                            landed_cost = (ship_cost_by_volume * co_line.volume) / co_line.product_qty
-                    co_line.product_id.write({'landed_cost': landed_cost})
+                if inv.is_shipper_invoice:
+                    ship_cost_by_volume = inv.amount_total / inv.container_id.total_volume #do computation here same like function field on shiping_cost_by_volumne on CO object.
+                    for co_line in inv.container_id.co_line_ids:
+                        #Update landed cost on product form by volume. Ref: issues/3188 Date: 6 Sep 2015 => Here are we making average landed cost each time so we divide by two.
+                        if co_line.product_id.landed_cost > 0.0:
+                            #landed_cost = co_line.product_id.landed_cost + ((co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty) / 2
+                            landed_cost = (co_line.product_id.landed_cost + ((ship_cost_by_volume * co_line.volume) / co_line.product_qty)) / 2
+                        else:# First time update on product form.
+                            if co_line.product_qty > 0.0:
+                                #landed_cost = (co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty
+                                landed_cost = (ship_cost_by_volume * co_line.volume) / co_line.product_qty
+                        co_line.product_id.write({'landed_cost': landed_cost})
                 flag = True
                 for i in inv.container_id.invoice_ids:
                     if i.id != inv.id and i.state == 'draft':
