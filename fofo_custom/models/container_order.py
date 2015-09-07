@@ -357,6 +357,7 @@ class container_order(models.Model):
     co_line_ids = fields.One2many('container.order.line','container_order_id', string='Container Order Lines' )
     inbound_pricelist_id = fields.Many2one('product.pricelist', string='Inbound Pricelist', required=False)
     outbound_pricelist_id = fields.Many2one('product.pricelist', string='Outbound Pricelist', required=False)
+    invoice_shipper = fields.Boolean('Shippers Invoice Created', help='If this checkbox is ticked that means shipper invoices have been generated for container order.', readonly=True)
 
     @api.onchange('inbound_shipper_id')
     def on_change_inbound_shipper_id(self):
@@ -538,6 +539,8 @@ class container_order(models.Model):
             inv_id.button_compute(set_total=True)
             order.write({'invoice_ids': [(4, inv_id.id)]})
             res.append(inv_id.id)
+
+            order.invoice_shipper = True # Checkbox on CO form set to True since shipper invoices are generated here and this checkbox will disable button "Create shipper invoices"
         return res
     
     @api.multi #Email template to send.

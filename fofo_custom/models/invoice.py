@@ -132,6 +132,7 @@ class account_invoice(models.Model):
                         raise Warning(('Error!'), _('Please define expense account to create landed cost journal entry.'))
                     inv.create_move_landed_cost(inv.landed_cost_journal_id, inv.stock_valuation_landcost_account, inv.expense_landcost_account)
 
+                #Write landed cost on product form:
                 if inv.allocate_land_cost:
                     ship_cost_by_volume = inv.amount_total / inv.container_id.total_volume #do computation here same like function field on shiping_cost_by_volumne on CO object.
                     for co_line in inv.container_id.co_line_ids:
@@ -144,11 +145,13 @@ class account_invoice(models.Model):
                                 #landed_cost = (co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty
                                 landed_cost = (ship_cost_by_volume * co_line.volume) / co_line.product_qty
                         co_line.product_id.write({'landed_cost': landed_cost})
+
+                # set CO to done if all ivnoices are validated.
                 flag = True
                 for i in inv.container_id.invoice_ids:
                     if i.id != inv.id and i.state == 'draft':
                         flag = False
-                if flag:
+                if flag and inv.container_id.invoice_shipper:
                     inv.container_id.action_done()
         return res
 

@@ -62,7 +62,7 @@
                                 context="{'send_to_inbound':False}" class="oe_highlight"/> -->
                         <button name="action_invoice_create" string="Create Shipper Invoices" 
                                 type="object"
-                                attrs="{'invisible': ['|', ('invoice_count', '>', 1), ('state', '!=', 'confirm')]}"
+                                attrs="{'invisible': [('invoice_shipper', '=', True)]}"
                                 class="oe_highlight"/>
                         <button name="confirm_order" string="Confirm"
                                 attrs="{'invisible':[('state','not in',('draft','sent_to_shipper'))]}"
@@ -165,6 +165,7 @@
                                         <field name="incoterm_id"  attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
                                         <field name="reference"  attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
                                         <field name="is_received" />
+                                        <field name="invoice_shipper"/>
                                     </group>
                                 </group>
                             </page>
