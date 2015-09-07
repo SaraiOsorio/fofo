@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="invoice_form_internal_sequence">
+            <field name="name">account.invoice.form2.internal.sequence.tax</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="is_tax_invoice_number" />
+                </xpath>
+                <xpath expr="//field[@name='date_invoice']" position="before">
+                    <field name="tax_invoice_number" attrs="{'invisible': [('is_tax_invoice_number', '=', False)]}"  />
+                </xpath>
+            </field>
+        </record>     
+
+        <record model="ir.ui.view" id="invoice_form_internal_sequence_customer">
+            <field name="name">account.invoice.form2.internal.sequence.tax.customer</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="is_tax_invoice_number" />
+                </xpath>
+                <xpath expr="//field[@name='date_invoice']" position="before">
+                    <field name="tax_invoice_number" attrs="{'invisible': [('is_tax_invoice_number', '=', False)]}"  />
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_account_invoice_filter_internal_sequence">
+            <field name="name">account.invoice.search2.internal.sequence.tax.customer</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='number']" position="after">
+                    <field name="tax_invoice_number" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
