@@ -10,6 +10,9 @@
                 <xpath expr="//field[@name='origin']" position="after">
                     <field name="container_id" readonly="True"/>
                 </xpath>
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="container_shipper_number" readonly="True"/>
+                </xpath>
             </field>
         </record>     
         <!--<record id="view_stock_enter_transfer_details_hide" model="ir.ui.view">

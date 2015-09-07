@@ -73,7 +73,8 @@ class procurement_order(models.Model):
 class stock_picking(models.Model):
     _inherit = 'stock.picking'
     
-    container_id = fields.Many2one('container.order', string="Container Reference")
+    container_id = fields.Many2one('container.order', string="Container Reference", copy=False)
+    container_shipper_number = fields.Char(related='container_id.container_shipper_number', string='Shipper Container Number', readonly=True, copy=False, help='Container number is provided by shipper after the loading process is complete.')
     
     #Below method is completely override here to pass container_id to invoice..
     @api.v7
