@@ -59,7 +59,7 @@ class product_template(models.Model):
         for cost in self.product_variant_ids:
             cost_sum += cost.landed_cost
             counter += 1
-        self.landed_cost_call = cost_sum / counter #Average landed cost. #TODO: need to check cost price method: 1. Standard price 2. Avg price 3 Real price. ? If option 2 is selected then only do average? 
+        self.landed_cost_all = cost_sum / counter #Average landed cost. #TODO: need to check cost price method: 1. Standard price 2. Avg price 3 Real price. ? If option 2 is selected then only do average? 
     
     @api.one
     @api.depends('product_variant_ids','product_variant_ids.total_standard_landed')
@@ -68,10 +68,10 @@ class product_template(models.Model):
         #for cost in self.product_variant_ids:
         #    cost_sum += cost.total_standard_landed
         #self.total_cost_call = cost_sum
-        self.total_cost_call = self.standard_price + self.landed_cost_call
+        self.total_cost_call = self.standard_price + self.landed_cost_all
 
     sale_line_ids = fields.One2many('sale.order.line', 'product_tmpl_id_store', 'Sales History')
-    landed_cost_call = fields.Float(compute=_get_landed_cost, string='Landed Cost')
+    landed_cost_all = fields.Float(compute=_get_landed_cost, string='Landed Cost')
     total_cost_call = fields.Float(compute=_total_cost_call, string='Total Cost')
     shipping_ok = fields.Boolean('Shipping Product', help="Specify if the product can be selected in a container order as shipping product.")
 

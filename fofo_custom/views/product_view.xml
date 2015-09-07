@@ -18,7 +18,7 @@
                             <field name="landed_cost" />
                             <field name="total_standard_landed" />
                     </group>
-<!--                    <xpath expr="//field[@name='landed_cost_call']" position="attributes">-->
+<!--                    <xpath expr="//field[@name='landed_cost_all']" position="attributes">-->
 <!--                        <attribute name="invisible">1</attribute>-->
 <!--                    </xpath>-->
                     <!-- <field name="volume" position="before">
@@ -72,7 +72,7 @@
                     <page string='Landed Costs' groups="base.group_user">
                         <group>
                             <group>
-                                <field name="landed_cost_call"/>
+                                <field name="landed_cost_all"/>
                             </group>
                             <group>
                                 <field name="total_cost_call"/>
@@ -86,7 +86,7 @@
                 </field> -->
                 <group name="general" position="inside">
                     <field name="shipping_ok"/>
-                    <field name="landed_cost_call"/>
+                    <field name="landed_cost_all"/>
                     <field name="total_cost_call"/>
                 </group>
             </field>
@@ -125,7 +125,7 @@
                     <attribute name="digits"></attribute>
                 </xpath>                
                 <!--xpath expr="//field[@name='standard_price']" position="after">
-                    <field name="landed_cost_call"/>
+                    <field name="landed_cost_all"/>
                     <field name="total_cost_call"/>
                 </xpath-->
             </field>
