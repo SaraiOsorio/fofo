@@ -31,7 +31,6 @@ from openerp import tools
 from _abcoll import ItemsView
 from openerp.exceptions import except_orm, Warning, RedirectWarning
 
-
 class sale_order(models.Model):
     _inherit = 'sale.order'
     
@@ -109,7 +108,6 @@ class account_invoice_line(models.Model):
     is_lazada_order = fields.Boolean(related='invoice_id.is_lazada_order', string='Lazada Order?' ,readonly=True)
     lazada_order_no = fields.Char(related='invoice_id.lazada_order_no', string='Lazada Order Number' ,readonly=True)
 
-
 class account_move(models.Model):#probuse
     _inherit = 'account.move'
     
@@ -127,8 +125,13 @@ LAZADA_STATUS = {'pending': 1,'ready_to_ship' : 2, 'shipped': 3, 'delivered' : 4
 class lazada_import(models.TransientModel):
     _name = 'lazada.import'
 
+    @api.multi
+    def _get_journal(self):
+        sale_journal_ids = self.env['account.journal'].search([('type', '=', 'sale')])
+        return sale_journal_ids and sale_journal_ids.id or False
+
     input_file = fields.Binary('Lazada Order File (.xlsx format)')
-    journal_id = fields.Many2one('account.journal', string='Sales Journal', required=True)
+    journal_id = fields.Many2one('account.journal', string='Sales Journal', required=True, default=_get_journal)
 
     @api.multi
     def import_orders(self):

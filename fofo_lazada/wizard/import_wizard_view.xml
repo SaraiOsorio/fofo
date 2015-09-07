@@ -8,15 +8,16 @@
             <field name="arch" type="xml">
                 <form string="Import">
                     <separator string="Import Lazada Orders"/>
-                    <label string="This wizard will create lazada orders using lazada order file and it will also create log history to show status of import."/>
-                    <group>
+                    <label string="This wizard will create lazada orders using lazada order file."/>
+                    <newline/>
+                    <label string="It will also create log history to show status of import."/>
                         <group>
-                            <field name="input_file"/>
+                            <group>
+                                <field name="input_file"/>
+                                <field name="journal_id" domain="[('type', '=', 'sale')]"/>
+                            </group>
+                        <group> </group>
                         </group>
-                        <group>
-                            <field name="journal_id" domain="[('type', '=', 'sale')]"/>
-                        </group>
-                    </group>
                 <footer>
                     <button name="import_orders" string="Import" type="object" class="oe_highlight"/> or 
                     <button special="cancel" string="Cancel" class="oe_link"/>
