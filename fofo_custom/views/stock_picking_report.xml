@@ -3,6 +3,17 @@
     <data>
 
         <template id="report_picking_package_add" inherit_id="stock.report_picking">
+
+            <xpath expr="//h2/span[2]" position="after">
+                <t t-if="o.picking_type_id.code == 'incoming'">
+                    <b>
+                        <span style="color:white;">....</span>
+                        <span style="font-size:16px;text-align:right;">Container Order:</span>
+                        <span t-field="o.container_id"  style="font-size:16px;text-align:right;"/>
+                    </b>
+                </t>
+            </xpath>
+
             <xpath expr="//div/table[2]/thead/tr/th[2]" position="after">
                 <t t-if="o.picking_type_id.code == 'incoming'">
                 <th class="text-right">Qty/Package</th>
@@ -11,10 +22,11 @@
             </xpath>
             <xpath expr="//div/table[2]/tbody/tr/t/td[2]" position="after">
                 <t t-if="o.picking_type_id.code == 'incoming'">
-                <td class="text-right"><span t-field="o.qty_package"/></td>
-                <td class="text-right"><span t-esc="o.number_packages or 0"/></td>
+                <td class="text-right"><span t-field="move.qty_package"/></td>
+                <td class="text-right"><span t-esc="move.number_packages or 0"/></td>
                 </t>
             </xpath>
+
             <xpath expr="//div/table[3]/thead/tr/th[2]" position="after">
                 <t t-if="o.picking_type_id.code == 'incoming'">
                 <th class="text-right">Qty/Package</th>
@@ -28,6 +40,7 @@
                 </t>
             </xpath>
         </template>
+
 
     </data>
 </openerp>
