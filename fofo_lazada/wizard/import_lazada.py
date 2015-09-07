@@ -38,6 +38,18 @@ class sale_order(models.Model):
     lazada_order_no = fields.Char('Lazada Order Number', readonly=True)
 
     @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        recs = self.browse()
+        if name:
+            recs = self.search([('name', '=', name)] + args, limit=limit)
+        if not recs:
+            recs = self.search([('name', operator, name)] + args, limit=limit)
+        if not recs:
+            recs = self.search(['|', ('client_order_ref', operator, name), ('lazada_order_no', operator, name)] + args, limit=limit)
+        return recs.name_get()
+
+    @api.model
     def create(self, vals):
         if vals.get('name', '/') == '/':
             if self._context.get('is_lazada_order'):
@@ -339,7 +351,7 @@ class lazada_import(models.TransientModel):
                     else:
                         ordervals = {
                             'name' : '/',
-                            'client_order_ref': item,
+                            #'client_order_ref': item, #Not require Lazada Order # in Reference/Description field on Lazada Order - Bug #3196
                             'partner_invoice_id' : partner_data['value']['partner_invoice_id'],
                             'date_order' : final_date,
                             'partner_id' : partner,
