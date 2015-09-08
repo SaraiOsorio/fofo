@@ -10,8 +10,12 @@
                 <xpath expr="//field[@name='origin']" position="after">
                     <field name="container_id" readonly="True"/>
                     <field name="is_shipper_invoice" readonly="True"/>
-                    <field name="allocate_land_cost"/>
-                    <field name="landed_cost_journal_id" attrs="{'invisible': [('allocate_land_cost','=', False)]}" domain="[('company_id', '=', company_id), ('land_cost_journal', '=', True)]"/>
+
+                    <label for="allocate_land_cost"/>
+                    <div>
+                        <field name="allocate_land_cost"/>
+                        <field class="oe_inline" name="landed_cost_journal_id" attrs="{'invisible': [('allocate_land_cost','=', False)]}" domain="[('company_id', '=', company_id), ('land_cost_journal', '=', True)]"/>
+                    </div>
                     <field name="stock_valuation_landcost_account" attrs="{'invisible': [('allocate_land_cost','=', False)]}"/>
                     <field name="expense_landcost_account" attrs="{'invisible': [('allocate_land_cost','=', False)]}"/>
                 </xpath>

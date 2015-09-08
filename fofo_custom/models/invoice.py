@@ -49,6 +49,9 @@ class account_invoice(models.Model):
 
     @api.one
     def create_move_landed_cost(self, landed_cost_journal, stock_valuation_landcost_account, expense_landcost_account):
+        #Note: Actually, I think we don't need these fields at all (but it is fine to have it invisibly but must auto default, so what??), because,
+        #(see above, I updated sample) the CR in logistic journal, are always the same account as the DR on purchase journal (whatever the account is, in this case, 51200, 51201, 51202, it will be even out line by line)
+        #the DR in logistic journal, at first I want to get from Stock Valuation account in Product Category, but may be not good, as Product Lines can be different products. SO -> let's use the DR account from the Landed Cost Journal master data itself, WDYT?        
         period_obj = self.env['account.period']
         move_obj = self.env['account.move']
         move_line_obj = self.env['account.move.line']
@@ -63,7 +66,7 @@ class account_invoice(models.Model):
         current_currency = self.currency_id
         ctx = dict(self._context or {})
         ctx.update({'date': self.date_invoice})
-        amount = current_currency.compute(self.amount_total, company_currency)
+        amount = current_currency.compute(self.amount_untaxed, company_currency)
         
         if landed_cost_journal.type == 'purchase':
             sign = 1
@@ -81,34 +84,34 @@ class account_invoice(models.Model):
         move_id = move_obj.create(move_vals)
         journal_id = landed_cost_journal.id
         partner_id = self.partner_id.id
-        
+        for line in self.invoice_line:
+            move_line_obj.create({
+                'name': move_name,
+                'ref': reference,
+                'move_id': move_id.id,
+                'account_id': line.account_id.id,
+                'debit': 0.0,
+                'credit': line.price_subtotal,#amount,
+                'period_id': period_ids and period_ids[0] or False,
+                'journal_id': journal_id,
+                'partner_id': partner_id,
+                'currency_id': company_currency.id <> current_currency.id and current_currency.id or False,
+                'amount_currency': company_currency.id <> current_currency.id and -sign * self.amount_untaxed or 0.0,
+                'date': self.date_invoice,
+                #'analytic_account_id' : ?,
+            })
         move_line_obj.create({
             'name': move_name,
             'ref': reference,
             'move_id': move_id.id,
-            'account_id': stock_valuation_landcost_account.id,
-            'debit': 0.0,
-            'credit': amount,
-            'period_id': period_ids and period_ids[0] or False,
-            'journal_id': journal_id,
-            'partner_id': partner_id,
-            'currency_id': company_currency.id <> current_currency.id and current_currency.id or False,
-            'amount_currency': company_currency.id <> current_currency.id and -sign * self.amount_total or 0.0,
-            'date': self.date_invoice,
-            #'analytic_account_id' : ?,
-        })
-        move_line_obj.create({
-            'name': move_name,
-            'ref': reference,
-            'move_id': move_id.id,
-            'account_id': expense_landcost_account.id,
+            'account_id': landed_cost_journal.default_debit_account_id.id, #expense_landcost_account.id,
             'credit': 0.0,
             'debit': amount,
             'period_id': period_ids and period_ids[0] or False,
             'journal_id': journal_id,
             'partner_id': partner_id,
             'currency_id': company_currency.id <> current_currency.id and  current_currency.id or False,
-            'amount_currency': company_currency.id <> current_currency.id and sign * self.amount_total or 0.0,
+            'amount_currency': company_currency.id <> current_currency.id and sign * self.amount_untaxed or 0.0,
             #'analytic_account_id': ?,
             'date': self.date_invoice,
         })
@@ -126,15 +129,16 @@ class account_invoice(models.Model):
                 if inv.allocate_land_cost:
                     if not inv.landed_cost_journal_id:
                         raise Warning(('Error!'), _('Please define landed cost journal to create landed cost journal entry.'))
-                    if not inv.stock_valuation_landcost_account:
-                        raise Warning(('Error!'), _('Please define stock valuation account to create landed cost journal entry.'))
-                    if not inv.expense_landcost_account:
-                        raise Warning(('Error!'), _('Please define expense account to create landed cost journal entry.'))
+                    if not inv.landed_cost_journal_id.default_debit_account_id:
+                        raise Warning(('Error!'), _('Please define debit account on landed cost journal to create landed cost journal entry.'))
                     inv.create_move_landed_cost(inv.landed_cost_journal_id, inv.stock_valuation_landcost_account, inv.expense_landcost_account)
 
                 #Write landed cost on product form:
                 if inv.allocate_land_cost:
-                    ship_cost_by_volume = inv.amount_total / inv.container_id.total_volume #do computation here same like function field on shiping_cost_by_volumne on CO object.
+                    if inv.container_id.total_volume > 0:
+                        ship_cost_by_volume = inv.amount_total / inv.container_id.total_volume #do computation here same like function field on shiping_cost_by_volumne on CO object.
+                    else:
+                        ship_cost_by_volume = inv.amount_total #TODO check.. is this correct is container has no volume then we consider to skip that.? 
                     for co_line in inv.container_id.co_line_ids:
                         #Update landed cost on product form by volume. Ref: issues/3188 Date: 6 Sep 2015 => Here are we making average landed cost each time so we divide by two.
                         if co_line.product_id.landed_cost > 0.0:
