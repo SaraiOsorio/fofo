@@ -729,12 +729,16 @@ class container_order(models.Model):
                 purchase_line = co_line.po_line_id 
                 co_line.state = 'done' #make container order line state to done.
                 
-                #Update landed cost on product form by volume. Ref: issues/3005
+                #Update landed cost on product form by volume. Ref: issues/3005 + 3188
                 if co_line.product_id.landed_cost > 0.0:
-                    landed_cost = (co_line.product_id.landed_cost + ((co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty)) / 2
+                    #Important note: Below logic is based on when shipments related to CO is not still Transffered.
+                    qty_available = co_line.product_id.qty_available
+                    amount_unit = co_line.product_id.standard_price
+                    landed_cost = (qty_available * amount_unit + ((co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty)) / (qty_available + co_line.product_qty) # As per Average price formula in stock_account/stock_account.py => Difference is only that we are not considering Product template's available qty and its standard price.!
+                    #landed_cost = (co_line.product_id.landed_cost + ((co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty)) / 2 #TODO Remove this.
                 else:# First time update.
                     if co_line.product_qty > 0.0:
-                        landed_cost = (co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty
+                        landed_cost = (co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty #Formula => Landed Cost = (Shipping Cost/Volume x Volume) / Contained Quantity
                 co_line.product_id.write({'landed_cost': landed_cost})
 
                 order_dict[purchase_line.order_id.id] = False
