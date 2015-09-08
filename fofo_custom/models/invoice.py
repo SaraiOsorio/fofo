@@ -124,7 +124,6 @@ class account_invoice(models.Model):
         res = super(account_invoice, self).action_move_create()
         for inv in self:
             if inv.container_id:
-
                 #Create journal entry for landed cost. Issue: 3190 - 6 Sep 2015
                 if inv.allocate_land_cost:
                     if not inv.landed_cost_journal_id:
@@ -133,8 +132,8 @@ class account_invoice(models.Model):
                         raise Warning(('Error!'), _('Please define debit account on landed cost journal to create landed cost journal entry.'))
                     inv.create_move_landed_cost(inv.landed_cost_journal_id, inv.stock_valuation_landcost_account, inv.expense_landcost_account)
 
-                #Write landed cost on product form:
-'''                if inv.allocate_land_cost:
+                    #Write landed cost on product form:
+            '''                if inv.allocate_land_cost:
                     if inv.container_id.total_volume > 0:
                         ship_cost_by_volume = inv.amount_total / inv.container_id.total_volume #do computation here same like function field on shiping_cost_by_volumne on CO object.
                     else:
@@ -151,11 +150,11 @@ class account_invoice(models.Model):
                         co_line.product_id.write({'landed_cost': landed_cost}) '''
 
                 # set CO to done if all ivnoices are validated.
-                flag = True
-                for i in inv.container_id.invoice_ids:
-                    if i.id != inv.id and i.state == 'draft':
-                        flag = False
-                if flag and inv.container_id.invoice_shipper:
-                    inv.container_id.action_done()
+            flag = True
+            for i in inv.container_id.invoice_ids:
+                if i.id != inv.id and i.state == 'draft':
+                    flag = False
+            if flag and inv.container_id.invoice_shipper:
+                inv.container_id.action_done()
         return res
 
