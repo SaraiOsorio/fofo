@@ -730,12 +730,12 @@ class container_order(models.Model):
                 co_line.state = 'done' #make container order line state to done.
                 
                 #Update landed cost on product form by volume. Ref: issues/3005
-                #if co_line.product_id.landed_cost > 0.0:
-                #    landed_cost = co_line.product_id.landed_cost + ((co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty) / 2
-                #else:# First time update.
-                #    if co_line.product_qty > 0.0:
-                #        landed_cost = (co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty
-                #co_line.product_id.write({'landed_cost': landed_cost})
+                if co_line.product_id.landed_cost > 0.0:
+                    landed_cost = (co_line.product_id.landed_cost + ((co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty)) / 2
+                else:# First time update.
+                    if co_line.product_qty > 0.0:
+                        landed_cost = (co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty
+                co_line.product_id.write({'landed_cost': landed_cost})
 
                 order_dict[purchase_line.order_id.id] = False
                 line_count_done = 0
