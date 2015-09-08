@@ -16,8 +16,8 @@
                         <field name="allocate_land_cost"/>
                         <field class="oe_inline" name="landed_cost_journal_id" attrs="{'invisible': [('allocate_land_cost','=', False)]}" domain="[('company_id', '=', company_id), ('land_cost_journal', '=', True)]"/>
                     </div>
-                    <field name="stock_valuation_landcost_account" attrs="{'invisible': [('allocate_land_cost','=', False)]}"/>
-                    <field name="expense_landcost_account" attrs="{'invisible': [('allocate_land_cost','=', False)]}"/>
+                    <!--<field name="stock_valuation_landcost_account" attrs="{'invisible': [('allocate_land_cost','=', False)]}"/>
+                    <field name="expense_landcost_account" attrs="{'invisible': [('allocate_land_cost','=', False)]}"/> -->
                 </xpath>
                 <xpath expr="//field[@name='move_id']" position="after">
                     <field name="move_landed_cost_id" attrs="{'invisible': [('allocate_land_cost','=', False)]}"/>

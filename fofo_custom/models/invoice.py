@@ -36,12 +36,12 @@ class account_invoice(models.Model):
     allocate_land_cost = fields.Boolean('Allocate Landed Cost', help='If this check box is ticked that will indicate the landed cost will go to product and journal entry will be raised for landed cost.', readonly=True, states={'draft': [('readonly', False)]})
     landed_cost_journal_id = fields.Many2one('account.journal', string='Landed Cost Journal',
         required=False, readonly=True, states={'draft': [('readonly', False)]})
-    stock_valuation_landcost_account = fields.Many2one('account.account', string='Stock Valuation Account',
+    stock_valuation_landcost_account = fields.Many2one('account.account', string='Stock Valuation Account',#TODO remove.
         required=False, domain=[('type', 'not in', ['view', 'closed'])],
-        help="The stock valuation account for landed cost entry.", readonly=True, states={'draft': [('readonly', False)]})
+        help="The stock valuation account for landed cost entry.", readonly=True, states={'draft': [('readonly', False)]})#TODO remove.
     expense_landcost_account = fields.Many2one('account.account', string='Expense Account',
         required=False, domain=[('type', 'not in', ['view', 'closed'])],
-        help="The expense account for landed cost entry.", readonly=True, states={'draft': [('readonly', False)]})
+        help="The expense account for landed cost entry.", readonly=True, states={'draft': [('readonly', False)]}) #TODO remove.
     move_landed_cost_id = fields.Many2one('account.move', string='Journal Entry - Landed Cost',
         readonly=True, index=True, ondelete='restrict', copy=False,
         help="Link to the automatically generated Journal Items for landed cost.")
