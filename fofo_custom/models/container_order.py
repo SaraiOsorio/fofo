@@ -506,10 +506,12 @@ class container_order(models.Model):
         uid_company_id = self.env.user.company_id.id
 
         for order in self:
+            if not order.co_line_ids:
+                    raise Warning( _('You cannot create shipper invoice without any container order line.'))
             if not order.inbound_shipper_id or not order.outbound_shipper_id:
-                    raise Warning( _('Please define Inbound Shipper and Outbound Shipper.'))
+                raise Warning( _('Please define Inbound Shipper and Outbound Shipper.'))
             if not order.inbound_shipper_expense_id or not order.outbound_shipper_expense_id:
-                    raise Warning( _('Please define Inbound Shipper Expense and Outbound Shipper Expense.'))
+                raise Warning( _('Please define Inbound Shipper Expense and Outbound Shipper Expense.'))
             res = []
 
             # For inbound shipper invoice.
