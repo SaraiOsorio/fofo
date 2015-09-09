@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
+    <data noupdate="1">
         <record id="transaction_type_config_1" model="lazada.payment.transaction.config">
             <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_1"/>
             <field name="account_id"></field>

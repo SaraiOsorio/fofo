@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
+    <data noupdate="1">
         <record id="transaction_type_1" model="lazada.payment.transaction.type">
             <field name="name">Payment Fee</field>
         </record>
