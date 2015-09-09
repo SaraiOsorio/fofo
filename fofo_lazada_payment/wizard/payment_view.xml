@@ -11,6 +11,7 @@
                     <newline/>
                     <group>
                         <field name="input_file"/>
+                        <label string="(.xlsx Format Supported)"/>
                     </group>
                     <group>
                         <group>
@@ -42,10 +43,10 @@
             <field name="target">new</field>
         </record>
         
-        <menuitem id="lazada_import_payment_main_menu" name="Lazada Payment"
+        <menuitem id="lazada_import_payment_main_menu" name="Lazada Payments"
                    parent= "account.menu_finance" sequence="4" />
         
-        <menuitem id="lazada_import_payment_menu" name="Lazada Payment Import" action="action_import_lazada_payment"
+        <menuitem id="lazada_import_payment_menu" name="Import Lazada Payment" action="action_import_lazada_payment"
                    parent= "lazada_import_payment_main_menu"/>
 
     </data>

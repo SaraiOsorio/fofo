@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="1">
-        <record id="transaction_type_0" model="lazada.payment.transaction.type">
-            <field name="name">Item Price Credit</field>
-        </record>
+    <data noupdate="0">
         <record id="transaction_type_1" model="lazada.payment.transaction.type">
-            <field name="name">Payment fee</field>
+            <field name="name">Payment Fee</field>
         </record>
         <record id="transaction_type_2" model="lazada.payment.transaction.type">
-            <field name="name">Payment fee credit</field>
+            <field name="name">Payment Fee Credit</field>
         </record>
         <record id="transaction_type_3" model="lazada.payment.transaction.type">
             <field name="name">Shipping Fee</field>
         </record>
         <record id="transaction_type_4" model="lazada.payment.transaction.type">
-            <field name="name">Shipping Fee credit</field>
+            <field name="name">Shipping Fee Credit</field>
         </record>
         <record id="transaction_type_5" model="lazada.payment.transaction.type">
             <field name="name">Commission Credit</field>

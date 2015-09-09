@@ -31,7 +31,7 @@
         </record>
 
         <record id='lazada_payment_transaction_type_action' model='ir.actions.act_window'>
-            <field name='name'>Lazada Payment Transaction Type</field>
+            <field name='name'>Lazada Payment Transaction Types</field>
             <field name='res_model'>lazada.payment.transaction.type</field>
             <field name='view_type'>form</field>
             <field name='view_mode'>tree,form</field>
@@ -69,17 +69,17 @@
         </record>
 
         <record id='lazada_payment_transaction_config_action' model='ir.actions.act_window'>
-            <field name='name'>Lazada Payment Transaction Configuration</field>
+            <field name='name'>Lazada Payment Transaction Configurations</field>
             <field name='res_model'>lazada.payment.transaction.config</field>
             <field name='view_type'>form</field>
             <field name='view_mode'>tree,form</field>
         </record>
         <menuitem id="lazada_payment_transaction_menu" name="Lazada Payments" parent="account.menu_finance_configuration"/>
 
-        <menuitem id="lazada_payment_transaction_config_menu" name="Transaction Type Configuration" parent="lazada_payment_transaction_menu"
+        <menuitem id="lazada_payment_transaction_config_menu" name="Transaction Type Configurations" parent="lazada_payment_transaction_menu"
                 action="lazada_payment_transaction_config_action" />
  
-        <menuitem id="lazada_payment_transaction_type_menu" name="Transaction Type" parent="lazada_payment_transaction_menu"
+        <menuitem id="lazada_payment_transaction_type_menu" name="Transaction Types" parent="lazada_payment_transaction_menu"
                 action="lazada_payment_transaction_type_action" />
     </data>
 </openerp>

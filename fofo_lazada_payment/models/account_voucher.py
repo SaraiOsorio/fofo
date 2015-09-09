@@ -37,7 +37,6 @@ class accuont_voucher_multiple_reconcile(models.Model):
 class account_voucher(models.Model):
     _inherit = 'account.voucher'
     
-    
     @api.multi
     @api.depends('line_cr_ids', 'line_dr_ids', 'multiple_reconcile_ids')
     def _get_writeoff_amount(self):
@@ -53,19 +52,13 @@ class account_voucher(models.Model):
                 for l in voucher.line_cr_ids:
                     credit += l.amount
                 for r in voucher.multiple_reconcile_ids:
-                    if not r.comment == 'Keep Open':
-                        reconcile_total += r.amount
+                    reconcile_total += r.amount
                 currency = voucher.currency_id or voucher.company_id.currency_id
-                print "________voucher.amount___",voucher.amount
-                print "________sign_____________",sign
-                print "_________credit__________",credit
-                print "_________debit___________",debit
-                print "__________reconcile______",reconcile_total
                 self.writeoff_amount =  currency.round(voucher.amount - sign * (credit - debit + reconcile_total))
             else:
                 return super(account_voucher, self)._get_writeoff_amount()
                 
-    reconcile_payment = fields.Boolean('Reconcile Payment', default=True)
+    reconcile_payment = fields.Boolean('Reconcile Payment', default=False)
     is_lazada_payment = fields.Boolean('Is Lazada Payment?', readonly=True)
     multiple_reconcile_ids = fields.One2many('account.voucher.multiple.reconcile', 'voucher_id', string='Reconcile Liness')
     writeoff_amount = fields.Float(compute=_get_writeoff_amount, string='Difference Amount', readonly=True, help="Computed as the difference between the amount stated in the voucher and the sum of allocation on the voucher lines.")
@@ -73,8 +66,8 @@ class account_voucher(models.Model):
     @api.multi
     def write(self, vals):
         if self.is_lazada_payment:
-            if vals.get('journal_id') or vals.get('line_cr_ids') or vals.get('line_dr_ids') or vals.get('date') or vals.get('period_id'): 
-                raise Warning(_('Warning!'),_('You are not allow to modify lazada customer payment.'))
+            if vals.get('multiple_reconcile_ids', False) or vals.get('journal_id') or vals.get('line_cr_ids') or vals.get('line_dr_ids') or vals.get('date') or vals.get('period_id'): 
+                raise Warning(_('Warning!'),_('You can not modify values of some columns on lazada customer payment which has been created by wizard.'))
         return super(account_voucher, self).write(vals)
     
 

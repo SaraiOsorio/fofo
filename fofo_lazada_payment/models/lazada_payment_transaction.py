@@ -23,14 +23,14 @@ from openerp import models, fields, api, _
 class lazada_payment_transaction_type(models.Model):
     _name = 'lazada.payment.transaction.type'
     
-    name = fields.Char('Name')
+    name = fields.Char('Name', required=True)
     
 
 class lazada_payment_transaction_config(models.Model):
     _name = 'lazada.payment.transaction.config'
     
-    transaction_type_id = fields.Many2one('lazada.payment.transaction.type', string='Transaction Type')
-    account_id = fields.Many2one('account.account', string='Account')
+    transaction_type_id = fields.Many2one('lazada.payment.transaction.type', string='Transaction Type', required=True)
+    account_id = fields.Many2one('account.account', string='Related Account')
     transaction_type_name = fields.Char(related='transaction_type_id.name', string="Transaction Type Name")
 
 

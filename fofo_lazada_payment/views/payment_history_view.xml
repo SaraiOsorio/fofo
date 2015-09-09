@@ -6,24 +6,29 @@
             <field name="model">payment.history</field>
             <field name="arch" type="xml">
                  <form string="Lazada Payment Import History" create="false" edit="false">
+                    <header>
+                        <field name="status" widget="statusbar"/> 
+                    </header>
                     <sheet>
                         <group>
                             <group>
                                 <field name="name"/>
                                 <field name="journal_id"/> 
                                 <field name="voucher_id"/>
+                                <field name="user_id"/>
                             </group>
                             <group>
                                 <field name="partner_id"/>
                                 <field name="import_date"/>
                                 <field name="currency_id"/> 
+                                <field name="input_file"/> 
                             </group>
                             <group/>
                         </group>
                         <notebook string="History Lines">
                             <page string="Payment History Lines">
                                 <field name="history_line_ids">
-                                    <tree string="History Lines" colors="green:transaction_type == 'Item Price Credit';" >
+                                    <tree string="History Lines" colors="blue:transaction_type == 'Item Price Credit';" >
                                         <field name="date"/> 
                                         <field name="order_no"/> 
                                         <field name="amount"/> 
@@ -37,6 +42,9 @@
                                         <field name="status"/> 
                                     </tree>
                                 </field>
+                            </page>
+                            <page string="Reason / Status Information">
+                                <field name="reason"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -55,6 +63,7 @@
                     <field name="journal_id"/>
                     <field name="import_date"/> 
                     <field name="currency_id"/>
+                    <field name="status"/> 
                  </tree>
             </field>
         </record>
@@ -69,6 +78,7 @@
                         <field name="partner_id" />
                         <field name="import_date"/>
                         <field name="journal_id"/>
+                        <field name="status"/> 
                     </group>
                     <group expand="0" string="Group By...">
                         <filter string="Import Number" name="name" context="{'group_by':'name'}" />

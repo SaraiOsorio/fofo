@@ -34,8 +34,10 @@ from openerp.exceptions import except_orm, Warning, RedirectWarning
 class sale_order(models.Model):
     _inherit = 'sale.order'
     
-    is_lazada_order = fields.Boolean('Lazada Order?', readonly=True)
-    lazada_order_no = fields.Char('Lazada Order Number', readonly=True)
+    is_lazada_order = fields.Boolean('Lazada Order?', copy=False,
+            readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},)
+    lazada_order_no = fields.Char('Lazada Order Number', copy=False,
+            readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},)
 
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
@@ -104,7 +106,8 @@ class account_invoice(models.Model):
     _inherit = 'account.invoice'
     
     is_lazada_order = fields.Boolean('Lazada Order?', readonly=True)
-    lazada_order_no = fields.Char('Lazada Order Number', readonly=True)
+    lazada_order_no = fields.Char('Lazada Order Number', copy=False,
+            readonly=True, states={'draft': [('readonly', False)]},)
     
     #probuse override from base to pass the lazada order number from invoice to journal entry(account.move)
     @api.multi

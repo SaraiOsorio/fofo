@@ -58,9 +58,10 @@
                             <tree string="Reconcile Lines" editable="top">
                                 <field name="order_no" invisible='True'/>
                                 <field name="account_id" domain="[('type','not in',['view', 'closed'])]" select="1" />
-                                <field name="amount" select="1" />
+                                <field name="amount" sum="Total Amount" select="1" />
                                 <field name="comment" />
                                 <field name="analytic_id" groups="analytic.group_analytic_accounting"/>
+                                <field name="order_no"  readonly="True"/>
                             </tree>
                         </field>
                 </xpath>
@@ -81,9 +82,10 @@
                             <tree string="Reconcile Lines" editable="top">
                                 <field name="order_no" invisible='True'/>
                                 <field name="account_id" domain="[('type','not in',['view', 'closed'])]" select="1" />
-                                <field name="amount" select="1" />
+                                <field name="amount" sum="Total Amount"  select="1" />
                                 <field name="comment" />
                                 <field name="analytic_id" groups="analytic.group_analytic_accounting"/>
+                                <field name="order_no" readonly="True"/>
                             </tree>
                         </field>
                 </xpath>
