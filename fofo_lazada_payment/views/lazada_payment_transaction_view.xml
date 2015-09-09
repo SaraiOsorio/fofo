@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="lazada_payment_transaction_type_form">
+            <field name="name">lazada.payment.transaction.type.form</field>
+            <field name="model">lazada.payment.transaction.type</field>
+            <field name="arch" type="xml">
+                 <form string="Lazada Payment Transaction Type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                            </group>
+                            <group/>
+                        </group>
+                    </sheet>
+                 </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="lazada_payment_transaction_type_tree">
+            <field name="name">lazada.payment.transaction.type.tree</field>
+            <field name="model">lazada.payment.transaction.type</field>
+            <field name="arch" type="xml">
+                 <tree string="Lazada Payment Transaction Type">
+                    <field name="name"/>
+                 </tree>
+            </field>
+        </record>
+
+        <record id='lazada_payment_transaction_type_action' model='ir.actions.act_window'>
+            <field name='name'>Lazada Payment Transaction Type</field>
+            <field name='res_model'>lazada.payment.transaction.type</field>
+            <field name='view_type'>form</field>
+            <field name='view_mode'>tree,form</field>
+        </record>
+        
+        <record model="ir.ui.view" id="lazada_payment_transaction_config_form">
+            <field name="name">lazada.payment.transaction.config.form</field>
+            <field name="model">lazada.payment.transaction.config</field>
+            <field name="arch" type="xml">
+                 <form string="Lazada Payment Transaction Type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="transaction_type_id"/>
+                            </group>
+                            <group>
+                                <field name="account_id" domain="[('type','not in',['view', 'closed'])]"/>
+                            </group>
+                            <group/>
+                        </group>
+                    </sheet>
+                 </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="lazada_payment_transaction_config_tree">
+            <field name="name">lazada.payment.transaction.config.tree</field>
+            <field name="model">lazada.payment.transaction.config</field>
+            <field name="arch" type="xml">
+                 <tree string="Lazada Payment Transaction Type">
+                    <field name="transaction_type_id"/> 
+                    <field name="account_id" domain="[('type','not in',['view', 'closed'])]"/>
+                 </tree>
+            </field>
+        </record>
+
+        <record id='lazada_payment_transaction_config_action' model='ir.actions.act_window'>
+            <field name='name'>Lazada Payment Transaction Configuration</field>
+            <field name='res_model'>lazada.payment.transaction.config</field>
+            <field name='view_type'>form</field>
+            <field name='view_mode'>tree,form</field>
+        </record>
+        <menuitem id="lazada_payment_transaction_menu" name="Lazada Payments" parent="account.menu_finance_configuration"/>
+
+        <menuitem id="lazada_payment_transaction_config_menu" name="Transaction Type Configuration" parent="lazada_payment_transaction_menu"
+                action="lazada_payment_transaction_config_action" />
+ 
+        <menuitem id="lazada_payment_transaction_type_menu" name="Transaction Type" parent="lazada_payment_transaction_menu"
+                action="lazada_payment_transaction_type_action" />
+    </data>
+</openerp>

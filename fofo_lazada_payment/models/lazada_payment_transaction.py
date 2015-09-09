@@ -18,7 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import lazada_payment_transaction
-import payment_history
-import account_voucher
+from openerp import models, fields, api, _
+
+class lazada_payment_transaction_type(models.Model):
+    _name = 'lazada.payment.transaction.type'
+    
+    name = fields.Char('Name')
+    
+
+class lazada_payment_transaction_config(models.Model):
+    _name = 'lazada.payment.transaction.config'
+    
+    transaction_type_id = fields.Many2one('lazada.payment.transaction.type', string='Transaction Type')
+    account_id = fields.Many2one('account.account', string='Account')
+    transaction_type_name = fields.Char(related='transaction_type_id.name', string="Transaction Type Name")
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

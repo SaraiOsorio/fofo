@@ -31,11 +31,16 @@
     """,
     'data':[
             'security/ir.model.access.csv',
+            'data/history_sequence.xml',
+            'views/lazada_payment_transaction_view.xml',
+            'data/transaction_type_data.xml',
+            'data/transaction_type_config_data.xml',
             'wizard/payment_view.xml',
+            'views/account_voucher_view.xml',
             'views/account_billing_view.xml',
             'views/payment_history_view.xml'
             ],
-    'depends':['fofo_lazada', 'account_billing'],
+    'depends':['fofo_lazada'],
     'installable':True,
     'auto_install':False
 }

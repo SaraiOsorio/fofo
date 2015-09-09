@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="transaction_type_config_0" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_0"/>
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_type_config_1" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_1"/>
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_type_config_2" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_2"/> 
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_type_config_3" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_3"/> 
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_type_config_4" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_4"/> 
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_type_config_5" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_5"/> 
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_type_config_6" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_6"/> 
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_type_config_7" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_7"/> 
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_type_config_8" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_8"/> 
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_type_config_9" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_9"/> 
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_type_config_10" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_10"/> 
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_type_config_11" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_11"/> 
+            <field name="account_id"></field>
+        </record>
+        <record id="transaction_typev_12" model="lazada.payment.transaction.config">
+            <field name="transaction_type_id" ref="fofo_lazada_payment.transaction_type_12"/> 
+            <field name="account_id"></field>
+        </record>
+    </data>
+</openerp>

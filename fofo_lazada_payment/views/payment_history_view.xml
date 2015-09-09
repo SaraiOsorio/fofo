@@ -9,11 +9,12 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="partner_id"/>
+                                <field name="name"/>
                                 <field name="journal_id"/> 
-                                <field name="bill_id"/>
+                                <field name="voucher_id"/>
                             </group>
                             <group>
+                                <field name="partner_id"/>
                                 <field name="import_date"/>
                                 <field name="currency_id"/> 
                             </group>
@@ -48,15 +49,36 @@
             <field name="model">payment.history</field>
             <field name="arch" type="xml">
                  <tree string="Lazada Payment Import History" create="false" edit="false">
+                    <field name="name"/>
                     <field name="partner_id"/>
-                    <field name="bill_id"/>
+                    <field name="voucher_id"/>
                     <field name="journal_id"/>
                     <field name="import_date"/> 
-                     <field name="currency_id"/>
+                    <field name="currency_id"/>
                  </tree>
             </field>
         </record>
-
+        
+        <record id="lazada_payment_import_history_filter" model="ir.ui.view">
+            <field name="name">payment.history.select</field>
+            <field name="model">payment.history</field>
+            <field name="arch" type="xml">
+                <search string="Search History">
+                    <group>
+                        <field name="name"/>
+                        <field name="partner_id" />
+                        <field name="import_date"/>
+                        <field name="journal_id"/>
+                    </group>
+                    <group expand="0" string="Group By...">
+                        <filter string="Import Number" name="name" context="{'group_by':'name'}" />
+                        <filter string="Partner" name="partner_id" context="{'group_by':'partner_id'}" />
+                        <filter string="Journal" name="journal_id" context="{'group_by':'journal_id'}" />
+                        <filter string="Date" name="import_date" context="{'group_by':'import_date'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
         <record id='lazada_payment_import_history_action' model='ir.actions.act_window'>
             <field name='name'>Lazada Payment Import History</field>
             <field name='res_model'>payment.history</field>

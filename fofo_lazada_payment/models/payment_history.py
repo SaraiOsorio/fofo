@@ -33,7 +33,7 @@ class payment_history_line(models.Model):
     lazada_sku = fields.Char('Lazada SKU')
     order_no = fields.Char('Order No')
     order_item_no = fields.Char('Order Item No')
-    history_id = fields.Many2one('payment.history', string="History")
+    history_id = fields.Many2one('payment.history', string="History", ondelete='cascade')
     status = fields.Selection([('Fail', 'Failed'), ('Done', 'Succeed')], string='Status')
     details = fields.Text('Detail')
     
@@ -42,11 +42,20 @@ class payment_history_line(models.Model):
 class payment_history(models.Model):
     _name = 'payment.history'
     
+    name = fields.Char('History Number')
     partner_id = fields.Many2one('res.partner', string='Partner')
     journal_id = fields.Many2one('account.journal', string='Journal')
     currency_id = fields.Many2one('res.currency', string='Currency')
-    import_date = fields.Date('Imported On')
+    import_date = fields.Date('Import Date')
     history_line_ids = fields.One2many('payment.history.line', 'history_id', string='History Lines')
     bill_id = fields.Many2one('account.billing', string="Bill")
+    voucher_id = fields.Many2one('account.voucher', string="Voucher")
+
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name') == '/' or False:
+            vals['name'] = self.env['ir.sequence'].get('lazada.payment.history')
+        return super(payment_history, self).create(vals)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

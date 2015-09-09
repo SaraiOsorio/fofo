@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="transaction_type_0" model="lazada.payment.transaction.type">
+            <field name="name">Item Price Credit</field>
+        </record>
+        <record id="transaction_type_1" model="lazada.payment.transaction.type">
+            <field name="name">Payment fee</field>
+        </record>
+        <record id="transaction_type_2" model="lazada.payment.transaction.type">
+            <field name="name">Payment fee credit</field>
+        </record>
+        <record id="transaction_type_3" model="lazada.payment.transaction.type">
+            <field name="name">Shipping Fee</field>
+        </record>
+        <record id="transaction_type_4" model="lazada.payment.transaction.type">
+            <field name="name">Shipping Fee credit</field>
+        </record>
+        <record id="transaction_type_5" model="lazada.payment.transaction.type">
+            <field name="name">Commission Credit</field>
+        </record>
+        <record id="transaction_type_6" model="lazada.payment.transaction.type">
+            <field name="name">Commission</field>
+        </record>
+        <record id="transaction_type_7" model="lazada.payment.transaction.type">
+            <field name="name">Seller Credit</field>
+        </record>
+        <record id="transaction_type_8" model="lazada.payment.transaction.type">
+            <field name="name">Other Fee</field>
+        </record>
+        <record id="transaction_type_9" model="lazada.payment.transaction.type">
+            <field name="name">Cancellation Fee</field>
+        </record>
+        <record id="transaction_type_10" model="lazada.payment.transaction.type">
+            <field name="name">Return to Seller Fee</field>
+        </record>
+        <record id="transaction_type_11" model="lazada.payment.transaction.type">
+            <field name="name">Automatic Shipping Fee</field>
+        </record>
+        <record id="transaction_type_12" model="lazada.payment.transaction.type">
+            <field name="name">Others</field>
+        </record>
+    </data>
+</openerp>

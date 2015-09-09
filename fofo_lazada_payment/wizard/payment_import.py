@@ -28,17 +28,16 @@ from datetime import date
 
 from openerp import models, fields, api, _
 
-
-class account_billing_line(models.Model):
-    _inherit = 'account.billing.line'
-    
+class account_voucher_line(models.Model):
+    _inherit = 'account.voucher.line'
+     
     @api.one
     @api.depends('move_line_id', 'move_line_id.invoice')
     def _get_so_reference(self):
         invoice_id = self.move_line_id.invoice
         if invoice_id.origin:
             self.sale_order = invoice_id.origin
-    
+     
     sale_order = fields.Char(compute=_get_so_reference,string='#SO')
 
 
@@ -52,6 +51,7 @@ class lazada_payment(models.TransientModel):
     
     input_file = fields.Binary('Lazada Payment File (.xlsx format)')
     journal_id = fields.Many2one('account.journal', string='Journal', required=True)
+    account_id = fields.Many2one('account.account', string='Account', required=True)
     currency_id = fields.Many2one('res.currency', string='Currency', required=True, default=lambda self: self.env.user.company_id.currency_id.id)
     date = fields.Date('Date', required=True, default= fields.Date.today())
     partner_id = fields.Many2one('res.partner', string='Customer',default=_get_partner, readonly=True)
@@ -62,28 +62,41 @@ class lazada_payment(models.TransientModel):
         partner = self.partner_id.id
         company = self.journal_id.company_id.id
         journal = self.journal_id.id
-        currency = self.currency_id.id
+        
         bill_date = self.date
 
-        bill_vals = {
+        journal_data = self.env['account.voucher'].onchange_journal_voucher(line_ids= False, tax_id=False, price=0.0, partner_id=partner, journal_id=journal, ttype=False, company_id=False)
+        currency = journal_data['value']['currency_id']
+        voucher_vals = {
+            'name': '/',
             'partner_id' : partner,
             'company_id' : company,
             'journal_id' : journal,
             'currency_id': currency,
             'line_ids' : False,
-            'line_cr_ids' : False
+            'line_cr_ids' : False,
+            'account_id' : journal_data['value']['account_id'],
+            'period_id': journal_data['value']['period_id'],
+            'state': 'draft',
+            'date' : bill_date,
+            'type': journal_data['value']['type'],
+            'reconcile_payment': True
         }
-        bill_id = self.env['account.billing'].create(bill_vals)
-        partner_data = self.env['account.billing'].onchange_partner_id(partner, journal, 0.0, currency, bill_date)
-        histoy_vals = {'partner_id' : partner,
+        partner_data = self.env['account.voucher'].onchange_partner_id(partner, journal, 0.0, currency, False ,bill_date)
+        histoy_vals = {'name':'/',
+                       'partner_id' : partner,
                     'currency_id' : currency,
                     'journal_id' : journal,
                     'history_line_ids' : False,
-                    'bill_id': bill_id.id,
+                    'voucher_id': False,
                     'import_date' : date.today().strftime("%m/%d/%Y")}
         history_id = self.env['payment.history'].create(histoy_vals)
         
-        order_journal_dict = {}
+        multiple_reconcile_dict = {}
+        order_list = []
+        cr_move_ids = []
+        dr_move_ids = []
+        total_amount = 0.0
         for line in self:
             lines = xlrd.open_workbook(file_contents=base64.decodestring(self.input_file))
             for sheet_name in lines.sheet_names(): 
@@ -91,6 +104,7 @@ class lazada_payment(models.TransientModel):
                 rows = sheet.nrows
                 columns = sheet.ncols
                 amount_row = sheet.row_values(0).index('Amount')
+                
                 for row_no in range(rows):
                     order_row = sheet.row_values(0).index('Order No')
                     order_no = False
@@ -98,9 +112,11 @@ class lazada_payment(models.TransientModel):
                         order_no = int(sheet.row_values(row_no)[order_row])
                     except:
                         order_no = False
-                    if order_no:
-                        if row_no > 0:
+                    if row_no > 0:
+                        order_list.append(order_no)
+                        if order_no :
                             amount = sheet.row_values(row_no)[amount_row]
+                            total_amount += amount
                             sheet_date = sheet.row_values(row_no)[sheet.row_values(0).index('Date')]
                             conv_date = time.strptime(sheet_date,"%d %b %Y")
                             billing_date = time.strftime("%m/%d/%Y",conv_date)
@@ -127,26 +143,76 @@ class lazada_payment(models.TransientModel):
                                 'status' : 'Done',
                                 'details': details
                             })
-                            if not amount < 0:
+                            if not amount < 0 and transaction_type == "Item Price Credit" or transaction_type == "Item Price":
                                 move_ids = self.env['account.move.line'].search([('lazada_order_no' ,'=', order_no), ('debit', '>', 0.0)])
                                 if move_ids:
-                                    if not order_no in order_journal_dict:
-                                        order_journal_dict[order_no] = (move_ids.id, amount)
-                                    else:
-                                        amount += amount
-                                        order_journal_dict[order_no] = (move_ids.id, amount)
-                    else:
-                        history_line_vals.update({'status' : 'Fail', 'order_no': False})
+                                    for move in move_ids:
+                                        if not move.id in cr_move_ids:
+                                            cr_move_ids.append(move.id)
+                                if partner_data['value'].get('line_dr_ids'):
+                                    move_dr_ids = self.env['account.move.line'].search([('lazada_order_no' ,'=', order_no), ('credit', '>', 0.0)])
+                                    if move_dr_ids:
+                                        for move_dr in move_dr_ids:
+                                            if not move_dr.id in dr_move_ids:
+                                                dr_move_ids.append(move_dr.id)
+                                
+                            elif not transaction_type == "Item Price Credit" or not transaction_type == "Item Price":
+                                transaction_type_id = self.env['lazada.payment.transaction.config'].search([('transaction_type_name', '=', str(transaction_type))])
+                                if not order_no in multiple_reconcile_dict:
+                                    multiple_reconcile_dict[order_no] = [{'transaction_type': transaction_type,
+                                                                         'amount': amount,
+                                                                         'account_id' : transaction_type_id.account_id.id, 
+                                                                         'order_no' : order_no}]
+                                else:
+                                    multiple_reconcile_dict[order_no].append({'transaction_type': transaction_type,
+                                                                              'amount': amount,
+                                                                              'account_id' : transaction_type_id.account_id.id,
+                                                                              'order_no' : order_no})
+                        else:
+                            history_line_vals.update({'status' : 'Fail', 'order_no': False})
                     history_lines = self.env['payment.history.line'].create(history_line_vals)
+        order_exception = False
+        for order_number in order_list:
+            if not order_number:
+                order_exception = True
+        
+        if not order_exception:
+            voucher_id = self.env['account.voucher'].create(voucher_vals)
+            history_id.voucher_id = voucher_id.id
             
-        for order in order_journal_dict:
-            moveline_id = order_journal_dict[order][0]
-            move_amount = order_journal_dict[order][1]
-            for line in partner_data['value']['line_cr_ids']:
-                if line['move_line_id'] == moveline_id:
-                    line['amount'] = move_amount
-                    bill_id.write({'line_cr_ids' : [(0, 0, line)]})
+            for order in multiple_reconcile_dict:
+                for line in multiple_reconcile_dict[order]:
+                    reconcile_vals = {
+                        'account_id': line['account_id'],
+                        'amount' : line['amount'],
+                        'comment' : line['transaction_type'],
+                        'voucher_id': voucher_id.id,
+                        'order_no': line['order_no']
+                    }
+                    self.env['account.voucher.multiple.reconcile'].create(reconcile_vals)
                     
+            for move in cr_move_ids:
+                for line in partner_data['value']['line_cr_ids']:
+                    if line['move_line_id'] == move:
+                        line['amount'] = line['amount_original']
+                        voucher_id.write({'line_cr_ids' : [(0, 0, line)]})
+            
+            if partner_data['value'].get('line_dr_ids'):
+                for move in dr_move_ids:
+                    for line in partner_data['value']['line_dr_ids']:
+                        if line['move_line_id'] == move:
+#                             line['amount'] = line['amount_original']
+                            voucher_id.write({'pre_line': True,'line_dr_ids' : [(0, 0, line)]})
+            
+            voucher_id.write({'is_lazada_payment' : True, 'amount' : total_amount})
+            transaction_type_id = self.env['lazada.payment.transaction.config'].search([('transaction_type_name', '=', 'Keep Open')])
+            if transaction_type_id:
+                self.env['account.voucher.multiple.reconcile'].create({
+                                                        'account_id': transaction_type_id.account_id.id,
+                                                        'amount' : voucher_id.writeoff_amount,
+                                                        'comment' : transaction_type_id.transaction_type_id.name,
+                                                        'voucher_id': voucher_id.id,
+                                                        })
         result = self.env.ref('fofo_lazada_payment.lazada_payment_import_history_action')
         result = result.read()[0]
         result['domain'] = str([('id','in',[history_id.id])])
