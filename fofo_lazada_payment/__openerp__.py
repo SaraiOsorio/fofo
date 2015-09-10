@@ -40,7 +40,7 @@
             'views/account_billing_view.xml',
             'views/payment_history_view.xml'
             ],
-    'depends':['fofo_lazada'],
+    'depends':['fofo_lazada', 'account_voucher_deduction'],
     'installable':True,
     'auto_install':False
 }
