@@ -17,6 +17,7 @@ addons:
       - python-serial
       - python-yaml
 #      - wkhtmltopdf  # only add if needed and check the before_install section below
+      - python-xlrd  # Excel for FOFO
 
 # set up an X server to run wkhtmltopdf.
 #before_install:
