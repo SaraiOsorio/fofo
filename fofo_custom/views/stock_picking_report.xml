@@ -4,13 +4,33 @@
 
         <template id="report_picking_package_add" inherit_id="stock.report_picking">
 
-            <xpath expr="//h2/span[2]" position="after">
+            <!--<xpath expr="//h2/span[2]" position="after">
                 <t t-if="o.picking_type_id.code == 'incoming'">
                     <b>
                         <span style="color:white;">....</span>
                         <span style="font-size:16px;text-align:right;">Container Order:</span>
                         <span t-field="o.container_id"  style="font-size:16px;text-align:right;"/>
                     </b>
+                </t>
+            </xpath> -->
+
+            <xpath expr="//h2" position="replace">
+                <t t-if="o.picking_type_id.code == 'incoming'">
+                    <h2>
+                        <span t-field="o.name"/>
+                        <span style="color:white;">....</span>
+                        <span>Container Order:</span>
+                        <span t-field="o.container_id"/>
+                    </h2>
+                </t>
+                <t t-if="o.picking_type_id.code != 'incoming'">
+                    <h2>
+                        <span t-field="o.name"/>
+                        <t t-if="o.container_id">
+                            <span>Container Order:</span>
+                            <span t-field="o.container_id"/>
+                        </t>
+                    </h2>
                 </t>
             </xpath>
 
