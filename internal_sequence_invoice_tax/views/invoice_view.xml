@@ -1,4 +1,5 @@
 <?xml version="1.0" ?>
+
 <openerp>
     <data>
 
@@ -40,5 +41,17 @@
                 </xpath>
             </field>
         </record>
+
+        <record model="ir.ui.view" id="view_invoice_tree_internal_sequence">
+            <field name="name">account.invoice.tree.internal.sequence.tax.customer</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='number']" position="after">
+                    <field name="tax_invoice_number" />
+                </xpath>
+            </field>
+        </record>
+
     </data>
 </openerp>
