@@ -7,12 +7,16 @@
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
-                    <field name="virtual_available" position="before">
-                            <field name="qty_contained" />
+                    <!-- field name="virtual_available" position="before">
+                            <field name="qty_contained" invisible="1" />
                     </field>
                     <field name="virtual_available" position="after">
-                            <field name="virtual_qty_contained" />
+                            <field name="virtual_qty_contained" invisible="1" />
                     </field>
+                    <field name="qty_available" position="after">
+                            <field name="incoming_contained_qty" />
+                            <field name="incoming_not_contained_qty" />
+                    </field-->
                     <group name="general" position="inside">
                             <field name="shipping_ok"/>
                             <field name="landed_cost" />
@@ -28,7 +32,9 @@
                     </field>             -->         
             </field>
         </record>
-
+        
+        
+        
         <!-- <record id="product_sales_history" model="ir.ui.view">
             <field name="name">product.product.form.inherit.sale history</field>
             <field name="model">product.product</field>
@@ -62,6 +68,33 @@
             </field>
         </record> -->
 
+         <record id="view_template_property_form_hide_incoming" model="ir.ui.view">
+            <field name="name">product.template.form.inherit.hide.incoming</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_template_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@string='Stock and Expected Variations']/label[2] " position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@string='Stock and Expected Variations']/div[2] " position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@string='Stock and Expected Variations']/div[1]" position="after">
+                    <label for="incoming_contained_qty"/> 
+                    <div>
+                        <field name="incoming_contained_qty" />
+                    </div>
+                    <label for="incoming_not_contained_qty"/>
+                    <div>
+                        <field name="incoming_not_contained_qty" />
+                    </div>
+                    <label for="outgoing_qty"/>
+                    <div>
+                        <field name="outgoing_qty" />
+                    </div>
+                </xpath>
+            </field>
+        </record>
             
          <record id="product_template_only_form_view_cost" model="ir.ui.view">
             <field name="name">product.template.form.inherit.cost</field>

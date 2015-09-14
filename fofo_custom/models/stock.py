@@ -143,10 +143,19 @@ class stock_move(models.Model):
                     self.pool.get('purchase.order.line').write(cr, uid, [move.purchase_line_id.id], {'state': 'confirmed'}) #If picking cancel then change the state of its related purchsae order lines to confirmed. This will alllow again selection of that purchase line in new container order.
         return res
 
+    @api.one
+    @api.depends('co_line_id')
+    def _get_move_co_related(self):
+        if self.co_line_id:
+            self.is_related_co = True
+        else:
+            self.is_related_co = False
+
 #columns
     co_line_id = fields.Many2one('container.order.line', string='Container Order Line')
     number_packages =  fields.Integer(string='Total Number of Packages')
     qty_package = fields.Float(string='Quantity / Package')
+    is_related_co = fields.Boolean(compute=_get_move_co_related, string="Related to CO", help="If this checkbox is ticked that means it is related to CO.", store=True) #This checkbox allow user to see if stock move is comes from CO or not. This will be used in compute two function fields on product form.
  
 class stock_pack_operation(models.Model):
     _inherit = 'stock.pack.operation'

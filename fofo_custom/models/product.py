@@ -22,6 +22,7 @@
 from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
 from openerp import api, tools, SUPERUSER_ID
+from openerp.tools.float_utils import float_round
 
 class product_packaging(models.Model):
     _inherit = "product.packaging"
@@ -52,6 +53,17 @@ class product_template(models.Model):
     _inherit = 'product.template'
 
     @api.one
+    @api.depends('product_variant_ids','product_variant_ids.incoming_contained_qty', 'product_variant_ids.incoming_not_contained_qty')
+    def _count_incoming_contained_qty(self):
+        contained_qty = 0.0
+        not_contained_qty = 0.0
+        for product in self.product_variant_ids:
+            contained_qty += product.incoming_contained_qty
+            not_contained_qty += product.incoming_not_contained_qty
+        self.incoming_contained_qty = contained_qty
+        self.incoming_not_contained_qty = not_contained_qty
+
+    @api.one
     @api.depends('product_variant_ids','product_variant_ids.landed_cost')
     def _get_landed_cost(self):
         cost_sum = 0.0
@@ -74,6 +86,8 @@ class product_template(models.Model):
     landed_cost_all = fields.Float(compute=_get_landed_cost, string='Landed Cost')
     total_cost_call = fields.Float(compute=_total_cost_call, string='Total Cost')
     shipping_ok = fields.Boolean('Shipping Product', help="Specify if the product can be selected in a container order as shipping product.")
+    incoming_contained_qty = fields.Float(compute='_count_incoming_contained_qty', string='Incoming (Contained)', copy=False, digits=dp.get_precision('Product Unit of Measure'), readonly=True, store=True, help='This will show the total draft picking-in with Container Orders.')
+    incoming_not_contained_qty = fields.Float(compute='_count_incoming_contained_qty', string='Incoming (Not-Contained)', copy=False, digits=dp.get_precision('Product Unit of Measure'), readonly=True, store=True, help='This will show the total draft picking-in without Container Orders.')
 
 class product_product(models.Model):
     _inherit = 'product.product'
@@ -104,6 +118,34 @@ class product_product(models.Model):
     def _compute_total_cost(self):
         self.total_standard_landed = self.standard_price + self.landed_cost #we can directly use standard_price.
 
+    @api.one
+    @api.depends('description', 'purchase_line_ids', 'purchase_line_ids.state', 'purchase_line_ids.product_id', 'purchase_line_ids.remain_contain_qty', 'container_line_ids', 'container_line_ids.state', 'container_line_ids.product_qty')
+    def _count_incoming_contained_qty(self):
+        ctx = dict(self._context or {})
+        domain_products = [('product_id', 'in', self.ids)]
+        domain_quant, domain_move_in, domain_move_out = [], [], []
+        domain_move_in_contain = []
+        domain_quant_loc, domain_move_in_loc, domain_move_out_loc = self.with_context(ctx)._get_domain_locations()
+        domain_move_in += self.with_context(ctx)._get_domain_dates() + [('state', 'not in', ('done', 'cancel', 'draft')), ('is_related_co', '=', False)] + domain_products
+        domain_move_in_contain += self.with_context(ctx)._get_domain_dates() + [('state', 'not in', ('done', 'cancel', 'draft')), ('is_related_co', '=', True)] + domain_products
+
+        if self._context.get('owner_id'):
+            owner_domain = ('restrict_partner_id', '=', self._context['owner_id'])
+            domain_move_in.append(owner_domain)
+            domain_move_in_contain.append(owner_domain)
+
+        domain_move_in += domain_move_in_loc
+        domain_move_in_contain += domain_move_in_loc
+        moves_in = self.env['stock.move'].read_group(domain_move_in, ['product_id', 'product_qty'], ['product_id'])
+        moves_in_contain = self.env['stock.move'].read_group(domain_move_in_contain, ['product_id', 'product_qty'], ['product_id'])
+
+        moves_in = dict(map(lambda x: (x['product_id'][0], x['product_qty']), moves_in))
+        moves_in_contain = dict(map(lambda x: (x['product_id'][0], x['product_qty']), moves_in_contain))
+        res = {}
+        for product in self:
+            id = product.id
+            self.incoming_contained_qty = float_round(moves_in_contain.get(id, 0.0), precision_rounding=product.uom_id.rounding)
+            self.incoming_not_contained_qty = float_round(moves_in.get(id, 0.0), precision_rounding=product.uom_id.rounding)
 #Columns
     qty_contained = fields.Float(compute=_count_qty_contained, string='Contained Quantity', copy=False, digits=dp.get_precision('Product Unit of Measure'), readonly=True, store=True, help='This will show the total contained qty of draft container orders.') # Show total qty in purchase order lines from container order which are draft container order (not confirmed yet.).
     virtual_qty_contained = fields.Float(compute=_count_qty_contained, string='Forcasted Quantity  (Contained)',help='Forcasted Quantity + Contained Quantity.', copy=False, digits=dp.get_precision('Product Unit of Measure'), readonly=True, store=True) 
@@ -115,6 +157,10 @@ class product_product(models.Model):
     landed_cost = fields.Float('Landed Cost')
     total_standard_landed = fields.Float(compute=_compute_total_cost, string='Total Cost', help='Standard Cost + Landed Cost')
     sale_line_ids = fields.One2many('sale.order.line', 'product_id', 'Sales History')
+    incoming_contained_qty = fields.Float(compute='_count_incoming_contained_qty', string='Incoming (Contained)', copy=False, digits=dp.get_precision('Product Unit of Measure'), readonly=True, store=True, help='This will show the total draft picking-in with Container Orders.')
+    incoming_not_contained_qty = fields.Float(compute='_count_incoming_contained_qty', string='Incoming (Not-Contained)', copy=False, digits=dp.get_precision('Product Unit of Measure'), readonly=True, store=True, help='This will show the total draft picking-in without Container Orders.')
+
+
 
 class product_ul(models.Model):
     _inherit = 'product.ul'
