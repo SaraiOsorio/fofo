@@ -87,7 +87,7 @@ class account_voucher(models.Model):
 #Columns----------END
 
 #-------------------------START---------------Logic for creating deduction lines journal entry ----
-    @api.model
+    @api.multi
     def writeoff_move_line_get(self, line_total, move_id, name, company_currency, current_currency):
         move_line = {}
         voucher_brw = self
