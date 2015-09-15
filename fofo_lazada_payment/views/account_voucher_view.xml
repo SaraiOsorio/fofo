@@ -1,48 +1,32 @@
 <?xml version="1.0"?>
+
 <openerp>
     <data>
 
-        <record model="ir.ui.view" id="account_voucher_deduction.view_vendor_receipt_form_voucher_payment">
+        <record model="ir.ui.view" id="view_vendor_receipt_form_voucher_payment_order_lazada">
             <field name="name">account.voucher.voucher.customer.payment.form</field>
             <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher_deduction.view_vendor_receipt_form_voucher_payment"></field>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='journal_id']" position="after">
-                    <field name="reconcile_payment"/>
+                <xpath expr="//field[@name='reconcile_payment']" position="after">
                     <field name="is_lazada_payment"/>
                 </xpath>
-                <xpath expr="//field[@name='line_dr_ids']" position="after">
-                        <separator string="Reconcile Payment Lines" attrs="{'invisible': [('reconcile_payment', '=', False)]}"/>
-                        <field name="multiple_reconcile_ids"  attrs="{'invisible': [('reconcile_payment', '=', False)]}">
-                            <tree string="Reconcile Lines" editable="top">
-                                <field name="account_id" domain="[('type','not in',['view', 'closed'])]" select="1" />
-                                <field name="amount" sum="Total Amount" select="1" />
-                                <field name="comment" />
-                                <field name="analytic_id" groups="analytic.group_analytic_accounting"/>
-                                <field name="order_no"  readonly="True"/>
-                            </tree>
-                        </field>
+                <xpath expr="//field[@name='multiple_reconcile_ids']/tree/field[@name='analytic_id']" position="after">
+                        <field name="order_no"  readonly="True"/>
                 </xpath>
             </field>
          </record>
-        <record model="ir.ui.view" id="account_voucher_deduction.view_vendor_supplier_form_voucher_payment">
+
+        <record model="ir.ui.view" id="view_vendor_supplier_form_voucher_payment_lazada_order">
             <field name="name">account.voucher.voucher.supplier.payment.form</field>
             <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher_deduction.view_vendor_supplier_form_voucher_payment"></field>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='journal_id']" position="after">
-                    <field name="reconcile_payment"/>
+                <xpath expr="//field[@name='reconcile_payment']" position="after">
                     <field name="is_lazada_payment"/>
                 </xpath>
-                <xpath expr="//field[@name='line_dr_ids']" position="after">
-                        <separator string="Reconcile Payment Lines" attrs="{'invisible': [('reconcile_payment', '=', False)]}"/>
-                        <field name="multiple_reconcile_ids"  attrs="{'invisible': [('reconcile_payment', '=', False)]}">
-                            <tree string="Reconcile Lines" editable="top">
-                                <field name="account_id" domain="[('type','not in',['view', 'closed'])]" select="1" />
-                                <field name="amount" sum="Total Amount"  select="1" />
-                                <field name="comment" />
-                                <field name="analytic_id" groups="analytic.group_analytic_accounting"/>
-                                <field name="order_no" readonly="True"/>
-                            </tree>
-                        </field>
+                <xpath expr="//field[@name='multiple_reconcile_ids']/tree/field[@name='analytic_id']" position="after">
+                        <field name="order_no"  readonly="True"/>
                 </xpath>
             </field>
         </record>
