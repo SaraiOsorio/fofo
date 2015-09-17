@@ -172,7 +172,11 @@
                             <page string="Pickings">
                                 <field name="picking_ids"/>
                             </page>
-                            <page string="Invoices">
+                            <page string="Accounting Information">
+                                <group>
+                                <field name="landed_cost_move_id"/>
+                                </group>
+                                <separator string="Related Invoices" />
                                 <field name="invoice_ids"  >
                                     <tree colors="blue:state == 'draft';black:state in ('proforma','proforma2','open');gray:state == 'cancel'" string="Invoice">
                                         <field name="partner_id" string="Supplier" groups="base.group_user"/>

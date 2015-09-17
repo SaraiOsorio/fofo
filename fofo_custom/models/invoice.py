@@ -33,20 +33,20 @@ class account_invoice(models.Model):
     
     container_id = fields.Many2one('container.order', string="Related Container Order")
     is_shipper_invoice = fields.Boolean('Shipper Invoice', help='If this check box is ticked that will indicate the invoice is related to shipper.')
-    allocate_land_cost = fields.Boolean('Allocate Landed Cost', help='If this check box is ticked that will indicate the landed cost will go to product and journal entry will be raised for landed cost.', readonly=True, states={'draft': [('readonly', False)]})
-    landed_cost_journal_id = fields.Many2one('account.journal', string='Landed Cost Journal',
-        required=False, readonly=True, states={'draft': [('readonly', False)]})
-    stock_valuation_landcost_account = fields.Many2one('account.account', string='Stock Valuation Account',#TODO remove.
-        required=False, domain=[('type', 'not in', ['view', 'closed'])],
-        help="The stock valuation account for landed cost entry.", readonly=True, states={'draft': [('readonly', False)]})#TODO remove.
-    expense_landcost_account = fields.Many2one('account.account', string='Expense Account',
-        required=False, domain=[('type', 'not in', ['view', 'closed'])],
-        help="The expense account for landed cost entry.", readonly=True, states={'draft': [('readonly', False)]}) #TODO remove.
-    move_landed_cost_id = fields.Many2one('account.move', string='Journal Entry - Landed Cost',
-        readonly=True, index=True, ondelete='restrict', copy=False,
-        help="Link to the automatically generated Journal Items for landed cost.")
+    #allocate_land_cost = fields.Boolean('Allocate Landed Cost', help='If this check box is ticked that will indicate the landed cost will go to product and journal entry will be raised for landed cost.', readonly=True, states={'draft': [('readonly', False)]})
+    #landed_cost_journal_id = fields.Many2one('account.journal', string='Landed Cost Journal',
+    #    required=False, readonly=True, states={'draft': [('readonly', False)]})
+    #stock_valuation_landcost_account = fields.Many2one('account.account', string='Stock Valuation Account',#TODO remove.
+    #    required=False, domain=[('type', 'not in', ['view', 'closed'])],
+    #    help="The stock valuation account for landed cost entry.", readonly=True, states={'draft': [('readonly', False)]})#TODO remove.
+    #expense_landcost_account = fields.Many2one('account.account', string='Expense Account',
+    #    required=False, domain=[('type', 'not in', ['view', 'closed'])],
+    #    help="The expense account for landed cost entry.", readonly=True, states={'draft': [('readonly', False)]}) #TODO remove.
+    #move_landed_cost_id = fields.Many2one('account.move', string='Journal Entry - Landed Cost',
+    #    readonly=True, index=True, ondelete='restrict', copy=False,
+    #    help="Link to the automatically generated Journal Items for landed cost.")
 
-
+    #TODO Remove below method since its unused becuase we are creating landed cost journal entry not from here.
     @api.one
     def create_move_landed_cost(self, landed_cost_journal, stock_valuation_landcost_account, expense_landcost_account):
         #Note: Actually, I think we don't need these fields at all (but it is fine to have it invisibly but must auto default, so what??), because,
@@ -123,38 +123,17 @@ class account_invoice(models.Model):
     def action_move_create(self):
         res = super(account_invoice, self).action_move_create()
         for inv in self:
-            if inv.container_id:
-                #Create journal entry for landed cost. Issue: 3190 - 6 Sep 2015
-                if inv.allocate_land_cost:
-                    if not inv.landed_cost_journal_id:
-                        raise Warning(('Error!'), _('Please define landed cost journal to create landed cost journal entry.'))
-                    if not inv.landed_cost_journal_id.default_debit_account_id:
-                        raise Warning(('Error!'), _('Please define debit account on landed cost journal to create landed cost journal entry.'))
-                    inv.create_move_landed_cost(inv.landed_cost_journal_id, inv.stock_valuation_landcost_account, inv.expense_landcost_account)
-
-                    #Write landed cost on product form:
-            '''                if inv.allocate_land_cost:
-                    if inv.container_id.total_volume > 0:
-                        ship_cost_by_volume = inv.amount_total / inv.container_id.total_volume #do computation here same like function field on shiping_cost_by_volumne on CO object.
-                    else:
-                        ship_cost_by_volume = inv.amount_total #TODO check.. is this correct is container has no volume then we consider to skip that.? 
-                    for co_line in inv.container_id.co_line_ids:
-                        #Update landed cost on product form by volume. Ref: issues/3188 Date: 6 Sep 2015 => Here are we making average landed cost each time so we divide by two.
-                        if co_line.product_id.landed_cost > 0.0:
-                            #landed_cost = co_line.product_id.landed_cost + ((co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty) / 2
-                            landed_cost = (co_line.product_id.landed_cost + ((ship_cost_by_volume * co_line.volume) / co_line.product_qty)) / 2
-                        else:# First time update on product form.
-                            if co_line.product_qty > 0.0:
-                                #landed_cost = (co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty
-                                landed_cost = (ship_cost_by_volume * co_line.volume) / co_line.product_qty
-                        co_line.product_id.write({'landed_cost': landed_cost}) '''
-
-                # set CO to done if all ivnoices are validated.
+            #set CO to done if all ivnoices are validated and picking transffered.
             flag = True
             for i in inv.container_id.invoice_ids:
-                if i.id != inv.id and i.state == 'draft':
+                if i.id != inv.id and i.state == 'draft' and i.is_shipper_invoice:
                     flag = False
-            if flag and inv.container_id.invoice_shipper:
-                inv.container_id.action_done()
+            if flag and inv.container_id.invoice_shipper: #If "invoice_shipper" checkbox is ticked that means shipper invoices have been generated for container order.
+                check_picking_done = True
+                for picking in inv.container_id.picking_ids:
+                    if picking.state != 'done' and picking.state != 'cancel':
+                        check_picking_done = False
+                if check_picking_done: #container order should only be done when all shipper invoices are validated and pickings are transfferd/done.
+                    inv.container_id.action_done()
         return res
 

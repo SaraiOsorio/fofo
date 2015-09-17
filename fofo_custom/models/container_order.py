@@ -105,8 +105,9 @@ class container_order_line(models.Model):
         cur_obj=self.env['res.currency']
         tax_obj = self.env['account.tax']
         for line in self:
-            taxes = line.taxes_id.compute_all(line.price_unit, line.product_qty, line.product_id, line.order_id.partner_id)
-            cur = line.order_id.pricelist_id.currency_id
+            current_currency = line.container_order_id.currency_id
+            taxes = line.taxes_id.compute_all(line.price_unit , line.product_qty, line.product_id, line.order_id.partner_id)
+            cur = current_currency #line.order_id.pricelist_id.currency_id
             self.price_subtotal = cur.round(taxes['total'])
 
     @api.one
@@ -149,11 +150,19 @@ class container_order_line(models.Model):
     def on_change_po_line(self):
         if self.po_line_id:
             line_data = self.env['purchase.order.line'].browse(self.po_line_id.id)
+            po_currency = self.order_id.currency_id
+            current_currency = self.container_order_id.currency_id
+            ctx = dict(self._context or {})
+            ctx.update({'date': self.container_order_id.date}) 
+            amount = line_data.price_unit
+            if po_currency:
+                amount = po_currency.compute(line_data.price_unit, current_currency)
+
             self.product_id = line_data.product_id.id
             self.product_qty = line_data.remain_contain_qty
             self.total_purchase_qty = line_data.product_qty
             self.product_uom= line_data.product_uom
-            self.price_unit = line_data.price_unit
+            self.price_unit = amount
             self.date_planned = line_data.date_planned
             self.name = line_data.name
             self.product_packaging = line_data.product_packaging.id
@@ -290,13 +299,19 @@ class container_order(models.Model):
     @api.depends('invoice_ids','invoice_ids.state', 'invoice_count', 'state')
     def _total_shipping_cost(self):
         #Note: Landed Cost = sum of all related Shipper Supplier Invoices in one Container Order and average to product in such container Order by Volume
-        self.total_shipping_cost = 0.0
         for line in self:
             for l in line.invoice_ids:
-                if l.is_shipper_invoice or l.allocate_land_cost:
-                    self.total_shipping_cost += l.amount_total
-            if self.total_volume > 0.0:
-                self.shipping_cost_by_volume = float(self.total_shipping_cost) / self.total_volume
+                if l.is_shipper_invoice:
+                    inv_currency = l.currency_id
+                    current_currency = line.company_id.currency_id
+                    ctx = dict(line._context or {})
+                    ctx.update({'date': self.date}) 
+                    amount = l.amount_total
+                    if inv_currency:
+                        amount = inv_currency.compute(l.amount_total, current_currency)
+                    line.total_shipping_cost += amount
+            if line.total_volume > 0.0:
+                line.shipping_cost_by_volume = float(line.total_shipping_cost) / line.total_volume
 
     _track = {
         'state': {
@@ -352,12 +367,13 @@ class container_order(models.Model):
     invoice_count = fields.Integer(compute=_count_all, string='Shipper Invoices', copy=False)
     total_weight =  fields.Float(compute=_total_weight_volume, string='Total Weight', store=True, digits=dp.get_precision('Stock Weight'))
     total_volume =  fields.Float(compute=_total_weight_volume, string='Total Volume', store=True, digits=dp.get_precision('Product Volume'))
-    total_shipping_cost =  fields.Float(compute=_total_shipping_cost, string='Total Shipping Cost', store=True, help="Total cost of inbound and outbound shippers invoices.")
-    shipping_cost_by_volume =  fields.Float(compute=_total_shipping_cost, string='Shipping Cost / Volume', store=True, help="Shipping / Landed cost by Volume.")
+    total_shipping_cost =  fields.Float(compute=_total_shipping_cost, string='Total Shipping Cost', store=True, help="Total cost of inbound and outbound shippers invoices. This will show cost in company currency(THB).")
+    shipping_cost_by_volume =  fields.Float(compute=_total_shipping_cost, string='Shipping Cost / Volume', store=True, help="Shipping / Landed cost by Volume. This will show cost in company currency(THB).")
     co_line_ids = fields.One2many('container.order.line','container_order_id', string='Container Order Lines' )
     inbound_pricelist_id = fields.Many2one('product.pricelist', string='Inbound Pricelist', required=False)
     outbound_pricelist_id = fields.Many2one('product.pricelist', string='Outbound Pricelist', required=False)
     invoice_shipper = fields.Boolean('Shippers Invoice Created', help='If this checkbox is ticked that means shipper invoices have been generated for container order.', readonly=True)
+    landed_cost_move_id = fields.Many2one('account.move', string="Landed Cost Journal", readonly=True)
 
     @api.onchange('inbound_shipper_id')
     def on_change_inbound_shipper_id(self):
@@ -473,7 +489,7 @@ class container_order(models.Model):
         }
 
     @api.multi#create in/out shipper invoices.
-    def _prepare_invoice(self, order, partner_id, line_ids, type='Inbound Supplier Invoice'):
+    def _prepare_invoice(self, order, partner_id, line_ids, type='Inbound Supplier Invoice', currency_id=None):
         journal_ids = self.env['account.journal'].search(
                             [('type', '=', 'purchase'),
                                       ('company_id', '=', order.company_id.id)],
@@ -481,13 +497,14 @@ class container_order(models.Model):
         if not journal_ids:
             raise Warning( _('Define purchase journal for this company: "%s" (id:%d).') % \
                     (order.company_id.name, order.company_id.id))
+        number = order.number or ''
         return {
-            'name': order.number,
-            'reference': type + ' - ' + order.number,
+            'name': number,
+            'reference': type + ' - ' + number,
             'account_id': partner_id.property_account_payable.id,
             'type': 'in_invoice',
             'partner_id': partner_id.id,
-            'currency_id': order.currency_id.id,
+            'currency_id': currency_id,
             'journal_id': len(journal_ids) and journal_ids.id or False,
             'invoice_line': [(6, 0, line_ids)],
             'origin': order.number,
@@ -495,7 +512,7 @@ class container_order(models.Model):
             'payment_term': partner_id.property_supplier_payment_term.id or False,
             'company_id': order.company_id.id,
             'is_shipper_invoice': True,
-            'allocate_land_cost': True,
+            #'allocate_land_cost': True,TODO remove.
         }
 
     @api.multi
@@ -521,7 +538,7 @@ class container_order(models.Model):
             inv_line_id = inv_line_obj.create(inv_line_data)
             inv_lines.append(inv_line_id.id)
             # get invoice data and create invoice
-            inv_data = self._prepare_invoice(order, order.inbound_shipper_id, inv_lines)
+            inv_data = self._prepare_invoice(order, order.inbound_shipper_id, inv_lines, type='Inbound Supplier Invoice', currency_id=order.inbound_pricelist_id.currency_id.id)
             inv_id = inv_obj.create(inv_data)
             # compute the invoice
             inv_id.button_compute(set_total=True)
@@ -535,7 +552,7 @@ class container_order(models.Model):
             inv_line_id = inv_line_obj.create(inv_line_data)
             inv_lines.append(inv_line_id.id)
             # get invoice data and create invoice
-            inv_data = self._prepare_invoice(order, order.outbound_shipper_id, inv_lines,type='Outbound Supplier Invoice')
+            inv_data = self._prepare_invoice(order, order.outbound_shipper_id, inv_lines, type='Outbound Supplier Invoice', currency_id=order.outbound_pricelist_id.currency_id.id)
             inv_id = inv_obj.create(inv_data)
             # compute the invoice
             inv_id.button_compute(set_total=True)
@@ -721,10 +738,29 @@ class container_order(models.Model):
 
     @api.multi
     def action_done(self):
+        period_obj = self.env['account.period']
+        move_obj = self.env['account.move']
+        move_line_obj = self.env['account.move.line']
+        currency_obj = self.env['res.currency']
         purchase_obj = self.env['purchase.order']
+        journal_obj = self.env['account.journal']
         order_dict = {}
         for container in self:
             container.write({'state': 'done'})
+            move_name = container.number
+            reference = container.number
+            period_ids = period_obj.find(time.strftime('%Y-%m-%d'))
+            journal_ids = journal_obj.search([('land_cost_journal', '=', True)])
+            move_vals = {
+                'name': '/',
+                'date': time.strftime('%Y-%m-%d'),
+                'ref': reference,
+                'period_id': period_ids and period_ids.id or False,
+                'journal_id': journal_ids and journal_ids.id or False,
+            }
+            move_id = move_obj.create(move_vals)
+            container.landed_cost_move_id = move_id.id
+
             for co_line in container.co_line_ids:
                 purchase_line = co_line.po_line_id 
                 co_line.state = 'done' #make container order line state to done.
@@ -739,8 +775,38 @@ class container_order(models.Model):
                 else:# First time update.
                     if co_line.product_qty > 0.0:
                         landed_cost = (co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty #Formula => Landed Cost = (Shipping Cost/Volume x Volume) / Contained Quantity
-                co_line.product_id.write({'landed_cost': landed_cost})
 
+                #CREATE ACCOUNTING ENTRY FOR LANDED COST JOURNAL - DEBIT SIDE FOR ALL PRODUCTS IN CO LINES.
+                debit_account = False
+                if co_line.product_id:
+                    if not co_line.product_id.categ_id.property_stock_valuation_account_id:
+                        raise Warning (_('Configuration Error!'), ('Please defind stock valuation/inventory account on product category form.'))
+                    debit_account = co_line.product_id.categ_id.property_stock_valuation_account_id.id
+                company_currency = container.company_id.currency_id
+                current_currency = container.currency_id
+                ctx = dict(container._context or {})
+                ctx.update({'date': time.strftime('%Y-%m-%d')})
+                landed_cost_product = container.shipping_cost_by_volume * co_line.volume
+                amount = landed_cost_product #current_currency.compute(landed_cost_product, company_currency)
+                if True:
+                    sign = 1 #TODO check
+                move_line_obj.create({
+                    'name': co_line.product_id.name,
+                    'ref': reference,
+                    'move_id': move_id.id,
+                    'account_id': debit_account or False,
+                    'credit': 0.0,
+                    'debit': amount,
+                    'period_id': period_ids and period_ids.id or False,
+                    'journal_id': journal_ids and journal_ids.id or False,
+                    #'partner_id': partner_id,
+                    #'currency_id': company_currency.id <> current_currency.id and  current_currency.id or False,
+                    #'amount_currency': company_currency.id <> current_currency.id and sign * landed_cost_product or 0.0,
+                    #'analytic_account_id': ?,
+                    'date': time.strftime('%Y-%m-%d'),
+                })
+
+                co_line.product_id.write({'landed_cost': landed_cost})
                 order_dict[purchase_line.order_id.id] = False
                 line_count_done = 0
                 line_count_all = 0
@@ -757,6 +823,58 @@ class container_order(models.Model):
                     order_dict[purchase_line.order_id.id] = True
                 else: 
                     order_dict[purchase_line.order_id.id] = False
+#------------#CREATE ACCOUNTING ENTRY FOR LANDED COST JOURNAL - CREDIT SIDE FOR ALL SHIPPER INVOICE ON CO.
+            company_currency = container.company_id.currency_id
+            current_currency = container.outbound_pricelist_id.currency_id
+            ctx = dict(container._context or {})
+            ctx.update({'date': time.strftime('%Y-%m-%d')})
+            amount_outbound = current_currency.compute(container.outbound_shipper_cost, company_currency)
+            if True:
+                sign = 1 #TODO check
+            credit_account_outbound = container.outbound_shipper_expense_id and container.outbound_shipper_expense_id.property_account_expense and container.outbound_shipper_expense_id.property_account_expense.id or False
+            if not credit_account_outbound:
+                credit_account_outbound = container.outbound_shipper_expense_id and container.outbound_shipper_expense_id.categ_id.property_account_expense_categ and container.outbound_shipper_expense_id.categ_id.property_account_expense_categ.id or False
+            move_line_obj.create({
+                'name': container.outbound_shipper_expense_id.name,
+                'ref': reference,
+                'move_id': move_id.id,
+                'account_id': credit_account_outbound or False,
+                'credit': amount_outbound,
+                'debit': 0.0,
+                'period_id': period_ids and period_ids.id or False,
+                'journal_id': journal_ids and journal_ids.id or False,
+                #'partner_id': partner_id,
+                #'currency_id': company_currency.id <> current_currency.id and  current_currency.id or False,
+                #'amount_currency': company_currency.id <> current_currency.id and -1 * container.outbound_shipper_cost or 0.0,
+                #'analytic_account_id': ?,
+                'date': time.strftime('%Y-%m-%d'),
+            })
+
+            current_currency = container.inbound_pricelist_id.currency_id
+            amount_inbound = current_currency.compute(container.inbound_shipper_cost, company_currency)
+            if True:
+                sign = 1 #TODO check
+            credit_account_inbound = container.inbound_shipper_expense_id and container.inbound_shipper_expense_id.property_account_expense and container.inbound_shipper_expense_id.property_account_expense.id or False
+            if not credit_account_inbound:
+                credit_account_inbound = container.inbound_shipper_expense_id and container.inbound_shipper_expense_id.categ_id.property_account_expense_categ and container.inbound_shipper_expense_id.categ_id.property_account_expense_categ.id or False
+
+            move_line_obj.create({
+                'name': container.inbound_shipper_expense_id.name,
+                'ref': reference,
+                'move_id': move_id.id,
+                'account_id': credit_account_inbound or False,
+                'credit': amount_inbound,
+                'debit': 0.0,
+                'period_id': period_ids and period_ids.id or False,
+                'journal_id': journal_ids and journal_ids.id or False,
+                #'partner_id': partner_id,
+                #'currency_id': company_currency.id <> current_currency.id and  current_currency.id or False,
+                #'amount_currency': company_currency.id <> current_currency.id and sign * container.inbound_shipper_cost or 0.0,
+                #'analytic_account_id': ?,
+                'date': time.strftime('%Y-%m-%d'),
+            })
+        
+        #MAKE PO DONE IF ALL PO LINES ARE CONTAINED AND DONE.
         for order in order_dict:
             if order_dict[order]:
                 # Make related all purchase orders to done.
