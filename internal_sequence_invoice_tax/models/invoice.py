@@ -18,6 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from lxml import etree
 
 from openerp import fields, models, api, _
 from openerp.exceptions import except_orm, Warning, RedirectWarning
@@ -27,6 +28,18 @@ class account_invoice(models.Model):
     
     is_tax_invoice_number = fields.Boolean('Run Tax Invoice Number', help='If this checkbox is ticked system will generate tax invoice number along with normal sequence number of invoice document.', defatul=False, readonly=True, states={'draft': [('readonly', False)]})
     tax_invoice_number = fields.Char('Tax Invoice Number', readonly=True, states={'draft': [('readonly', False)]}, copy=False)
+
+    @api.model
+    def fields_view_get(self, view_id=None, view_type=False, toolbar=False, submenu=False):
+        res = super(account_invoice, self).fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)
+        if view_type == 'tree':
+            context = self._context
+            doc = etree.XML(res['arch'])
+            if not context.get('type') in ('out_invoice', 'out_refund'):
+                for node in doc.xpath("//field[@name='tax_invoice_number']"):
+                    doc.remove(node)
+            res['arch'] = etree.tostring(doc)
+        return res
         
     @api.multi
     def action_number(self):
