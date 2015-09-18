@@ -294,16 +294,26 @@ class container_order(models.Model):
             for l in line.co_line_ids:
                 self.total_weight += l.weight
                 self.total_volume += l.volume
-#    @api.one
-#    @api.constrains('currency_id')
-#    def on_constraint_currency_id(self):
-#        if self.currency_id and self.co_line_ids:
-#            raise Warning( _('The amount will not be converted. If want to change currency, please delete and re-select PO Line.'))
 
-    @api.onchange('currency_id')
-    def on_change_currency_id(self):
-        if self.currency_id and self.co_line_ids:
-            raise Warning( _('The amount will not be converted. If want to change currency, please delete and re-select PO Line.'))
+    @api.multi
+    def onchange_currency(self, currency_id=False, co_line_ids=[]):
+        print currency_id,co_line_ids
+        if not co_line_ids:
+            return {}
+        if not currency_id:
+            return {}
+        co_line_exists = False
+        for line in co_line_ids:
+            if line and len(line) > 0 and line[2]:
+                co_line_exists = True
+        if currency_id and self.currency_id:
+            if self.currency_id.id != currency_id and co_line_exists:
+                warning = {
+                'title': _('Warning!'),
+                'message' : _('The amount will not be converted. If want to change currency, please delete and re-select PO Line.')
+        }
+                return {'value': {'currency_id': self.currency_id.id}, 'warning': warning}
+        return {}
 
     @api.one
     @api.depends('invoice_ids','invoice_ids.state', 'invoice_count', 'state')
