@@ -297,7 +297,6 @@ class container_order(models.Model):
 
     @api.multi
     def onchange_currency(self, currency_id=False, co_line_ids=[]):
-        print currency_id,co_line_ids
         if not co_line_ids:
             return {}
         if not currency_id:
