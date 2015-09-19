@@ -169,6 +169,8 @@ class lazada_import(models.TransientModel):
             product_data_dict = {}
             sequene_counter = 0
             history_sequence = ''
+            if len(lines.sheet_names()) > 1:
+                raise Warning(_('Import Error!'),_('Please check your xlsx file, it seems it contains more than one sheet.'))
             for sheet_name in lines.sheet_names(): 
                 sheet = lines.sheet_by_name(sheet_name) 
                 rows = sheet.nrows
