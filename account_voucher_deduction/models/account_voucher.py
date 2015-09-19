@@ -134,7 +134,7 @@ class account_voucher(models.Model):
                         move_line = {
                             'name': line.comment or name,
                             'account_id': line.account_id.id,
-                            'move_id': move_id.id,
+                            'move_id': move_id,
                             'partner_id': voucher_brw.partner_id.id,
                             'date': voucher_brw.date,
                             'credit': abs(credit),  # abs(credit[0]),
@@ -150,7 +150,7 @@ class account_voucher(models.Model):
                 move_line = {
                     'name': write_off_name or name,
                     'account_id': account_id,
-                    'move_id': move_id.id,
+                    'move_id': move_id,
                     'partner_id': voucher_brw.partner_id.id,
                     'date': voucher_brw.date,
                     'credit': diff > 0 and diff or 0.0,
@@ -205,7 +205,7 @@ class account_voucher(models.Model):
                         'period_id': line.voucher_id.period_id.id,
                         'name': _('Gain/Loss Entry Created') + ': ' + (line.name or '/'),
                         'account_id': voucher_brw.writeoff_acc_id.id,
-                        'move_id': move_id.id,
+                        'move_id': move_id,
                         'partner_id': line.voucher_id.partner_id.id,
                         'analytic_account_id': voucher_brw.analytic_id and voucher_brw.analytic_id.id or False,
                         'quantity': 1,
@@ -252,7 +252,7 @@ class account_voucher(models.Model):
             # Create one move line per voucher line where amount is not 0.0
             line_total, rec_list_ids = self.voucher_move_line_create(voucher.id, line_total, move_id.id, company_currency, current_currency)
             # Create the writeoff line if needed
-            ml_writeoff = voucher.writeoff_move_line_get(line_total, move_id, name, company_currency, current_currency)
+            ml_writeoff = voucher.writeoff_move_line_get(line_total, move_id.id, name, company_currency, current_currency)
             c = 0.0
             d = 0.0
             if voucher.reconcile_payment:
