@@ -30,9 +30,19 @@ class account_journal(models.Model):
 
 class account_invoice(models.Model):
     _inherit = 'account.invoice'
+
+    @api.multi
+    def action_cancel(self):
+        for invoice in self:
+            if invoice.container_id and invoice.is_shipper_invoice and invoice.container_id.state == 'done' and invoice.container_id.landed_cost_move_id:
+                raise Warning (_('Error!'), ('You can not cancel invoice if container order is done or landed cost journal is created.'))
+        return super(account_invoice, self).action_cancel()
     
     container_id = fields.Many2one('container.order', string="Related Container Order")
     is_shipper_invoice = fields.Boolean('Shipper Invoice', help='If this check box is ticked that will indicate the invoice is related to shipper.')
+    is_inbound_invoice = fields.Boolean('Inbound Shipper Invoice', readonly=True)
+    is_outbound_invoice = fields.Boolean('Outbound Shipper Invoice', readonly=True)
+    recreate_invoice_id = fields.Many2one('Recreated Invoice', readonly=True)
     #allocate_land_cost = fields.Boolean('Allocate Landed Cost', help='If this check box is ticked that will indicate the landed cost will go to product and journal entry will be raised for landed cost.', readonly=True, states={'draft': [('readonly', False)]})
     #landed_cost_journal_id = fields.Many2one('account.journal', string='Landed Cost Journal',
     #    required=False, readonly=True, states={'draft': [('readonly', False)]})

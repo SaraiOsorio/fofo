@@ -61,8 +61,12 @@
                                 attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"
                                 context="{'send_to_inbound':False}" class="oe_highlight"/> -->
                         <button name="action_invoice_create" string="Create Shipper Invoices" 
-                                type="object"
-                                attrs="{'invisible':['|', ('state','not in',('confirm')), ('invoice_shipper', '=', True)]}"
+                                type="object" context="{'recreate': False}" 
+                                attrs="{'invisible':['|', ('state','not in',('confirm')), ('draft_invoice_shipper', '=', True)]}"
+                                class="oe_highlight"/>
+                        <button name="action_invoice_create" string="Recreate Shipper Invoice" 
+                                type="object" context="{'recreate': True}" 
+                                attrs="{'invisible':['|', ('state','not in', ('confirm')), ('recreate_visible', '=', False)]}"
                                 class="oe_highlight"/>
                         <button name="allocate_land_cost" string="Allocate Landed Cost" 
                                 type="object"
@@ -176,6 +180,8 @@
                                         <field name="is_received" />
                                         <field name="invoice_shipper"/>
                                         <field name="landed_cost_allocated"/>
+                                        <field name="draft_invoice_shipper" invisible="1"/>
+                                        <field name="recreate_visible"  invisible="1" />
                                     </group>
                                 </group>
                             </page>
@@ -233,6 +239,7 @@
                     <field name="arrive_date"/>
                     <field name="amount_total" />
                     <field name="container_shipper_number"/>
+                    <field name="draft_invoice_shipper" invisible="1"/>
                     <field name="company_id" />
                     <field name="resp_user_id"/>
                     <field name="state"/>

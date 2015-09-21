@@ -326,6 +326,7 @@ class container_order(models.Model):
     @api.depends('invoice_ids', 'invoice_ids.state')
     def _get_state_invoice_shipper(self):
         self.invoice_shipper = False
+        self.recreate_visible = False
         count = 0
         count_open = 0
         for invoice in self.invoice_ids:
@@ -333,6 +334,9 @@ class container_order(models.Model):
                 count += 1
             if invoice.is_shipper_invoice and invoice.state in ('open', 'paid'):
                 count_open += 1
+            if invoice.state == 'cancel' and invoice.is_shipper_invoice:
+                if not invoice.recreate_invoice_id:
+                    self.recreate_visible = True
         if count == 0:
             self.invoice_shipper = False
         elif count == count_open or count_open >= 2:
@@ -418,6 +422,8 @@ class container_order(models.Model):
     invoice_shipper = fields.Boolean(compute=_get_state_invoice_shipper, string='Shipper Invoices', help='If this checkbox is ticked that means all shipper invoices have been generated and validated for container order.')
     landed_cost_move_id = fields.Many2one('account.move', string="Landed Cost Journal", readonly=True)
     landed_cost_allocated = fields.Boolean('Landed Cost Allocated', help="This checkbox will automatically checked once landed cost will be allocated for container order.", readonly=True)
+    draft_invoice_shipper = fields.Boolean('Draft Shipper Invoices', readonly=True)
+    recreate_visible = fields.Boolean(compute=_get_state_invoice_shipper, string='Recreate Visible')
 
     @api.onchange('inbound_shipper_id')
     def on_change_inbound_shipper_id(self):
@@ -533,7 +539,7 @@ class container_order(models.Model):
         }
 
     @api.multi#create in/out shipper invoices.
-    def _prepare_invoice(self, order, partner_id, line_ids, type='Inbound Supplier Invoice', currency_id=None):
+    def _prepare_invoice(self, order, partner_id, line_ids, type='Inbound Supplier Invoice', currency_id=None, type_bound='inbound'):
         journal_ids = self.env['account.journal'].search(
                             [('type', '=', 'purchase'),
                                       ('company_id', '=', order.company_id.id)],
@@ -542,6 +548,12 @@ class container_order(models.Model):
             raise Warning( _('Define purchase journal for this company: "%s" (id:%d).') % \
                     (order.company_id.name, order.company_id.id))
         number = order.number or ''
+        inbound = False
+        outbound = False
+        if type_bound == 'inbound':
+            inbound = True
+        else:
+            outbound = True
         return {
             'name': number,
             'reference': type + ' - ' + number,
@@ -556,6 +568,8 @@ class container_order(models.Model):
             'payment_term': partner_id.property_supplier_payment_term.id or False,
             'company_id': order.company_id.id,
             'is_shipper_invoice': True,
+            'is_inbound_invoice': inbound,
+            'is_outbound_invoice': outbound,
             #'allocate_land_cost': True,TODO remove.
         }
 
@@ -565,7 +579,7 @@ class container_order(models.Model):
         inv_line_obj = self.env['account.invoice.line']
         res = False
         uid_company_id = self.env.user.company_id.id
-
+        recreate = self._context.get('recreate', False)
         for order in self:
             if not order.co_line_ids:
                     raise Warning( _('You cannot create shipper invoice without any container order line.'))
@@ -574,36 +588,67 @@ class container_order(models.Model):
             if not order.inbound_shipper_expense_id or not order.outbound_shipper_expense_id:
                 raise Warning( _('Please define Inbound Shipper Expense and Outbound Shipper Expense.'))
             res = []
+            if recreate:
+                for invoice in order.invoice_ids:
+                    if invoice.state == 'cancel' and invoice.is_shipper_invoice and not invoice.recreate_invoice_id:
+                        if invoice.is_inbound_invoice:
+                            # For inbound shipper invoice.
+                            inv_lines = []
+                            acc_id = self._choose_account_from_po_line(order.inbound_shipper_expense_id)
+                            inv_line_data = self._prepare_inv_line(order, order.inbound_shipper_expense_id, acc_id, cost_type='inbound')
+                            inv_line_id = inv_line_obj.create(inv_line_data)
+                            inv_lines.append(inv_line_id.id)
+                            # get invoice data and create invoice
+                            inv_data = self._prepare_invoice(order, order.inbound_shipper_id, inv_lines, type='Inbound Supplier Invoice', currency_id=order.inbound_pricelist_id.currency_id.id, type_bound='inbound')
+                            inv_id = inv_obj.create(inv_data)
+                            # compute the invoice
+                            inv_id.button_compute(set_total=True)
+                            order.write({'invoice_ids': [(4, inv_id.id)]})
+                            res.append(inv_id.id)
+                        else:
+                            # For outbound shipper invoice.
+                            inv_lines = []
+                            acc_id = self._choose_account_from_po_line(order.outbound_shipper_expense_id)
+                            inv_line_data = self._prepare_inv_line(order, order.outbound_shipper_expense_id, acc_id, cost_type='outbound')
+                            inv_line_id = inv_line_obj.create(inv_line_data)
+                            inv_lines.append(inv_line_id.id)
+                            # get invoice data and create invoice
+                            inv_data = self._prepare_invoice(order, order.outbound_shipper_id, inv_lines, type='Outbound Supplier Invoice', currency_id=order.outbound_pricelist_id.currency_id.id, type_bound='outbound')
+                            inv_id = inv_obj.create(inv_data)
+                            # compute the invoice
+                            inv_id.button_compute(set_total=True)
+                            order.write({'invoice_ids': [(4, inv_id.id)]})
+                            res.append(inv_id.id)
+                        invoice.recreate_invoice_id = inv_id.id
+            if not recreate:
+                # For inbound shipper invoice.
+                inv_lines = []
+                acc_id = self._choose_account_from_po_line(order.inbound_shipper_expense_id)
+                inv_line_data = self._prepare_inv_line(order, order.inbound_shipper_expense_id, acc_id, cost_type='inbound')
+                inv_line_id = inv_line_obj.create(inv_line_data)
+                inv_lines.append(inv_line_id.id)
+                # get invoice data and create invoice
+                inv_data = self._prepare_invoice(order, order.inbound_shipper_id, inv_lines, type='Inbound Supplier Invoice', currency_id=order.inbound_pricelist_id.currency_id.id, type_bound='inbound')
+                inv_id = inv_obj.create(inv_data)
+                # compute the invoice
+                inv_id.button_compute(set_total=True)
+                order.write({'invoice_ids': [(4, inv_id.id)]})
+                res.append(inv_id.id)
 
-            # For inbound shipper invoice.
-            inv_lines = []
-            acc_id = self._choose_account_from_po_line(order.inbound_shipper_expense_id)
-            inv_line_data = self._prepare_inv_line(order, order.inbound_shipper_expense_id, acc_id, cost_type='inbound')
-            inv_line_id = inv_line_obj.create(inv_line_data)
-            inv_lines.append(inv_line_id.id)
-            # get invoice data and create invoice
-            inv_data = self._prepare_invoice(order, order.inbound_shipper_id, inv_lines, type='Inbound Supplier Invoice', currency_id=order.inbound_pricelist_id.currency_id.id)
-            inv_id = inv_obj.create(inv_data)
-            # compute the invoice
-            inv_id.button_compute(set_total=True)
-            order.write({'invoice_ids': [(4, inv_id.id)]})
-            res.append(inv_id.id)
-
-            # For outbound shipper invoice.
-            inv_lines = []
-            acc_id = self._choose_account_from_po_line(order.outbound_shipper_expense_id)
-            inv_line_data = self._prepare_inv_line(order, order.outbound_shipper_expense_id, acc_id, cost_type='outbound')
-            inv_line_id = inv_line_obj.create(inv_line_data)
-            inv_lines.append(inv_line_id.id)
-            # get invoice data and create invoice
-            inv_data = self._prepare_invoice(order, order.outbound_shipper_id, inv_lines, type='Outbound Supplier Invoice', currency_id=order.outbound_pricelist_id.currency_id.id)
-            inv_id = inv_obj.create(inv_data)
-            # compute the invoice
-            inv_id.button_compute(set_total=True)
-            order.write({'invoice_ids': [(4, inv_id.id)]})
-            res.append(inv_id.id)
-
-            #order.invoice_shipper = True # Checkbox on CO form set to True since shipper invoices are generated here and this checkbox will disable button "Create shipper invoices"
+                # For outbound shipper invoice.
+                inv_lines = []
+                acc_id = self._choose_account_from_po_line(order.outbound_shipper_expense_id)
+                inv_line_data = self._prepare_inv_line(order, order.outbound_shipper_expense_id, acc_id, cost_type='outbound')
+                inv_line_id = inv_line_obj.create(inv_line_data)
+                inv_lines.append(inv_line_id.id)
+                # get invoice data and create invoice
+                inv_data = self._prepare_invoice(order, order.outbound_shipper_id, inv_lines, type='Outbound Supplier Invoice', currency_id=order.outbound_pricelist_id.currency_id.id, type_bound='outbound')
+                inv_id = inv_obj.create(inv_data)
+                # compute the invoice
+                inv_id.button_compute(set_total=True)
+                order.write({'invoice_ids': [(4, inv_id.id)]})
+                res.append(inv_id.id)
+                order.draft_invoice_shipper = True 
         return res
     
     @api.multi #Email template to send.
