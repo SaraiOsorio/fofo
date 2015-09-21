@@ -574,6 +574,11 @@ class container_order(models.Model):
         }
 
     @api.multi
+    def action_force_done(self):
+        self.state = 'done'
+        return True
+
+    @api.multi
     def action_invoice_create(self):
         inv_obj = self.env['account.invoice']
         inv_line_obj = self.env['account.invoice.line']

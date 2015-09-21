@@ -64,6 +64,10 @@
                                 type="object" context="{'recreate': False}" 
                                 attrs="{'invisible':['|', ('state','not in',('confirm')), ('draft_invoice_shipper', '=', True)]}"
                                 class="oe_highlight"/>
+                        <button name="action_force_done" string="Force Done" 
+                                type="object"  
+                                attrs="{'invisible':[('state','not in',('confirm'))]}"
+                                />
                         <button name="action_invoice_create" string="Recreate Shipper Invoice" 
                                 type="object" context="{'recreate': True}" 
                                 attrs="{'invisible':['|', ('state','not in', ('confirm')), ('recreate_visible', '=', False)]}"
