@@ -73,8 +73,8 @@ class procurement_order(models.Model):
 class stock_picking(models.Model):
     _inherit = 'stock.picking'
     
-    container_id = fields.Many2one('container.order', string="Container Reference", copy=False)
-    container_shipper_number = fields.Char(related='container_id.container_shipper_number', string='Shipper Container Number', readonly=True, copy=False, help='Container number is provided by shipper after the loading process is complete.')
+    container_id = fields.Many2one('container.order', string="Container Reference", copy=True)
+    container_shipper_number = fields.Char(related='container_id.container_shipper_number', string='Shipper Container Number', readonly=True, copy=True, help='Container number is provided by shipper after the loading process is complete.')
     
     #Below method is completely override here to pass container_id to invoice..
     @api.v7
@@ -157,6 +157,19 @@ class stock_move(models.Model):
     qty_package = fields.Float(string='Quantity / Package')
     is_related_co = fields.Boolean(compute=_get_move_co_related, string="Related to CO", help="If this checkbox is ticked that means it is related to CO.", store=True) #This checkbox allow user to see if stock move is comes from CO or not. This will be used in compute two function fields on product form.
  
+
+class stock_transfer_details(models.TransientModel):
+    _inherit = 'stock.transfer_details'
+
+    @api.one
+    def do_detailed_transfer(self):
+        res = super(stock_transfer_details, self).do_detailed_transfer()
+        if self._context.get('active_model', False) == 'stock.picking' and self._context.get('active_id', False):
+            picking = self.env['stock.picking'].browse(self._context['active_id'])
+            if picking.container_id and picking.container_id.invoice_shipper and picking.container_id.is_received:
+                picking.container_id.action_done()
+        return res
+
 class stock_pack_operation(models.Model):
     _inherit = 'stock.pack.operation'
 

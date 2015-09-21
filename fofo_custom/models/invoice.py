@@ -128,11 +128,10 @@ class account_invoice(models.Model):
             for i in inv.container_id.invoice_ids:
                 if i.id != inv.id and i.state == 'draft' and i.is_shipper_invoice:
                     flag = False
-            if flag and inv.container_id.invoice_shipper: #If "invoice_shipper" checkbox is ticked that means shipper invoices have been generated for container order.
+            if flag:
                 check_picking_done = True
-                for picking in inv.container_id.picking_ids:
-                    if picking.state != 'done' and picking.state != 'cancel':
-                        check_picking_done = False
+                if not inv.container_id.is_received:
+                    check_picking_done = False
                 if check_picking_done: #container order should only be done when all shipper invoices are validated and pickings are transfferd/done.
                     inv.container_id.action_done()
         return res

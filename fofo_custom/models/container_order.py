@@ -278,12 +278,20 @@ class container_order(models.Model):
     @api.depends('picking_ids', 'picking_ids.state', 'state')#TODO:
     def _check_received(self):
         for order in self:
-            if order.state == 'confirm' and order.picking_ids:
+            order.is_received = False
+            len_picking = len(order.picking_ids)
+            len_cancel = 0
+            is_received = True
+            if (order.state == 'confirm' or order.state == 'done') and order.picking_ids:
                 for picking in order.picking_ids:
-                    is_received = True
-                    if picking.state != 'done':
+                    if picking.state != 'done' and picking.state != 'cancel':
                         is_received = False
-                order.is_received = is_received
+                    if picking.state == 'cancel':
+                        len_cancel += 1
+                if len_picking == len_cancel:
+                    order.is_received = False
+                else:
+                    order.is_received = is_received
 
     @api.one
     @api.depends('co_line_ids','co_line_ids.weight', 'co_line_ids.volume', 'state')
@@ -313,6 +321,22 @@ class container_order(models.Model):
         }
                 return {'value': {'currency_id': self.currency_id.id}, 'warning': warning}
         return {}
+
+    @api.one
+    @api.depends('invoice_ids', 'invoice_ids.state')
+    def _get_state_invoice_shipper(self):
+        self.invoice_shipper = False
+        count = 0
+        count_open = 0
+        for invoice in self.invoice_ids:
+            if invoice.is_shipper_invoice:
+                count += 1
+            if invoice.is_shipper_invoice and invoice.state in ('open', 'paid'):
+                count_open += 1
+        if count == 0:
+            self.invoice_shipper = False
+        elif count == count_open or count_open >= 2:
+            self.invoice_shipper = True
 
     @api.one
     @api.depends('invoice_ids','invoice_ids.state', 'invoice_count', 'state')
@@ -391,8 +415,9 @@ class container_order(models.Model):
     co_line_ids = fields.One2many('container.order.line','container_order_id', string='Container Order Lines' )
     inbound_pricelist_id = fields.Many2one('product.pricelist', string='Inbound Pricelist', required=False)
     outbound_pricelist_id = fields.Many2one('product.pricelist', string='Outbound Pricelist', required=False)
-    invoice_shipper = fields.Boolean('Shippers Invoice Created', help='If this checkbox is ticked that means shipper invoices have been generated for container order.', readonly=True)
+    invoice_shipper = fields.Boolean(compute=_get_state_invoice_shipper, string='Shipper Invoices', help='If this checkbox is ticked that means all shipper invoices have been generated and validated for container order.')
     landed_cost_move_id = fields.Many2one('account.move', string="Landed Cost Journal", readonly=True)
+    landed_cost_allocated = fields.Boolean('Landed Cost Allocated', help="This checkbox will automatically checked once landed cost will be allocated for container order.", readonly=True)
 
     @api.onchange('inbound_shipper_id')
     def on_change_inbound_shipper_id(self):
@@ -578,7 +603,7 @@ class container_order(models.Model):
             order.write({'invoice_ids': [(4, inv_id.id)]})
             res.append(inv_id.id)
 
-            order.invoice_shipper = True # Checkbox on CO form set to True since shipper invoices are generated here and this checkbox will disable button "Create shipper invoices"
+            #order.invoice_shipper = True # Checkbox on CO form set to True since shipper invoices are generated here and this checkbox will disable button "Create shipper invoices"
         return res
     
     @api.multi #Email template to send.
@@ -766,6 +791,42 @@ class container_order(models.Model):
         order_dict = {}
         for container in self:
             container.write({'state': 'done'})
+            for co_line in container.co_line_ids:
+                purchase_line = co_line.po_line_id 
+                co_line.state = 'done' #make container order line state to done.
+                
+                order_dict[purchase_line.order_id.id] = False
+                line_count_done = 0
+                line_count_all = 0
+                line_count_confirm = 0
+                for line in purchase_line.order_id.order_line:
+                    line_count_all += len(line.co_line_ids)
+                    if line.state != 'contained' and line.state != 'done' and line.state != 'cancel':
+                        line_count_confirm += 1
+                    elif line.state == 'contained':
+                        for l in line.co_line_ids:
+                            if l.container_order_id.state == 'done':
+                                line_count_done += 1
+                if line_count_all == line_count_done and not line_count_confirm > 0:
+                    order_dict[purchase_line.order_id.id] = True
+                else: 
+                    order_dict[purchase_line.order_id.id] = False
+        #MAKE PO DONE IF ALL PO LINES ARE CONTAINED AND DONE.
+        for order in order_dict:
+            if order_dict[order]:
+                # Make related all purchase orders to done.
+                purchase = purchase_obj.browse(order)
+                purchase.wkf_po_done()
+                purchase.write({'shipped': True}) #Received field on PO now ticked.
+
+    @api.multi #New method. 21 Sep 2015
+    def allocate_land_cost(self):
+        period_obj = self.env['account.period']
+        move_obj = self.env['account.move']
+        move_line_obj = self.env['account.move.line']
+        currency_obj = self.env['res.currency']
+        journal_obj = self.env['account.journal']
+        for container in self:
             move_name = container.number
             reference = container.number
             period_ids = period_obj.find(time.strftime('%Y-%m-%d'))
@@ -781,10 +842,7 @@ class container_order(models.Model):
             container.landed_cost_move_id = move_id.id
 
             for co_line in container.co_line_ids:
-                purchase_line = co_line.po_line_id 
-                co_line.state = 'done' #make container order line state to done.
-                
-                #Update landed cost on product form by volume. Ref: issues/3005 + 3188
+                #Update landed cost on product form by volume. Ref: issues/3005 + 3188  / 3260
                 if co_line.product_id.landed_cost > 0.0:
                     #Important note: Below logic is based on when shipments related to CO is not still Transffered.
                     qty_available = co_line.product_id.qty_available - co_line.product_qty #since picking is already transfferd so it already updated qty avaialble so we need to subtract CO line qty from there.
@@ -825,22 +883,7 @@ class container_order(models.Model):
                 })
 
                 co_line.product_id.write({'landed_cost': landed_cost})
-                order_dict[purchase_line.order_id.id] = False
-                line_count_done = 0
-                line_count_all = 0
-                line_count_confirm = 0
-                for line in purchase_line.order_id.order_line:
-                    line_count_all += len(line.co_line_ids)
-                    if line.state != 'contained' and line.state != 'done' and line.state != 'cancel':
-                        line_count_confirm += 1
-                    elif line.state == 'contained':
-                        for l in line.co_line_ids:
-                            if l.container_order_id.state == 'done':
-                                line_count_done += 1
-                if line_count_all == line_count_done and not line_count_confirm > 0:
-                    order_dict[purchase_line.order_id.id] = True
-                else: 
-                    order_dict[purchase_line.order_id.id] = False
+
 #------------#CREATE ACCOUNTING ENTRY FOR LANDED COST JOURNAL - CREDIT SIDE FOR ALL SHIPPER INVOICE ON CO.
             company_currency = container.company_id.currency_id
             current_currency = container.outbound_pricelist_id.currency_id
@@ -891,15 +934,8 @@ class container_order(models.Model):
                 #'analytic_account_id': ?,
                 'date': time.strftime('%Y-%m-%d'),
             })
+            container.landed_cost_allocated = True
         
-        #MAKE PO DONE IF ALL PO LINES ARE CONTAINED AND DONE.
-        for order in order_dict:
-            if order_dict[order]:
-                # Make related all purchase orders to done.
-                purchase = purchase_obj.browse(order)
-                purchase.wkf_po_done()
-                purchase.write({'shipped': True}) #Received field on PO now ticked.
-
     @api.multi
     def cancel_order(self):
         for order in self:

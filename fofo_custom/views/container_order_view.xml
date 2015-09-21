@@ -62,7 +62,11 @@
                                 context="{'send_to_inbound':False}" class="oe_highlight"/> -->
                         <button name="action_invoice_create" string="Create Shipper Invoices" 
                                 type="object"
-                                attrs="{'invisible': [('invoice_shipper', '=', True)]}"
+                                attrs="{'invisible':['|', ('state','not in',('confirm')), ('invoice_shipper', '=', True)]}"
+                                class="oe_highlight"/>
+                        <button name="allocate_land_cost" string="Allocate Landed Cost" 
+                                type="object"
+                                attrs="{'invisible':['|', ('invoice_shipper', '=', False), '|', ('is_received', '=', False), ('landed_cost_allocated', '=', True)]}"
                                 class="oe_highlight"/>
                         <button name="confirm_order" string="Confirm"
                                 attrs="{'invisible':[('state','not in',('draft','sent_to_shipper'))]}"
@@ -117,17 +121,22 @@
                             <page string="Container Order Lines">
                                 <field name="co_line_ids" context="{'only_confirmed': True}" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}">
                                     <tree string="Container Order Lines">
+                                        <field name="po_line_id"  invisible='True'/>
                                         <field name="reference"/>
                                         <field name="supplier_id"/>
-                                        <field name="product_id" context="{'co_line_ids': parent.co_line_ids}"/>
+                                        <field name="product_id"/>
+                                        <field name="name"  invisible='True'/>
                                         <field name="total_purchase_qty"/>
                                         <field name="product_qty"/>
                                         <field name="product_uom" string="Product UOM"/>
                                         <field name="product_packaging" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging"/>
                                         <field name="qty_package" string="Qty/Packages" invisible="0"/>
                                         <field name="number_packages" invisible="0" string="Total Packages"/>
+                                        <field name="price_unit"  invisible='True'/>
+                                        <field name="date_planned"  invisible='True'/>
                                         <field name="weight"/>
                                         <field name="volume"/>
+                                        <field name="taxes_id" widget='many2many_tags' invisible="True"/>
                                         <field name="price_subtotal"/>
                                     </tree>
                                 </field>
@@ -166,6 +175,7 @@
                                         <field name="reference"  attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
                                         <field name="is_received" />
                                         <field name="invoice_shipper"/>
+                                        <field name="landed_cost_allocated"/>
                                     </group>
                                 </group>
                             </page>
@@ -243,6 +253,7 @@
                     <filter name="draft" string="Draft" domain="[('state','in',('draft','sent_to_shipper'))]"/>
                     <filter name="confirm" string="Confirmed" domain="[('state','not in',('draft','cancel','done'))]"/>
                     <filter name="done" string="Done" domain="[('state','=','done')]"/>
+                    <filter name="landed" string="Landed Cost To Allocate" domain="[('landed_cost_allocated','=', False)]" help="Show only Container orders which need to allocate landed cost."/>
                     <separator/>
                     <group expand="0" string="Group By">
                         <filter string="Responsible User" icon="terp-partner" domain="[]" context="{'group_by':'resp_user_id'}"/>
