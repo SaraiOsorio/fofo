@@ -418,7 +418,7 @@ class container_order(models.Model):
     outbound_shipper_cost = fields.Float(string="Outbound Shipper Cost", digits=dp.get_precision('Product Price'))
     picking_type_id = fields.Many2one('stock.picking.type', string='Deliver To', help="This will determine picking type of incoming shipment", required=True, default=_get_picking_in)
     currency_id = fields.Many2one('res.currency', string='Currency', required=True, default=lambda self: self.env.user.company_id.currency_id.id)
-    prev_currency_id = fields.Many2one('res.currency', string='Previous Currency', required=False, default=lambda self: self.env.user.company_id.currency_id.id)
+    prev_currency_id = fields.Many2one('res.currency', string='Previous Currency')
     location_id = fields.Many2one('stock.location', string='Destination', required=True, domain=[('usage','<>','view')])
     picking_ids =  fields.One2many('stock.picking', 'container_id', string='Picking List', store=True, copy=False, readonly=True)#compute=_get_picking_ids, 
     invoice_ids =  fields.One2many('account.invoice', 'container_id', string='Shipper Invoices', readonly=True, copy=False)
