@@ -432,9 +432,9 @@ class container_order(models.Model):
     inbound_pricelist_id = fields.Many2one('product.pricelist', string='Inbound Pricelist', required=False)
     outbound_pricelist_id = fields.Many2one('product.pricelist', string='Outbound Pricelist', required=False)
     invoice_shipper = fields.Boolean(compute=_get_state_invoice_shipper, string='Shipper Invoices', help='If this checkbox is ticked that means all shipper invoices have been generated and validated for container order.')
-    landed_cost_move_id = fields.Many2one('account.move', string="Landed Cost Journal", readonly=True)
-    landed_cost_allocated = fields.Boolean('Landed Cost Allocated', help="This checkbox will automatically checked once landed cost will be allocated for container order.", readonly=True)
-    draft_invoice_shipper = fields.Boolean('Draft Shipper Invoices', readonly=True)
+    landed_cost_move_id = fields.Many2one('account.move', string="Landed Cost Journal", readonly=True, copy=False)
+    landed_cost_allocated = fields.Boolean('Landed Cost Allocated', help="This checkbox will automatically checked once landed cost will be allocated for container order.", readonly=True, copy=False)
+    draft_invoice_shipper = fields.Boolean('Draft Shipper Invoices', readonly=True, copy=False)
     recreate_visible = fields.Boolean(compute=_get_state_invoice_shipper, string='Recreate Visible')
 
     @api.onchange('inbound_shipper_id')
