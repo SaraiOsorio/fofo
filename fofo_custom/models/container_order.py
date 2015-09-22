@@ -304,7 +304,8 @@ class container_order(models.Model):
                 self.total_volume += l.volume
 
     @api.multi
-    def onchange_currency(self, currency_id=False, co_line_ids=[]):
+    def onchange_currency(self, currency_id=False, co_line_ids=[], prev_currency_id=False):
+        res = {}
         if not co_line_ids:
             return {}
         if not currency_id:
@@ -313,6 +314,9 @@ class container_order(models.Model):
         for line in co_line_ids:
             if line and len(line) > 0 and line[2]:
                 co_line_exists = True
+        if currency_id and not co_line_exists:
+            res['value'] = {'prev_currency_id': currency_id}
+            return res
         if currency_id and self.currency_id:
             if self.currency_id.id != currency_id and co_line_exists:
                 warning = {
@@ -320,7 +324,14 @@ class container_order(models.Model):
                 'message' : _('The amount will not be converted. If want to change currency, please delete and re-select PO Line.')
         }
                 return {'value': {'currency_id': self.currency_id.id}, 'warning': warning}
-        return {}
+        elif currency_id and not self.currency_id and co_line_exists:
+            if currency_id != prev_currency_id:
+                warning = {
+                'title': _('Warning!'),
+                'message' : _('The amount will not be converted. If want to change currency, please delete and re-select PO Line.')
+        }
+                return {'value': {'currency_id': prev_currency_id}, 'warning': warning}
+        return res
 
     @api.one
     @api.depends('invoice_ids', 'invoice_ids.state')
@@ -407,6 +418,7 @@ class container_order(models.Model):
     outbound_shipper_cost = fields.Float(string="Outbound Shipper Cost", digits=dp.get_precision('Product Price'))
     picking_type_id = fields.Many2one('stock.picking.type', string='Deliver To', help="This will determine picking type of incoming shipment", required=True, default=_get_picking_in)
     currency_id = fields.Many2one('res.currency', string='Currency', required=True, default=lambda self: self.env.user.company_id.currency_id.id)
+    prev_currency_id = fields.Many2one('res.currency', string='Previous Currency', required=False, default=lambda self: self.env.user.company_id.currency_id.id)
     location_id = fields.Many2one('stock.location', string='Destination', required=True, domain=[('usage','<>','view')])
     picking_ids =  fields.One2many('stock.picking', 'container_id', string='Picking List', store=True, copy=False, readonly=True)#compute=_get_picking_ids, 
     invoice_ids =  fields.One2many('account.invoice', 'container_id', string='Shipper Invoices', readonly=True, copy=False)

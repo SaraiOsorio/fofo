@@ -122,7 +122,8 @@
                                 <field name="arrive_date" attrs="{'readonly':[('state','in',('done', 'cancel'))]}"/>
                                 <field name="picking_type_id" on_change="onchange_picking_type_id(picking_type_id)" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
                                 <field name="location_id" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
-                                <field name="currency_id" on_change="onchange_currency(currency_id, co_line_ids)" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
+                                <field name="prev_currency_id" invisible="1"/>
+                                <field name="currency_id" on_change="onchange_currency(currency_id, co_line_ids, prev_currency_id)" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
                             </group>
                         </group>
                         <notebook string="Container">
