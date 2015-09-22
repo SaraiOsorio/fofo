@@ -124,7 +124,7 @@ class container_order_line(models.Model):
     product_uom = fields.Many2one('product.uom', 'Product Unit of Measure', required=True)
     price_unit = fields.Float('Unit Price', required=True, digits= dp.get_precision('Product Price'))
     state =  fields.Selection([('draft', 'Draft'), ('confirmed', 'Confirmed'),('done', 'Done'), ('cancel', 'Cancelled')],
-                                  'Status', readonly=True, copy=False,default='draft')
+                                  'Status', readonly=True, copy=False,default='draft', help="Unit price in container order currency.")
     taxes_id = fields.Many2many('account.tax', 'container_order_line_tax', 'ord_id', 'tax_id', 'Taxes')
     date_planned = fields.Date('Scheduled Date', required=True, select=True)
     account_analytic_id = fields.Many2one('account.analytic.account', 'Analytic Account')
@@ -733,9 +733,9 @@ class container_order(models.Model):
         price_unit = order_line.price_unit
         if order_line.product_uom.id != order_line.product_id.uom_id.id:
             price_unit *= order_line.product_uom.factor / order_line.product_id.uom_id.factor
-        if order_line.po_line_id.order_id.currency_id.id != order_line.po_line_id.company_id.currency_id.id:
+#        if order_line.po_line_id.order_id.currency_id.id != order_line.container_order_id.currency_id.id:
             #we don't round the price_unit, as we may want to store the standard price with more digits than allowed by the currency
-            price_unit = order_line.po_line_id.order_id.currency_id.compute(price_unit, order_line.po_line_id.company_id.currency_id, round=False)
+#            price_unit = order_line.po_line_id.order_id.currency_id.compute(price_unit, order_line.container_order_id.currency_id, round=False)
         res = []
         move_template = {
             'name': order_line.name or '',
