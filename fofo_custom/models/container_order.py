@@ -359,7 +359,7 @@ class container_order(models.Model):
         #Note: Landed Cost = sum of all related Shipper Supplier Invoices in one Container Order and average to product in such container Order by Volume
         for line in self:
             for l in line.invoice_ids:
-                if l.is_shipper_invoice:
+                if l.is_shipper_invoice and l.state != 'cancel':
                     inv_currency = l.currency_id
                     current_currency = line.company_id.currency_id
                     ctx = dict(line._context or {})
