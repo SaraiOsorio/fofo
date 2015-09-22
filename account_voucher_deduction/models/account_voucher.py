@@ -221,9 +221,13 @@ class account_voucher(models.Model):
         if voucher_brw.reconcile_payment and voucher_brw.writeoff_acc_id and (str(abs(line_total)) <> str(ded_amount)) and not flag:
             raise except_orm(_('Error !'), _('You have selected Reconcile Payment option so please make counter part entry also on Reconcile Payment lines OR If you do not have multiple taxes/write off you can untick Reconcile Payment checkbox.'))
         return list_move_line
-    
+
+    #Below method is completly override from account_voucher module.    
     @api.multi
     def action_move_line_create(self):
+        '''
+        See probuse tag for changes by Probuse.
+        '''
         move_pool = self.env['account.move']
         move_line_pool = self.env['account.move.line']
         for voucher in self:
@@ -253,6 +257,8 @@ class account_voucher(models.Model):
             line_total, rec_list_ids = self.voucher_move_line_create(voucher.id, line_total, move_id.id, company_currency, current_currency)
             # Create the writeoff line if needed
             ml_writeoff = voucher.writeoff_move_line_get(line_total, move_id.id, name, company_currency, current_currency)
+            
+            #PROBUSE CHANGE STARTED Section 1 ----------------------
             c = 0.0
             d = 0.0
             if voucher.reconcile_payment:
@@ -268,14 +274,18 @@ class account_voucher(models.Model):
                         d += line_tax['debit']
                         move_line_pool.create(line_tax)
             else:
-                if ml_writeoff:
-                    move_line_pool.create(ml_writeoff[0])
+                if ml_writeoff: #Odoo standard
+                    move_line_pool.create(ml_writeoff[0]) #Odoo standard
+            #PROBUSE CHANGE END  Section 1----------------------
+
             # We post the voucher.
             voucher.write({
                 'move_id': move_id.id,
                 'state': 'posted',
                 'number': name,
             })
+
+            #PROBUSE CHANGE STARTED  Section 2 ----------------------
             if c <> d:
                 if d - c > 0:
                     account_id = ll.company_id.expense_currency_exchange_account_id
@@ -299,6 +309,8 @@ class account_voucher(models.Model):
                     'date': ll.date,
                 }
                 move_line_pool.create(move_line)
+            #PROBUSE CHANGE END  Section 2----------------------
+
                         
             if voucher.journal_id.entry_posted:
                 move_id.post()
@@ -307,6 +319,7 @@ class account_voucher(models.Model):
                 if len(rec_ids) >= 2:
                     recs = move_line_pool.browse(rec_ids)
                     recs.reconcile_partial(writeoff_acc_id=voucher.writeoff_acc_id.id, writeoff_period_id=voucher.period_id.id, writeoff_journal_id=voucher.journal_id.id)
+
         return True
 #------------------------END--------------------------------------------------------------
 
