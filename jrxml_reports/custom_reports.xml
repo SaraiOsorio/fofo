@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+    <report string="Quotation / Order"
+        model="sale.order"
+        auto="True"
+        name="ff.quotation"
+        rml="jrxml_reports/custom_reports/ff_quotation.jrxml"
+        id="ff_quotation" 
+        menu="True"
+        header="False" 
+        />    
+    <record id="ff_quotation" model="ir.actions.report.xml">
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">pdf</field>
+    </record>
+    
+    <report string="Billing"
+        model="account.billing"
+        auto="True"
+        name="tt.billling"
+        rml="jrxml_reports/custom_reports/ff_billing.jrxml"
+        id="ff_billing" 
+        menu="True"
+        header="False" 
+        />    
+    <record id="ff_billing" model="ir.actions.report.xml">
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">pdf</field>
+    </record>
+    
+    <report string="Tax Invoice"
+        model="account.invoice"
+        auto="True"
+        name="ff.tax.invoice"
+        rml="jrxml_reports/custom_reports/ff_tax_invoice.jrxml"
+        id="ff_tax_invoice" 
+        menu="True"
+        header="False" 
+        />    
+    <record id="ff_tax_invoice" model="ir.actions.report.xml">
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">pdf</field>
+    </record>
+    
+</data>
+</openerp>
