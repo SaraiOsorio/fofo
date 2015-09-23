@@ -336,9 +336,9 @@ class purchase_order_line(models.Model):
                 if co.move_ids:
                     for move in co.move_ids:
                         if move.state != 'cancel':# Fix for: Cancelled IN does not add back its Quantity for next CO - Bug #3105
-                            contain_qty += co.product_qty
+                            contain_qty += move.product_uom_qty#co.product_qty
                         else:
-                            contain_qty += co.product_qty
+                            contain_qty += move.product_uom_qty
                             cancel_qty += move.product_uom_qty
                 else:
                     contain_qty += co.product_qty
