@@ -38,13 +38,6 @@ class accuont_voucher_multiple_reconcile(models.Model):
 class account_voucher(models.Model):
     _inherit = 'account.voucher'
 
-    @api.multi
-    @api.constrains('reconcile_payment','payment_option')
-    def _check_reconcile_payment(self):
-        for voucher in self:
-            if voucher.reconcile_payment and voucher.payment_option == 'with_writeoff':
-                raise Warning(_('Error!'), _('You can not use Reconcile Payment along with Reconcile payment balance.'))
-
     @api.multi #Complete override function field from account_voucher module.
     @api.depends('line_cr_ids', 'line_dr_ids', 'multiple_reconcile_ids')
     def _get_writeoff_amount(self):
@@ -80,7 +73,7 @@ class account_voucher(models.Model):
                 self.writeoff_amount =  currency.round(voucher.amount - sign * (credit - debit))
 
 #Columns-------START
-    reconcile_payment = fields.Boolean('Reconcile Payment', default=False)
+    reconcile_payment = fields.Boolean('Reconcile Payment', default=True)
     is_lazada_payment = fields.Boolean('Is Lazada Payment?', readonly=True)
     multiple_reconcile_ids = fields.One2many('account.voucher.multiple.reconcile', 'voucher_id', string='Reconcile Liness')
     writeoff_amount = fields.Float(compute=_get_writeoff_amount, string='Difference Amount', readonly=True, help="Computed as the difference between the amount stated in the voucher and the sum of allocation on the voucher lines.")
@@ -258,6 +251,7 @@ class account_voucher(models.Model):
             # Create the writeoff line if needed
             ml_writeoff = voucher.writeoff_move_line_get(line_total, move_id.id, name, company_currency, current_currency)
             
+            print "ml_writeoff.,,,,,,,,,,,,",ml_writeoff
             #PROBUSE CHANGE STARTED Section 1 ----------------------
             c = 0.0
             d = 0.0
@@ -285,33 +279,33 @@ class account_voucher(models.Model):
                 'number': name,
             })
 
-            #PROBUSE CHANGE STARTED  Section 2 ----------------------
-            if c <> d:
-                if d - c > 0:
-                    account_id = ll.company_id.expense_currency_exchange_account_id
-                    if not account_id:
-                        raise Warning(_('Insufficient Configuration!'), _("You should configure the 'Loss Exchange Rate Account' in the accounting settings, to manage automatically the booking of accounting entries related to differences between exchange rates."))
-                else:
-                    account_id = ll.company_id.income_currency_exchange_account_id
-                    if not account_id:
-                        raise Warning(_('Insufficient Configuration!'), _("You should configure the 'Gain Exchange Rate Account' in the accounting settings, to manage automatically the booking of accounting entries related to differences between exchange rates."))
+#            #PROBUSE CHANGE STARTED  Section 2 ----------------------
+#            if c <> d:
+#                if d - c > 0:
+#                    account_id = ll.company_id.expense_currency_exchange_account_id
+#                    if not account_id:
+#                        raise Warning(_('Insufficient Configuration!'), _("You should configure the 'Loss Exchange Rate Account' in the accounting settings, to manage automatically the booking of accounting entries related to differences between exchange rates."))
+#                else:
+#                    account_id = ll.company_id.income_currency_exchange_account_id
+#                    if not account_id:
+#                        raise Warning(_('Insufficient Configuration!'), _("You should configure the 'Gain Exchange Rate Account' in the accounting settings, to manage automatically the booking of accounting entries related to differences between exchange rates."))
                 
-                move_line = {
-                    'journal_id': ll.journal_id.id,
-                    'period_id': ll.period_id.id,
-                    'name': _('Gain/Loss Entry For Exchange') + ': ' + (ll.name or '/'),
-                    'account_id': account_id.id,
-                    'move_id': move_id.id,
-                    'partner_id': ll.partner_id.id,
-                    'quantity': 1,
-                    'credit': d - c > 0 and (d - c) or 0.0,
-                    'debit': d - c < 0 and -(d - c) or 0.0,
-                    'date': ll.date,
-                }
-                move_line_pool.create(move_line)
-            #PROBUSE CHANGE END  Section 2----------------------
+#                move_line = {#
+#                    'journal_id': ll.journal_id.id,
+#                    'period_id': ll.period_id.id,
+#                    'name': _('Gain/Loss Entry For Exchange') + ': ' + (ll.name or '/'),
+#                    'account_id': account_id.id,
+#                    'move_id': move_id.id,
+#                    'partner_id': ll.partner_id.id,
+#                    'quantity': 1,
+#                    'credit': d - c > 0 and (d - c) or 0.0,
+#                    'debit': d - c < 0 and -(d - c) or 0.0,
+#                    'date': ll.date,
+#                }
+#                move_line_pool.create(move_line)
+#            #PROBUSE CHANGE END  Section 2----------------------
 
-                        
+            print "::::::::rec_list_ids:::",rec_list_ids
             if voucher.journal_id.entry_posted:
                 move_id.post()
             # We automatically reconcile the account move lines.
