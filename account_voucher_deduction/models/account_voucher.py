@@ -41,7 +41,8 @@ class account_voucher(models.Model):
     @api.multi #Complete override function field from account_voucher module.
     @api.depends('line_cr_ids', 'line_dr_ids', 'multiple_reconcile_ids')
     def _get_writeoff_amount(self):
-        if not self.ids: return {}
+        if not self.ids:
+            return True
         currency_obj = self.env['res.currency']
         res = {}
         for voucher in self:
@@ -60,7 +61,6 @@ class account_voucher(models.Model):
                 elif voucher.type == 'payment':
                     for r in voucher.multiple_reconcile_ids:
                         reconcile_total -= r.amount
-
                 currency = voucher.currency_id or voucher.company_id.currency_id
                 self.writeoff_amount =  currency.round(voucher.amount - sign * (credit - debit + reconcile_total))
             else:
@@ -109,14 +109,14 @@ class account_voucher(models.Model):
                         credit = 0.0
                         if line.amount < 0.0:
                             if voucher_brw.type == 'receipt':
-                                debit = amount_convert #credit- EcoSoft-Probuse
+                                debit = amount_convert #Probuse
                             else:
-                                credit = amount_convert #debit EcoSoft-Probuse
+                                credit = amount_convert #Probuse
                         else:
                             if voucher_brw.type == 'receipt':
-                                credit = amount_convert #debit EcoSoft-Probuse
+                                credit = amount_convert #Probuse
                             else:
-                                debit = amount_convert #credit EcoSoft-Probuse
+                                debit = amount_convert #Probuse
                         
                         debit = voucher_brw.company_id.currency_id.round((debit))
                         credit = voucher_brw.company_id.currency_id.round((credit))
@@ -138,7 +138,7 @@ class account_voucher(models.Model):
                         }
                         ded_amount += voucher_brw.company_id.currency_id.round((amount_convert))  # today
                         list_move_line.append(move_line)
-            if not voucher_brw.reconcile_payment:
+            if not voucher_brw.multiple_reconcile_ids:
                 sign = voucher_brw.type == 'payment' and -1 or 1
                 move_line = {
                     'name': write_off_name or name,
@@ -150,69 +150,25 @@ class account_voucher(models.Model):
                     'debit': diff < 0 and -diff or 0.0,
                     'amount_currency': company_currency <> current_currency and (sign * -1 * voucher_brw.writeoff_amount) or False,
                     'currency_id': company_currency <> current_currency and current_currency or False,
-                    'analytic_account_id': voucher_brw.analytic_id and voucher_brw.analytic_id.id or False,
+                    #'analytic_account_id': voucher_brw.analytic_id and voucher_brw.analytic_id.id or False,
                 }
                 list_move_line.append(move_line)
-                
-        if voucher_brw.payment_option == 'with_writeoff' and voucher_brw.reconcile_payment:
-            ctx = dict(self._context.copy())
-            ctx.update({'date': voucher_brw.date})
-            diff1 = line_total
-            write_off_amount = self.with_context(ctx)._convert_amount(voucher_brw.writeoff_amount, voucher_brw.id)  # this will return amount in company currency
-            write_off_amount = voucher_brw.company_id.currency_id.round((write_off_amount))  # today
-            x = self.with_context(ctx)._convert_amount(voucher_brw.amount, voucher_brw.id)
-            y = ded_amount
-            flag = False
-            if str(abs(line_total)) <> str(ded_amount):
-                flag = True
-                line = voucher_brw.line_cr_ids and voucher_brw.line_cr_ids[0] or voucher_brw.line_dr_ids[0] 
-                z = voucher_brw.company_id.currency_id.round((y + line_total))  # today
-                diff = y + line_total
-                
-                if ded_amount < line_total:
-                    z = abs(line_total) - abs(ded_amount)
-                    z = abs(z)
-                    z = voucher_brw.company_id.currency_id.round(z)  # today
-                else:
-                    z = abs(ded_amount) - abs(line_total)
-                    z = abs(z)
-                    z = voucher_brw.company_id.currency_id.round(z)  # today
-                    
-#                exch_lines = self._get_exchange_lines(cr, uid, line, move_id,z , company_currency, current_currency, context=context)
-#                list_move_line.extend(exch_lines)
-                if not voucher_brw.writeoff_acc_id:
-                    raise Warning(_('Warning !'), _('Please specify counter part account on payment to do write off entry gain/loss difference amou'))
-                
-                if voucher_brw.type == 'payment':
-                    credit = voucher_brw.type == 'payment' and abs(ded_amount) - abs(line_total) < 0.0 and z or voucher_brw.type == 'receipt' and abs(ded_amount) - abs(line_total) < 0.0 and z or 0.0,
-                    debit = voucher_brw.type == 'receipt' and abs(ded_amount) - abs(line_total) > 0.0 and z or voucher_brw.type == 'payment' and abs(ded_amount) - abs(line_total) > 0.0 and z or 0.0,
-                if voucher_brw.type == 'receipt':
-                    credit = voucher_brw.type == 'payment' and abs(ded_amount) - abs(line_total) > 0.0 and z or voucher_brw.type == 'receipt' and abs(ded_amount) - abs(line_total) > 0.0 and z or 0.0,
-                    debit = voucher_brw.type == 'receipt' and abs(ded_amount) - abs(line_total) < 0.0 and z or voucher_brw.type == 'payment' and abs(ded_amount) - abs(line_total) < 0.0 and z or 0.0,
-
-                if abs(credit[0]) == 0.00 and abs(debit[0]) == 0.00:  # 25 jan 14
-                    pass
-                else:
-                    move_line_foreign_currency = {
-                        'journal_id': line.voucher_id.journal_id.id,
-                        'period_id': line.voucher_id.period_id.id,
-                        'name': _('Gain/Loss Entry Created') + ': ' + (line.name or '/'),
-                        'account_id': voucher_brw.writeoff_acc_id.id,
-                        'move_id': move_id,
-                        'partner_id': line.voucher_id.partner_id.id,
-                        'analytic_account_id': voucher_brw.analytic_id and voucher_brw.analytic_id.id or False,
-                        'quantity': 1,
-                        'credit':abs(credit[0]),
-                        'debit': abs(debit[0]),
-                        'date': line.voucher_id.date,
-                    }
-                    list_move_line.append(move_line_foreign_currency)
-
-            if str(abs(line_total)) <> str(ded_amount) and not flag:
-                raise except_orm(_('Error !'), _('Total amount of deductions lines must be equal to the difference amount.'))
-        # 7.0 fix remove not... in 6.1 it was: if voucher_brw.reconcile_payment and voucher_brw.writeoff_acc_id and not str(abs(line_total)) <> str(ded_amount):
-        if voucher_brw.reconcile_payment and voucher_brw.writeoff_acc_id and (str(abs(line_total)) <> str(ded_amount)) and not flag:
-            raise except_orm(_('Error !'), _('You have selected Reconcile Payment option so please make counter part entry also on Reconcile Payment lines OR If you do not have multiple taxes/write off you can untick Reconcile Payment checkbox.'))
+            elif voucher_brw.multiple_reconcile_ids and diff != ded_amount:
+                value1 = self.with_context(ctx)._convert_amount(voucher_brw.writeoff_amount, voucher_brw.id)  # this will return amount in company currency
+                sign = voucher_brw.type == 'payment' and -1 or 1
+                move_line = {
+                    'name': write_off_name or name,
+                    'account_id': account_id,
+                    'move_id': move_id,
+                    'partner_id': voucher_brw.partner_id.id,
+                    'date': voucher_brw.date,
+                    'credit': value1 > 0 and value1 or 0.0,
+                    'debit': value1 < 0 and -value1 or 0.0,
+                    'amount_currency': company_currency <> current_currency and (sign * -1 * voucher_brw.writeoff_amount) or False,
+                    'currency_id': company_currency <> current_currency and current_currency or False,
+                    #'analytic_account_id': voucher_brw.analytic_id and voucher_brw.analytic_id.id or False,
+                }
+                list_move_line.append(move_line)
         return list_move_line
 
     #Below method is completly override from account_voucher module.    
@@ -243,30 +199,21 @@ class account_voucher(models.Model):
             line_total = move_line_brw.debit - move_line_brw.credit
             rec_list_ids = []
             if voucher.type == 'sale':
-                line_total = line_total - voucher.with_context(ctx)._convert_amount(voucher.tax_amount)
+                line_total = line_total - voucher.with_context(ctx)._convert_amount(voucher.tax_amount, voucher.id)
             elif voucher.type == 'purchase':
-                line_total = line_total + self.with_context(ctx)._convert_amount(voucher.tax_amount)
+                line_total = line_total + self.with_context(ctx)._convert_amount(voucher.tax_amount, voucher.id)
+
             # Create one move line per voucher line where amount is not 0.0
             line_total, rec_list_ids = self.voucher_move_line_create(voucher.id, line_total, move_id.id, company_currency, current_currency)
+
             # Create the writeoff line if needed
             ml_writeoff = voucher.writeoff_move_line_get(line_total, move_id.id, name, company_currency, current_currency)
             
-            print "ml_writeoff.,,,,,,,,,,,,",ml_writeoff
             #PROBUSE CHANGE STARTED Section 1 ----------------------
-            c = 0.0
-            d = 0.0
             if voucher.reconcile_payment:
                 if ml_writeoff:
-                    c = 0.0
-                    d = 0.0
-                    ll = move_id
-                    for t in move_id.line_id:
-                        c += t.credit
-                        d += t.debit
                     for line_tax in ml_writeoff:
-                        c += line_tax['credit']
-                        d += line_tax['debit']
-                        move_line_pool.create(line_tax)
+                        writeoff_id = move_line_pool.create(line_tax)
             else:
                 if ml_writeoff: #Odoo standard
                     move_line_pool.create(ml_writeoff[0]) #Odoo standard
@@ -279,41 +226,17 @@ class account_voucher(models.Model):
                 'number': name,
             })
 
-#            #PROBUSE CHANGE STARTED  Section 2 ----------------------
-#            if c <> d:
-#                if d - c > 0:
-#                    account_id = ll.company_id.expense_currency_exchange_account_id
-#                    if not account_id:
-#                        raise Warning(_('Insufficient Configuration!'), _("You should configure the 'Loss Exchange Rate Account' in the accounting settings, to manage automatically the booking of accounting entries related to differences between exchange rates."))
-#                else:
-#                    account_id = ll.company_id.income_currency_exchange_account_id
-#                    if not account_id:
-#                        raise Warning(_('Insufficient Configuration!'), _("You should configure the 'Gain Exchange Rate Account' in the accounting settings, to manage automatically the booking of accounting entries related to differences between exchange rates."))
-                
-#                move_line = {#
-#                    'journal_id': ll.journal_id.id,
-#                    'period_id': ll.period_id.id,
-#                    'name': _('Gain/Loss Entry For Exchange') + ': ' + (ll.name or '/'),
-#                    'account_id': account_id.id,
-#                    'move_id': move_id.id,
-#                    'partner_id': ll.partner_id.id,
-#                    'quantity': 1,
-#                    'credit': d - c > 0 and (d - c) or 0.0,
-#                    'debit': d - c < 0 and -(d - c) or 0.0,
-#                    'date': ll.date,
-#                }
-#                move_line_pool.create(move_line)
-#            #PROBUSE CHANGE END  Section 2----------------------
-
-            print "::::::::rec_list_ids:::",rec_list_ids
             if voucher.journal_id.entry_posted:
                 move_id.post()
             # We automatically reconcile the account move lines.
             for rec_ids in rec_list_ids:
                 if len(rec_ids) >= 2:
                     recs = move_line_pool.browse(rec_ids)
-                    recs.reconcile_partial(writeoff_acc_id=voucher.writeoff_acc_id.id, writeoff_period_id=voucher.period_id.id, writeoff_journal_id=voucher.journal_id.id)
-
+                    #reconcile = move_line_pool.reconcile_partial(cr, uid, rec_ids, writeoff_acc_id=voucher.writeoff_acc_id.id, writeoff_period_id=voucher.period_id.id, writeoff_journal_id=voucher.journal_id.id) #This is Standard odoo code.
+                    if voucher.writeoff_amount == 0.0 or voucher.multiple_reconcile_ids:#Probuse
+                        recs.reconcile(type='manual')#Probuse
+                    else:#Probuse
+                        recs.reconcile_partial(type='manual')#Probuse
         return True
 #------------------------END--------------------------------------------------------------
 

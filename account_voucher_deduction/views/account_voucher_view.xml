@@ -49,13 +49,20 @@
             <field name="inherit_id" ref="account_voucher.view_vendor_receipt_form"/>
             <field name="arch" type="xml">
                 <xpath  expr="//field[@name='writeoff_acc_id']"   position="attributes">
-                    <attribute name="invisible">0</attribute>
+                    <attribute name="invisible">1</attribute>
                     <attribute name="required">0</attribute>
                 </xpath> 
                 <xpath  expr="//field[@name='comment']"   position="attributes">
                     <attribute name="invisible">1</attribute>
                     <attribute name="required">0</attribute>
                 </xpath> 
+                <xpath  expr="//field[@name='analytic_id']"   position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="required">0</attribute>
+                </xpath> 
+                <xpath expr="//field[@name='payment_option']" position="attributes">
+                    <attribute name="attrs">{}</attribute>
+                </xpath>
                 <xpath expr="//field[@name='payment_option']" position="after">
                         <separator string="Reconcile Payment Lines" colspan="2"/>
                         <field name="multiple_reconcile_ids" nolabel="1" >
@@ -82,6 +89,13 @@
                     <attribute name="invisible">1</attribute>
                     <attribute name="required">0</attribute>
                 </xpath> 
+                <xpath  expr="//field[@name='analytic_id']"   position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="required">0</attribute>
+                </xpath> 
+                <xpath expr="//field[@name='payment_option']" position="attributes">
+                    <attribute name="attrs">{}</attribute>
+                </xpath>
                 <xpath expr="//field[@name='payment_option']" position="after">
                         <separator string="Reconcile Payment Lines" nolabel="1"  colspan="2"/>
                         <field name="multiple_reconcile_ids"  >
