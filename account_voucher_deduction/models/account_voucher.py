@@ -27,9 +27,9 @@ class accuont_voucher_multiple_reconcile(models.Model):
     _name = 'account.voucher.multiple.reconcile'
     _description = 'Account Voucher Multiple Reconcile'
     
-    account_id = fields.Many2one('account.account', string='Reconcile Account', required=False)
-    amount = fields.Float(string='Amount', digits_compute=dp.get_precision('Account'), required=False)
-    comment = fields.Char(string='Comment', required=False)
+    account_id = fields.Many2one('account.account', string='Reconcile Account', required=True)
+    amount = fields.Float(string='Amount', digits_compute=dp.get_precision('Account'), required=True)
+    comment = fields.Char(string='Comment', required=True)
     voucher_id = fields.Many2one('account.voucher', string='Related Voucher')
     analytic_id = fields.Many2one('account.analytic.account', string='Analytic Account')
     #transaction_type = fields.Char('Transaction Type')
@@ -49,7 +49,7 @@ class account_voucher(models.Model):
             debit = 0.0 
             credit =  0.0 
             reconcile_total = 0.0
-            if voucher.reconcile_payment:
+            if voucher.multiple_reconcile_ids:
                 sign = voucher.type == 'payment' and -1 or 1
                 for l in voucher.line_dr_ids:
                     debit += l.amount
@@ -73,7 +73,6 @@ class account_voucher(models.Model):
                 self.writeoff_amount =  currency.round(voucher.amount - sign * (credit - debit))
 
 #Columns-------START
-    reconcile_payment = fields.Boolean('Reconcile Payment', default=True)
     is_lazada_payment = fields.Boolean('Is Lazada Payment?', readonly=True)
     multiple_reconcile_ids = fields.One2many('account.voucher.multiple.reconcile', 'voucher_id', string='Reconcile Liness')
     writeoff_amount = fields.Float(compute=_get_writeoff_amount, string='Difference Amount', readonly=True, help="Computed as the difference between the amount stated in the voucher and the sum of allocation on the voucher lines.")
@@ -99,7 +98,7 @@ class account_voucher(models.Model):
                 account_id = voucher_brw.partner_id.property_account_receivable.id
             else:
                 account_id = voucher_brw.partner_id.property_account_payable.id
-            if voucher_brw.reconcile_payment:
+            if voucher_brw.multiple_reconcile_ids:
                 if voucher_brw.multiple_reconcile_ids:
                     ctx = dict(self._context.copy())
                     ctx.update({'date': voucher_brw.date})
@@ -155,21 +154,33 @@ class account_voucher(models.Model):
                 list_move_line.append(move_line)
             elif voucher_brw.multiple_reconcile_ids and diff != ded_amount:
                 value1 = self.with_context(ctx)._convert_amount(voucher_brw.writeoff_amount, voucher_brw.id)  # this will return amount in company currency
-                sign = voucher_brw.type == 'payment' and -1 or 1
-                move_line = {
-                    'name': write_off_name or name,
-                    'account_id': account_id,
-                    'move_id': move_id,
-                    'partner_id': voucher_brw.partner_id.id,
-                    'date': voucher_brw.date,
-                    'credit': value1 > 0 and value1 or 0.0,
-                    'debit': value1 < 0 and -value1 or 0.0,
-                    'amount_currency': company_currency <> current_currency and (sign * -1 * voucher_brw.writeoff_amount) or False,
-                    'currency_id': company_currency <> current_currency and current_currency or False,
-                    #'analytic_account_id': voucher_brw.analytic_id and voucher_brw.analytic_id.id or False,
-                }
-                list_move_line.append(move_line)
-        return list_move_line
+                if value1 != 0.0:
+                    if value1 < 0.0:
+                        if voucher_brw.type == 'receipt':
+                            debit = value1 #Probuse
+                        else:
+                            credit = value1 #Probuse
+                    else:
+                        if voucher_brw.type == 'receipt':
+                            credit = value1 #Probuse
+                        else:
+                            debit = value1 #Probuse
+
+                    sign = voucher_brw.type == 'payment' and -1 or 1
+                    move_line = {
+                        'name': write_off_name or name,
+                        'account_id': account_id,
+                        'move_id': move_id,
+                        'partner_id': voucher_brw.partner_id.id,
+                        'date': voucher_brw.date,
+                        'credit': abs(credit),
+                        'debit': abs(debit),
+                        'amount_currency': company_currency <> current_currency and (sign * -1 * voucher_brw.writeoff_amount) or False,
+                        'currency_id': company_currency <> current_currency and current_currency or False,
+                        #'analytic_account_id': voucher_brw.analytic_id and voucher_brw.analytic_id.id or False,
+                    }
+                    list_move_line.append(move_line)
+            return list_move_line
 
     #Below method is completly override from account_voucher module.    
     @api.multi
@@ -210,14 +221,14 @@ class account_voucher(models.Model):
             ml_writeoff = voucher.writeoff_move_line_get(line_total, move_id.id, name, company_currency, current_currency)
             
             #PROBUSE CHANGE STARTED Section 1 ----------------------
-            if voucher.reconcile_payment:
+            if voucher.multiple_reconcile_ids:
                 if ml_writeoff:
                     for line_tax in ml_writeoff:
                         writeoff_id = move_line_pool.create(line_tax)
             else:
                 if ml_writeoff: #Odoo standard
                     move_line_pool.create(ml_writeoff[0]) #Odoo standard
-            #PROBUSE CHANGE END  Section 1----------------------
+            #PROBUSE CHANGE END Section 1----------------------
 
             # We post the voucher.
             voucher.write({
