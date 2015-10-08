@@ -84,7 +84,6 @@ class lazada_payment(models.TransientModel):
             'state': 'draft',
             'date' : bill_date,
             'type': journal_data['value']['type'],
-            'reconcile_payment': True
         }
         partner_data = self.env['account.voucher'].onchange_partner_id(partner, journal, 0.0, currency, False ,bill_date)
         histoy_vals = {'name':'/',
