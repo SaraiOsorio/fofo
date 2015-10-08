@@ -244,7 +244,11 @@ class account_voucher(models.Model):
                 if len(rec_ids) >= 2:
                     recs = move_line_pool.browse(rec_ids)
                     #reconcile = move_line_pool.reconcile_partial(cr, uid, rec_ids, writeoff_acc_id=voucher.writeoff_acc_id.id, writeoff_period_id=voucher.period_id.id, writeoff_journal_id=voucher.journal_id.id) #This is Standard odoo code.
-                    if voucher.writeoff_amount == 0.0 or voucher.multiple_reconcile_ids:#Probuse
+                    if voucher.writeoff_amount == 0.0 and not voucher.multiple_reconcile_ids:
+                        recs.reconcile_partial(type='manual')#Probuse
+                    elif voucher.writeoff_amount == 0.0 and voucher.multiple_reconcile_ids:
+                        recs.reconcile_partial(type='manual')#Probuse
+                    elif voucher.writeoff_amount == 0.0 or voucher.multiple_reconcile_ids:#Probuse
                         recs.reconcile(type='manual')#Probuse
                     else:#Probuse
                         recs.reconcile_partial(type='manual')#Probuse
