@@ -19,12 +19,19 @@
                 <button name="view_picking" string="Receive Products" type="object" attrs="{'invisible': ['|', ('shipped','=',True), ('state','!=', 'approved')]}" class="oe_highlight" position="replace">
                     <button name="view_picking" string="Receive Products" type="object" attrs="{'invisible': ['|', ('shipped','=',True),  '|',('state','!=', 'approved'), ('purchase_by_container','!=', False)]}" class="oe_highlight"/>
                 </button>
-                <button name="view_invoice" string="Receive Invoice" type="object" attrs="{'invisible': ['|', ('invoice_method','in', ['picking', 'manual']), '|', ('state','!=', 'approved'), ('invoiced','=',True) ]}" class="oe_highlight" position="replace">
-                    <button name="view_invoice" string="Receive Invoice" type="object" attrs="{'invisible': ['|', ('invoice_method','in', ['picking', 'manual']), '|', ('state','!=', 'approved'),'|' , ('invoiced','=',True), '|' , ('purchase_by_container','!=', False) ]}" class="oe_highlight"/>
-                </button>
             </field>
         </record>
-                    
+        
+        <record model="ir.ui.view" id="purchase_container_form_view2">
+            <field name="name">purchase.order.form.view2</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="order_invoice_line_percentage.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <button name="view_invoice" position="replace">
+                    <button name="view_invoice" string="Receive Invoice" type="object" attrs="{'invisible': ['|', ('invoice_method','in', ['picking', 'manual', 'line_percentage']), '|', ('state','!=', 'approved'),'|' , ('invoiced','=',True), '|' , ('purchase_by_container','!=', False) ]}" class="oe_highlight"/>
+                </button>
+            </field>
+        </record> 
                     	 
         <record model="ir.ui.view" id="purchase_order_line_form_container1">
             <field name="name">purchase.container.line.form1.view</field>

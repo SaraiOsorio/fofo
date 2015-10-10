@@ -43,7 +43,8 @@
             'data/product_data.xml',
             'report/report_container_order.xml'
             ],
-    'depends':['sale','purchase','account', 'stock'],
+    'depends':['sale','purchase','account', 'stock',
+               'order_invoice_line_percentage'],
     'installable':True,
     'auto_install':False
 }
