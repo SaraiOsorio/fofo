@@ -62,7 +62,7 @@ class account_voucher(models.Model):
 
                 currency = voucher.currency_id or voucher.company_id.currency_id
                 #self.writeoff_amount =  currency.round(voucher.amount - sign * (credit - debit)) -- STANDARD CODE
-                self.writeoff_amount = currency.round(voucher.amount - sign * (credit - debit + reconcile_total)) #Probuse
+                voucher.writeoff_amount = currency.round(voucher.amount - sign * (credit - debit + reconcile_total)) #Probuse
             else:
                 sign = voucher.type == 'payment' and -1 or 1
                 for l in voucher.line_dr_ids:
@@ -76,7 +76,7 @@ class account_voucher(models.Model):
                     credit += l.amount + l.amount_wht + l.amount_retention
                     # --
                 currency = voucher.currency_id or voucher.company_id.currency_id
-                self.writeoff_amount = currency.round(voucher.amount - sign * (credit - debit))
+                voucher.writeoff_amount = currency.round(voucher.amount - sign * (credit - debit))
 
     writeoff_amount = fields.Float(compute=_get_writeoff_amount, string='Difference Amount', readonly=True, help="Computed as the difference between the amount stated in the voucher and the sum of allocation on the voucher lines.")
 

@@ -62,7 +62,7 @@ class account_voucher(models.Model):
                     for r in voucher.multiple_reconcile_ids:
                         reconcile_total -= r.amount
                 currency = voucher.currency_id or voucher.company_id.currency_id
-                self.writeoff_amount =  currency.round(voucher.amount - sign * (credit - debit + reconcile_total))
+                voucher.writeoff_amount =  currency.round(voucher.amount - sign * (credit - debit + reconcile_total))
             else:
                 sign = voucher.type == 'payment' and -1 or 1
                 for l in voucher.line_dr_ids:
@@ -70,7 +70,7 @@ class account_voucher(models.Model):
                 for l in voucher.line_cr_ids:
                     credit += l.amount
                 currency = voucher.currency_id or voucher.company_id.currency_id
-                self.writeoff_amount =  currency.round(voucher.amount - sign * (credit - debit))
+                voucher.writeoff_amount =  currency.round(voucher.amount - sign * (credit - debit))
 
 #Columns-------START
     is_lazada_payment = fields.Boolean('Is Lazada Payment?', readonly=True)
