@@ -45,6 +45,9 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_sales_order_filter"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="lazada_order_no"/>
+                </xpath>
                 <xpath expr="//filter[@string='My']" position="after">
                     <filter string="Lazada Order" domain="[('is_lazada_order','=',True)]" name="my_lazada_orders_filter"/>
                 </xpath>
