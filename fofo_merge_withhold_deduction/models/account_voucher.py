@@ -27,7 +27,7 @@ from openerp.exceptions import except_orm, Warning, RedirectWarning
 class account_voucher(models.Model):
     _inherit = 'account.voucher'
 
-    @api.multi #Complete override function field from account_voucher module.
+    @api.multi #Complete override function field from account_voucher module. _get_writeoff_amount method here will be override here from account_voucher_deduction and account_undue_withhold_tax. That means _get_writeoff_amount method combincation of both modules logic.
     @api.depends('line_cr_ids', 'line_dr_ids', 'multiple_reconcile_ids')
     def _get_writeoff_amount(self):
         if not self.ids:
@@ -50,14 +50,19 @@ class account_voucher(models.Model):
                     # credit += l.amount
                     credit += l.amount + l.amount_wht + l.amount_retention
                     # --
+
+                #Probuse  ----- START
                 if voucher.type == 'receipt':
                     for r in voucher.multiple_reconcile_ids:
                         reconcile_total += r.amount
                 elif voucher.type == 'payment':
                     for r in voucher.multiple_reconcile_ids:
                         reconcile_total -= r.amount
+                #Probuse  -----END
+
                 currency = voucher.currency_id or voucher.company_id.currency_id
-                self.writeoff_amount = currency.round(voucher.amount - sign * (credit - debit + reconcile_total))
+                #self.writeoff_amount =  currency.round(voucher.amount - sign * (credit - debit)) -- STANDARD CODE
+                self.writeoff_amount = currency.round(voucher.amount - sign * (credit - debit + reconcile_total)) #Probuse
             else:
                 sign = voucher.type == 'payment' and -1 or 1
                 for l in voucher.line_dr_ids:
@@ -129,7 +134,7 @@ class account_voucher(models.Model):
             # Create the writeoff line if needed
             ml_writeoff = voucher.writeoff_move_line_get(line_total, move_id.id, name, company_currency, current_currency)
             
-            #PROBUSE CHANGE STARTED Section 1 ----------------------
+            #PROBUSE CHANGE STARTED  ----------------------
             if voucher.multiple_reconcile_ids:
                 if ml_writeoff:
                     for line_tax in ml_writeoff:
@@ -137,7 +142,7 @@ class account_voucher(models.Model):
             else:
                 if ml_writeoff: #Odoo standard
                     move_line_pool.create(ml_writeoff[0]) #Odoo standard
-            #PROBUSE CHANGE END Section 1----------------------
+            #PROBUSE CHANGE END ----------------------------
 
             # We post the voucher.
             voucher.write({
@@ -152,16 +157,15 @@ class account_voucher(models.Model):
             for rec_ids in rec_list_ids:
                 if len(rec_ids) >= 2:
                     recs = move_line_pool.browse(rec_ids)
-                    #reconcile = move_line_pool.reconcile_partial(cr, uid, rec_ids, writeoff_acc_id=voucher.writeoff_acc_id.id, writeoff_period_id=voucher.period_id.id, writeoff_journal_id=voucher.journal_id.id) #This is Standard odoo code.
-                    if voucher.writeoff_amount == 0.0 and not voucher.multiple_reconcile_ids:
+                    #reconcile = move_line_pool.reconcile_partial(cr, uid, rec_ids, writeoff_acc_id=voucher.writeoff_acc_id.id, writeoff_period_id=voucher.period_id.id, writeoff_journal_id=voucher.journal_id.id) #Odoo standard
+                    if voucher.writeoff_amount == 0.0 and not voucher.multiple_reconcile_ids:#Probuse
                         recs.reconcile_partial(type='manual')#Probuse
-                    elif voucher.writeoff_amount == 0.0 and voucher.multiple_reconcile_ids:
+                    elif voucher.writeoff_amount == 0.0 and voucher.multiple_reconcile_ids:#Probuse
                         recs.reconcile_partial(type='manual')#Probuse
                     elif voucher.writeoff_amount == 0.0 or voucher.multiple_reconcile_ids:#Probuse
                         recs.reconcile(type='manual')#Probuse
                     else:#Probuse
                         recs.reconcile_partial(type='manual')#Probuse
         return True
-#------------------------END--------------------------------------------------------------
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
