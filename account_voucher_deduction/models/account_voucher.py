@@ -255,4 +255,9 @@ class account_voucher(models.Model):
         return True
 #------------------------END--------------------------------------------------------------
 
+    @api.multi
+    def button_reset_amount(self):
+        return self.write({'multiple_reconcile_ids': []})
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
