@@ -2,12 +2,16 @@
 <openerp>
 <data>
 
-    <report string="Quotation / Order"
+	<delete model="ir.actions.report.xml" search="[('id', '=', ref('sale.report_sale_order'))]" />
+	<delete model="ir.actions.report.xml" search="[('id', '=', ref('account.account_invoices'))]" />
+			
+	# Quotation
+    <report string="Quotation"
         model="sale.order"
         auto="True"
         name="ff.quotation"
         rml="jrxml_reports/custom_reports/ff_quotation.jrxml"
-        id="ff_quotation" 
+        id="ff_quotation"
         menu="True"
         header="False" 
         />    
@@ -16,10 +20,25 @@
         <field name="jasper_output">pdf</field>
     </record>
     
+    <report string="Quotation (No Head)"
+        model="sale.order"
+        auto="True"
+        name="ff.quotation.nohead"
+        rml="jrxml_reports/custom_reports/ff_quotation_nohead.jrxml"
+        id="ff_quotation_nohead" 
+        menu="True"
+        header="False" 
+        />    
+    <record id="ff_quotation_nohead" model="ir.actions.report.xml">
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">pdf</field>
+    </record>
+    
+    # Billing
     <report string="Billing"
         model="account.billing"
         auto="True"
-        name="tt.billling"
+        name="ff.billling"
         rml="jrxml_reports/custom_reports/ff_billing.jrxml"
         id="ff_billing" 
         menu="True"
@@ -28,6 +47,36 @@
     <record id="ff_billing" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
+    </record>
+    
+    <report string="Billing (No Head)"
+        model="account.billing"
+        auto="True"
+        name="ff.billling.nohead"
+        rml="jrxml_reports/custom_reports/ff_billing_nohead.jrxml"
+        id="ff_billing_nohead" 
+        menu="True"
+        header="False" 
+        />    
+    <record id="ff_billing_nohead" model="ir.actions.report.xml">
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">pdf</field>
+    </record>
+    
+    # Invoice
+    <report string="Invoice"
+        model="account.invoice"
+        auto="True"
+        name="ff.invoice"
+        rml="jrxml_reports/custom_reports/ff_invoice.jrxml"
+        id="ff_invoice" 
+        menu="True"
+        header="False" 
+        />
+    <record id="ff_invoice" model="ir.actions.report.xml">
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">pdf</field>
+        <field name="copies">3</field>
     </record>
     
     <report string="Tax Invoice"
@@ -42,7 +91,9 @@
     <record id="ff_tax_invoice" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
+        <field name="copies">3</field>
     </record>
+    
     
 </data>
 </openerp>

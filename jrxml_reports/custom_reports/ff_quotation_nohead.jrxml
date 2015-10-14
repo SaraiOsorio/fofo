@@ -298,20 +298,6 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 			<rectangle radius="10">
 				<reportElement x="339" y="105" width="216" height="95"/>
 			</rectangle>
-			<staticText>
-				<reportElement x="0" y="56" width="511" height="12"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[3/15 หมู่ที่ 9]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="92" width="380" height="12"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[Tax ID : 01234567890  Headoffice www.fofo.in.th]]></text>
-			</staticText>
 			<image>
 				<reportElement x="205" y="0" width="157" height="36"/>
 				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "logo.jpg"]]></imageExpression>
@@ -386,20 +372,6 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 				</textElement>
 				<text><![CDATA[Quotation]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="0" y="1" width="269" height="18"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="12" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[Sing Loey Yang Co., LTD.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="68" width="511" height="12"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[ตำบลโคกขาม อำเภอเมืองสมุทรสาคร สมุทรสาคร 74000]]></text>
-			</staticText>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="72" y="109" width="259" height="14" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
@@ -407,13 +379,6 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{customer_name}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="0" y="80" width="511" height="12"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[Tel: +66-2-3333333 Fax : +66-2-3333333]]></text>
-			</staticText>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
 				<reportElement positionType="Float" mode="Transparent" x="72" y="123" width="260" height="46" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
@@ -491,7 +456,7 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="40" splitType="Stretch">
+		<band height="14" splitType="Stretch">
 			<textField pattern="" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="34" height="13"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
@@ -528,7 +493,7 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 				<textFieldExpression class="java.lang.Number"><![CDATA[$F{price_subtotal}==null?0.00:$F{price_subtotal}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="36" y="0" width="219" height="37"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="36" y="0" width="219" height="13"/>
 				<textElement verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
@@ -541,12 +506,6 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[($F{discount} == null ? null : $F{discount})]]></textFieldExpression>
 			</textField>
-			<image scaleImage="RealSize" onErrorType="Blank">
-				<reportElement stretchType="RelativeToTallestObject" x="255" y="-7" width="54" height="44" isRemoveLineWhenBlank="true">
-					<printWhenExpression><![CDATA[$F{product_image}!=""]]></printWhenExpression>
-				</reportElement>
-				<imageExpression class="java.lang.String"><![CDATA[$F{product_image}]]></imageExpression>
-			</image>
 		</band>
 	</detail>
 	<pageFooter>
@@ -631,10 +590,10 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 			<rectangle radius="10">
 				<reportElement x="280" y="102" width="274" height="71"/>
 			</rectangle>
-			<textField isBlankWhenNull="true">
-				<reportElement style="table" x="0" y="45" width="383" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single" markup="none">
-					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="0" y="45" width="383" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_total_text_th}]]></textFieldExpression>
 			</textField>

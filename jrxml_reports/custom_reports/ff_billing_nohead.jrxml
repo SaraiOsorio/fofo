@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Billing" language="groovy" pageWidth="612" pageHeight="792" columnWidth="592" leftMargin="20" rightMargin="0" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.3636363636363855"/>
+	<property name="ireport.zoom" value="1.5000000000000244"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="OPENERP_RELATIONS" value="[&apos;line_cr_ids&apos;]"/>
@@ -295,34 +295,6 @@
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{memo}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="1" y="57" width="511" height="12"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="10" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[ตำบลโคกขาม อำเภอเมืองสมุทรสาคร สมุทรสาคร 74000]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1" y="44" width="511" height="12"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="10" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[3/15 หมู่ที่ 9]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1" y="70" width="511" height="12"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="10" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[Tel: +66-2-3333333 Fax : +66-2-3333333]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1" y="83" width="380" height="12"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="10" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[Tax ID : 01234567890  Headoffice]]></text>
-			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -406,6 +378,13 @@
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{invoice_number}]]></textFieldExpression>
 			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="276" y="0" width="88" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="11" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{date_due}]]></textFieldExpression>
+			</textField>
 			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
 				<reportElement mode="Transparent" x="363" y="0" width="102" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
@@ -433,13 +412,6 @@
 					<font fontName="Monospaced" size="11" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{date_original}]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-				<reportElement x="275" y="0" width="88" height="20"/>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
-					<font fontName="Monospaced" size="11" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
-				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{date_due}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
