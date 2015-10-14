@@ -82,6 +82,33 @@ class product_template(models.Model):
         #self.total_cost_call = cost_sum
         self.total_cost_call = self.standard_price + self.landed_cost_all
 
+    @api.one
+    @api.depends('packaging_ids','packaging_ids.qty', 'packaging_ids.ul')
+    def _compute_volume(self):
+        if not self.packaging_ids:
+            self.volume = 0.0
+        else:
+            height = self.packaging_ids[0].ul.height
+            width = self.packaging_ids[0].ul.width
+            length = self.packaging_ids[0].ul.length
+            qty1 = self.packaging_ids[0].qty
+            if qty1 > 0:
+                self.volume = (height*width*length)/1000000/qty1
+            
+    @api.one
+    @api.depends('packaging_ids','packaging_ids.qty', 'packaging_ids.ul')
+    def _compute_gross_weight(self):
+        if not self.packaging_ids:
+            self.weight = 0.0
+        else:
+            plu_gross_weight = self.packaging_ids[0].ul.plu_gross_weight
+            qty = self.packaging_ids[0].qty
+            if qty > 0:
+                self.weight = plu_gross_weight/qty
+
+    volume = fields.Float(string='Volume', compute='_compute_volume', digits=dp.get_precision('Product Volume'), store=True)
+    weight = fields.Float(string='Gross Weight', compute='_compute_gross_weight', digits=dp.get_precision('Stock Weight'), store=True)
+    weight_net = fields.Float(string='Net Weight', digits=dp.get_precision('Stock Weight'))
     sale_line_ids = fields.One2many('sale.order.line', 'product_tmpl_id_store', 'Sales History')
     landed_cost_all = fields.Float(compute=_get_landed_cost, string='Landed Cost')
     total_cost_call = fields.Float(compute=_total_cost_call, string='Total Cost')
@@ -166,36 +193,5 @@ class product_ul(models.Model):
     _inherit = 'product.ul'
     
     plu_gross_weight = fields.Float('PLU Gross Weight', digits=dp.get_precision('Stock Weight'),help="Total weight of product and package in kg.")
-    
-class product_template(models.Model):
-    _inherit = 'product.template'
-    
-    @api.one
-    @api.depends('packaging_ids','packaging_ids.qty', 'packaging_ids.ul')
-    def _compute_volume(self):
-        if not self.packaging_ids:
-            self.volume = 0.0
-        else:
-            height = self.packaging_ids[0].ul.height
-            width = self.packaging_ids[0].ul.width
-            length = self.packaging_ids[0].ul.length
-            qty1 = self.packaging_ids[0].qty
-            if qty1 > 0:
-                self.volume = (height*width*length)/1000000/qty1
-            
-    @api.one
-    @api.depends('packaging_ids','packaging_ids.qty', 'packaging_ids.ul')
-    def _compute_gross_weight(self):
-        if not self.packaging_ids:
-            self.weight = 0.0
-        else:
-            plu_gross_weight = self.packaging_ids[0].ul.plu_gross_weight
-            qty = self.packaging_ids[0].qty
-            if qty > 0:
-                self.weight = plu_gross_weight/qty
-
-    volume = fields.Float(string='Volume', compute='_compute_volume', digits=dp.get_precision('Product Volume'), store=True)
-    weight = fields.Float(string='Gross Weight', compute='_compute_gross_weight', digits=dp.get_precision('Stock Weight'), store=True)
-    weight_net = fields.Float(string='Net Weight', digits=dp.get_precision('Stock Weight'))
     
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
