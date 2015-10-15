@@ -28,11 +28,11 @@
     'description': """ 
     """,
     'data': [
-             'data/account.account.template.csv',
+            'data/account.account.template.csv',
             'data/account.tax.code.template.csv',
             'data/account.chart.template.csv',
             'data/account.tax.template.csv',
-             'fofo_import_wizard.xml'
+            'fofo_import_wizard.xml'
     ],
     'auto_install': False,
     'installable': True,
