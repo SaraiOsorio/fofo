@@ -61,6 +61,7 @@ virtualenv:
 
 install:
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - git clone https://github.com/ecosoft-odoo/common.git -b ${VERSION} ${HOME}/common
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
 
