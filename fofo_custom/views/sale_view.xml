@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_order_form_sale_line_ids" model="ir.ui.view">
+            <field name="name">sale.order.form.sale.line.ids</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//form/sheet/notebook/page[1]/field[1]/form/div" position="before">
+                     <div>
+                            <label for="sale_history_line_ids"/>
+                            <field name="sale_history_line_ids"/>
+                     </div>
+                 </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

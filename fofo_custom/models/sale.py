@@ -27,4 +27,21 @@ class sale_order_line(models.Model):
 
     date_order = fields.Datetime(related='order_id.date_order', store=True, string='Order Date')
     product_tmpl_id_store = fields.Many2one(related='product_id.product_tmpl_id', store=True, string='Product Template', relation='product.template')
+    sale_history_line_ids = fields.Many2many('sale.order.line', 'sale_line_history_rel', 'line_id1', 'line_id2', string='Sale History')
+
+    @api.multi
+    def product_id_change(self, pricelist, product, qty=0,
+            uom=False, qty_uos=0, uos=False, name='', partner_id=False,
+            lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False):
+        res = super(sale_order_line, self).product_id_change(pricelist, product, qty,
+            uom, qty_uos, uos, name, partner_id,
+            lang, update_tax, date_order, packaging, fiscal_position, flag)
+        if product and partner_id:
+            sale_lines = self.search([('product_id', '=', product), ('order_id.partner_id', '=', partner_id)], order='id desc', limit=8)
+            lines = []
+            if sale_lines:
+                for line in sale_lines:
+                    lines.append(line.id)
+                res['value'].update({'sale_history_line_ids': [(6, 0, lines)]})
+        return res
 

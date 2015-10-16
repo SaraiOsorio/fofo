@@ -41,7 +41,8 @@
             'container_report.xml',
             'data/container_order_email_template.xml',
             'data/product_data.xml',
-            'report/report_container_order.xml'
+            'report/report_container_order.xml',
+            'views/sale_view.xml'
             ],
     'depends':['sale','purchase','account', 'stock',
                'order_invoice_line_percentage'],
