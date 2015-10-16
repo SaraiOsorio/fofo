@@ -32,15 +32,15 @@
 * Product 
     """,
     'data':[
-#             'res.partner.category.csv',
-#             'account.payment.term.csv',
-#             'product.category.csv',
-#             'product.ul.csv',
-             'product_data.xml',  # Price List
-#             'res.partner.csv',
-#             'product.product.csv',
-#             'product.supplierinfo.csv', # Please delete product_supplierinfo, pricelist_partnerinfo
-            ],
+#         'res.partner.category.csv',
+#         'account.payment.term.csv',
+#         'product.category.csv',
+#         'product.ul.csv',
+        'product_data.xml',  # Price List
+#         'res.partner.csv',
+#         'product.product.csv',
+#         'product.supplierinfo.csv', # Please delete product_supplierinfo, pricelist_partnerinfo
+    ],
     'depends':['sale','purchase','account', 'stock'],
     'installable':True,
     'auto_install':False
