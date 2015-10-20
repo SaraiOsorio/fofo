@@ -185,8 +185,9 @@
                                         <field name="is_received" />
                                         <field name="invoice_shipper"/>
                                         <field name="landed_cost_allocated"/>
-                                        <field name="draft_invoice_shipper" invisible="1"/>
+                                        <field name="draft_invoice_shipper" invisible="0" help="If this checkbox is ticked that indicate shipper invoices are created in the system."/>
                                         <field name="recreate_visible"  invisible="1" />
+                                
                                     </group>
                                 </group>
                             </page>

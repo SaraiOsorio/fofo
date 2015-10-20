@@ -142,7 +142,7 @@ class account_invoice(models.Model):
                 check_picking_done = True
                 if not inv.container_id.is_received:
                     check_picking_done = False
-                if check_picking_done: #container order should only be done when all shipper invoices are validated and pickings are transfferd/done.
+                if check_picking_done and inv.container_id.draft_invoice_shipper: #container order should only be done when all shipper invoices are validated and pickings are transfferd/done.
                     inv.container_id.action_done()
         return res
 
