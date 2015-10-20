@@ -186,6 +186,7 @@ class lazada_import(models.TransientModel):
                 picking_to_transfer = []
                 picking_to_invoice = []
                 for row_no in range(rows):
+                    print ":row_no:::",row_no
                     if row_no > 0:
                         seller_sku_value = sheet.row_values(row_no)[seller_sku] # "Seller SKU" from xlsx
                         if not seller_sku_value in seller_sku_list:
@@ -196,12 +197,13 @@ class lazada_import(models.TransientModel):
                             
                             if product_dict.get(seller_sku_value):
                                 product_id = product_dict.get(seller_sku_value)
-                                product_data = sale_line_obj.product_id_change(partner_data['value']['pricelist_id'], product_id, qty=0,
-                                uom=False, qty_uos=0, uos=False, name='', partner_id=partner,
-                                lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False)
-                                
                                 if not product_data_dict.get(product_id):
+                                    product_data = sale_line_obj.product_id_change(partner_data['value']['pricelist_id'], product_id, qty=0,
+                                    uom=False, qty_uos=0, uos=False, name='', partner_id=partner,
+                                    lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False)
+
                                     product_data_dict[product_id] = product_data
+                                
                         order = str(sheet.row_values(row_no)[order_number]).split('.')[0]
                         if not items_dict.get(order):
                             items_dict[order] = [{'seller_sku' : seller_sku_value,
@@ -220,6 +222,7 @@ class lazada_import(models.TransientModel):
                 history_ids = []
                 ctx = self._context.copy()
                 for item in items_dict:
+                    print ">>>>>>>>>>>>>>",item
                     no_order_number = False
                     order_fail = False
                     date_convert = tools.ustr(items_dict[item][0]['created_at'])
