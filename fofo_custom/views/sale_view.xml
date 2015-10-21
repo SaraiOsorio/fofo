@@ -9,7 +9,18 @@
                  <xpath expr="//form/sheet/notebook/page[1]/field[1]/form/div" position="before">
                      <div>
                             <label for="sale_history_line_ids"/>
-                            <field name="sale_history_line_ids"/>
+                            <field name="sale_history_line_ids" widget="one2many" >
+                                <tree string="Sales Order Lines" delete="false" create="false" write="false">
+                                    <field name="order_id"/>
+                                    <field name="date_order"/>
+                                    <field name="name"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="price_unit"/>
+                                    <field name="discount" groups="sale.group_discount_per_so_line"/>
+                                    <field name="price_subtotal"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
                      </div>
                  </xpath>
             </field>
