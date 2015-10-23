@@ -135,7 +135,7 @@ class account_move_line(models.Model):#probuse
     is_lazada_order = fields.Boolean(related='move_id.is_lazada_order', string='Lazada Order?' ,readonly=True)
     lazada_order_no = fields.Char(related='move_id.lazada_order_no', string='Lazada Order Number' ,readonly=True)
 
-LAZADA_STATUS = {'pending': 1,'ready_to_ship' : 2, 'shipped': 3, 'delivered' : 4, 'failed' : 5, 'canceled' : 6}
+LAZADA_STATUS = {'pending': 1,'ready_to_ship' : 2, 'shipped': 3, 'delivered' : 4, 'failed' : 5, 'canceled' : 6, 'returned': 7}
 
 class lazada_import(models.TransientModel):
     _name = 'lazada.import'
@@ -186,7 +186,6 @@ class lazada_import(models.TransientModel):
                 picking_to_transfer = []
                 picking_to_invoice = []
                 for row_no in range(rows):
-                    print ":row_no:::",row_no
                     if row_no > 0:
                         seller_sku_value = sheet.row_values(row_no)[seller_sku] # "Seller SKU" from xlsx
                         if not seller_sku_value in seller_sku_list:
@@ -221,8 +220,8 @@ class lazada_import(models.TransientModel):
                 import_date = time.strftime('%Y-%m-%d')
                 history_ids = []
                 ctx = self._context.copy()
+                failed_order = []
                 for item in items_dict:
-                    print ">>>>>>>>>>>>>>",item
                     no_order_number = False
                     order_fail = False
                     date_convert = tools.ustr(items_dict[item][0]['created_at'])
@@ -233,27 +232,48 @@ class lazada_import(models.TransientModel):
                         final_date_new = datetime.strptime(date_convert_new, '%Y-%m-%d %H:%M:%S').strftime('%m/%d/%Y %H:%M:%S')
                         if not line_sku['order_no']:
                             no_order_number = True
+                            
+                            
                         if not product_dict[line_sku['seller_sku']]:
                             order_fail = True
-                            history_vals = {
-                                    'product_id':False,
-                                    'seller_sku':line_sku['seller_sku'],
-                                    'created_at':final_date_new,
-                                    'order_number':line_sku['order_no'],#order,
-                                    'unit_price': line_sku['unit_price'], #sheet.row_values(row_no)[unit_price],
-                                    'status': line_sku['status'],#sheet.row_values(row_no)[status],
-                                    'import_time':import_date,
-                                    'user_id': self.env.user.id,
-                                    'order_status':'fail',
-                                    'notes': 'Product/SKU not found in ERP system.'
-                            }
-                            history = self.env['import.history'].create(history_vals)
-                            if sequene_counter == 0:
-                                history_sequence = self.env['ir.sequence'].get('lazada.import.history')
-                                sequene_counter += 1
-                            history.name = history_sequence
-                            if history:
-                                history_ids.append(history.id)
+                            if not line_sku['order_no'] in failed_order:
+                                for history_item in items_dict[line_sku['order_no']]:
+                                    if not product_dict[history_item['seller_sku']]:
+                                        failed_order.append(line_sku['order_no'])
+                                        history_vals = {
+                                                'product_id':False,
+                                                'seller_sku':line_sku['seller_sku'],
+                                                'created_at':final_date_new,
+                                                'order_number':line_sku['order_no'],#order,
+                                                'unit_price': line_sku['unit_price'], #sheet.row_values(row_no)[unit_price],
+                                                'status': line_sku['status'],#sheet.row_values(row_no)[status],
+                                                'import_time':import_date,
+                                                'user_id': self.env.user.id,
+                                                'order_status':'fail',
+                                                'notes': 'Product/SKU not found in ERP system.'
+                                        }
+                                    else:
+                                        history_vals = {
+                                                'product_id':product_dict[history_item['seller_sku']],
+                                                'seller_sku':line_sku['seller_sku'],
+                                                'created_at':final_date_new,
+                                                'order_number':line_sku['order_no'],#order,
+                                                'unit_price': line_sku['unit_price'], #sheet.row_values(row_no)[unit_price],
+                                                'status': line_sku['status'],#sheet.row_values(row_no)[status],
+                                                'import_time':import_date,
+                                                'user_id': self.env.user.id,
+                                                'order_status':'fail',
+                                                'notes': 'One of the line is fail of these order.'
+                                        }
+                                    history = self.env['import.history'].create(history_vals)
+                                    if sequene_counter == 0:
+                                        history_sequence = self.env['ir.sequence'].get('lazada.import.history')
+                                        sequene_counter += 1
+                                    history.name = history_sequence
+                                    if history:
+                                        history_ids.append(history.id)
+                                    
+                                    
                     if order_fail:
                         continue
                     
@@ -327,6 +347,67 @@ class lazada_import(models.TransientModel):
                                                 exist_orders.signal_workflow('order_confirm')
                                                 exist_orders.action_cancel()
                                             
+                                            if str(line_status['status']) == 'returned':
+                                                if exist_orders.state == 'draft':
+                                                    exist_orders.signal_workflow('order_confirm')
+                                                    if exist_orders.picking_ids:
+                                                        for picking in exist_orders.picking_ids:
+                                                            picking.write({'invoice_state': '2binvoiced'})
+                                                            picking.do_transfer()
+                                                            invoice = picking.action_invoice_create(
+                                                                        journal_id = self.journal_id.id,
+                                                                        type = 'out_invoice'
+                                                                        )
+                                                            if invoice:
+                                                                for i in invoice:
+                                                                    #It will validate the created invoice
+                                                                    invoice_data = self.env['account.invoice'].browse(i)
+                                                                    invoice_data.signal_workflow('invoice_open')
+                                                if exist_orders.state == 'progress':
+                                                    if exist_orders.picking_ids:
+                                                        for picking in exist_orders.picking_ids:
+                                                            picking.write({'invoice_state': '2binvoiced'})
+                                                            if picking.state == 'confirmed' or picking.state == 'assigned':
+                                                                picking.do_transfer()
+                                                            if not exist_orders.invoice_ids:
+                                                                invoice = picking.action_invoice_create(
+                                                                        journal_id = self.journal_id.id,
+                                                                        type = 'out_invoice'
+                                                                        )
+                                                                if invoice:
+                                                                    for i in invoice:
+                                                                        #It will validate the created invoice
+                                                                        invoice_data = self.env['account.invoice'].browse(i)
+                                                                        invoice_data.signal_workflow('invoice_open')
+                                                if exist_orders.picking_ids:
+                                                    for picking in exist_orders.picking_ids:
+                                                        move_ids = self.env['stock.move'].search([('picking_id','=',picking.id)])
+                                                         
+                                                        return_moves = []
+                                                        for stock_move in move_ids:
+                                                            return_moves.append((0, 0, {'product_id':stock_move.product_id.id, 
+                                                              'quantity': stock_move.product_qty,
+                                                              'move_id':stock_move.id, 
+                                                              }))
+                                                        if return_moves:
+                                                            stock_return_id = self.env['stock.return.picking'].create({
+                                                                                   'product_return_moves': return_moves,
+                                                                                    'invoice_state':'2binvoiced',
+                                                                                            })
+                                                            context = self._context.copy()
+                                                            context.update({'active_id': picking.id})
+                                                            new_picking_id, pick_type_id = stock_return_id.with_context(context)._create_returns()
+                                                            
+                                                            return_picking = self.env['stock.picking'].browse(new_picking_id)
+                                                            return_picking.write({'invoice_state': 'invoiced'})
+                                                            return_picking.do_transfer()
+                                                            if exist_orders.invoice_ids:
+                                                                refund_vals = self.env['account.invoice']._prepare_refund(exist_orders.invoice_ids, date=False, period_id=False,
+                                                                                                           description='Customer Refund', journal_id=False)
+                                                                refund_vals.update({'lazada_order_no': exist_orders.invoice_ids.lazada_order_no})
+                                                                new_invoice = self.env['account.invoice'].create(refund_vals)
+                                                                if new_invoice:
+                                                                    new_invoice.signal_workflow('invoice_open')
                                             history.status = line_status['status']
                                             history_ids.append(history.id)
                     if flag_order_exist:
@@ -399,10 +480,10 @@ class lazada_import(models.TransientModel):
                                 line_id = sale_line_obj.create(orderlinevals)
                                 history_vals = {
                                     'product_id':products,
-                                    'seller_sku':seller_sku_value,
+                                    'seller_sku':i['seller_sku'],
                                     'created_at':final_date,
                                     'order_number':i['order_no'],
-                                    'unit_price':sheet.row_values(row_no)[unit_price],
+                                    'unit_price':i['unit_price'],
                                     'status':i['status'],
                                     'import_time':import_date,
                                     'user_id':self.env.user.id,
@@ -419,11 +500,11 @@ class lazada_import(models.TransientModel):
                             else:#Unsed now ? Since we already check for fail at begining.
                                 history_vals = {
                                         'product_id':False,
-                                        'seller_sku':seller_sku_value,
+                                        'seller_sku':i['seller_sku'],
                                         'created_at':final_date,
                                         'order_number':order,
-                                        'unit_price':sheet.row_values(row_no)[unit_price],
-                                        'status':sheet.row_values(row_no)[status],
+                                        'unit_price':i['unit_price'],
+                                        'status':i['status'],
                                         'import_time':import_date,
                                         'user_id':self.env.user.id,
                                         'order_status':'fail',
@@ -483,7 +564,46 @@ class lazada_import(models.TransientModel):
                             sale_order_id.signal_workflow('order_confirm')
                             sale_order_id.action_cancel()
                             
-                    
+                        if i['status'] == 'returned':
+                            sale_order_id.signal_workflow('order_confirm')
+                            if sale_order_id.picking_ids:
+                                for picking in sale_order_id.picking_ids:
+                                    picking.write({'invoice_state': '2binvoiced'})
+                                    picking.do_transfer()
+                                    invoice = picking.action_invoice_create(
+                                                journal_id = self.journal_id.id,
+                                                type = 'out_invoice'
+                                                )
+                                    move_ids = self.env['stock.move'].search([('picking_id','=',picking.id)])
+                                    return_moves = []
+                                    for stock_move in move_ids:
+                                        return_moves.append((0, 0, {'product_id':stock_move.product_id.id, 
+                                                              'quantity': stock_move.product_qty,
+                                                              'move_id':stock_move.id, 
+                                                              }))
+                                    if return_moves:
+                                        stock_return_id = self.env['stock.return.picking'].create({
+                                                               'product_return_moves': return_moves,
+                                                                'invoice_state':'2binvoiced',
+                                                                        })
+                                        context = self._context.copy()
+                                        context.update({'active_id': picking.id})
+                                        new_picking_id, pick_type_id = stock_return_id.with_context(context)._create_returns()
+                                        
+                                        return_picking = self.env['stock.picking'].browse(new_picking_id)
+                                        return_picking.write({'invoice_state': 'invoiced'})
+                                        return_picking.do_transfer()
+                                        if invoice:
+                                            for i in invoice:
+                                                #It will validate the created invoice
+                                                invoice_data = self.env['account.invoice'].browse(i)
+                                                invoice_data.signal_workflow('invoice_open')
+                                                refund_vals = self.env['account.invoice']._prepare_refund(invoice_data, date=False, period_id=False,
+                                                                                           description='Customer Refund', journal_id=False)
+                                                refund_vals.update({'lazada_order_no': order})
+                                                new_invoice = self.env['account.invoice'].create(refund_vals)
+                                                if new_invoice:
+                                                    new_invoice.signal_workflow('invoice_open')
                     #If Order has status Ready to Ship then set
                     #Delivery order in ready to transfer state
             pick_transfer = self.env['stock.picking'].browse(picking_to_transfer)
@@ -495,8 +615,7 @@ class lazada_import(models.TransientModel):
             #It will create the invoice on base of DO
             invoice = pick_invoice.with_context(context).action_invoice_create(
                                             journal_id = self.journal_id.id,
-                                            group = False,
-                                            type = 'out_invoice',
+                                            type = 'out_invoice'
                                             )
             if invoice:
                 for i in invoice:
