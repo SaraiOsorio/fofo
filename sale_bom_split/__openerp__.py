@@ -54,8 +54,7 @@
     'depends': ['sale', 'bom_split'],
     'data': [],
     'demo': [],
-    'test': ['tests/test_sale_bom_split.yml',
-             ],
+    'test': [],
     'installable': True,
     'auto_install': False,
 }

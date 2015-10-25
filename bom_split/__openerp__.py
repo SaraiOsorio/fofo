@@ -32,7 +32,7 @@ Used in sale_bom_split and purchase_bom_split.
     'license': 'AGPL-3',
     'depends': ['mrp'],
     'data': [],
-    'demo': ['bom_split_demo.yml'],
+    'demo': [],
     'installable': True,
     'autoinstall': False,
 }
