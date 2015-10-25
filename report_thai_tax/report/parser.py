@@ -3,7 +3,8 @@
 #
 #
 ##############################################################################
-
+import sys
+sys.path.insert(0, '/home/kittiu/workspace/common/common')
 import jasper_reports
 from openerp.osv import fields, osv
 import datetime
