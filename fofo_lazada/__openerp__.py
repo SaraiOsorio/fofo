@@ -37,6 +37,7 @@
             'views/invoice_view.xml',
             'views/stock_view.xml',
             'views/account_move_view.xml',
+            'views/product_view.xml',
             ],
     'depends':['fofo_custom'],
     'installable':True,

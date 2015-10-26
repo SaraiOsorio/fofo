@@ -147,6 +147,7 @@ class lazada_import(models.TransientModel):
 
     input_file = fields.Binary('Lazada Order File (.xlsx format)')
     journal_id = fields.Many2one('account.journal', string='Sales Journal', required=True, default=_get_journal)
+    refund_journal_id = fields.Many2one('account.journal', string='Sales Refund Journal', required=True)
 
     @api.multi
     def import_orders(self):
@@ -234,8 +235,7 @@ class lazada_import(models.TransientModel):
                             no_order_number = True
                             
                             
-                        #Below logic if one line failed in any order then create history vals for other lines as failed line.
-                        if not product_dict[line_sku['seller_sku']]:#fix for http://128.199.123.133/issues/3374 
+                        if not product_dict[line_sku['seller_sku']]:
                             order_fail = True
                             if not line_sku['order_no'] in failed_order:
                                 for history_item in items_dict[line_sku['order_no']]:
@@ -402,13 +402,22 @@ class lazada_import(models.TransientModel):
                                                             return_picking = self.env['stock.picking'].browse(new_picking_id)
                                                             return_picking.write({'invoice_state': 'invoiced'})
                                                             return_picking.do_transfer()
-                                                            if exist_orders.invoice_ids:
-                                                                refund_vals = self.env['account.invoice']._prepare_refund(exist_orders.invoice_ids, date=False, period_id=False,
-                                                                                                           description='Customer Refund', journal_id=False)
-                                                                refund_vals.update({'lazada_order_no': exist_orders.invoice_ids.lazada_order_no})
-                                                                new_invoice = self.env['account.invoice'].create(refund_vals)
-                                                                if new_invoice:
-                                                                    new_invoice.signal_workflow('invoice_open')
+                                                            refund_invoice = return_picking.action_invoice_create(
+                                                                    journal_id = self.refund_journal_id.id,
+                                                                    type='out_refund'
+                                                                    )
+                                                            if refund_invoice:
+                                                                for i in refund_invoice:
+                                                                    #It will validate the created invoice
+                                                                    refund_invoice_data = self.env['account.invoice'].browse(i)
+                                                                    refund_invoice_data.signal_workflow('invoice_open')
+#                                                             if exist_orders.invoice_ids:
+#                                                                 refund_vals = self.env['account.invoice']._prepare_refund(exist_orders.invoice_ids, date=False, period_id=False,
+#                                                                                                            description='Customer Refund', journal_id=False)
+#                                                                 refund_vals.update({'lazada_order_no': exist_orders.invoice_ids.lazada_order_no})
+#                                                                 new_invoice = self.env['account.invoice'].create(refund_vals)
+#                                                                 if new_invoice:
+#                                                                     new_invoice.signal_workflow('invoice_open')
                                             history.status = line_status['status']
                                             history_ids.append(history.id)
                     if flag_order_exist:
@@ -575,6 +584,11 @@ class lazada_import(models.TransientModel):
                                                 journal_id = self.journal_id.id,
                                                 type = 'out_invoice'
                                                 )
+                                    if invoice:
+                                        for i in invoice:
+                                            #It will validate the created invoice
+                                            invoice_data = self.env['account.invoice'].browse(i)
+                                            invoice_data.signal_workflow('invoice_open')
                                     move_ids = self.env['stock.move'].search([('picking_id','=',picking.id)])
                                     return_moves = []
                                     for stock_move in move_ids:
@@ -590,21 +604,27 @@ class lazada_import(models.TransientModel):
                                         context = self._context.copy()
                                         context.update({'active_id': picking.id})
                                         new_picking_id, pick_type_id = stock_return_id.with_context(context)._create_returns()
-                                        
                                         return_picking = self.env['stock.picking'].browse(new_picking_id)
-                                        return_picking.write({'invoice_state': 'invoiced'})
-                                        return_picking.do_transfer()
-                                        if invoice:
-                                            for i in invoice:
+                                        refund_invoice = return_picking.action_invoice_create(
+                                                journal_id = self.refund_journal_id.id,
+                                                type='out_refund'
+                                                )
+                                        if refund_invoice:
+                                            for i in refund_invoice:
                                                 #It will validate the created invoice
-                                                invoice_data = self.env['account.invoice'].browse(i)
-                                                invoice_data.signal_workflow('invoice_open')
-                                                refund_vals = self.env['account.invoice']._prepare_refund(invoice_data, date=False, period_id=False,
-                                                                                           description='Customer Refund', journal_id=False)
-                                                refund_vals.update({'lazada_order_no': order})
-                                                new_invoice = self.env['account.invoice'].create(refund_vals)
-                                                if new_invoice:
-                                                    new_invoice.signal_workflow('invoice_open')
+                                                refund_invoice_data = self.env['account.invoice'].browse(i)
+                                                refund_invoice_data.signal_workflow('invoice_open')
+#                                         if invoice:
+#                                             for i in invoice:
+#                                                 #It will validate the created invoice
+#                                                 invoice_data = self.env['account.invoice'].browse(i)
+#                                                 invoice_data.signal_workflow('invoice_open')
+#                                                 refund_vals = self.env['account.invoice']._prepare_refund(invoice_data, date=False, period_id=False,
+#                                                                                            description='Customer Refund', journal_id=False)
+#                                                 refund_vals.update({'lazada_order_no': invoice_data.lazada_order_no})
+#                                                 new_invoice = self.env['account.invoice'].create(refund_vals)
+#                                                 if new_invoice:
+#                                                     new_invoice.signal_workflow('invoice_open')
                     #If Order has status Ready to Ship then set
                     #Delivery order in ready to transfer state
             pick_transfer = self.env['stock.picking'].browse(picking_to_transfer)
