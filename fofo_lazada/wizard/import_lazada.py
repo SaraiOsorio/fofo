@@ -234,7 +234,8 @@ class lazada_import(models.TransientModel):
                             no_order_number = True
                             
                             
-                        if not product_dict[line_sku['seller_sku']]:
+                        #Below logic if one line failed in any order then create history vals for other lines as failed line.
+                        if not product_dict[line_sku['seller_sku']]:#fix for http://128.199.123.133/issues/3374 
                             order_fail = True
                             if not line_sku['order_no'] in failed_order:
                                 for history_item in items_dict[line_sku['order_no']]:
@@ -242,11 +243,11 @@ class lazada_import(models.TransientModel):
                                         failed_order.append(line_sku['order_no'])
                                         history_vals = {
                                                 'product_id':False,
-                                                'seller_sku':line_sku['seller_sku'],
+                                                'seller_sku':history_item['seller_sku'],
                                                 'created_at':final_date_new,
-                                                'order_number':line_sku['order_no'],#order,
-                                                'unit_price': line_sku['unit_price'], #sheet.row_values(row_no)[unit_price],
-                                                'status': line_sku['status'],#sheet.row_values(row_no)[status],
+                                                'order_number':history_item['order_no'],#order,
+                                                'unit_price': history_item['unit_price'], #sheet.row_values(row_no)[unit_price],
+                                                'status': history_item['status'],#sheet.row_values(row_no)[status],
                                                 'import_time':import_date,
                                                 'user_id': self.env.user.id,
                                                 'order_status':'fail',
@@ -255,11 +256,11 @@ class lazada_import(models.TransientModel):
                                     else:
                                         history_vals = {
                                                 'product_id':product_dict[history_item['seller_sku']],
-                                                'seller_sku':line_sku['seller_sku'],
+                                                'seller_sku':history_item['seller_sku'],
                                                 'created_at':final_date_new,
-                                                'order_number':line_sku['order_no'],#order,
-                                                'unit_price': line_sku['unit_price'], #sheet.row_values(row_no)[unit_price],
-                                                'status': line_sku['status'],#sheet.row_values(row_no)[status],
+                                                'order_number':history_item['order_no'],#order,
+                                                'unit_price': history_item['unit_price'], #sheet.row_values(row_no)[unit_price],
+                                                'status': history_item['status'],#sheet.row_values(row_no)[status],
                                                 'import_time':import_date,
                                                 'user_id': self.env.user.id,
                                                 'order_status':'fail',
