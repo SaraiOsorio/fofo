@@ -15,6 +15,7 @@
                             <group>
                                 <field name="input_file"/>
                                 <field name="journal_id" domain="[('type', '=', 'sale')]"/>
+                                <field name="refund_journal_id" domain="[('type', '=', 'sale_refund')]"/>
                             </group>
                         <group> </group>
                         </group>
