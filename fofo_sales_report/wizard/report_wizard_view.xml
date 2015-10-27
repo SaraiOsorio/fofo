@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="fofo_sales_report_wizard" model="ir.ui.view">
+            <field name="name">fofo.sale.report.wizard.form</field>
+            <field name="model">fofo.sale.report</field>
+            <field name="arch" type="xml">
+                <form string="Sales Detail Per Customer">
+                    <group>
+                         <group>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="fiscalyear_id"/>
+                        </group>
+                    </group>
+                    <notebook tabpos="up" colspan="4">
+                        <page string="Filters" name="filters">
+                            <group>
+                                <field name="filter"/>
+                            </group>
+                            <group string="Dates"  attrs="{'invisible':[('filter', '!=', 'filter_date')], 'required':[('filter', '=', 'filter_date')]}">
+                                <field name="date_from" />
+                                <field name="date_to" />
+                            </group>
+                            <group string="Periods" attrs="{'invisible':[('filter','!=','filter_period')], 'required':[('filter', '=', 'filter_period')]}">
+                                <field name="period_from" domain="[('fiscalyear_id', '=', fiscalyear_id)]"/>
+                                <field name="period_to" domain="[('fiscalyear_id', '=', fiscalyear_id)]"/>
+                            </group>
+                        </page>
+                        <page string="Filter Customer Tags" name="category_ids">
+                            <field name="category_ids"/>
+                        </page>
+                        <page string="Filter Customers" name="customer_ids">
+                            <field name="customer_ids" domain="[('customer', '=', 'True')]"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="print_report" string="Print" type="object" class="oe_highlight"/>
+                        or <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_fofo_sales_report" model="ir.actions.act_window">
+            <field name="name">Sales Detail Per Customer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fofo.sale.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fofo_sales_report_wizard"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="fofo_customer_report_menu"  name="Company Reports" parent="base.menu_reporting" sequence="0"/>
+        <menuitem id="fofo_sales_report_menu" name="Sales Detail Per Customer" parent="fofo_customer_report_menu" action="action_fofo_sales_report"/>
+
+
+
+    </data>
+</openerp>

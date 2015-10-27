@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <report 
+            id="fofo_sale_report_reg"
+            model="account.invoice"
+            string="Sales Report"
+            report_type="qweb-pdf"
+            name="fofo_sales_report.fofo_sales_report" 
+            file="fofo_sales_report.fofo_sales_report"
+        />
+
+    </data>
+</openerp>
