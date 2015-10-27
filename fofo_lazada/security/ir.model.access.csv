@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_import_history,access_import_history,model_import_history,base.group_user,1,1,1,0
+access_import_history-sales,access_import_history-sales,model_import_history,base.group_sale_manager,1,1,1,1

@@ -38,6 +38,7 @@
             'views/stock_view.xml',
             'views/account_move_view.xml',
             'views/product_view.xml',
+            'security/ir.model.access.csv',
             ],
     'depends':['fofo_custom'],
     'installable':True,
