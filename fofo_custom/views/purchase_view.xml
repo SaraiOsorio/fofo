@@ -115,7 +115,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='action_cancel']" position="after">
                     <button name="force_done" string="Force Done"
-                            states = "approved"
+                            states = "approved,contained,except_picking,except_invoice"
                             type="object"
                             groups="purchase.group_purchase_manager"
                             class="oe_highlight"/>
