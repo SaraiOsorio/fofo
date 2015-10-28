@@ -21,5 +21,6 @@
 
 import sale_detail_report
 import sale_refund_report
+import container_receiving
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

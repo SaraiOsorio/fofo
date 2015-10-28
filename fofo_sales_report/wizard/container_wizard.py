@@ -19,7 +19,24 @@
 #
 ##############################################################################
 
-import report_wizard
-import sale_refund_wizard
-import container_wizard
+import time
+from openerp import models, fields, api, _
+from openerp.exceptions import Warning
+
+
+class container_receiving_report(models.TransientModel):
+    _name = 'container.receiving.report'
+    
+    company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env['res.company']._company_default_get('fofo.sale.report'))
+    start_date = fields.Date('Start Date', required=True, default= fields.Date.today())
+    end_date = fields.Date('End Date', required=True, default= fields.Date.today())
+    
+    @api.multi
+    def print_report(self, data):
+        if self.env.context is None:
+            self.env.context = {}
+        data['form'] = self.read(['end_date', 'start_date','company_id'])[0]
+        return self.pool['report'].get_action(self._cr, self._uid, [], 'fofo_sales_report.container_receiving_report', data=data, context=self.env.context)#probuse
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

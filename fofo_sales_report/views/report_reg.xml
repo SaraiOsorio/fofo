@@ -19,6 +19,15 @@
             name="fofo_sales_report.fofo_sales_refund_report" 
             file="fofo_sales_report.fofo_sales_refund_report"
         />
-            
+        
+        <report 
+            id="container_receiving_report_reg"
+            model="container.order" 
+            string="Container Receiving Report"
+            report_type="qweb-pdf"
+            name="fofo_sales_report.container_receiving_report" 
+            file="fofo_sales_report.container_receiving_report"
+        />
+                     
     </data>
 </openerp>

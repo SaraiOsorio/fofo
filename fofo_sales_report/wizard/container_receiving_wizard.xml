@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="container_receiving_report_wizard" model="ir.ui.view">
+            <field name="name">container.receiving.report.wizard.form</field>
+            <field name="model">container.receiving.report</field>
+            <field name="arch" type="xml">
+                <form string="Container Receiving">
+                    <group>
+                         <group>
+                            <field name="company_id"/>
+                        </group>
+                        <group/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Print" type="object" class="oe_highlight"/>
+                        or <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_container_receiving_report" model="ir.actions.act_window">
+            <field name="name">Container Receiving</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">container.receiving.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="container_receiving_report_wizard"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="container_receiving_report_menu" name="Container Receiving" parent="fofo_sales_report.fofo_customer_report_menu" action="action_container_receiving_report"/>
+
+
+
+    </data>
+</openerp>

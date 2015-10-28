@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="container_receiving_report">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.external_layout">
+                        <div class="page">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <span>Estimated Arrival Start Date </span> : <span t-esc="formatLang(o.start_date, date=True)"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <span>Estimated Arrival End Date &amp;nbsp;</span> : <span t-esc="formatLang(o.end_date, date=True)"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 mb16 text-center">
+                                    <h4><strong>Container Receiving Report</strong></h4>
+                                </div>
+                            </div>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr style="border-top:1px solid black;">
+                                        <th colspan="2">Customer Name</th>
+                                        <th colspan="2">Arrival Date</th>
+                                    </tr>
+                                    <tr style="border-top:hidden;">
+                                        <th>Product Code</th>
+                                        <th>Description</th>
+                                        <th>Description For Supplier</th>
+                                        <th class="text-right">QTY-Boxes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="get_container_order(data)" t-as="order">
+                                        <tr>
+                                            <td colspan="2" style="border-top: 1px solid black;">
+                                                <strong t-esc="order.container_shipper_number"/>
+                                            </td>
+                                            <td colspan="2" style="border-top: 1px solid black;">
+                                                <strong t-esc="formatLang(order.arrive_date, date=True)"/>
+                                            </td>
+                                            
+                                        </tr>
+                                        <t t-foreach="get_order_lines(order)" t-as="line">
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="line['product']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line['product_description']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line['supplier_description']"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="line['qty_boxes']"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+</openerp>

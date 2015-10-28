@@ -30,8 +30,10 @@
     'data':[
             'wizard/report_wizard_view.xml',
             'wizard/sale_refund_wizard_view.xml',
+            'wizard/container_receiving_wizard.xml',
             'views/sales_report_view.xml',
             'views/sale_refund_report.xml',
+            'views/container_receiving_report.xml',
             'views/report_reg.xml'
             ],
     'depends':['fofo_custom'],
