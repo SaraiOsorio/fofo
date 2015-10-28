@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="fofo_sales_refund_report">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.external_layout">
+                        <div class="page">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <strong>Company:</strong>
+                                    <p t-esc="get_company(data)"/>
+                                </div>
+                                <div class="col-xs-3">
+                                    <strong>Fiscal Year:</strong>
+                                    <p t-esc="get_fiscalyear(data)"/>
+                                </div>
+                                <div class="col-xs-3">
+                                    <strong>Filter By:</strong>
+                                    <p>
+                                        <span t-if="data['form']['filter'] == 'filter_no'">Not filtered</span>
+                                        <span t-if="data['form']['filter'] == 'filter_period'">Filtered by period</span>
+                                        <span t-if="data['form']['filter'] == 'filter_date'">Filtered by date</span>
+                                        <p t-if="data['form']['filter'] == 'filter_period'">
+                                            Start Period: <span t-esc="get_start_period(data)"/>
+                                            End Period: <span t-esc="get_end_period(data)"/>
+                                        </p>
+                                        <p t-if="data['form']['filter'] == 'filter_date'">
+                                            Date from : <span t-esc="formatLang(get_start_date(data), date=True)"/><br />
+                                            Date to : <span t-esc="formatLang(get_end_date(data), date=True)"/>
+                                        </p>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb32">
+                                <h4 class="text-center"><strong>Sales Product Return</strong></h4>
+                            </div>
+                            
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr style="border-top:1px solid black;">
+                                        <th>Document Date</th>
+                                        <th>Document No.</th>
+                                        <th colspan="4">Customer Name</th>
+                                    </tr>
+                                    <tr style="border-top:hidden;">
+                                        <th>Product Code</th>
+                                        <th>Description</th>
+                                        <th>Unit</th>
+                                        <th class="text-right">Qty</th>
+                                        <th class="text-right">Price Unit</th>
+                                        <th class="text-right" width="13%">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="get_partner_data(data)" t-as="partner">
+                                        <tr>
+                                            <td>
+                                                <strong t-esc="formatLang(partner[1].date_invoice, date=True)"/>
+                                            </td>
+                                            <td>
+                                                <strong t-esc="partner[1].number"/>
+                                            </td>
+                                            <td colspan="5">
+                                                <strong t-esc="partner[0].name"/>
+                                            </td>
+                                        </tr>
+                                        <t t-foreach="get_line_data(partner, data)" t-as="p">
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="p['product']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="p['description']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="p['unit']"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="p['qty']"/>
+                                                </td>
+                                                
+                                                <td>
+                                                    <span t-esc="p['price_unit']"/>
+                                                </td>
+                                                <td class="text-right" width="13%">
+                                                    <span t-esc="p['amount']"/> <span t-esc="p['symbol']"/> 
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <tr>
+                                            <td colspan="5" class="text-right"  style="border-top:1px solid black;border-bottom: 1px solid black;">
+                                                <span>Total</span>
+                                            </td>
+                                            <td  class="text-right" style="border-top:1px solid black;border-bottom: 1px solid black;">
+                                                <span t-esc="get_total_amount()[0]"/> <span t-esc="get_total_amount()[1]"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td class="text-right" colspan="5">
+                                            <strong>Total Sales Refund</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong t-esc="get_grand_total()[0]"/> <strong t-esc="get_grand_total()[1]"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+</openerp>

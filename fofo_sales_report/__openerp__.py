@@ -29,7 +29,9 @@
     """,
     'data':[
             'wizard/report_wizard_view.xml',
+            'wizard/sale_refund_wizard_view.xml',
             'views/sales_report_view.xml',
+            'views/sale_refund_report.xml',
             'views/report_reg.xml'
             ],
     'depends':['fofo_custom'],

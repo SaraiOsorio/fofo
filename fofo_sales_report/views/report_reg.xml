@@ -10,6 +10,15 @@
             name="fofo_sales_report.fofo_sales_report" 
             file="fofo_sales_report.fofo_sales_report"
         />
-
+        
+        <report 
+            id="fofo_sale_refund_report_reg"
+            model="account.invoice"
+            string="Sales Refund Report"
+            report_type="qweb-pdf"
+            name="fofo_sales_report.fofo_sales_refund_report" 
+            file="fofo_sales_report.fofo_sales_refund_report"
+        />
+            
     </data>
 </openerp>

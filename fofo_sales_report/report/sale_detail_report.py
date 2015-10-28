@@ -19,10 +19,6 @@
 #
 ##############################################################################
 
-import time
-from datetime import date, time
-import datetime
-
 from openerp.osv import osv
 from openerp.report import report_sxw
 
@@ -63,6 +59,7 @@ class fofo_sales_detail_report(report_sxw.rml_parse):
         return customer_list
         
     def _get_line_data(self, partner, data):
+        company_id = data['form']['company_id'][0]
         if data['form']['filter'] == 'filter_no':
             self.cr.execute("SELECT \
                                     inv_line.id,  \
@@ -86,8 +83,8 @@ class fofo_sales_detail_report(report_sxw.rml_parse):
                                 LEFT JOIN product_uom uom \
                                     ON (tmpl.uom_id = uom.id) \
                                 WHERE \
-                                    invoice.partner_id = %s and invoice.state not in ('draft', 'cancel') and invoice.type= 'out_invoice' \
-                                " %(partner.id))
+                                    invoice.partner_id = %s and invoice.company_id = %s and invoice.state not in ('draft', 'cancel') and invoice.type= 'out_invoice' \
+                                " %(partner.id, company_id))
         else:
             date_start = False
             date_stop = False
@@ -122,9 +119,9 @@ class fofo_sales_detail_report(report_sxw.rml_parse):
                                 LEFT JOIN product_uom uom
                                     ON (tmpl.uom_id = uom.id)
                                 WHERE
-                                    invoice.partner_id = %s and invoice.state not in ('draft', 'cancel') and 
+                                    invoice.partner_id = %s and invoice.company_id = %s and invoice.state not in ('draft', 'cancel') and 
                                     invoice.date_invoice <= %s and invoice.date_invoice >= %s and invoice.type= 'out_invoice'
-                                """, (partner.id, date_stop, date_start))
+                                """, (partner.id, company_id, date_stop, date_start))
         
         query_data = self.cr.dictfetchall()
         self.total_sale = [0.0, '']
