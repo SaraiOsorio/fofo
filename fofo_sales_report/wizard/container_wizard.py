@@ -28,8 +28,8 @@ class container_receiving_report(models.TransientModel):
     _name = 'container.receiving.report'
     
     company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env['res.company']._company_default_get('fofo.sale.report'))
-    start_date = fields.Date('Start Date', required=True, default= fields.Date.today())
-    end_date = fields.Date('End Date', required=True, default= fields.Date.today())
+    start_date = fields.Date('Arrival Start Date', required=True, default= fields.Date.today())
+    end_date = fields.Date('Arrival End Date', required=True, default= fields.Date.today())
     
     @api.multi
     def print_report(self, data):
