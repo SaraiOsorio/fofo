@@ -47,7 +47,7 @@
                                         <th>Description</th>
                                         <th class="text-right">Qty</th>
                                         <th>Unit</th>
-                                        <th class="text-right">Total Sales</th>
+                                        <th class="text-right" width="13%">Total Sales</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,7 +75,7 @@
                                                 <td>
                                                     <span t-esc="p['unit']"/>
                                                 </td>
-                                                <td class="text-right">
+                                                <td class="text-right" width="13%">
                                                     <span t-esc="p['total_sale']"/> <span t-esc="p['symbol']"/> 
                                                 </td>
                                             </tr>
@@ -87,6 +87,14 @@
                                             </td>
                                         </tr>
                                     </t>
+                                    <tr style="border-top: hidden;">
+                                        <td class="text-right" colspan="5">
+                                            <strong>TOTAL SALE</strong>
+                                        </td>
+                                        <td class="text-right" colspan="2">
+                                            <strong t-esc="get_grand_total()[0]"/> <strong t-esc="get_grand_total()[1]"/>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

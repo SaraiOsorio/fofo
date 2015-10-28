@@ -39,9 +39,11 @@ class fofo_sales_detail_report(report_sxw.rml_parse):
                     'get_end_date': self._get_end_date,
                     'get_partner_data': self._get_partner_data,
                     'get_line_data': self._get_line_data,
-                    'get_total_sale': self._get_total_sale
+                    'get_total_sale': self._get_total_sale,
+                    'get_grand_total': self._get_grand_total
         })
         self.total_sale =[0.0, '']
+        self.grand_total = [0.0, '']
         
     def _get_partner_data(self, data):
         customer_list = []
@@ -111,8 +113,8 @@ class fofo_sales_detail_report(report_sxw.rml_parse):
                                     account_invoice_line inv_line 
                                 LEFT JOIN account_invoice invoice
                                     ON (inv_line.invoice_id = invoice.id)
-                                LEFT JOIN res_currency currency \
-                                    ON (invoice.currency_id = currency.id) \
+                                LEFT JOIN res_currency currency 
+                                    ON (invoice.currency_id = currency.id) 
                                 LEFT JOIN product_product product
                                     ON (inv_line.product_id = product.id)
                                 LEFT JOIN product_template tmpl
@@ -129,8 +131,13 @@ class fofo_sales_detail_report(report_sxw.rml_parse):
         for sale in query_data:
             self.total_sale[0] += sale['total_sale']
             self.total_sale[1] =  sale['symbol']
+        self.grand_total[0] += self.total_sale[0]
+        self.grand_total[1] = self.total_sale[1]
         return query_data
         
+    def _get_grand_total(self):
+        return self.grand_total
+    
     def _get_total_sale(self):
         return self.total_sale
         
