@@ -49,7 +49,7 @@ class sales_refund_report(report_sxw.rml_parse):
         if wiz_customer_ids:
             customers_data = self.pool.get('res.partner').browse(self.cr, self.uid, wiz_customer_ids)
             customer_list.extend(customers_data)
-        if not wiz_customer_ids and not categ_ids:
+        if not wiz_customer_ids:
             customers_ids = self.pool.get('res.partner').search(self.cr, self.uid, [])
             customers_data = self.pool.get('res.partner').browse(self.cr, self.uid, customers_ids)
             customer_list.extend(customers_data)
