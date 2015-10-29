@@ -44,4 +44,19 @@ class sale_order_line(models.Model):
                     lines.append(line.id)
                 res['value'].update({'sale_history_line_ids': [(6, 0, lines)]})
         return res
+    
+    
+class sale_order(models.Model):
+    _inherit = 'sale.order'
+    
+    @api.constrains('order_policy', 'order_line')
+    def check_order_policy(self):
+        if self.order_line:
+            for line in self.order_line:
+                product_tmpl_id = line.product_id.product_tmpl_id.id
+                bom_product = self.env['mrp.bom'].search([('product_tmpl_id', '=', product_tmpl_id)])
+                if bom_product and self.order_policy != 'manual':
+                    raise Warning('Product : %s is bundled product. Please set the order policy : On Demand.' %(line.product_id.name))
+        return True
+    
 
