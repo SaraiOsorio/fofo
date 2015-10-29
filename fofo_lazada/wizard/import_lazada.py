@@ -190,7 +190,7 @@ class lazada_import(models.TransientModel):
                     if row_no > 0:
                         seller_sku_value = sheet.row_values(row_no)[seller_sku] # "Seller SKU" from xlsx
                         if not seller_sku_value in seller_sku_list:
-                            products = prod_obj.search([('default_code', '=', seller_sku_value)]).id
+                            products = prod_obj.search([('default_code', '=', seller_sku_value)])
                             seller_sku_list.append(seller_sku_value)
                             if not product_dict.get(seller_sku_value):
                                 product_dict[seller_sku_value] = products
@@ -198,7 +198,7 @@ class lazada_import(models.TransientModel):
                             if product_dict.get(seller_sku_value):
                                 product_id = product_dict.get(seller_sku_value)
                                 if not product_data_dict.get(product_id):
-                                    product_data = sale_line_obj.product_id_change(partner_data['value']['pricelist_id'], product_id, qty=0,
+                                    product_data = sale_line_obj.product_id_change(partner_data['value']['pricelist_id'], product_id.id, qty=0,
                                     uom=False, qty_uos=0, uos=False, name='', partner_id=partner,
                                     lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False)
 
@@ -225,6 +225,7 @@ class lazada_import(models.TransientModel):
                 for item in items_dict:
                     no_order_number = False
                     order_fail = False
+                    order_policy = 'picking'
                     date_convert = tools.ustr(items_dict[item][0]['created_at'])
                     final_date = datetime.strptime(date_convert, '%Y-%m-%d %H:%M:%S').strftime('%m/%d/%Y %H:%M:%S')
                     #this section will check if any product is not found then it will not create orderline for that product and also create the history with fail status
@@ -234,9 +235,9 @@ class lazada_import(models.TransientModel):
                         if not line_sku['order_no']:
                             no_order_number = True
                             
-                            
                         if not product_dict[line_sku['seller_sku']]:
                             order_fail = True
+                            #this section will create the history for fail order
                             if not line_sku['order_no'] in failed_order:
                                 for history_item in items_dict[line_sku['order_no']]:
                                     if not product_dict[history_item['seller_sku']]:
@@ -255,7 +256,7 @@ class lazada_import(models.TransientModel):
                                         }
                                     else:
                                         history_vals = {
-                                                'product_id':product_dict[history_item['seller_sku']],
+                                                'product_id':product_dict[history_item['seller_sku']].id,
                                                 'seller_sku':history_item['seller_sku'],
                                                 'created_at':final_date_new,
                                                 'order_number':history_item['order_no'],#order,
@@ -273,7 +274,13 @@ class lazada_import(models.TransientModel):
                                     history.name = history_sequence
                                     if history:
                                         history_ids.append(history.id)
-                                    
+                        else:
+                            product = product_dict[line_sku['seller_sku']]
+                            product_tmpl_id = product.product_tmpl_id
+                            bom_product = self.env['mrp.bom'].search([('product_tmpl_id', '=', product_tmpl_id.id)])
+                            #if line product is bundled product then it will create the order with 'On Demand' order policy.
+                            if bom_product:
+                                order_policy = 'manual'
                                     
                     if order_fail:
                         continue
@@ -340,9 +347,15 @@ class lazada_import(models.TransientModel):
                                                 exist_orders.signal_workflow('order_confirm')
                                                 if exist_orders.picking_ids:
                                                     for picking in exist_orders.picking_ids:
-                                                        picking.write({'invoice_state': '2binvoiced'})
+                                                        if exist_orders.order_policy == 'manual':
+                                                            invoice = exist_orders.signal_workflow('manual_invoice')
+                                                            if exist_orders.invoice_ids:
+                                                                for inv in exist_orders.invoice_ids:
+                                                                    inv.signal_workflow('invoice_open')
+                                                        else:
+                                                            picking.write({'invoice_state': '2binvoiced'})
+                                                            picking_to_invoice.append(picking.id)
                                                         picking_to_transfer.append(picking.id)
-                                                        picking_to_invoice.append(picking.id)
                                             
                                             if str(line_status['status']) == 'canceled':
                                                 exist_orders.signal_workflow('order_confirm')
@@ -351,37 +364,21 @@ class lazada_import(models.TransientModel):
                                             if str(line_status['status']) == 'returned':
                                                 if exist_orders.state == 'draft':
                                                     exist_orders.signal_workflow('order_confirm')
-                                                    if exist_orders.picking_ids:
-                                                        for picking in exist_orders.picking_ids:
-                                                            picking.write({'invoice_state': '2binvoiced'})
-                                                            picking.do_transfer()
-                                                            invoice = picking.action_invoice_create(
-                                                                        journal_id = self.journal_id.id,
-                                                                        type = 'out_invoice'
-                                                                        )
-                                                            if invoice:
-                                                                for i in invoice:
-                                                                    #It will validate the created invoice
-                                                                    invoice_data = self.env['account.invoice'].browse(i)
-                                                                    invoice_data.signal_workflow('invoice_open')
-                                                if exist_orders.state == 'progress':
-                                                    if exist_orders.picking_ids:
-                                                        for picking in exist_orders.picking_ids:
-                                                            picking.write({'invoice_state': '2binvoiced'})
-                                                            if picking.state == 'confirmed' or picking.state == 'assigned':
-                                                                picking.do_transfer()
-                                                            if not exist_orders.invoice_ids:
+                                                if exist_orders.picking_ids:
+                                                    for picking in exist_orders.picking_ids:
+                                                        #if sale order does not have invoice then below process will create the invoices for sale order
+                                                        if not exist_orders.invoice_ids:
+                                                            if exist_orders.order_policy == 'manual':
+                                                                invoice = exist_orders.signal_workflow('manual_invoice')
+                                                            else:
+                                                                picking.write({'invoice_state': '2binvoiced'})
                                                                 invoice = picking.action_invoice_create(
                                                                         journal_id = self.journal_id.id,
                                                                         type = 'out_invoice'
                                                                         )
-                                                                if invoice:
-                                                                    for i in invoice:
-                                                                        #It will validate the created invoice
-                                                                        invoice_data = self.env['account.invoice'].browse(i)
-                                                                        invoice_data.signal_workflow('invoice_open')
-                                                if exist_orders.picking_ids:
-                                                    for picking in exist_orders.picking_ids:
+                                                            if picking.state == 'confirmed' or picking.state == 'assigned':
+                                                                picking.do_transfer()
+                                                        
                                                         move_ids = self.env['stock.move'].search([('picking_id','=',picking.id)])
                                                          
                                                         return_moves = []
@@ -390,34 +387,47 @@ class lazada_import(models.TransientModel):
                                                               'quantity': stock_move.product_qty,
                                                               'move_id':stock_move.id, 
                                                               }))
+                                                        #this section will create the return picking for sale order
                                                         if return_moves:
-                                                            stock_return_id = self.env['stock.return.picking'].create({
-                                                                                   'product_return_moves': return_moves,
-                                                                                    'invoice_state':'2binvoiced',
-                                                                                            })
+                                                            if exist_orders.order_policy == 'manual':
+                                                                stock_return_id = self.env['stock.return.picking'].create({
+                                                                                       'product_return_moves': return_moves,
+                                                                                        'invoice_state':'none',
+                                                                                                })
+                                                            else:
+                                                                stock_return_id = self.env['stock.return.picking'].create({
+                                                                                       'product_return_moves': return_moves,
+                                                                                        'invoice_state':'2binvoiced',
+                                                                                                })
                                                             context = self._context.copy()
                                                             context.update({'active_id': picking.id})
                                                             new_picking_id, pick_type_id = stock_return_id.with_context(context)._create_returns()
                                                             
                                                             return_picking = self.env['stock.picking'].browse(new_picking_id)
-                                                            return_picking.write({'invoice_state': 'invoiced'})
-                                                            return_picking.do_transfer()
-                                                            refund_invoice = return_picking.action_invoice_create(
-                                                                    journal_id = self.refund_journal_id.id,
-                                                                    type='out_refund'
-                                                                    )
-                                                            if refund_invoice:
-                                                                for i in refund_invoice:
-                                                                    #It will validate the created invoice
-                                                                    refund_invoice_data = self.env['account.invoice'].browse(i)
-                                                                    refund_invoice_data.signal_workflow('invoice_open')
-#                                                             if exist_orders.invoice_ids:
-#                                                                 refund_vals = self.env['account.invoice']._prepare_refund(exist_orders.invoice_ids, date=False, period_id=False,
-#                                                                                                            description='Customer Refund', journal_id=False)
-#                                                                 refund_vals.update({'lazada_order_no': exist_orders.invoice_ids.lazada_order_no})
-#                                                                 new_invoice = self.env['account.invoice'].create(refund_vals)
-#                                                                 if new_invoice:
-#                                                                     new_invoice.signal_workflow('invoice_open')
+                                                        if exist_orders.invoice_ids:
+                                                            for inv in exist_orders.invoice_ids:
+                                                                inv.signal_workflow('invoice_open')
+                                                                #if sale order has order policy 'On Demand' then it will create the refund invoice based on current invoice
+                                                                if exist_orders.order_policy == 'manual':
+                                                                    refund_vals = self.env['account.invoice']._prepare_refund(inv, date=False, period_id=False,
+                                                                                                               description='Customer Refund', journal_id=False)
+                                                                    refund_vals.update({'lazada_order_no': inv.lazada_order_no})
+                                                                    new_invoice = self.env['account.invoice'].create(refund_vals)
+                                                                    if new_invoice:
+                                                                        new_invoice.signal_workflow('invoice_open')
+                                                                else:
+                                                                    #if sale order has order policy 'On Delivery order' then it will create the refund invoice based on return picking
+                                                                    refund_invoice = return_picking.action_invoice_create(
+                                                                        journal_id = self.refund_journal_id.id,
+                                                                        type='out_refund'
+                                                                        )
+                                                                    if refund_invoice:
+                                                                        for i in refund_invoice:
+                                                                            #It will validate the created invoice
+                                                                            refund_invoice_data = self.env['account.invoice'].browse(i)
+                                                                            refund_invoice_data.signal_workflow('invoice_open')
+                                                                return_picking.do_transfer()
+                                                                                
                                             history.status = line_status['status']
                                             history_ids.append(history.id)
                     if flag_order_exist:
@@ -459,7 +469,7 @@ class lazada_import(models.TransientModel):
                             'payment_term': partner_data['value']['payment_term'],
                             'state' : 'draft',
                             'is_lazada_order': True,
-                            'order_policy' :  'picking',
+                            'order_policy' :  order_policy,
                             'lazada_order_no': items_dict[item][0]['order_no'],#probuse
                         }
                         ctx.update({'is_lazada_order': True})
@@ -482,14 +492,14 @@ class lazada_import(models.TransientModel):
                                         'price_unit' : i['unit_price'],
                                         'invoiced' : False,
                                         'state' : 'draft',
-                                        'product_id' : products,
+                                        'product_id' : products.id,
                                         'tax_id' : product_data['value']['tax_id'],
                                         'is_lazada_order': True,
                                         'lazada_order_no': order,
                                             }
                                 line_id = sale_line_obj.create(orderlinevals)
                                 history_vals = {
-                                    'product_id':products,
+                                    'product_id':products.id,
                                     'seller_sku':i['seller_sku'],
                                     'created_at':final_date,
                                     'order_number':i['order_no'],
@@ -507,7 +517,7 @@ class lazada_import(models.TransientModel):
                                 history.name = history_sequence
                                 if history:
                                     history_ids.append(history.id)
-                            else:#Unsed now ? Since we already check for fail at begining.
+                            else:#Unsed now ? Since we already check for fail at beginning.
                                 history_vals = {
                                         'product_id':False,
                                         'seller_sku':i['seller_sku'],
@@ -528,7 +538,6 @@ class lazada_import(models.TransientModel):
                                 if history:
                                     history_ids.append(history.id)
                         #below section will set the state of sale order related to lazada status
-                        
                         if i['status'] == 'ready_to_ship':
                             sale_order_id.signal_workflow('order_confirm')
                             if sale_order_id.picking_ids:
@@ -566,9 +575,15 @@ class lazada_import(models.TransientModel):
                             sale_order_id.signal_workflow('order_confirm')
                             if sale_order_id.picking_ids:
                                 for picking in sale_order_id.picking_ids:
-                                    picking.write({'invoice_state': '2binvoiced'})
+                                    if sale_order_id.order_policy == 'manual':
+                                        invoices = sale_order_id.signal_workflow('manual_invoice')
+                                        if sale_order_id.invoice_ids:
+                                            for inv in sale_order_id.invoice_ids:
+                                                inv.signal_workflow('invoice_open')
+                                    else:
+                                        picking_to_invoice.append(picking.id)
+                                        picking.write({'invoice_state': '2binvoiced'})
                                     picking_to_transfer.append(picking.id)
-                                    picking_to_invoice.append(picking.id)
                         
                         if i['status'] == 'canceled':
                             sale_order_id.signal_workflow('order_confirm')
@@ -578,17 +593,18 @@ class lazada_import(models.TransientModel):
                             sale_order_id.signal_workflow('order_confirm')
                             if sale_order_id.picking_ids:
                                 for picking in sale_order_id.picking_ids:
-                                    picking.write({'invoice_state': '2binvoiced'})
+                                    #if order policy is 'On Demand' then it will create the invoice base on sale order
+                                    if sale_order_id.order_policy == 'manual':
+                                        invoices = sale_order_id.signal_workflow('manual_invoice')
+                                    else:
+                                        #if order policy is not 'On Demand' then it will create the invoice base on picking
+                                        picking.write({'invoice_state': '2binvoiced'})
+                                        invoice = picking.action_invoice_create(
+                                                    journal_id = self.journal_id.id,
+                                                    type = 'out_invoice'
+                                                    )
+                                    #transfer the picking
                                     picking.do_transfer()
-                                    invoice = picking.action_invoice_create(
-                                                journal_id = self.journal_id.id,
-                                                type = 'out_invoice'
-                                                )
-                                    if invoice:
-                                        for i in invoice:
-                                            #It will validate the created invoice
-                                            invoice_data = self.env['account.invoice'].browse(i)
-                                            invoice_data.signal_workflow('invoice_open')
                                     move_ids = self.env['stock.move'].search([('picking_id','=',picking.id)])
                                     return_moves = []
                                     for stock_move in move_ids:
@@ -597,34 +613,48 @@ class lazada_import(models.TransientModel):
                                                               'move_id':stock_move.id, 
                                                               }))
                                     if return_moves:
-                                        stock_return_id = self.env['stock.return.picking'].create({
+                                        #create the return picking
+                                        if sale_order_id.order_policy == 'manual':
+                                            stock_return_id = self.env['stock.return.picking'].create({
+                                                               'product_return_moves': return_moves,
+                                                                'invoice_state':'none',
+                                                                        })
+                                        else:
+                                            stock_return_id = self.env['stock.return.picking'].create({
                                                                'product_return_moves': return_moves,
                                                                 'invoice_state':'2binvoiced',
                                                                         })
                                         context = self._context.copy()
                                         context.update({'active_id': picking.id})
+                                        #create picking return
                                         new_picking_id, pick_type_id = stock_return_id.with_context(context)._create_returns()
                                         return_picking = self.env['stock.picking'].browse(new_picking_id)
-                                        refund_invoice = return_picking.action_invoice_create(
-                                                journal_id = self.refund_journal_id.id,
-                                                type='out_refund'
-                                                )
-                                        if refund_invoice:
-                                            for i in refund_invoice:
-                                                #It will validate the created invoice
-                                                refund_invoice_data = self.env['account.invoice'].browse(i)
-                                                refund_invoice_data.signal_workflow('invoice_open')
-#                                         if invoice:
-#                                             for i in invoice:
-#                                                 #It will validate the created invoice
-#                                                 invoice_data = self.env['account.invoice'].browse(i)
-#                                                 invoice_data.signal_workflow('invoice_open')
-#                                                 refund_vals = self.env['account.invoice']._prepare_refund(invoice_data, date=False, period_id=False,
-#                                                                                            description='Customer Refund', journal_id=False)
-#                                                 refund_vals.update({'lazada_order_no': invoice_data.lazada_order_no})
-#                                                 new_invoice = self.env['account.invoice'].create(refund_vals)
-#                                                 if new_invoice:
-#                                                     new_invoice.signal_workflow('invoice_open')
+                                        #transfer the return picking
+                                        return_picking.do_transfer()
+                                        
+                                    if sale_order_id.invoice_ids:
+                                        for inv in sale_order_id.invoice_ids:
+                                            #validate the invoices of order
+                                            inv.signal_workflow('invoice_open')
+                                            if sale_order_id.order_policy == 'manual':
+                                                #if order policy is 'On Demand' then it will create the refund invoice base on the sale invoice
+                                                refund_vals = self.env['account.invoice']._prepare_refund(inv, date=False, period_id=False,
+                                                                                           description='Customer Refund', journal_id=False)
+                                                refund_vals.update({'lazada_order_no': inv.lazada_order_no})
+                                                new_invoice = self.env['account.invoice'].create(refund_vals)
+                                                if new_invoice:
+                                                    new_invoice.signal_workflow('invoice_open')
+                                            else:
+                                                #if order policy is not On Demand' then it will create the refund invoice  base on the return picking
+                                                refund_invoice = return_picking.action_invoice_create(
+                                                    journal_id = self.refund_journal_id.id,
+                                                    type='out_refund'
+                                                    )
+                                                if refund_invoice:
+                                                    for i in refund_invoice:
+                                                        #It will validate the created invoice
+                                                        refund_invoice_data = self.env['account.invoice'].browse(i)
+                                                        refund_invoice_data.signal_workflow('invoice_open')
                     #If Order has status Ready to Ship then set
                     #Delivery order in ready to transfer state
             pick_transfer = self.env['stock.picking'].browse(picking_to_transfer)

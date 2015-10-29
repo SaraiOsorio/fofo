@@ -40,7 +40,7 @@
             'views/product_view.xml',
             'security/ir.model.access.csv',
             ],
-    'depends':['fofo_custom'],
+    'depends':['fofo_custom', 'sale_bom_split'],
     'installable':True,
     'auto_install':False
 }
