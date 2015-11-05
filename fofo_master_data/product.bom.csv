@@ -1,0 +1,6 @@
+product,child_product,quantity
+<product_code_1>,product-1,1
+,Product-2,2
+,Product-3,1
+<product_code_2>,Product-4,1
+,Product-3,2
