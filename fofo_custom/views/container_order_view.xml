@@ -136,7 +136,7 @@
                                 <button name="add_co_lines" type="object"  
                                         class="oe_highlight"  
                                         attrs="{'invisible':[('state','!=','draft')]}"
-                                        string="Add Lines"/>
+                                        string="Compute"/>
                                 <field name="co_line_ids" context="{'only_confirmed': True}" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}">
                                     <tree string="Container Order Lines">
                                         <field name="po_line_id"  invisible='True'/>

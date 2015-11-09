@@ -437,26 +437,42 @@ class container_order(models.Model):
     landed_cost_allocated = fields.Boolean('Landed Cost Allocated', help="This checkbox will automatically checked once landed cost will be allocated for container order.", readonly=True, copy=False)
     draft_invoice_shipper = fields.Boolean('Draft Shipper Invoices', readonly=True, copy=False)
     recreate_visible = fields.Boolean(compute=_get_state_invoice_shipper, string='Recreate Visible')
-    po_ids = fields.Many2many('purchase.order', 'purchase_container_rel', 'po_id', 'container_id', string='Purchase Order')
-
+    po_ids = fields.Many2many('purchase.order', 'purchase_container_rel', 'po_id', 'container_id', string='Purchase Orders')
+    po_ids = fields.Many2many('purchase.order', 'purchase_container_rel', 'po_id', 'container_id', string='Purchase Orders')
+    inserted_po_ids = fields.Many2many('purchase.order', 'purchase_container_record_rel', 'po_id', 'container_id', string='Operated Purchase Orders')
+    all_inserted_po_ids = fields.Many2many('purchase.order', 'purchase_container_all_rel', 'po_id', 'container_id', string='All Purchase Orders')
 
     @api.multi
     def add_co_lines(self):
         if self.po_ids:
             co_lines = []
+            po_list = []
+            exist_po_list = []
             for po in self.po_ids:
+                po_exist = False
+                
+                if po not in self.all_inserted_po_ids:
+                    exist_ids = self.all_inserted_po_ids.ids
+                    exist_po_list.append(po.id)
+                    exist_po_list.extend(exist_ids)
+                
+                for current_po in self.po_ids:#Check if po already operated and its CO line exists in the CO.
+                    if current_po in self.all_inserted_po_ids and current_po not in self.inserted_po_ids:
+                        for coline in self.co_line_ids:
+                            if coline.po_line_id.order_id.id == current_po.id:
+                                raise Warning(_('It seems you are trying to add purchase order which has been already added before so please first remove all its related Container order lines to add it again.'))
+                
+                if self.inserted_po_ids and po in self.inserted_po_ids:
+                    po_list.append(po.id)
+                    po_exist = True
+                
+                if po_exist:
+                    continue
+                
+                po_list.append(po.id)
                 if po.order_line:
-                    line_exist = False
                     for order_line in po.order_line:
                         if order_line.state == 'confirmed' and order_line.remain_contain_qty > 0.0 and order_line.purchase_by_container is True:
-                            #If co line is already added in co order then it will skip this line
-                            if self.co_line_ids.ids:
-                                for col in self.co_line_ids:
-                                    if col.po_line_id.id == order_line.id:
-                                        line_exist = True
-                            if line_exist:
-                                continue
-                            
                             po_currency = po.currency_id
                             current_currency = self.currency_id
                             amount = order_line.price_unit
@@ -481,13 +497,16 @@ class container_order(models.Model):
                                             'number_packages': order_line.number_packages,
                                             'taxes_id': [(6, 0, taxes)]
                                             }
-                            co_lines.append((0, 0, co_line_vals))
+                            co_lines.append((0, 0, co_line_vals))#create
+            if po_list:
+                self.write({'inserted_po_ids': [(6, 0, po_list)]}) #Write
+            if exist_po_list:
+                self.write({'all_inserted_po_ids': [(6, 0, exist_po_list)]}) #Write
             if co_lines:
                 #create new co lines
                 self.write({'co_line_ids': co_lines})
 
-#             
-        
+
     @api.onchange('inbound_shipper_id')
     def on_change_inbound_shipper_id(self):
         if self.inbound_shipper_id:
