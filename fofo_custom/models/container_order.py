@@ -173,6 +173,7 @@ class container_order_line(models.Model):
                 for tax in line_data.taxes_id:
                     taxes.append(tax.id)
                 self.taxes_id = taxes
+                
 
 class container_order(models.Model):
     _inherit = ['mail.thread']
@@ -436,7 +437,57 @@ class container_order(models.Model):
     landed_cost_allocated = fields.Boolean('Landed Cost Allocated', help="This checkbox will automatically checked once landed cost will be allocated for container order.", readonly=True, copy=False)
     draft_invoice_shipper = fields.Boolean('Draft Shipper Invoices', readonly=True, copy=False)
     recreate_visible = fields.Boolean(compute=_get_state_invoice_shipper, string='Recreate Visible')
+    po_ids = fields.Many2many('purchase.order', 'purchase_container_rel', 'po_id', 'container_id', string='Purchase Order')
 
+
+    @api.multi
+    def add_co_lines(self):
+        if self.po_ids:
+            co_lines = []
+            for po in self.po_ids:
+                if po.order_line:
+                    line_exist = False
+                    for order_line in po.order_line:
+                        if order_line.state == 'confirmed' and order_line.remain_contain_qty > 0.0 and order_line.purchase_by_container is True:
+                            #If co line is already added in co order then it will skip this line
+                            if self.co_line_ids.ids:
+                                for col in self.co_line_ids:
+                                    if col.po_line_id.id == order_line.id:
+                                        line_exist = True
+                            if line_exist:
+                                continue
+                            
+                            po_currency = po.currency_id
+                            current_currency = self.currency_id
+                            amount = order_line.price_unit
+                            if po_currency:
+                                amount = po_currency.compute(order_line.price_unit, current_currency)
+                            taxes = []
+                            if order_line.taxes_id:
+                                for tax in order_line.taxes_id:
+                                    taxes.append(tax.id)
+                            co_line_vals = {
+                                            'container_order_id': self.id, 
+                                            'po_line_id':order_line.id,
+                                            'product_id': order_line.product_id.id,
+                                            'product_qty': order_line.remain_contain_qty,
+                                            'total_purchase_qty': order_line.product_qty,
+                                            'product_uom': order_line.product_uom.id,
+                                            'price_unit': amount,
+                                            'date_planned': order_line.date_planned,
+                                            'name': order_line.name,
+                                            'product_packaging': order_line.product_packaging.id,
+                                            'qty_package': order_line.qty_package,
+                                            'number_packages': order_line.number_packages,
+                                            'taxes_id': [(6, 0, taxes)]
+                                            }
+                            co_lines.append((0, 0, co_line_vals))
+            if co_lines:
+                #create new co lines
+                self.write({'co_line_ids': co_lines})
+
+#             
+        
     @api.onchange('inbound_shipper_id')
     def on_change_inbound_shipper_id(self):
         if self.inbound_shipper_id:

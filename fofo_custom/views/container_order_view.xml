@@ -15,7 +15,7 @@
                             <group>
                                 <field name="max_weight"/>
                                 <field name="max_volume"/>
-                            </group>                            
+                            </group>
                             <group/>
                         </group>
                     </sheet>
@@ -101,7 +101,7 @@
                                 attrs="{'invisible': [('invoice_count', '=', 0)]}">
                                 <field name="invoice_count" widget="statinfo" string="Related Invoices" help="Inbound / Outbound Shipper Invoices"/>
                             </button> 
-                        </div>                               
+                        </div>
                         <group>
                             <group>
                                 <field name="container_size" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"/>
@@ -128,6 +128,15 @@
                         </group>
                         <notebook string="Container">
                             <page string="Container Order Lines">
+                                <group>
+                                    <field name="po_ids" widget='many2many_tags' 
+                                    domain="[('state', 'in', ('confirmed', 'approved')), ('purchase_by_container', '=', True)]" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}"
+                                    />
+                                </group>
+                                <button name="add_co_lines" type="object"  
+                                        class="oe_highlight"  
+                                        attrs="{'invisible':[('state','!=','draft')]}"
+                                        string="Add Lines"/>
                                 <field name="co_line_ids" context="{'only_confirmed': True}" attrs="{'readonly':[('state','in',('confirm', 'done', 'cancel'))]}">
                                     <tree string="Container Order Lines">
                                         <field name="po_line_id"  invisible='True'/>
@@ -359,7 +368,8 @@
                             <group>
                                 <field name="taxes_id" widget="many2many_tags" domain="[('parent_id','=',False),('type_tax_use','!=','sale')]"/>
                                 <field name="product_tmpl_id" invisible="1"/>
-                                <field name="product_packaging" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                                <field name="product_packaging" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging" 
+                                     options="{'limit': 1, 'create': false, 'create_edit': false }" />
                                 <field name="number_packages" invisible="0"/>
                                 <field name="qty_package" invisible="0"/>
                                 <field name="date_planned" widget="date"/>
