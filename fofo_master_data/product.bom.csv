@@ -1,6 +1,461 @@
-product,child_product,quantity
-<product_code_1>,product-1,1
-,Product-2,2
-,Product-3,1
-<product_code_2>,Product-4,1
-,Product-3,2
+id,,product_tmpl_id,,type,bom_line_ids/product_id,bom_line_ids/product_qty
+product.product_bom_1,CN201-Green+WC101,FOFO ชุดมีดเซรามิกด้ามสีพร้อมฐานวาง + เขียงไม้เนื้อแข็ง 26x38 ซม. (ฟรี หม้อด้าม 16 ซม.),X,phantom,CN201,1
+,,,Y,,WC101,1
+product.product_bom_3,CN202-Black+WC101,FOFO ชุด มีด เซรามิก ด้ามสีใบมีดดำ  + เขียง ไม้เนื้อแข็ง 26x38 ซม. (ฟรี หม้อด้าม 16 ซม.),X,phantom,CN202,1
+,,,Y,,WC101,1
+product.product_bom_5,CN203+WC101,FOFO ชุดมีดเซรามิกด้ามไม้พร้อมฐานวาง + เขียงไม้เนื้อแข็ง แถม ผ้าเช็ดมือชุดกระโปรง (คละสี),X,phantom,CN203,1
+,,,Y,,WC101,1
+product.product_bom_7,CS3102D-black,FOFO ชุดแก้ว ชา/กาแฟ เซรามิก พร้อมจานรอง - สีดำ (2 ใบ),X,phantom,cs3102d,2
+product.product_bom_8,"CS3102D-black,pink",FOFO ชุด แก้ว กาแฟ เซรามิก 250 ML. - สีดำ/ชมพู (4 ใบ),X,phantom,cs3102d,4
+product.product_bom_9,CS3102D-orange*6,FOFO ชุด แก้ว กาแฟ ขนาดกะทัดรัด - สีส้ม 4 ใบ/ชุด (ฟรี แก้วกาแฟ 2 ใบ),X,phantom,cs3102d,6
+product.product_bom_10,CS3102D-purple,FOFO ชุดแก้ว ชา/กาแฟ เซรามิก พร้อมจานรอง - สีม่วง (2 ใบ),X,phantom,cs3102d,2
+product.product_bom_11,CS3102Q-earthtone,FOFO ชุดแก้วกาแฟเซรามิก โทนธรรมชาติ (3 ใบ/ชุด),X,phantom,cs3102q,3
+product.product_bom_12,CS3102Q-Lime,FOFO แก้ว กาแฟ เซรามิก ทรงสามเหลี่ยม. - เขียวมะนาว 4 ใบ/ชุด,X,phantom,cs3102q,4
+product.product_bom_13,"CS3102Q-pink,blue",FOFO ชุด แก้ว กาแฟ เซรามิก ฐานโค้ง 220 ML. - สีฟ้า/ชมพู (4 ใบ),X,phantom,cs3102q,4
+product.product_bom_14,CS3102Q-purple,FOFO แก้ว กาแฟ เซรามิก ฐานโค้ง 220 ML. - สีม่วงแก่ 4 ใบ/ชุด,X,phantom,cs3102q,4
+product.product_bom_15,CS3102Q-purple*2,FOFO แก้วมัค เซรามิก อเนกประสงค์ ขนาดใหญ่ - สีม่วง 2 ใบ/ชุด,X,phantom,cs3102q,2
+product.product_bom_16,"CS3102Q-purple,pink",FOFO 4 ใบ/ชุด แก้ว กาแฟ เซรามิก ฐานโค้ง 220 ML. - สีม่วง/ชมพู,X,phantom,cs3102q,2
+product.product_bom_17,CS3102Q-redblood,FOFO แก้ว กาแฟ เซรามิก ฐานโค้ง 220 ML. - สีแดงสด 4 ใบ/ชุด,X,phantom,cs3102q,4
+product.product_bom_18,CS3102Q-Yellow,FOFO แก้ว กาแฟ เซรามิก ฐานโค้ง 220 ML. - สีเหลืองสด 4 ใบ/ชุด,X,phantom,cs3102q,4
+product.product_bom_19,CS3102T-blue,FOFO ชุด แก้ว กาแฟ เซรามิก ทรงแปดเหลี่ยม 250 ML. - สีฟ้าเข้ม (4 ใบ),X,phantom,cs3102t,4
+product.product_bom_20,"CS3104-blue,grey",FOFO ชุด แก้ว รินนม เซรามิก 220 ML. - สีฟ้า/เทา (4 ใบ),X,phantom,CS3104,4
+product.product_bom_21,"CS3104-orange,brown",FOFO ชุด แก้ว รินนม เซรามิก 220 ML. - สีส้ม/น้ำตาล (4ใบ),X,phantom,CS3104,4
+product.product_bom_22,cw1106 - 6,FOFO ชุด 6 ใบ จานเซรามิก ทรงตื้นมีขอบ - ขาวครีม (6นิ้ว),X,phantom,CW1106,6
+product.product_bom_23,cw1108 x 6p,FOFO ชุด 6 ใบ จานเซรามิก ทรงตื้นมีขอบ (8นิ้ว) - ขาวครีม,X,phantom,CW1108,6
+product.product_bom_24,cw1109 x 6p,FOFO ชุด 6 ใบ จานเซรามิก ทรงตื้นมีขอบ (9นิ้ว) - ขาวครีม,X,phantom,CW1109,6
+product.product_bom_25,CW1210 - 6,FOFO ชุด จานเซรามิก ทรงตื้น  6 ใบ/ ชุด (10นิ้ว) -  ขาวครีม,X,phantom,CW1210,6
+product.product_bom_26,CW1308 - 6,FOFO ชุด จานเซรามิก ทรงลึก 6 ใบ/ ชุด (8นิ้ว) - ขาวครีม,X,phantom,CW1308,6
+product.product_bom_27,CW130809 - 4,FOFO ชุด จานเซรามิก ทรงลึก 4 ใบ/ ชุด (8/9นิ้ว) - ขาวครีม,X,phantom,CW1308,2
+,,,Y,,CW1309,2
+product.product_bom_29,CW1309 - 6,FOFO ชุด จาน เซรามิก ทรงลึก - สีขาว/ครีม 6 ใบ/ชุด (9นิ้ว),X,phantom,CW1309,6
+product.product_bom_30,CW1310 - 6,FOFO ชุด จานเซรามิก ทรงลึก 6 ใบ/ ชุด (10นิ้ว) - ขาวครีม,X,phantom,CW1310,6
+product.product_bom_31,CW14060708,FOFO ชุดถ้วยเซรามิก ขาวล้วน  3 ใบ/ ชุด (6/7/8 นิ้ว),X,phantom,CW1406,1
+,,,Y,,CW1407,1
+,,,Y,,CW1408,1
+product.product_bom_34,CW150809,FOFO ชุดถ้วยเซรามิก ขาวล้วน ขอบหนา 2 ใบ/ ชุด (7.8/9 นิ้ว),X,phantom,CW1508,1
+,,,Y,,CW1509,1
+product.product_bom_36,cw2108910,FOFO ชุด จาน เซรามิก ขาวล้วน 3 ใบ/ ชุด (21/23.5/27 ซม.),X,phantom,CW2108,1
+,,,Y,,CW2109,1
+,,,Y,,CW2110,1
+product.product_bom_39,E01,FOFO ชุด เบาะรองนั่ง + หมอนรองหลัง ลดอุณหภูมิ  ม้าไม้,X,phantom,EC04BZ81,1
+,,,Y,,EC04BD72,1
+product.product_bom_41,E02,FOFO ชุด เบาะรองนั่ง + หมอนรองหลัง ลดอุณหภูมิ  เชอร์รี่,X,phantom,EC04BZ81,1
+,,,Y,,EC04BD72,1
+product.product_bom_43,EC0,FOFO ชุด เบาะรองนั่ง + หมอนรองหลัง ลดอุณหภูมิ สตอร์เบอร์รี่,X,phantom,EC04BZ81,1
+,,,Y,,EC04BD72,1
+product.product_bom_45,EC02G231722-Blue-Set,FOFO ชุด ฝาปิดซิลิโคนขนาดใหญ่  ถนอมอาหาร ร้อน เย็น + ขนาดเล็ก (สีฟ้า),X,phantom,EC02G2317,1
+,,,Y,,EC02G2322,1
+product.product_bom_47,EC02G231722-Green-Set,FOFO ชุด ฝาปิดซิลิโคนขนาดใหญ่ ถนอมอาหาร ร้อน เย็น  ขนาดเล็ก (สีเขียว),X,phantom,EC02G2317,1
+,,,Y,,EC02G2322,1
+product.product_bom_49,EC02G231722-Pink-Set,FOFO ชุด ฝาปิดซิลิโคนขนาดใหญ่ ถนอมอาหาร ร้อน เย็น + ขนาดเล็ก (สีชมพู),X,phantom,EC02G2317,1
+,,,Y,,EC02G2322,1
+product.product_bom_51,EC030314*10,FOFO ช้อนไม้สำหรับทานขนมหวาน (สีน้ำตาล) 10 คัน/ชุด,X,phantom,EC030314,10
+product.product_bom_52,EC04BZ81+EC04BD72,FOFO ชุด เบาะรองนั่ง + หมอนรองหลัง ลดอุณหภูมิ หอไอเฟล,X,phantom,EC04BZ81,1
+,,,Y,,EC04BD72,1
+product.product_bom_54,EC05D101*2,FOFO King Bathing ชุดฝักบัวสปาน้ำแร่ เพิ่มแรงดันน้ำ (ใหญ่) 2 อัน/ชุด (สีใส),X,phantom,EC05D101,2
+product.product_bom_55,EC05D102*2,FOFO King Bathing ชุดฝักบัวสปาน้ำแร่ เพิ่มแรงดันน้ำ (ใหญ่) 2 อัน/ชุด (สีฟ้า),X,phantom,EC05D102,2
+product.product_bom_56,EC05M101*2,FOFO ชุดฝักบัวสปาน้ำแร่ เพิ่มแรงดันน้ำ (เล็ก) 2 อัน/ชุด (สีใส),X,phantom,EC05M101,2
+product.product_bom_57,EC05M102*2,King Bathing ชุดฝักบัวสปาน้ำแร่ เพิ่มแรงดันน้ำ (เล็ก) 2 อัน/ชุด (สีฟ้า),X,phantom,EC05M102,2
+product.product_bom_58,EC05X101*2,FOFO King Bathing ชุดฝักบัวสปาน้ำแร่ เพิ่มแรงดันน้ำ (กลาง) 2 อัน/ชุด (สีใส),X,phantom,EC05X101,2
+product.product_bom_59,EC05X102*2,FOFO King Bathing ชุดฝักบัวสปาน้ำแร่ เพิ่มแรงดันน้ำ (กลาง) 2 อัน/ชุด (สีฟ้า),X,phantom,EC05X102,2
+product.product_bom_60,EC0630162024-Set,FOFO ชุดหม้อเคลือบ non-stick 3 ใบ/ชุด,X,phantom,EC064016,1
+,,,Y,,EC063020,1
+,,,Y,,EC063024,1
+product.product_bom_63,GA1500,FOFO กา แก้วชงชา / แก้วชงกาแฟสด ทรงตรง 500 ml. แถมฟรี ช้อนกาแฟ 2 คัน,X,phantom,GA1500,1
+,,,Y,,SK2861,2
+product.product_bom_65,GA1509,FOFO กาแก้วชงชา ทรงโค้ง  500 ml. แถมฟรี ช้อนกาแฟ 2 คัน,X,phantom,GA1509,1
+,,,Y,,SK2861,2
+product.product_bom_67,GA1509*2promo,FOFO ชุด กาแก้วชงชา ทรงโค้ง 500 ml. 2ใบ แถมฟรี ช้อนกาแฟ 4 คัน,X,phantom,GA1509,2
+,,,Y,,SK2861,4
+product.product_bom_69,GA15092,FOFO ชุด กาแก้วชงชา ทรงโค้ง 500 ml. 2ใบ แถมฟรี ช้อนกาแฟ 4 คัน,X,phantom,GA1509,2
+,,,Y,,SK2861,4
+product.product_bom_71,KB14045,FOFO ชุด ถาดเคลือบ ลายดอก ตีตรา HONGKONG 40+45 CM (2ใบ/ชุด),X,phantom,KB140,1
+,,,Y,,KB145,1
+product.product_bom_73,LA013-set1,FOFO ชุดเครื่องครัว สุดคุ้ม SET 1 (แถมกะละมังล้างผัก ไซส์ 22),X,phantom,SC224,1
+,,,Y,,SC227,1
+,,,Y,,SC230,1
+,,,Y,,SO132,1
+,,,Y,,SD213,1
+,,,Y,,SD223,1
+,,,Y,,SC722,1
+product.product_bom_80,LA015-bakery set,FOFO ชุด อุปกรณ์เบเกอรี่ ครบครัน 6 อย่าง (คละสีคละแบบ) แถมฟรี ชุดช้อนตวงแฟนซี ,X,phantom,PJ131,1
+,,,Y,,PL101,1
+,,,Y,,PM101,1
+,,,Y,,PN101,1
+,,,Y,,SC1326,1
+,,,Y,,GA101,1
+product.product_bom_86,LA024-Pan Set,"FOFO ชุด กระทะ เคลือบเซรามิก 24,26,28 ซม. 3 ใบ/ชุด (นำเข้าเกาหลี) ฟรี ชุดอุปกรณ์ทำครัว 6 ชิ้น",X,phantom,CZL-KC241,1
+,,,Y,,CZL-KC261,1
+,,,Y,,CZL-KC281,1
+,,,Y,,PK101,1
+,,,Y,,PK102,1
+,,,Y,,PK103,1
+,,,Y,,PK104,1
+,,,Y,,PK105,1
+,,,Y,,PK106,1
+,,,Y,,PK107,1
+product.product_bom_96,LA025-Set,FOFO Family Set ชุด ถ้วย ไม้ Chestnut  แฮนด์เมด 12.5 ซม. (4 ใบ/ชุด) ฟรี แก้วเซรามิก 2 ใบ (คละสีคละแบบ),X,phantom,WB101,4
+,,,Y,,CS3102T,2
+product.product_bom_98,LA025-Set-small,FOFO Family Set ชุด ถ้วย ไม้ Chestnut  แฮนด์เมด 11 ซม. (4 ใบ/ชุด) ฟรี แก้วเซรามิก 2 ใบ (คละสีคละแบบ),X,phantom,WB101,4
+,,,Y,,CS3102T,2
+product.product_bom_100,LA027-SET,FOFO ชุด เครื่องครัว สุดคุ้ม SET 3 แถมฟรี ช้อนส้อมสเตนเลส 2 คู่,X,phantom,SO134,1
+,,,Y,,SD219,1
+,,,Y,,SD223B,1
+,,,Y,,SD623,1
+,,,Y,,SK122,2
+product.product_bom_105,LA028,FOFO ชุดน้ำชา/กาแฟ กา แก้วชงชาทรงตรง + แก้วน้ำชาเซรามิคเจ้าหญิงพร้อมจานรอง 3 ใบ,X,phantom,GA1500,1
+,,,Y,,CF101,3
+product.product_bom_107,PK107,FOFO ชุดอุปกรณ์ทำครัว 6 ชิ้น,X,phantom,PK101,1
+,,,Y,,PK102,1
+,,,Y,,PK103,1
+,,,Y,,PK104,1
+,,,Y,,PK105,1
+,,,Y,,PK106,1
+,,,Y,,PK107,1
+product.product_bom_114,PL102+PJ201-Green,FOFO ชุดแผ่นซิลิโคนรองทำเบเกอรี่ พร้อมไม้คลึงแป้งซิลิโคน - สีเขียว,X,phantom,PL102,1
+,,,Y,,PJ201,1
+product.product_bom_116,PL102+PJ201-Orange,FOFO ชุดแผ่นซิลิโคนรองทำเบเกอรี่ พร้อมไม้คลึงแป้งซิลิโคน - สีส้ม,X,phantom,PL102,1
+,,,Y,,PJ201,1
+product.product_bom_118,PL102+PJ201-Red,FOFO ชุดแผ่นซิลิโคนรองทำเบเกอรี่ พร้อมไม้คลึงแป้งซิลิโคน - สีแดง,X,phantom,PL102,1
+,,,Y,,PJ201,1
+product.product_bom_120,SB1112GBR,FOFO ชุด ถาดมงคล 3 สี สเตนเลส -ทอง/เงินรมดำ/ทองสีกุหลาบ,X,phantom,SB1112G,1
+,,,Y,,SB1112B,1
+,,,Y,,SB1112R,1
+product.product_bom_123,SB1121416,FOFO ชุดถาดกลมสเตนเลส  30CM 35CM 40CM (3 ใบ/ชุด),X,phantom,SB112,1
+,,,Y,,SB114,1
+,,,Y,,SB116,1
+product.product_bom_126,sb308-12P,FOFO จาน สเตนเลส 8 นิ้ว 12 ใบ/ชุด,X,phantom,SB308,12
+product.product_bom_127,SB528-6,FOFO ชุด ถาดหลุม สเตนเลส 28 ซม. 6 ใบ (แถมฟรี ช้อนส้อมสเตนเลส 6 คู่),X,phantom,SB528,6
+,,,Y,,SK122,6
+product.product_bom_129,SC1318*2,FOFO กะละมัง กังนัม 18 ซม. (2ใบ/ชุด),X,phantom,SC1318,2
+product.product_bom_130,SC13182226,FOFO กะละมัง กังนัม หนา ขนาด 18/22/26 ซม. 3 ใบ / ชุด (สีเงิน),X,phantom,SC1318,1
+,,,Y,,SC1322,1
+,,,Y,,SC1326,1
+product.product_bom_133,SC1320*2,FOFO กะละมัง กังนัม 20 ซม. (2ใบ/ชุด),X,phantom,SC1320,2
+product.product_bom_134,SC13202428,FOFO กะละมัง กังนัม หนา ขนาด 20/24/28 ซม. 3 ใบ / ชุด (สีเงิน),X,phantom,SC1320,1
+,,,Y,,SC1324,1
+,,,Y,,SC1328,1
+product.product_bom_137,SC1322*2,FOFO กะละมัง กังนัม 22 ซม. (2ใบ/ชุด),X,phantom,SC1322,2
+product.product_bom_138,SC1324*2,FOFO กะละมัง กังนัม 24 ซม. (2ใบ/ชุด),X,phantom,SC1324,2
+product.product_bom_139,SC1326*2,FOFO กะละมัง กังนัม 26 ซม. (2ใบ/ชุด),X,phantom,SC1326,2
+product.product_bom_140,SC1328*2,FOFO กะละมังผสม กังนัม 28 ซม. (2ใบ/ชุด),X,phantom,SC1328,2
+product.product_bom_141,SC1330*2,FOFO กะละมังผสม กังนัม 30 ซม. (2ใบ/ชุด),X,phantom,SC1330,2
+product.product_bom_142,SC1332*2,FOFO กะละมัง กังนัม 32 ซม. (2ใบ/ชุด),X,phantom,SC1332,2
+product.product_bom_143,SC1334*2,FOFO กะละมังกังนัม 34 ซม. (2ใบ/ชุด),X,phantom,SC1334,2
+product.product_bom_144,SC2242730,FOFO ชุด ชาม ผสมแป้ง สเตนเลส ขนาด 24/27/30 ซม. (1 ชุด 3 ใบ),X,phantom,SC224,1
+,,,Y,,SC227,1
+,,,Y,,SC230,1
+product.product_bom_147,SC224-3,FOFO ชาม ผสมแป้ง 24 ซม.3ใบ/ชุด,X,phantom,SC224,3
+product.product_bom_148,SC227-3,FOFO ชาม ผสมแป้ง 27 ซม.3ใบ/ชุด,X,phantom,SC227,3
+product.product_bom_149,SC230-2,FOFO ชาม ผสมแป้ง 30 ซม.2ใบ/ชุด,X,phantom,SC230,2
+product.product_bom_150,SC233-2P,FOFO ชาม ผสมแป้ง 33 ซม. 2 ใบ/ชุด,X,phantom,SC233,2
+product.product_bom_151,SC2333640,FOFO ชุด ชามผสมแป้ง สเตนเลส 3 ใบ 33/36/40 ซม.,X,phantom,SC233,1
+,,,Y,,SC236,1
+,,,Y,,SC240,1
+product.product_bom_154,SC236*2,FOFO ชามผสม แป้ง 36 ซม. 2 ใบ/ชุด,X,phantom,SC236,2
+product.product_bom_155,SC240*2,FOFO ชาม ผสมแป้ง 40 ซม. 2 ใบ/ชุด,X,phantom,SC240,2
+product.product_bom_156,SC7222630,FOFO ชุดกะละมัง ล้างผัก 3 ใบ 22CM/ 26CM/ 30CM,X,phantom,SC722,1
+,,,Y,,SC726,1
+,,,Y,,SC730,1
+product.product_bom_159,SC928*2,FOFO กะละมังล้างผัก รูเล็กมีหู 28 ซม. (2ใบ/ชุด),X,phantom,SC928,2
+product.product_bom_160,SC930*2,FOFO กะละมัง ล้างผัก รูเล็กมีหู 30 ซม. (2ใบ/ชุด),X,phantom,SC930,2
+product.product_bom_161,SC932*2,FOFO กะละมัง ล้างผัก รูเล็กมีหู 32 ซม. (2ใบ/ชุด),X,phantom,SC932,2
+product.product_bom_162,SC936*2,FOFO กะละมัง ล้างผัก รูเล็กมีหู 36 ซม. (2ใบ/ชุด),X,phantom,SC936,2
+product.product_bom_163,SC940*2,FOFO กะละมัง ล้างผัก รูเล็กมีหู 40 ซม. (2ใบ/ชุด),X,phantom,SC940,2
+product.product_bom_164,SD1101-SET,FOFO ชุด ถ้วย บรรจุอาหาร สไตล์เกาหลี 900 ML. 2 ใบ/ชุด (คละสี),X,phantom,SD1101,2
+product.product_bom_165,SD1216+20-SET,FOFO ชุด หม้อสองหู และ หม้อด้าม (อย่างหนา) ฝาแก้ว + สเตนเลส Sunlight,X,phantom,SD1216,1
+,,,Y,,SD1220,1
+product.product_bom_167,SD21623,FOFO ชุดหม้อด้าม สเตนเลส ฝาแก้ว 2 ใบ,X,phantom,SD216,1
+,,,Y,,SD223B,1
+product.product_bom_169,SE228*3,FOFO ถังน้ำสเตนเลส มีหูหิ้ว ขนาด 28 ซม. 3 ใบ/ชุด,X,phantom,SE228,3
+product.product_bom_170,SE232*3,FOFO ถังน้ำสเตนเลส มีหูหิ้ว ขนาด 32 ซม. 3 ใบ/ชุด,X,phantom,SE232,3
+product.product_bom_171,SG73545-SET Blue,FOFO Lover Set ชุด กระติกน้ำ สุญญากาศ เก็บอุณหภูมิ ฝาล็อก - สีน้ำเงิน (2 ใบ/ชุด),X,phantom,SG735,1
+,,,Y,,SG750,1
+product.product_bom_173,SG73545-SET Golden brown,FOFO Lover Set ชุด กระติกน้ำ สุญญากาศ เก็บอุณหภูมิ ฝาล็อก - สีน้ำตาลทอง (2 ใบ/ชุด),X,phantom,SG735,1
+,,,Y,,SG750,1
+product.product_bom_175,SG73545-SET Pink,FOFO Lover Set ชุด กระติกน้ำ สุญญากาศ เก็บอุณหภูมิ ฝาล็อก - สีชมพู (2 ใบ/ชุด),X,phantom,SG735,1
+,,,Y,,SG750,1
+product.product_bom_177,SG73545-SET White,FOFO Lover Set ชุด กระติกน้ำ สุญญากาศ เก็บอุณหภูมิ ฝาล็อก - สีขาว (2 ใบ/ชุด),X,phantom,SG735,1
+,,,Y,,SG750,1
+product.product_bom_179,SH520*,FOFO เหยือกกาแฟ สเตนเลส เก็บอุณหภูมิ ร้อน/เย็น ขนาด 2 ลิตร,X,phantom,SH520,1
+product.product_bom_180,SI802021-SET,FOFO ชุด กระบวย และ ตะหลิว สเตนเลสล้วน 2 ด้าม/ชุด,X,phantom,SI8020,1
+,,,Y,,SI8021,1
+product.product_bom_182,SI811112-SET,FOFO ชุด กระบวย + ตะหลิว สเตนเลสด้ามดำแบกกะไลต์ (2 ด้าม/ชุด),X,phantom,SI8111,1
+,,,Y,,SI8112,1
+product.product_bom_184,WD301-Set,FOFO ชุดถ้วยไม้ Chestnut เคลือบเงาลายไม้ + ช้อนไม้พุทรา (สีน้ำตาล) 2 ชุด/4 ชิ้น,X,phantom,WB103,1
+,,,Y,,EC030314,1
+product.product_bom_186,WD302-Set,FOFO ชุดตะหลิว + กระบวยไม้พุทรา (สีน้ำตาล) 2 ด้าม/ชุด,X,phantom,EC030128,1
+,,,Y,,EC030239,1
+product.product_bom_188,WD303-Set,FOFO ชุดอุปกรณ์ทำครัว (สีน้ำตาล) เซ็ต 4 ชิ้น,X,phantom,EC030128,1
+,,,Y,,EC030239,1
+,,,Y,,EC030222,1
+,,,Y,,EC030233,1
+product.product_bom_192,0-0001/1*6,CCG ตะแกรง ปิ้งปลา อลูมิเนียม 6 อัน/ ชุด,X,phantom,YH-0-0001/1,6
+product.product_bom_193,0-0051*6,CCG ถาดปลาอลูมิเนียม (ไซส์ใหญ่) ชุด 6 ถาด,X,phantom,YH-0-0051,6
+product.product_bom_194,0-0052*6,CCG ถาดปลาอลูมิเนียม (ไซส์กลาง) ชุด 6 ถาด,X,phantom,YH-0-0052,6
+product.product_bom_195,0-0401*6,CCG เตาอลูมิเนียม สำหรับเสิร์ฟ 6 เตา/ชุด,X,phantom,YH-0-0401,6
+product.product_bom_196,0051+0401,CCG ถาดปลาอลูมิเนียม + เตาอลูมิเนียม (ไซส์ใหญ่),X,phantom,YH-0-0051,1
+,,,Y,,YH-0-0401,1
+product.product_bom_198,0052+0401,CCG ถาดปลาอลูมิเนียม + เตาอลูมิเนียม (ไซส์กลาง),X,phantom,YH-0-0052,1
+,,,Y,,YH-0-0401,1
+product.product_bom_200,0-0701*6,CCG หม้ออบ อลูมิเนียม (ใหญ่) 6 ใบ/ชุด,X,phantom,YH-0-0701,6
+product.product_bom_201,0-0702*6,CCG หม้ออบ อลูมิเนียม (กลาง) 6 ใบ/ชุด,X,phantom,YH-0-0702,6
+product.product_bom_202,0-0703*6,CCG หม้ออบ อลูมิเนียม (เล็ก) 6 ใบ/ชุด,X,phantom,YH-0-0703,6
+product.product_bom_203,05-0501*6,CCG ทัพพี / ทัพพีสเตนเลส ลายไทย ปลายแหลม (ใหญ่) ตราฟูจิ 6 ด้าม/ชุด เบอร์ 1,X,phantom,YH-05-0501,6
+product.product_bom_204,05-0502*6,CCG ทัพพี / ทัพพีสเตนเลส ลายไทย ปลายแหลม  (กลาง) ตราฟูจิ 6 ด้าม/ชุด เบอร์ 2,X,phantom,YH-05-0502,6
+product.product_bom_205,05-0503*6,CCG ทัพพี / ทัพพีสเตนเลส ลายไทย ปลายแหลม ตราฟูจิ (เล็ก) 6 ด้าม/ชุด เบอร์ 3,X,phantom,YH-05-0503,6
+product.product_bom_206,05-0602*6,CCG ทัพพี / ทัพพีสเตนเลส ลายไทย ปลายมน 6 ด้าม/ชุด เบอร์ 2 (กลาง),X,phantom,YH-05-0602,6
+product.product_bom_207,05-0603*6,CCG 6 ด้าม/ชุด เบอร์ 3 (เล็ก) ทัพพี / ทัพพีสเตนเลส ลายไทย ปลายมน ตราฟูจิ,X,phantom,YH-05-0603,6
+product.product_bom_208,37-0008*6,CCG 6 อัน/ชุด 7.5 ซม. ขาหมู สเตนเลส สำหรับทำขนมขาหมู (ตือคาโค),X,phantom,YH-37-0008,6
+product.product_bom_209,37-0009*6,CCG 6 อัน/ชุด 5.5 ซม. ขาหมู สเตนเลส สำหรับทำขนมขาหมู (ตือคาโค),X,phantom,YH-37-0009,6
+product.product_bom_210,37-0010*6,CCG 6 ด้าม/ชุด (ใหญ่) กระบวย สเตนเลส (ก๊งเหล้า),X,phantom,YH-37-0010,6
+product.product_bom_211,37-0010-11,CCG 2 ด้าม/ชุด กระบวย สเตนเลส (กีงเหล้า) เล็ก + ใหญ่,X,phantom,YH-37-0010,1
+,,,Y,,YH-37-0011,1
+product.product_bom_213,37-0011*6,CCG 6 ด้าม/ชุด (เล็ก) กระบวย สเตนเลส (ก๊งเหล้า),X,phantom,YH-37-0011,6
+product.product_bom_214,40-704*12,CCG  ถ้วยขนมจีบ / ติ่มซำ สเตนเลส 12 ใบ,X,phantom,YH-40-704,12
+product.product_bom_215,40-704*24,CCG ถ้วยขนมจีบ / ถ้วยติ่มซำ สเตนเลส 24 ใบ,X,phantom,YH-40-704,24
+product.product_bom_216,40-P111*12,CCG ชุด มีด / มีดปอกผลไม้ ปลายแหลม สเตนเลส ด้ามดอกเหลือง 12 เล่ม,X,phantom,YH-40-P111,12
+product.product_bom_217,40-P111/1*12,CCG มีด / มีดปอกผลไม้ ปลายแหลม สเตนเลส ด้ามดอกดำ 12 เล่ม/ชุด,X,phantom,YH-40-P111/1,12
+product.product_bom_218,40-P222*12,CCG ชุด มีด / มีดปอกผลไม้ ปลายแหลม สเตนเลส ด้ามเจาะรู 12 เล่ม - สีเหลือง,X,phantom,YH-40-P222,12
+product.product_bom_219,40-P222/1*12,CCG มีด / มีดปอกผลไม้ ปลายแหลม สเตนเลส ด้ามเจาะรู (สีดำ) 12 เล่ม/ชุด,X,phantom,YH-40-P222/1,12
+product.product_bom_220,46-310*12,CCG 12 เล่ม/ชุด ไซส์ 10 นิ้ว กรรไกรคีบของร้อน ชุบซิงค์,X,phantom,YH-46-310,12
+product.product_bom_221,46-310+12*6,CCG 6 เล่ม/ชุด กรรไกรคีบของร้อน ชุบซิงค์ 10 + 12 นิ้ว,X,phantom,YH-46-310,3
+,,,Y,,YH-46-312,3
+product.product_bom_223,46-312*12,CCG 12 เล่ม/ชุด ไซส์ 12 นิ้ว กรรไกรคีบของร้อน ชุบซิงค์,X,phantom,YH-46-312,12
+product.product_bom_224,46-501*6,CCG มีด / มีดด้าม สเตนเลส ปลายแหลม (สแตนเลสทั้งด้าม) 6 เล่ม/ชุด,X,phantom,YH-46-501,6
+product.product_bom_225,46-502*6,CCG มีด / มีดด้าม สเตนเลส ปลายตัดเฉียง (สเตนเลสทั้งด้าม) 6 เล่ม/ชุด,X,phantom,YH-46-502,6
+product.product_bom_226,46-503*6,CCG มีดด้าม สเตนเลส ปลายโค้ง (สเตนเลสทั้งด้าม) 6 เล่ม/ชุด,X,phantom,YH-46-503,6
+product.product_bom_227,50-0007*12,CCG ที่ขูดมะพร้าว 2 หัว 12 ด้าม,X,phantom,YH-50-0007,12
+product.product_bom_228,P666*12,CCG มีดด้ามดำ ปลายสันเฉียง ขนาด 6 นิ้ว 6 เล่ม/ชุด,X,phantom,YH-40-P666,12
+product.product_bom_229,PD101*10,CCG ชุด ตะเกียบ / ตะเกียบเมลามีน - สีขาวครีม 10 แพ็ค,X,phantom,PD101,10
+product.product_bom_230,PD101*30,CCG 30 ชุด ตะเกียบ / ตะเกียบเมลามีน - สีเหลืองครีม,X,phantom,PD101,30
+product.product_bom_231,SA13627*6,CCG  (6 ชุด 12 ใบ)  36X27 ซม. ชุด ถาด ถาดเหลี่ยมสเตนเลส รองของทอด - Silver,X,phantom,SA13627,6
+product.product_bom_232,SA14030*6,CCG  (6 ชุด 12 ใบ)  40 x 30 ซม. ชุด ถาด ถาดเหลี่ยมสเตนเลส รองของทอด - Silver,X,phantom,SA14030,6
+product.product_bom_233,SA14535*6,CCG  (6 ชุด 12 ใบ)  45 x 35 ซม. ชุด ถาด ถาดเหลี่ยมสเตนเลส รองของทอด - Silver,X,phantom,SA14535,6
+product.product_bom_234,SA15035*6,CCG  (6 ชุด 12 ใบ)  50 x 35 ซม. ชุด ถาด ถาดเหลี่ยมสเตนเลส รองของทอด - Silver,X,phantom,SA15035,6
+product.product_bom_235,SA16040*6,CCG  (6 ชุด 12 ใบ)  60 x 40 ซม. ชุด ถาด ถาดเหลี่ยมสเตนเลส รองของทอด - Silver,X,phantom,SA16040,6
+product.product_bom_236,SA232242*6,CCG ถาด / ถาดสเตนเลส มีที่จับ ขนาด 33 x 24 ซม. (6 ใบ/ชุด),X,phantom,SA232242,6
+product.product_bom_237,SA236272*6,CCG ถาด / ถาดสเตนเลส มีที่จับ ขนาด 36 x 27 ซม. (6 ใบ/ชุด),X,phantom,SA236272,6
+product.product_bom_238,SA243312*6,CCG ถาด / ถาดสเตนเลส มีที่จับ ขนาด 43 x 31 ซม. (6 ใบ/ชุด),X,phantom,SA243312,6
+product.product_bom_239,SA248342*6,CCG ถาด / ถาดสเตนเลส มีที่จับ ขนาด 48 x 34 ซม. (6 ใบ/ชุด),X,phantom,SA248342,6
+product.product_bom_240,SA258422A*6,CCG ถาด / ถาดสเตนเลส มีที่จับ ขนาด 58 x 42 ซม. (6 ใบ/ชุด),X,phantom,SA258422A,6
+product.product_bom_241,SA332224*2,CCG 2 ใบ/ชุด ไซส์ 32 x 22 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA332224,2
+product.product_bom_242,SA332224*6,CCG 6 ใบ/ชุด ไซส์ 32 x 22 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA332224,6
+product.product_bom_243,SA336272*2,CCG 2 ใบ/ชุด ไซส์ 36 x 27 x 2 ซม. ถาด / ถาดเสิร์ฟ สเตนเลส (อย่างหนา),X,phantom,SA336272,2
+product.product_bom_244,SA336272*6,CCG 6 ใบ/ชุด ไซส์ 36 x 27 x 2 ซม. ถาด / ถาดเสิร์ฟ สเตนเลส (อย่างหนา),X,phantom,SA336272,6
+product.product_bom_245,SA336274*2,CCG 2 ใบ/ชุด ไซส์ 36 x 27 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA336274,2
+product.product_bom_246,SA336274*6,CCG 6 ใบ/ชุด ไซส์ 36 x 27 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA336274,6
+product.product_bom_247,SA336277*2,CCG 2 ใบ/ชุด ไซส์ 36 x 27 x 7 ถาด / ถาดลึก สเตนเลส,X,phantom,SA336277,2
+product.product_bom_248,SA336277*6,CCG 6 ใบ/ชุด ไซส์ 36 x 27 x 7 ถาด / ถาดลึก สเตนเลส,X,phantom,SA336277,6
+product.product_bom_249,SA340303*2,CCG 6 ใบ/ชุด ไซส์ 40 x 30 x 3 ซม. ถาด / ถาดเสิร์ฟเหลี่ยม สเตนเลส (อย่างหนา),X,phantom,SA340303,2
+product.product_bom_250,SA340303*6,CCG 2 ใบ/ชุด ไซส์ 40 x 30 x 3 ซม. ถาด / ถาดเสิร์ฟเหลี่ยม สเตนเลส (อย่างหนา),X,phantom,SA340303,6
+product.product_bom_251,SA340307*2,CCG 2 ใบ/ชุด ไซส์ 40 x 30 x 7 ถาด / ถาดลึก สเตนเลส,X,phantom,SA340307,2
+product.product_bom_252,SA340307*6,CCG 6 ใบ/ชุด ไซส์ 40 x 30 x 7 ถาด / ถาดลึก สเตนเลส,X,phantom,SA340307,6
+product.product_bom_253,SA345352*2,CCG ถาด / ถาดอาหารสเตนเลส หนาพิเศษ 2 ใบ ขนาด 45 x 35 x 2 ซม.,X,phantom,SA345352,2
+product.product_bom_254,SA345352*6,CCG ถาด / ถาดอาหารสเตนเลส หนาพิเศษ 6 ใบ ขนาด 45 x 35 x 2 ซม.,X,phantom,SA345352,6
+product.product_bom_255,SA345354*2,CCG 2 ใบ/ชุด ไซส์ 45 x 35 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA345354,2
+product.product_bom_256,SA345354*6,CCG 6 ใบ/ชุด ไซส์ 45 x 35 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA345354,6
+product.product_bom_257,SA345357*2,CCG 2 ใบ/ชุด ไซส์ 45 x 35 x 7 ถาด / ถาดลึก สเตนเลส,X,phantom,SA345357,2
+product.product_bom_258,SA345357*6,CCG 6 ใบ/ชุด ไซส์ 45 x 35 x 7 ถาด / ถาดลึก สเตนเลส,X,phantom,SA345357,6
+product.product_bom_259,SA350354*2,CCG 2 ใบ/ชุด ไซส์ 50 x 35 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA350354,2
+product.product_bom_260,SA350354*6,CCG 6 ใบ/ชุด ไซส์ 50 x 35 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA350354,6
+product.product_bom_261,SA350357*2,CCG 2 ใบ/ชุด ไซส์ 50 x 35 x 7 ถาด / ถาดลึก สเตนเลส,X,phantom,SA350357,2
+product.product_bom_262,SA350357*6,CCG 6 ใบ/ชุด ไซส์ 50 x 35 x 7 ถาด / ถาดลึก สเตนเลส,X,phantom,SA350357,6
+product.product_bom_263,SA350402*2,CCG 6 ใบ/ชุด ไซส์ 50 x 40 x 2 ซม. ถาด / ถาดเสิร์ฟ สเตนเลส,X,phantom,SA350402,2
+product.product_bom_264,SA350402*6,CCG 2 ใบ/ชุด ไซส์ 50 x 40 x 2 ซม. ถาด / ถาดเสิร์ฟ สเตนเลส,X,phantom,SA350402,6
+product.product_bom_265,SA350404*2,CCG 2 ใบ/ชุด ไซส์ 50 x 40 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA350404,2
+product.product_bom_266,SA350404*6,CCG 6 ใบ/ชุด ไซส์ 50 x 40 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA350404,6
+product.product_bom_267,SA360402*2,CCG 2 ใบ/ชุด ไซส์ 60 x 40 x 2 ซม. ถาด / ถาดเสิร์ฟ สเตนเลส,X,phantom,SA360402,2
+product.product_bom_268,SA360402*6,CCG 6 ใบ/ชุด ไซส์ 60 x 40 x 2 ซม. ถาด / ถาดเสิร์ฟ สเตนเลส,X,phantom,SA360402,6
+product.product_bom_269,SA360404*2,CCG 2 ใบ/ชุด ไซส์ 60 x 40 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA360404,2
+product.product_bom_270,SA360404*6,CCG 6 ใบ/ชุด ไซส์ 60 x 40 x 4 ซม. ถาด / ถาดอาหาร สเตนเลส,X,phantom,SA360404,6
+product.product_bom_271,SA601*12,CCG SET 12 ชุด ชุดอุ่นอาหาร / ถาดอุ่นอาหาร ฝาแก้ว ขนาด 36 x 27 ซม. - Silver,X,phantom,SA601,12
+product.product_bom_272,SA602*12,CCG ขายส่ง 36 x 27 ซม. SET 12 ชุด ชุดอุ่นอาหาร / ถาดอุ่นอาหาร ทรงเหลี่ยม สเตนเลส ฝาสเตนเลส + แก้ว,X,phantom,SA602,12
+product.product_bom_273,SA603*12,CCG ขายส่ง  40 x 30 ซม. (Set 12 ชุด) ถาด/ ถาดอุ่นอาหาร สแตนเลส พร้อมฝาแก้ว,X,phantom,SA603,12
+product.product_bom_274,SA604*12,CCG ขายส่ง 40 x 30 ซม. SET 12 ชุด ชุดอุ่นอาหาร / ถาดอุ่นอาหาร ทรงเหลี่ยม สเตนเลส ฝาสเตนเลส + แก้ว,X,phantom,SA604,12
+product.product_bom_275,SB110*3,CCG ขายส่ง 3 ใบ/ชุด 25 ซม. ถาด / ถาดกลมสเตนเลส ลายหอย,X,phantom,SB110,3
+product.product_bom_276,SB110*6,CCG ขายส่ง 6 ใบ/ชุด 25 ซม. ถาด / ถาดกลมสเตนเลส ลายหอย,X,phantom,SB110,6
+product.product_bom_277,SB112*3,CCG ขายส่ง 3 ใบ/ชุด 30 ซม. ถาด/ ถาดกลมสเตนเลส ลายหอย,X,phantom,SB112,3
+product.product_bom_278,SB112*6,CCG ขายส่ง 6 ใบ/ชุด 30 ซม. ถาด / ถาดกลมสเตนเลส ลายหอย,X,phantom,SB112,6
+product.product_bom_279,SB114*3,CCG ขายส่ง 3 ใบ/ชุด 35 ซม. ถาด / ถาดกลมสเตนเลส ลายหอย,X,phantom,SB114,3
+product.product_bom_280,SB114*6,CCG ขายส่ง 6 ใบ/ชุด 35 ซม. ถาด / ถาดกลมสเตนเลส ลายหอย,X,phantom,SB114,6
+product.product_bom_281,SB116*6,CCG ขายส่ง 6 ใบ/ชุด 40 ซม. ถาด / ถาดกลมสเตนเลส ลายหอย,X,phantom,SB116,6
+product.product_bom_282,SB118*6,CCG ขายส่ง 6 ใบ/ชุด 45 ซม. ถาด / ถาดกลมสเตนเลส ลายหอย,X,phantom,SB118,6
+product.product_bom_283,SB120*6,CCG ขายส่ง 6 ใบ/ชุด 50 ซม. ถาด / ถาดกลมสเตนเลส ลายหอย,X,phantom,SB120,6
+product.product_bom_284,SB122*6,CCG ขายส่ง 6 ใบ/ชุด 55 ซม. ถาด / ถาดกลมสเตนเลส ลายหอย,X,phantom,SB122,6
+product.product_bom_285,SB124*6,CCG ขายส่ง 6 ใบ/ชุด 60 ซม. ถาด / ถาดกลมสเตนเลส ลายหอย,X,phantom,SB124,6
+product.product_bom_286,SB308-12,CCG   จาน / จานสเตนเลส 8 นิ้ว 12 ใบ/ชุด,X,phantom,SB308,12
+product.product_bom_287,SB308-6,CCG   จาน / จานสเตนเลส 8 นิ้ว 6 ใบ/ชุด,X,phantom,SB308,6
+product.product_bom_288,SB309-12,CCG 12 ใบ/ชุด 9 นิ้ว จาน / จานสเตนเลส,X,phantom,SB309,12
+product.product_bom_289,SB309-6,CCG 6 ใบ/ชุด 9 นิ้ว จาน / จานสเตนเลส,X,phantom,SB309,6
+product.product_bom_290,SB450*6,CCG ขายส่ง 6 ใบ 50 ซม. ถาด / ถาดสเตนเลส กลม ลายไทย,X,phantom,SB450,6
+product.product_bom_291,SB455*6,CCG ขายส่ง 6 ใบ 55 ซม. ถาด / ถาดสเตนเลส กลม ลายไทย,X,phantom,SB455,6
+product.product_bom_292,SB460*6,CCG ขายส่ง 6 ใบ 60 ซม. ถาด / ถาดสเตนเลส กลม ลายไทย,X,phantom,SB460,6
+product.product_bom_293,SB526*6,CCG 6 ใบ/ชุด 26 ซม. ถาดหลุม / ถาดหลุมสเตนเลส,X,phantom,SB526,6
+product.product_bom_294,SB528*6,CCG 6 ใบ/ชุด 28 ซม. ถาดหลุม / ถาดหลุมสเตนเลส,X,phantom,SB528,6
+product.product_bom_295,SB530*6,CCG 6 ใบ/ชุด 30 ซม. ถาดหลุม / ถาดหลุมสเตนเลส,X,phantom,SB530,6
+product.product_bom_296,SB532*6,CCG ขายส่ง 6 ใบ/ชุด 32 ซม. ถาดหลุม / ถาดหลุมสเตนเลส - Silver,X,phantom,SB532,6
+product.product_bom_297,SB535*6,CCG ถาดหลุม/ถาดหลุมสเตนเลส 35 ซม. 6 ใบ/ชุด (Silver) ,X,phantom,SB535,6
+product.product_bom_298,SB601*12,CCG ขายส่ง 12 ชุด ชุดอุ่นอาหาร สเตนเลส ทรงกลม ฝาแก้ว – สีเงิน,X,phantom,SB601,12
+product.product_bom_299,SC1012*12,CCG 12 ใบ/ชุด 12 ซม. โถข้าว / โถข้าวสเตนเลส,X,phantom,SC1012,12
+product.product_bom_300,SC1020*12,CCG โถข้าว / โถข้าวสเตนเลส 20 ซม. (12 ใบ/ชุด),X,phantom,SC020,12
+product.product_bom_301,SC116*12,CCG ขนาด 16 ซม. (12 ใบ/ชุด) ชามผสมแป้ง สเตนเลส (บาง),X,phantom,SC116,12
+product.product_bom_302,SC118*12,CCG ขนาด 18 ซม. (12 ใบ/ชุด) ชามผสมแป้ง สเตนเลส (บาง),X,phantom,SC118,12
+product.product_bom_303,SC120*12,CCG ขนาด 20 ซม. (12 ใบ/ชุด) ชามผสมแป้ง สเตนเลส (บาง),X,phantom,SC120,12
+product.product_bom_304,SC122*12,CCG ขนาด 22 ซม. (12 ใบ/ชุด) ชามผสมแป้ง สเตนเลส (บาง),X,phantom,SC122,12
+product.product_bom_305,SC124*12,CCG ขนาด 26 ซม. (6 ใบ/ชุด) ชามผสมแป้ง สเตนเลส (บาง),X,phantom,SC124,12
+product.product_bom_306,SC126*6,CCG ขนาด 24 ซม. (12 ใบ/ชุด) ชามผสมแป้ง สเตนเลส (บาง),X,phantom,SC126,6
+product.product_bom_307,SC1318*6,CCG 6 ใบ/ชุด 18 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังกังนัม อย่างหนา,X,phantom,SC1318,6
+product.product_bom_308,SC1320*6,CCG 6 ใบ/ชุด 20 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังกังนัม อย่างหนา,X,phantom,SC1320,6
+product.product_bom_309,SC1322*6,CCG 6 ใบ/ชุด 22 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังกังนัม อย่างหนา,X,phantom,SC1322,6
+product.product_bom_310,SC1324*6,CCG 6 ใบ/ชุด 24 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังกังนัม อย่างหนา,X,phantom,SC1324,6
+product.product_bom_311,SC1326*6,CCG 6 ใบ/ชุด 26 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังกังนัม อย่างหนา,X,phantom,SC1326,6
+product.product_bom_312,SC1328*6,CCG 6 ใบ/ชุด 28 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังกังนัม อย่างหนา,X,phantom,SC1328,6
+product.product_bom_313,SC1330*6,CCG 6 ใบ/ชุด 30 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังกังนัม อย่างหนา,X,phantom,SC1330,6
+product.product_bom_314,SC1332*6,CCG 6 ใบ/ชุด 32 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังกังนัม อย่างหนา,X,phantom,SC1332,6
+product.product_bom_315,SC1334*6,CCG 6 ใบ/ชุด 34 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังกังนัม อย่างหนา,X,phantom,SC1334,6
+product.product_bom_316,SC224*6,CCG ขายส่ง 6 ใบ/ชุด 24 ซม. ชามผสมแป้ง สเตนเลส (หนา),X,phantom,SC224,6
+product.product_bom_317,SC227*6,CCG ขายส่ง 6 ใบ/ชุด 27 ซม. ชามผสมแป้ง สเตนเลส (หนา),X,phantom,SC227,6
+product.product_bom_318,SC230*6,CCG ขายส่ง 6 ใบ/ชุด 30 ซม. ชามผสมแป้ง สเตนเลส (หนา),X,phantom,SC230,6
+product.product_bom_319,SC233*6,CCG 6 ใบ/ชุด 33 ซม. ชามผสมแป้ง สเตนเลส (หนา),X,phantom,SC233,6
+product.product_bom_320,SC236*6,CCG ขายส่ง 6 ใบ/ชุด 36 ซม. ชามผสมแป้ง สเตนเลส (หนา),X,phantom,SC236,6
+product.product_bom_321,SC240*6,CCG ขายส่ง 6 ใบ/ชุด 40 ซม. ชามผสมแป้ง สเตนเลส (หนา),X,phantom,SC240,6
+product.product_bom_322,SC247*6,CCG ขายส่ง 6 ใบ/ชุด 47 ซม. ชามผสมแป้ง สเตนเลส (หนา),X,phantom,SC247,6
+product.product_bom_323,SC250*6,CCG ขายส่ง 6 ใบ/ชุด 50 ซม. ชามผสมแป้ง สเตนเลส (หนา),X,phantom,SC250,6
+product.product_bom_324,SC5141618,CCG ชุดขันเย็นใจ ขนาด 15/16.5/18.5 ซม. (3 ใบ),X,phantom,SC514,1
+,,,Y,,SC516,1
+,,,Y,,SC518,1
+product.product_bom_327,SC722*6,CCG  6 ใบ/ชุด 22 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังล้างผัก รูเล็ก,X,phantom,SC722,6
+product.product_bom_328,SC724*6,CCG  6 ใบ/ชุด 24 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังล้างผัก รูเล็ก,X,phantom,SC724,6
+product.product_bom_329,SC726*6,CCG  6 ใบ/ชุด 26 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังล้างผัก รูเล็ก,X,phantom,SC726,6
+product.product_bom_330,SC728*6,CCG  6 ใบ/ชุด 28 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังล้างผัก รูเล็ก,X,phantom,SC728,6
+product.product_bom_331,SC730*6,CCG  6 ใบ/ชุด 30 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังล้างผัก รูเล็ก,X,phantom,SC730,6
+product.product_bom_332,SC732*6,CCG  6 ใบ/ชุด 32 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังล้างผัก รูเล็ก,X,phantom,SC732,6
+product.product_bom_333,SC734*6,CCG  6 ใบ/ชุด 34 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังล้างผัก รูเล็ก,X,phantom,SC734,6
+product.product_bom_334,SC736*6,CCG  6 ใบ/ชุด 36 ซม. กะละมัง / กะละมังสเตนเลส / กะละมังล้างผัก รูเล็ก,X,phantom,SC736,6
+product.product_bom_335,SC740*6,CCG กะละมัง / กะละมังสเตนเลส ล้างผัก รูเล็ก 40 ซม. (ชุด 6 ใบ),X,phantom,SC740,6
+product.product_bom_336,SC828*6,CCG ขายส่ง 6 ใบ/ชุด 28 ซม. กะละมัง / กะละมังสเตนเลส สำหรับล้างผัก รูใหญ่,X,phantom,SC828,6
+product.product_bom_337,SC830*6,CCG ขายส่ง 6 ใบ/ชุด 30 ซม. กะละมัง / กะละมังสเตนเลส สำหรับล้างผัก รูใหญ่,X,phantom,SC830,6
+product.product_bom_338,SC832*6,CCG ขายส่ง 6 ใบ/ชุด 32 ซม. กะละมัง / กะละมังสเตนเลส สำหรับล้างผัก รูใหญ่,X,phantom,SC832,6
+product.product_bom_339,SC836*6,CCG ขายส่ง 6 ใบ/ชุด 36 ซม. กะละมัง / กะละมังสเตนเลส สำหรับล้างผัก รูใหญ่,X,phantom,SC836,6
+product.product_bom_340,SC843*6,CCG ขายส่ง 6 ใบ/ชุด 43 ซม. ชาม ชามผสมแป้ง ชามผสมแป้งสเตนเลสเจาะรู,X,phantom,SC843,6
+product.product_bom_341,SD626*12,CCG หม้อสุกี้ สเตนเลส 26 ซม. 12 ใบ/ชุด,X,phantom,SD626,12
+product.product_bom_342,SG107*12,CCG Restaurant Supply แก้วน้ำสเตนเลส ขนาด 7.5 ซม. (12 ใบ),X,phantom,SG107,12
+product.product_bom_343,SG107*6,CCG Restaurant Supply แก้วน้ำสเตนเลส ขนาด 7.5 ซม. 6 ใบ (Silver),X,phantom,SG107,6
+product.product_bom_344,SG108*12,CCG Restaurant Supply แก้วน้ำสเตนเลส ขนาด 8 ซม. 12 ใบ,X,phantom,SG108,12
+product.product_bom_345,SG108*6,CCG Restaurant Supply แก้วน้ำสเตนเลส ขนาด 8 ซม. 6 ใบ (Silver) ,X,phantom,SG108,6
+product.product_bom_346,SH415*3,CCG แก้วชงชาชัก / แก้วชงกาแฟ สเตนเลส 1.5 ลิตร ชุด 3 ใบ,X,phantom,SH415,3
+product.product_bom_347,SH420*3,CCG แก้วชงกาแฟ / แก้วชาชัก สเตนเลส 2.0 ลิตร ชุด 3 ใบ,X,phantom,SH420,3
+product.product_bom_348,SI401*3,CCG 3 ด้าม/ชุด (ใหญ่) ที่ตักน้ำแข็ง / กระบวยตักน้ำแข็ง สเตนเลส,X,phantom,SI401,3
+product.product_bom_349,SI4010203,CCG Restaurant Supply ชุดที่ตักน้ำแข็ง สเตนเลส 3 ขนาด 13.5/15/18.5 ซม.,X,phantom,SI401,1
+,,,Y,,SI402,1
+,,,Y,,SI403,1
+product.product_bom_352,SI402*3,CCG ที่ตักน้ำแข็ง / กระบวยตักน้ำแข็ง สเตนเลส (กลาง) 3 ด้าม/ชุด,X,phantom,SI402,3
+product.product_bom_353,SI403*3,CCG 3 ด้าม/ชุด (เล็ก) ที่ตักน้ำแข็ง / กระบวยตักน้ำแข็ง สเตนเลส,X,phantom,SI403,3
+product.product_bom_354,SJ102*6,CCG ขายส่ง 6 อัน/ชุด 12 นิ้ว ตะกร้อ / ตะกร้อลวกก๋วยเตี๋ยว สเตนเลส ด้ามสเตนเลส,X,phantom,SJ102,6
+product.product_bom_355,SJ1024*3,CCG ตะแกรง / ตะแกรงลวด ด้ามสเตนเลส 24 ซม.( 3 อัน/ชุด),X,phantom,SJ1024,3
+product.product_bom_356,SJ103*6,CCG ขายส่ง 6 อัน/ชุด ตะกร้อ / ตระกร้อลวกก๋วยเตี๋ยว สเตนเลส ทรงกระบอก เจาะรู - Silver,X,phantom,SJ103,6
+product.product_bom_357,SJ1030*3,CCG ตะแกรง / ตะแกรงลวด ด้ามสเตนเลส 30 ซม. (3 อัน/ชุด),X,phantom,SJ1030,3
+product.product_bom_358,SJ105*6,CCG ขายส่ง 6 อัน/ชุด ตะกร้อญี่ปุ่น / ตะกร้อ ยาวยำ สเตนเลส,X,phantom,SJ105,6
+product.product_bom_359,SJ1221*3,CCG กระชอน ด้ามสเตนเลส ขอบสูง 2 หู 21 ซม. (3 อัน/ชุด),X,phantom,SJ1221,3
+product.product_bom_360,SJ1225*3,CCG กระชอน ด้ามสเตนเลส ขอบสูง 2 หู 25 ซม. (3 อัน/ชุด),X,phantom,SJ1225,3
+product.product_bom_361,SJ1228*3,CCG กระชอน ด้ามสเตนเลส ขอบสูง 2 หู 28 ซม. (3 ใบ/ชุด),X,phantom,SJ1228,3
+product.product_bom_362,SJ1312*2,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 12 ซม. - สีม่วง/เขียว (2 ด้าม/ชุด),X,phantom,SJ1312,2
+product.product_bom_363,SJ1312*6,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 12 ซม. - สีม่วง/เขียว (6 ด้าม/ชุด),X,phantom,SJ1312,6
+product.product_bom_364,SJ1314*2,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 14 ซม. - สีม่วง/เขียว (2 ด้าม/ชุด),X,phantom,SJ1314,2
+product.product_bom_365,SJ1314*6,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 14 ซม. - สีม่วง/เขียว (6 ด้าม/ชุด),X,phantom,SJ1314,6
+product.product_bom_366,SJ1316*2,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 12 ซม. - สีม่วง/เขียว (2 ด้าม/ชุด),X,phantom,SJ1316,2
+product.product_bom_367,SJ1316*6,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 16 ซม. - สีม่วง/เขียว (6 ด้าม/ชุด),X,phantom,SJ1316,6
+product.product_bom_368,SJ1318*2,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 18 ซม. - สีม่วง/เขียว (2 ด้าม/ชุด),X,phantom,SJ1318,2
+product.product_bom_369,SJ1318*6,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 18 ซม. - สีม่วง/เขียว (6 ด้าม/ชุด),X,phantom,SJ1318,6
+product.product_bom_370,SJ1320*2,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 20 ซม. - สีม่วง/เขียว (2 ด้าม/ชุด),X,phantom,SJ1320,2
+product.product_bom_371,SJ1320*6,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 20 ซม. - สีม่วง/เขียว (6 ด้าม/ชุด),X,phantom,SJ1320,6
+product.product_bom_372,SJ1322*2,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 22 ซม. - สีม่วง/เขียว (2 ด้าม/ชุด),X,phantom,SJ1322,2
+product.product_bom_373,SJ1322*6,CCG ตะแกรง / ตะแกรงสเตนเลส ขนาด 22 ซม. - สีม่วง/เขียว (6 ด้าม/ชุด),X,phantom,SJ1322,6
+product.product_bom_374,SJ208*6,CCG ตะแกรง / ตะแกรงสเตนเลส ด้ามไม้ 8  นิ้ว ชุด 6 อัน,X,phantom,SJ208,6
+product.product_bom_375,SJ209*6,CCG ตะแกรง / ตะแกรงสเตนเลส ด้ามไม้ 9  นิ้ว ชุด 6 อัน,X,phantom,SJ209,6
+product.product_bom_376,SJ210*6,CCG ตะแกรง / ตะแกรงสเตนเลส ด้ามไม้ 10  นิ้ว ชุด 6 อัน,X,phantom,SJ210,6
+product.product_bom_377,SJ211*6,CCG ตะแกรง / ตะแกรงสเตนเลส ด้ามไม้ 11 นิ้ว 6 อัน,X,phantom,SJ211,6
+product.product_bom_378,SJ212*6,CCG ตะแกรง / ตะแกรงสเตนเลส ด้ามไม้ 12 นิ้ว ชุด 6 อัน,X,phantom,SJ212,6
+product.product_bom_379,SJ317*6,CCG ขายส่ง 6 อัน/ชุด 17 ซม. ตะแกรง / ตะแกรงลวด,X,phantom,SJ317,6
+product.product_bom_380,SJ320*6,CCG ขายส่ง 6 อัน/ชุด 20 ซม. ตะแกรง / ตะแกรงลวด,X,phantom,SJ320,6
+product.product_bom_381,SJ322*6,CCG ขายส่ง 6 อัน/ชุด 22 ซม. ตะแกรง / ตะแกรงลวด,X,phantom,SJ322,6
+product.product_bom_382,SJ418*6,CCG ขายส่ง 6 อัน/ชุด 18 ซม. กระชอน / กระชอนกรองกากผลไม้ สเตนเลส,X,phantom,SJ418,6
+product.product_bom_383,SJ421*6,CCG ขายส่ง 6 อัน/ชุด 21 ซม. กระชอน / กระชอนกรองกากผลไม้ สเตนเลส,X,phantom,SJ421,6
+product.product_bom_384,SJ425*6,CCG ขายส่ง 6 อัน/ชุด 25 ซม. กระชอน / กระชอนกรองกากผลไม้ สเตนเลส,X,phantom,SJ425,6
+product.product_bom_385,SJ512*6,CCG 6 อัน/ชุด 12 ซม.  กระชอน / กระชอนสเตนเลส ขอบหนาด้ามลวด,X,phantom,SJ512,6
+product.product_bom_386,SJ514*6,CCG 6 อัน/ชุด 14 ซม.  กระชอน / กระชอนสเตนเลส ขอบหนาด้ามลวด,X,phantom,SJ514,6
+product.product_bom_387,SJ516*6,CCG 16 ซม.  ชุด กระชอน / กระชอนสเตนเลส ขอบหนาด้ามลวด 6 อัน/ชุด,X,phantom,SJ516,6
+product.product_bom_388,SJ518*6,CCG 6 อัน/ชุด 18 ซม.  กระชอน / กระชอนสเตนเลส ขอบหนาด้ามลวด,X,phantom,SJ518,6
+product.product_bom_389,SJ520*6,CCG 6 อัน/ชุด 20 ซม.  กระชอน / กระชอนสเตนเลส ขอบหนาด้ามลวด,X,phantom,SJ520,6
+product.product_bom_390,SJ522*6,CCG 6 อัน/ชุด 22 ซม.  ชุด กระชอน / กระชอนสเตนเลส ขอบหนาด้ามลวด,X,phantom,SJ522,6
+product.product_bom_391,SJ524*6,CCG 6 อัน/ชุด 24 ซม.  กระชอน / กระชอนสเตนเลส ขอบหนาด้ามลวด,X,phantom,SJ524,6
+product.product_bom_392,SJ526*6,CCG 6 อัน/ชุด 26 ซม. กระชอน / กระชอนสเตนเลส ขอบหนาด้ามลวด,X,phantom,SJ526,6
+product.product_bom_393,SJ715*2,CCG ตะแกรง / ตะแกรงลวด ด้ามยาว 15 ซม. ชุด 2 อัน,X,phantom,SJ715,2
+product.product_bom_394,SJ715*6,CCG  ตะแกรง / ตะแกรงลวด ด้ามยาว 15 ซม. ชุด 6 อัน,X,phantom,SJ715,6
+product.product_bom_395,SJ717*2,CCG ตะแกรง / ตะแกรงลวด ด้ามยาว 17 ซม. ชุด 2 อัน,X,phantom,SJ717,1
+product.product_bom_396,SJ717*6,CCG ตะแกรง / ตะแกรงลวด ด้ามยาว 17 ซม. ชุด 6 อัน,X,phantom,SJ717,6
+product.product_bom_397,SJ722*2,CCG ตะแกรง / ตะแกรงลวด ด้ามยาว 22 ซม. ชุด 2 อัน,X,phantom,SJ722,1
+product.product_bom_398,SJ725*2,CCG ตะแกรง / ตะแกรงลวด ด้ามยาว 25 ซม. 2 อัน,X,phantom,SJ725,1
+product.product_bom_399,SJ725*6,CCG ตะแกรง / ตะแกรงลวด ด้ามยาว 25 ซม. ชุด 6 อัน,X,phantom,SJ725,6
+product.product_bom_400,SJ819*2,CCG 2 ใบ/ชุด 19 ซม. ตะกร้า / ตะกร้าสเตนเลส / ตะกร้าล้างผัก กลม (มุ้ง) – Silver,X,phantom,SJ819,1
+product.product_bom_401,SJ819*6,CCG 6 ใบ/ชุด 19 ซม.  ตะกร้า ตะกร้าสเตนเลส ตะกร้าล้างผัก กลม (มุ้ง),X,phantom,SJ819,6
+product.product_bom_402,SJ822*2,CCG 2 ใบ/ชุด 22 ซม. ตะกร้า / ตะกร้าสเตนเลส / ตะกร้าล้างผัก กลม (มุ้ง) – Silver,X,phantom,SJ822,1
+product.product_bom_403,SJ822*6,CCG 6 ใบ/ชุด 22 ซม.  ตะกร้า ตะกร้าสเตนเลส ตะกร้าล้างผัก กลม (มุ้ง),X,phantom,SJ822,6
+product.product_bom_404,SJ825*2,CCG 2 ใบ/ชุด 25 ซม. ตะกร้า / ตะกร้าสเตนเลส / ตะกร้าล้างผัก กลม (มุ้ง) – Silver,X,phantom,SJ825,1
+product.product_bom_405,SJ825*6,CCG 6 ใบ/ชุด 25 ซม.  ตะกร้า ตะกร้าสเตนเลส ตะกร้าล้างผัก กลม (มุ้ง),X,phantom,SJ825,6
+product.product_bom_406,SJ828*2,CCG 2 ใบ/ชุด 28 ซม. ตะกร้า / ตะกร้าสเตนเลส / ตะกร้าล้างผัก กลม (มุ้ง) – Silver,X,phantom,SJ828,1
+product.product_bom_407,SJ828*6,CCG 6 ใบ/ชุด 28 ซม.  ตะกร้า ตะกร้าสเตนเลส ตะกร้าล้างผัก กลม (มุ้ง),X,phantom,SJ828,6
+product.product_bom_408,SJ831*2,CCG 2 ใบ/ชุด 31 ซม. ตะกร้า / ตะกร้าสเตนเลส / ตะกร้าล้างผัก กลม (มุ้ง) – Silver,X,phantom,SJ831,1
+product.product_bom_409,SJ831*6,CCG 6 ใบ/ชุด 31 ซม.  ตะกร้า ตะกร้าสเตนเลส ตะกร้าล้างผัก กลม (มุ้ง),X,phantom,SJ831,6
+product.product_bom_410,SJ9039*2,CCG กระชอน ด้ามแดงสั้น 16 ซม. 2 ด้าม,X,phantom,SJ9039,2
+product.product_bom_411,SJ9039*6,CCG กระชอน ด้ามแดงสั้น 16 ซม. ชุด 6 ด้าม,X,phantom,SJ9039,6
+product.product_bom_412,SJ9040*2,CCG กระชอน ด้ามแดงสั้น 18 ซม. 2 ด้าม,X,phantom,SJ9040,2
+product.product_bom_413,SJ9040*6,CCG กระชอน ด้ามแดงสั้น 18 ซม. 6 ด้าม,X,phantom,SJ9040,6
+product.product_bom_414,SJ9041*2,CCG กระชอน ด้ามแดงสั้น 20 ซม. 2 ด้าม,X,phantom,SJ9041,2
+product.product_bom_415,SJ9041*6,CCG กระชอน ด้ามแดงสั้น 20 ซม. ชุด 6 ด้าม,X,phantom,SJ9041,6
+product.product_bom_416,SJ9050*2,CCG ชุด 2 ด้าม ตะกร้อ / ตะกร้อสเตนเลส / ตะกร้อลวดลูกชิ้นขดลวด 12 ซม.,X,phantom,SJ9050,2
+product.product_bom_417,SJ9050*6,CCG ชุด 6 ด้าม ตะกร้อ / ตะกร้อสเตนเลส / ตะกร้อลวดลูกชิ้นขดลวด 12 ซม.,X,phantom,SJ9050,6
+product.product_bom_418,SJ9051*2,CCG ชุด 2 ด้าม ตะกร้อ / ตะกร้อสเตนเลส / ตะกร้อลวดลูกชิ้นขดลวด 14 ซม.,X,phantom,SJ9051,2
+product.product_bom_419,SJ9051*6,CCG ตะกร้อสแตนเลส 14 ซม. ชุด 6 ด้าม ,X,phantom,SJ9051,6
+product.product_bom_420,SR410*2,CCG 2 ด้าม/ชุด ไซส์ 10 นิ้ว ไม้ตีแป้ง / ตะกร้อมือ ด้ามจับสเตนเลส ,X,phantom,SR410,2
+product.product_bom_421,SR410*6,CCG 6 ด้าม/ชุด ไซส์ 10 นิ้ว ไม้ตีแป้ง / ตะกร้อมือ ด้ามจับสเตนเลส,X,phantom,SR410,6
+product.product_bom_422,SR412*2,CCG 2 ด้าม/ชุด ไซส์ 12 นิ้ว ไม้ตีแป้ง / ตะกร้อมือ ด้ามจับสเตนเลส,X,phantom,SR412,2
+product.product_bom_423,SR412*6,CCG 6 ด้าม/ชุด ไซส์ 12 นิ้ว ไม้ตีแป้ง / ตะกร้อมือ ด้ามจับสเตนเลส,X,phantom,SR412,6
+product.product_bom_424,SR414*2,CCG 2 ด้าม/ชุด ไซส์ 14 นิ้ว ไม้ตีแป้ง / ตะกร้อมือ ด้ามจับสเตนเลส,X,phantom,SR414,2
+product.product_bom_425,SR414*6,CCG 6 ด้าม/ชุด ไซส์ 14 นิ้ว ไม้ตีแป้ง / ตะกร้อมือ ด้ามจับสเตนเลส,X,phantom,SR414,6
+product.product_bom_426,SR416*2,CCG 2 ด้าม/ชุด ไซส์ 16 นิ้ว ไม้ตีแป้ง / ตะกร้อมือ ด้ามจับสเตนเลส,X,phantom,SR416,2
+product.product_bom_427,SR416*6,CCG 6 ด้าม/ชุด ไซส์ 16 นิ้ว ไม้ตีแป้ง / ตะกร้อมือ ด้ามจับสเตนเลส,X,phantom,SR416,6
+product.product_bom_428,SR501*12,CCG ถ้วยเกาหลี สเตนเลส 12 ใบ/ชุด,X,phantom,SR501,2
+product.product_bom_429,SR501*6,CCG ถ้วยเกาหลี สเตนเลส 6 ใบ/ชุด,X,phantom,SR501,6
+product.product_bom_430,YH-16-008-Green*6,CCG 6 อัน ไซส์ 8 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เขียว,X,phantom,YH-16-008,6
+product.product_bom_431,YH-16-008-Orange*6,CCG 6 อัน ไซส์ 8 ซม. กระชอน / กระชอนสีก้นสเตนเลส - ส้ม,X,phantom,YH-16-008,6
+product.product_bom_432,YH-16-008-Pink*6,CCG 6 อัน ไซส์ 8 ซม. กระชอน / กระชอนสีก้นสเตนเลส - ชมพู,X,phantom,YH-16-008,6
+product.product_bom_433,YH-16-010-Green*6,CCG 6 อัน ไซส์ 10 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เขียว,X,phantom,YH-16-010,6
+product.product_bom_434,YH-16-010-Orange*6,CCG 6 อัน ไซส์ 10 ซม. กระชอน / กระชอนสีก้นสเตนเลส - ส้ม,X,phantom,YH-16-010,6
+product.product_bom_435,YH-16-010-Yellow*6,CCG 6 อัน ไซส์ 10 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เหลือง,X,phantom,YH-16-010,6
+product.product_bom_436,YH-16-012-Green*6,FOFO 6 อัน ไซส์ 12 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เขียว,X,phantom,YH-16-012,6
+product.product_bom_437,YH-16-012-Orange*6,CCG 6 อัน ไซส์ 12 ซม. กระชอน / กระชอนสีก้นสเตนเลส - ส้ม,X,phantom,YH-16-012,6
+product.product_bom_438,YH-16-012-Yellow*6,CCG 6 อัน ไซส์ 12 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เหลือง,X,phantom,YH-16-012,6
+product.product_bom_439,YH-16-016-Green*2,CCG 2 อัน ไซส์ 16 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เขียว,X,phantom,YH-16-016,2
+product.product_bom_440,YH-16-016-Orange*2,CCG  2 อัน ไซส์ 16 ซม. กระชอน / กระชอนสีก้นสเตนเลส - ส้ม,X,phantom,YH-16-016,2
+product.product_bom_441,YH-16-016-Yellow*2,CCG 2 อัน ไซส์ 16 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เหลือง,X,phantom,YH-16-016,2
+product.product_bom_442,YH-16-018-Green*2,CCG 2 อัน ไซส์ 18 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เขียว,X,phantom,YH-16-018,2
+product.product_bom_443,YH-16-018-Orange*2,CCG 2 อัน ไซส์ 18 ซม. กระชอน / กระชอนสีก้นสเตนเลส - ส้ม,X,phantom,YH-16-018,2
+product.product_bom_444,YH-16-018-Yellow*2,CCG 2 อัน ไซส์ 18 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เหลือง,X,phantom,YH-16-018,2
+product.product_bom_445,YH-16-020-Green*2,CCG 2 อัน ไซส์ 20 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เขียว,X,phantom,YH-16-020,2
+product.product_bom_446,YH-16-020-Orange*2,CCG 2 อัน ไซส์ 20 ซม. กระชอน / กระชอนสีก้นสเตนเลส - ส้ม,X,phantom,YH-16-020,2
+product.product_bom_447,YH-16-020-Yellow*2,CCG 2 อัน ไซส์ 20 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เหลือง,X,phantom,YH-16-020,2
+product.product_bom_448,YH-16-024-Green*2,CCG 2 อัน ไซส์ 24 ซม. กระชอน / กระชอนสีก้นสเตนเลส - เขียว,X,phantom,YH-16-024,2
+product.product_bom_449,YH-16-024-Orange*2,CCG 2 อัน ไซส์ 24 ซม. กระชอน / กระชอนสีก้นสเตนเลส - ส้ม,X,phantom,YH-16-024,2
+product.product_bom_450,YH-16-024-Yellow*2,CCG 2 อัน ไซส์ 24 ซม. กระชอน / กระชอนสีก้นสเตนเลส - ชมพู,X,phantom,YH-16-024,2
+product.product_bom_451,YH-37-0013 - 6,CCG กรวยหยอดฝอยทอง (ใหญ่) 6 อัน/ชุด,X,phantom,YH-37-0013,6
+product.product_bom_452,YH-37-00131415,"CCG ชุด กรวยหยอดฝอยทอง (เล็ก, กลาง, ใหญ่)",X,phantom,YH-37-0013,1
+,,,Y,,YH-37-0014,1
+,,,Y,,YH-37-0015,1
+product.product_bom_455,YH-37-0014 - 6,CCG กรวยหยอดฝอยทอง (กลาง) 6 อัน/ชุด,X,phantom,YH-37-0014,6
+product.product_bom_456,YH-37-0015 - 6,CCG กรวยหยอดฝอยทอง (เล็ก) 6 อัน/ชุด,X,phantom,YH-37-0015,6
+product.product_bom_457,YH-40-P444*12,CCG มีด ด้ามดำ ปลายสันโค้ง ขนาด 6 นิ้ว (6 เล่ม/ชุด),X,phantom,YH-40-P444,12
+product.product_bom_458,YH-40-P444+P666,CCG มีด ด้ามดำ ปลายสันเฉียง +  ปลายสันโค้ง 6 นิ้ว 2 เล่ม/ชุด,X,phantom,YH-40-P444,1
+,,,Y,,YH-40-P666,1
+product.product_bom_460,YH-53-0411,CCG มีดปอกผลไม้ 2 คม 12 เล่ม,X,phantom,YH-53-0411,12
