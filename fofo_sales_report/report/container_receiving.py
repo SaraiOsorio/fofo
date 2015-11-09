@@ -49,7 +49,7 @@ class container_receiving_report(report_sxw.rml_parse):
         self.cr.execute("""SELECT 
                                 co_line.id,
                                 product.default_code as product,
-                                pol.name as product_description, 
+                                tmpl.name as product_description, 
                                 co_line.number_packages as qty_boxes,
                                 tmpl.description_purchase as supplier_description,
                                 co.arrive_date as arrive_date
