@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Quotation" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.3636363636363766"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="288"/>
+	<property name="ireport.y" value="0"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;order_line&quot;]"/>
 	<import value="org.apache.commons.codec.binary.Base64"/>
 	<style name="table" lineSpacing="Single">
@@ -172,6 +172,9 @@
 	</field>
 	<field name="amount_total_text_th" class="java.lang.String">
 		<fieldDescription><![CDATA[amount_total_text_th]]></fieldDescription>
+	</field>
+	<field name="date_validity" class="java.util.Date">
+		<fieldDescription><![CDATA[date_validity]]></fieldDescription>
 	</field>
 	<variable name="string_total" class="java.lang.String">
 		<variableExpression><![CDATA[(Math.round($F{amount_total}*100)/100).toString()]]></variableExpression>
@@ -485,6 +488,20 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{phone}]]></textFieldExpression>
 			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="411" y="184" width="139" height="14" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{date_validity}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="345" y="184" width="76" height="14" backcolor="#B5E7D3"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Expiration :]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -528,7 +545,7 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 				<textFieldExpression class="java.lang.Number"><![CDATA[$F{price_subtotal}==null?0.00:$F{price_subtotal}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="36" y="0" width="219" height="37"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="92" y="0" width="219" height="37"/>
 				<textElement verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
@@ -542,7 +559,7 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 				<textFieldExpression class="java.lang.Number"><![CDATA[($F{discount} == null ? null : $F{discount})]]></textFieldExpression>
 			</textField>
 			<image scaleImage="RealSize" onErrorType="Blank">
-				<reportElement stretchType="RelativeToTallestObject" x="255" y="-7" width="54" height="44" isRemoveLineWhenBlank="true">
+				<reportElement stretchType="RelativeToTallestObject" x="36" y="-7" width="54" height="44" isRemoveLineWhenBlank="true">
 					<printWhenExpression><![CDATA[$F{product_image}!=""]]></printWhenExpression>
 				</reportElement>
 				<imageExpression class="java.lang.String"><![CDATA[$F{product_image}]]></imageExpression>
