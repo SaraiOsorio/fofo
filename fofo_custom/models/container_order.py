@@ -530,6 +530,11 @@ class container_order(models.Model):
             if co_line_remove:
                 for r in co_line_remove:
                     self.write({'co_line_ids': [(3, r)]})
+        else:# Make empty CO lines if there is not PO's on CO form.
+            if self.co_line_ids:
+                for col in self.co_line_ids:
+                    self.write({'co_line_ids': [(3, col.id)]})
+                    self.write({'inserted_po_ids': [(6, 0, [])]})
 
 
     @api.onchange('inbound_shipper_id')
