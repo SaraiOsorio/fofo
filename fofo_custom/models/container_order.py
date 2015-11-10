@@ -150,6 +150,12 @@ class container_order_line(models.Model):
     def on_change_po_line(self):
         if self.po_line_id:
             line_data = self.env['purchase.order.line'].browse(self.po_line_id.id)
+            packaging_id = line_data.product_packaging.id
+            if not packaging_id:
+                product_id = line_data.product_id
+                if product_id.packaging_ids:
+                    packaging_ids = product_id.packaging_ids.ids
+                    packaging_id = packaging_ids[0]
             po_currency = self.order_id.currency_id
             current_currency = self.container_order_id.currency_id
             ctx = dict(self._context or {})
@@ -165,7 +171,7 @@ class container_order_line(models.Model):
             self.price_unit = amount
             self.date_planned = line_data.date_planned
             self.name = line_data.name
-            self.product_packaging = line_data.product_packaging.id
+            self.product_packaging = packaging_id
             self.qty_package = line_data.qty_package
             self.number_packages = line_data.number_packages
             if line_data.taxes_id:
@@ -484,6 +490,14 @@ class container_order(models.Model):
                             po_currency = po.currency_id
                             current_currency = self.currency_id
                             amount = order_line.price_unit
+                            
+                            packaging_id = order_line.product_packaging.id
+                            if not packaging_id:
+                                product_id = order_line.product_id
+                                if product_id.packaging_ids:
+                                    packaging_ids = product_id.packaging_ids.ids
+                                    packaging_id = packaging_ids[0]
+                            
                             if po_currency:
                                 amount = po_currency.compute(order_line.price_unit, current_currency)
                             taxes = []
@@ -500,7 +514,7 @@ class container_order(models.Model):
                                             'price_unit': amount,
                                             'date_planned': order_line.date_planned,
                                             'name': order_line.name,
-                                            'product_packaging': order_line.product_packaging.id,
+                                            'product_packaging': packaging_id,
                                             'qty_package': order_line.qty_package,
                                             'number_packages': order_line.number_packages,
                                             'taxes_id': [(6, 0, taxes)]
