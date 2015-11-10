@@ -20,14 +20,34 @@
             file="fofo_sales_report.fofo_sales_refund_report"
         />
         
+        <record id="paperformat_container_receiving" model="report.paperformat">
+            <field name="name">European A4 Container Receiving</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">7</field>
+            <field name="margin_bottom">7</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">5</field>
+            <field name="dpi">85</field>
+        </record>
+            
         <report 
             id="container_receiving_report_reg"
             model="container.order" 
-            string="Container Receiving Report"
+            string="Container Receiving Report" 
             report_type="qweb-pdf"
             name="fofo_sales_report.container_receiving_report" 
-            file="fofo_sales_report.container_receiving_report"
+            file="fofo_sales_report.container_receiving_report" 
+            header="False"
         />
+        <record id="container_receiving_report_reg" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="fofo_sales_report.paperformat_container_receiving"/>
+        </record>
                      
     </data>
 </openerp>

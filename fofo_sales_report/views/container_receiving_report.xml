@@ -22,19 +22,18 @@
                                     <h4><strong>Container Receiving Report</strong></h4>
                                 </div>
                             </div>
+                            <div class="row">
                             <table class="table table-condensed">
-                                <thead>
-                                    <tr style="border-top:1px solid black;">
+                                    <tr style="border-top:2px solid black;">
                                         <th colspan="2">Customer Name</th>
                                         <th colspan="2">Arrival Date</th>
                                     </tr>
-                                    <tr style="border-top:hidden;">
+                                    <tr style="border-top:hidden;border-bottom:2px solid black;">
                                         <th>Product Code</th>
                                         <th>Description</th>
                                         <th>Description For Supplier</th>
                                         <th class="text-right">QTY-Boxes</th>
                                     </tr>
-                                </thead>
                                 <tbody>
                                     <t t-foreach="get_container_order(data)" t-as="order">
                                         <tr>
@@ -65,6 +64,7 @@
                                     </t>
                                 </tbody>
                             </table>
+                            </div>
                         </div>
 <!--                    </t-->
                 </t>
