@@ -448,6 +448,7 @@ class container_order(models.Model):
             co_lines = []
             po_list = []
             exist_po_list = []
+            co_line_remove = []
             for po in self.po_ids:
                 po_exist = False
                 
@@ -455,7 +456,14 @@ class container_order(models.Model):
                     exist_ids = self.all_inserted_po_ids.ids
                     exist_po_list.append(po.id)
                     exist_po_list.extend(exist_ids)
-                
+                    
+                co_line_remove = []
+                for inserted_po in self.inserted_po_ids:
+                    if inserted_po not in self.po_ids:
+                        for co_line in self.co_line_ids:
+                            if co_line.po_line_id.order_id.id == inserted_po.id:
+                                co_line_remove.append(co_line.id)
+                                
                 for current_po in self.po_ids:#Check if po already operated and its CO line exists in the CO.
                     if current_po in self.all_inserted_po_ids and current_po not in self.inserted_po_ids:
                         for coline in self.co_line_ids:
@@ -505,6 +513,9 @@ class container_order(models.Model):
             if co_lines:
                 #create new co lines
                 self.write({'co_line_ids': co_lines})
+            if co_line_remove:
+                for r in co_line_remove:
+                    self.write({'co_line_ids': [(3, r)]})
 
 
     @api.onchange('inbound_shipper_id')
@@ -583,10 +594,17 @@ class container_order(models.Model):
         res = super(container_order, self).write(vals)
         if vals.get('co_line_ids', False):
             for line in vals['co_line_ids']:
-                if line and line[2] and 'po_line_id' in line[2]:
-                    line_record = purchase_line_obj.browse(line[2]['po_line_id'])
-                    if line_record.product_id:
-                        product_record = line_record.product_id.browse()# This will allow to call function field on product object. (_count_qty_contained).
+                if len(line) > 2:
+                    if line and line[2] and 'po_line_id' in line[2]:
+                        line_record = purchase_line_obj.browse(line[2]['po_line_id'])
+                        if line_record.product_id:
+                            product_record = line_record.product_id.browse()# This will allow to call function field on product object. (_count_qty_contained).
+                else:
+                    co_line_id = line[1]
+                    co_line_data = self.env['container.order.line'].browse(co_line_id)
+                    po_line_record = co_line_data.po_line_id
+                    if po_line_record.product_id:
+                        product_record = po_line_record.product_id.browse()
         return res
 
     @api.multi
