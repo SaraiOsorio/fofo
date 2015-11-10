@@ -448,7 +448,7 @@ class container_order(models.Model):
     inserted_po_ids = fields.Many2many('purchase.order', 'purchase_container_record_rel', 'po_id', 'container_id', string='Operated Purchase Orders')
     all_inserted_po_ids = fields.Many2many('purchase.order', 'purchase_container_all_rel', 'po_id', 'container_id', string='All Purchase Orders')
 
-    @api.multi
+    @api.one
     def add_co_lines(self):
         if self.po_ids:
             co_lines = []
@@ -457,7 +457,6 @@ class container_order(models.Model):
             co_line_remove = []
             for po in self.po_ids:
                 po_exist = False
-                
                 if po not in self.all_inserted_po_ids:
                     exist_ids = self.all_inserted_po_ids.ids
                     exist_po_list.append(po.id)
@@ -468,7 +467,7 @@ class container_order(models.Model):
                     if inserted_po not in self.po_ids:
                         for co_line in self.co_line_ids:
                             if co_line.po_line_id.order_id.id == inserted_po.id:
-                                co_line_remove.append(co_line.id)
+                                co_line_remove.append(co_line)
                                 
                 for current_po in self.po_ids:#Check if po already operated and its CO line exists in the CO.
                     if current_po in self.all_inserted_po_ids and current_po not in self.inserted_po_ids:
@@ -482,7 +481,6 @@ class container_order(models.Model):
                 
                 if po_exist:
                     continue
-                
                 po_list.append(po.id)
                 if po.order_line:
                     for order_line in po.order_line:
@@ -520,20 +518,24 @@ class container_order(models.Model):
                                             'taxes_id': [(6, 0, taxes)]
                                             }
                             co_lines.append((0, 0, co_line_vals))#create
+
             if po_list:
                 self.write({'inserted_po_ids': [(6, 0, po_list)]}) #Write
             if exist_po_list:
                 self.write({'all_inserted_po_ids': [(6, 0, exist_po_list)]}) #Write
             if co_lines:
                 #create new co lines
-                self.write({'co_line_ids': co_lines})
+                for coline in co_lines:
+                    self.write({'co_line_ids': [coline]})
             if co_line_remove:
                 for r in co_line_remove:
-                    self.write({'co_line_ids': [(3, r)]})
+                    #self.write({'co_line_ids': [(3, r)]})
+                    r.unlink()
         else:# Make empty CO lines if there is not PO's on CO form.
             if self.co_line_ids:
                 for col in self.co_line_ids:
-                    self.write({'co_line_ids': [(3, col.id)]})
+                    #self.write({'co_line_ids': [(3, col.id)]})
+                    col.unlink()
                     self.write({'inserted_po_ids': [(6, 0, [])]})
 
 
