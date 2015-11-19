@@ -391,7 +391,7 @@ class container_order(models.Model):
     max_weight = fields.Float(related='container_size.max_weight', string='Max Weight Container', help="Max Weight of Container.", digits=dp.get_precision('Stock Weight'), store=True, readonly=True)
     max_volume = fields.Float(related='container_size.max_volume', string='Max Volume Container', help="Max Volume of Container.", digits=dp.get_precision('Product Volume'), store=True, readonly=True)
     container_size = fields.Many2one('container.size', string="Container Size", required=True)
-    date = fields.Date('Date', default=fields.Date.today(), required=True, copy=False)
+    date = fields.Date('Date', default=fields.Date.context_today, required=True, copy=False)
     outbound_shipper_id = fields.Many2one('res.partner', string="Outbound Shipper Name")
     inbound_shipper_id = fields.Many2one('res.partner', string="Inbound Shipper Name")
     load_date = fields.Date("Loading Date")
