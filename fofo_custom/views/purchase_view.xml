@@ -19,6 +19,12 @@
                 <button name="view_picking" string="Receive Products" type="object" attrs="{'invisible': ['|', ('shipped','=',True), ('state','!=', 'approved')]}" class="oe_highlight" position="replace">
                     <button name="view_picking" string="Receive Products" type="object" attrs="{'invisible': ['|', ('shipped','=',True),  '|',('state','!=', 'approved'), ('purchase_by_container','!=', False)]}" class="oe_highlight"/>
                 </button>
+                <field name="currency_id" position="after">
+                	<field name="show_supplier_product_only" />
+                </field>
+                <field name="order_line" position="attributes">
+                	<attribute name="context">{'show_supplier_product_only': show_supplier_product_only}</attribute>
+                </field>
             </field>
         </record>
         

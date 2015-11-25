@@ -216,8 +216,9 @@ class purchase_order(models.Model):
                                                                  'approved':[('readonly',True)],
                                                                  'done':[('readonly',True)], 'cancel':[('readonly',True)]},)
     order_line = fields.One2many( states={'contained':[('readonly',True)],'approved':[('readonly',True)],
-                                              'done':[('readonly',True)], 'cancel':[('readonly',True)]},
-                                      )
+                                              'done':[('readonly',True)], 'cancel':[('readonly',True)]}, )
+    show_supplier_product_only = fields.Boolean(string="Show supplier product only", help="If checked, purhcase line will show only product with its supplier same as selected in this order.")
+
 
 class purchase_order_line(models.Model):
     _inherit = "purchase.order.line"
@@ -282,6 +283,31 @@ class purchase_order_line(models.Model):
             args.append(['purchase_by_container', '=', True])
         return super(purchase_order_line, self).search(args, offset=offset, limit=limit, order=order, count=count)
 
+    @api.model
+    def _update_domain_show_supplier_product_only(self, res,
+                                                  partner_id):
+        res['domain'] = dict(res.get('domain') or {})
+        restrict = self._context.get('show_supplier_product_only', False)
+        if partner_id and restrict:
+            supplierinfo_obj = self.env['product.supplierinfo']
+            product_obj = self.env['product.product']
+            supplierinfos = supplierinfo_obj.search(
+                [('name', '=', partner_id)])
+            product_tmpl_ids = [x.product_tmpl_id.id for x in supplierinfos]
+            products = product_obj.search(
+                [('product_tmpl_id', 'in', product_tmpl_ids)])
+            if products:
+                res['domain'].update({
+                    'product_id': [('purchase_ok', '=', True),
+                                   ('id', 'in', products.ids)],
+                })
+                return res
+
+        res['domain'].update({
+            'product_id': [('purchase_ok', '=', True)],
+        })
+        return res
+
     @api.v7
     def onchange_product_id(self, cr, uid, ids, pricelist_id, product_id, qty, uom_id,
             partner_id, date_order=False, fiscal_position_id=False, date_planned=False,
@@ -300,6 +326,14 @@ class purchase_order_line(models.Model):
         if product.description_purchase:
             name = product.description_purchase
             res['value'].update({'name': name})
+
+        # if is_show_product_supplier_only = True
+        print context_partner
+        print context
+        res = self._update_domain_show_supplier_product_only(cr, uid,
+                                                             res, partner_id,
+                                                             context=context)
+        print res
         return res
 
     @api.one
