@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Quotation" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.3636363636363766"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="38"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;order_line&quot;]"/>
 	<import value="org.apache.commons.codec.binary.Base64"/>
 	<style name="table" lineSpacing="Single">
@@ -313,7 +313,7 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[Tax ID : 01234567890  Headoffice www.fofo.in.th]]></text>
+				<text><![CDATA[Tax ID: 0745557000058  Headoffice www.fofo.in.th]]></text>
 			</staticText>
 			<image>
 				<reportElement x="205" y="0" width="157" height="36"/>
@@ -415,7 +415,7 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[Tel: +66-2-3333333 Fax : +66-2-3333333]]></text>
+				<text><![CDATA[Tel : +66 (0) 24964739, Fax : +66 (0) 24964739]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
 				<reportElement positionType="Float" mode="Transparent" x="72" y="123" width="260" height="46" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -651,7 +651,7 @@ We are pleased to quote our products for your valuable inquiry as following;]]><
 			<textField isBlankWhenNull="true">
 				<reportElement style="table" x="0" y="45" width="383" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single" markup="none">
-					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="Monospaced" size="8" isBold="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_total_text_th}]]></textFieldExpression>
 			</textField>

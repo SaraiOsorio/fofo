@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.6500000000000166"/>
+	<property name="ireport.zoom" value="1.9965000000000204"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;invoice_line&quot;]"/>
@@ -371,7 +371,7 @@
 				<text><![CDATA[Delivery / Tax Invoice]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="53" width="511" height="12"/>
+				<reportElement x="0" y="49" width="511" height="12"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -389,7 +389,7 @@
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[Tax ID : 01234567890  Headoffice]]></text>
+				<text><![CDATA[Tax ID: 0745557000058  Headoffice]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="205" height="18"/>

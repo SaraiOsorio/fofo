@@ -314,14 +314,14 @@
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="10" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[Tel: +66-2-3333333 Fax : +66-2-3333333]]></text>
+				<text><![CDATA[Tel : +66 (0) 24964739, Fax : +66 (0) 24964739]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="83" width="380" height="12"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="10" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[Tax ID : 01234567890  Headoffice]]></text>
+				<text><![CDATA[Tax ID: 0745557000058  Headoffice]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
