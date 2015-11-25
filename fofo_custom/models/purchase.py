@@ -296,12 +296,11 @@ class purchase_order_line(models.Model):
             product_tmpl_ids = [x.product_tmpl_id.id for x in supplierinfos]
             products = product_obj.search(
                 [('product_tmpl_id', 'in', product_tmpl_ids)])
-            if products:
-                res['domain'].update({
-                    'product_id': [('purchase_ok', '=', True),
-                                   ('id', 'in', products.ids)],
-                })
-                return res
+            res['domain'].update({
+                'product_id': [('purchase_ok', '=', True),
+                               ('id', 'in', products.ids)],
+            })
+            return res
 
         res['domain'].update({
             'product_id': [('purchase_ok', '=', True)],
