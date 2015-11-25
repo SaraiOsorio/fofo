@@ -371,32 +371,39 @@
 				<text><![CDATA[Delivery / Tax Invoice]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="49" width="511" height="12"/>
+				<reportElement x="0" y="0" width="205" height="18"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Monospaced" size="12" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[บริษัท ซินเล่ยหยาง จำกัด]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="48" width="511" height="12"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[3/15 หมู่ที่ 9]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="65" width="511" height="12"/>
+				<reportElement x="2" y="72" width="511" height="12"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Tel : +66 (0) 24964739, Fax : +66 (0) 24964739]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="84" width="380" height="12"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Tax ID: 0745557000058  Headoffice www.fofo.in.th]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="60" width="511" height="12"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[ตำบลโคกขาม อำเภอเมืองสมุทรสาคร สมุทรสาคร 74000]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="81" width="380" height="12"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[Tax ID: 0745557000058  Headoffice]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="0" width="205" height="18"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="12" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[บริษัท ซินเล่ยหยาง จำกัด]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
