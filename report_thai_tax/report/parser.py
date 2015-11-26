@@ -5,6 +5,7 @@
 ##############################################################################
 import sys
 sys.path.insert(0, '/home/kittiu/workspace/common/common')
+sys.path.insert(0, '/opt/odoo/common')
 import jasper_reports
 from openerp.osv import fields, osv
 import datetime
