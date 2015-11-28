@@ -244,7 +244,7 @@ class account_voucher(models.Model):
             line_total, rec_list_ids = self.voucher_move_line_create(voucher.id, line_total, move_id.id, company_currency, current_currency)
 
             # Create the writeoff line if needed
-            ml_writeoff = self.writeoff_move_line_get(voucher.id, line_total, move_id.id, name, company_currency, current_currency)
+            ml_writeoff = voucher.writeoff_move_line_get(line_total, move_id.id, name, company_currency, current_currency)
             if ml_writeoff:
                 move_line_pool.create(ml_writeoff)
             # We post the voucher.
