@@ -79,10 +79,10 @@ class account_voucher(models.Model):
 #Columns----------END
 
 #-------------------------START---------------Logic for creating deduction lines journal entry ----
-    @api.model
-    def writeoff_move_line_get(self, voucher_id, line_total, move_id, name, company_currency, current_currency):
+    @api.multi
+    def writeoff_move_line_get(self, line_total, move_id, name, company_currency, current_currency):
         move_line = {}
-        voucher_brw = self.browse(voucher_id)
+        voucher_brw = self
         current_currency_obj = voucher_brw.currency_id or voucher_brw.journal_id.company_id.currency_id
         list_move_line = []
         ded_amount = 0.00
@@ -218,7 +218,7 @@ class account_voucher(models.Model):
             line_total, rec_list_ids = self.voucher_move_line_create(voucher.id, line_total, move_id.id, company_currency, current_currency)
 
             # Create the writeoff line if needed
-            ml_writeoff = voucher.writeoff_move_line_get(voucher.id, line_total, move_id.id, name, company_currency, current_currency)
+            ml_writeoff = voucher.writeoff_move_line_get(line_total, move_id.id, name, company_currency, current_currency)
             
             #PROBUSE CHANGE STARTED Section 1 ----------------------
             if voucher.multiple_reconcile_ids:
