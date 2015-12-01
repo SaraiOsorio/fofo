@@ -35,7 +35,9 @@ class container_receiving_report(models.TransientModel):
         'container_receiving_report_rel',
         'report_id',
         'container_id',
-        string='Shipper Container Number',)
+        string='Shipper Container Number',
+        domain="[('date', '<=', end_date), ('date', '>=', start_date)]",
+    )
 
     @api.multi
     def print_report(self, data):

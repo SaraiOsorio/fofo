@@ -1128,6 +1128,10 @@ class container_shipper_number(models.Model):
         string='Shipper Container Number',
         readonly=True,
     )
+    date = fields.Date(
+        string='CO Date',
+        readonly=True,
+    )
 
     def init(self, cr):
         # Main
@@ -1135,7 +1139,7 @@ class container_shipper_number(models.Model):
         cr.execute("""
             create or replace view container_shipper_number as (
                 select row_number() over (order by name desc) id, * from
-                    (select distinct container_shipper_number as name
+                    (select distinct container_shipper_number as name, date
                     from container_order
                     where container_shipper_number is not null) a
             )
