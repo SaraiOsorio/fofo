@@ -35,16 +35,22 @@ class container_receiving_report(report_sxw.rml_parse):
         start_date = data['form']['start_date']
         end_date = data['form']['end_date']
         company_id = data['form']['company_id'][0]
+        container_ids = data['form']['container_ids']
+        domain = [('state', '=', 'confirm'),
+                  ('arrive_date', '>=', start_date),
+                  ('arrive_date', '<=', end_date),
+                  ('company_id', '=', company_id)]
+        if container_ids:
+            shipper_containers = self.pool.get('container.shipper.number').browse(self.cr, self.uid, container_ids)
+            numbers = [x.name for x in shipper_containers]
+            domain.append(('container_shipper_number', 'in', numbers))
         order_list = []
-        order_ids = self.pool.get('container.order').search(self.cr, self.uid, [('state', '=', 'confirm'),
-                                                                                ('arrive_date', '>=', start_date),
-                                                                                ('arrive_date', '<=', end_date),
-                                                                                ('company_id', '=', company_id)])
+        order_ids = self.pool.get('container.order').search(self.cr, self.uid, domain)
         order_data = self.pool.get('container.order').browse(self.cr, self.uid, order_ids)
         for o in order_data:
             order_list.append(o)
         return order_list
-        
+
     def _get_order_lines(self, order):
         self.cr.execute("""SELECT 
                                 co_line.id,
@@ -63,7 +69,7 @@ class container_receiving_report(report_sxw.rml_parse):
                                 ON (co_line.product_id = product.id) 
                             LEFT JOIN product_template tmpl 
                                 ON (product.product_tmpl_id = tmpl.id) 
-                            WHERE 
+                            WHERE
                                  co.id = %s
                             """, (order.id, ))
         query_data = self.cr.dictfetchall()

@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_container_shipper_number,container.shipper.number,model_container_shipper_number,purchase.group_purchase_user,1,0,0,0
 access_container_size_user,container.size,model_container_size,purchase.group_purchase_user,1,0,0,0
 access_container_size_manager,container.size,model_container_size,purchase.group_purchase_manager,1,1,1,1
 access_container_order_user,container.order,model_container_order,purchase.group_purchase_user,1,1,1,0

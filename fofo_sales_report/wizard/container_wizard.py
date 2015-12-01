@@ -26,16 +26,22 @@ from openerp.exceptions import Warning
 
 class container_receiving_report(models.TransientModel):
     _name = 'container.receiving.report'
-    
+
     company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env['res.company']._company_default_get('fofo.sale.report'))
     start_date = fields.Date('Arrival Start Date', required=True, default= fields.Date.today())
     end_date = fields.Date('Arrival End Date', required=True, default= fields.Date.today())
-    
+    container_ids = fields.Many2many(
+        'container.shipper.number',
+        'container_receiving_report_rel',
+        'report_id',
+        'container_id',
+        string='Shipper Container Number',)
+
     @api.multi
     def print_report(self, data):
         if self.env.context is None:
             self.env.context = {}
-        data['form'] = self.read(['end_date', 'start_date','company_id'])[0]
+        data['form'] = self.read(['end_date', 'start_date', 'company_id', 'container_ids'])[0]
         return self.pool['report'].get_action(self._cr, self._uid, [], 'fofo_sales_report.container_receiving_report', data=data, context=self.env.context)#probuse
 
 

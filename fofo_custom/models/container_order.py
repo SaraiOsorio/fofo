@@ -1106,7 +1106,7 @@ class container_order(models.Model):
                 'date': time.strftime('%Y-%m-%d'),
             })
             container.landed_cost_allocated = True
-        
+
     @api.multi
     def cancel_order(self):
         for order in self:
@@ -1118,5 +1118,28 @@ class container_order(models.Model):
         for coline in self.co_line_ids:
             coline.state = 'cancel'
         self.write({'state': 'cancel'})
+
+
+class container_shipper_number(models.Model):
+    _name = "container.shipper.number"
+    _auto = False
+
+    name = fields.Char(
+        string='Shipper Container Number',
+        readonly=True,
+    )
+
+    def init(self, cr):
+        # Main
+        tools.drop_view_if_exists(cr, 'container_shipper_number')
+        cr.execute("""
+            create or replace view container_shipper_number as (
+                select row_number() over (order by name desc) id, * from
+                    (select distinct container_shipper_number as name
+                    from container_order
+                    where container_shipper_number is not null) a
+            )
+        """)
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
