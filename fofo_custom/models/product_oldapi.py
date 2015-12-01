@@ -24,10 +24,10 @@ class product_product(osv.osv):
         if res:
             for r in res:
                 if supplier_desc[r[0]]:
-                    final_res.append((r[0], r[1]+' ('+ supplier_desc[r[0]] + ')' ))
+                    final_res.append((r[0], r[1]+' {'+ supplier_desc[r[0]] + '}' ))
                 else:
                     final_res.append(r)
-        return final_res 
+        return final_res
 
     #This method is completly override. Please check #ecosoft tag.
     def name_search(self, cr, user, name='', args=None, operator='ilike', context=None, limit=100):
