@@ -159,7 +159,7 @@
 					<text><![CDATA[จำนวนเงินสุทธิ ]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true">
-					<reportElement x="0" y="1" width="352" height="21"/>
+					<reportElement x="-39" y="1" width="432" height="21"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Monospaced" size="12" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
