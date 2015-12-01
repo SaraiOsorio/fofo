@@ -176,21 +176,22 @@ class lazada_import(models.TransientModel):
                 sheet = lines.sheet_by_name(sheet_name) 
                 rows = sheet.nrows
                 columns = sheet.ncols
-                seller_sku = sheet.row_values(0).index('Seller SKU')
-                created_at = sheet.row_values(0).index('Created at')
-                order_number = sheet.row_values(0).index('Order Number')
-                unit_price = sheet.row_values(0).index('Unit Price')
-                status = sheet.row_values(0).index('Status')
-                
+                header_row = [col.strip() for col in sheet.row_values(0)]
+                seller_sku = header_row.index('Seller SKU')
+                created_at = header_row.index('Created at')
+                order_number = header_row.index('Order Number')
+                unit_price = header_row.index('Unit Price')
+                status = header_row.index('Status')
+
                 items_dict = {}
                 seller_sku_list = []
                 picking_to_transfer = []
                 picking_to_invoice = []
                 for row_no in range(rows):
                     if row_no > 0:
-                        seller_sku_value = sheet.row_values(row_no)[seller_sku] # "Seller SKU" from xlsx
+                        seller_sku_value = sheet.row_values(row_no)[seller_sku].strip() # "Seller SKU" from xlsx
                         if not seller_sku_value in seller_sku_list:
-                            products = prod_obj.search([('default_code', '=', seller_sku_value)])
+                            products = prod_obj.search([('default_code', '=', seller_sku_value)], limit=1)
                             seller_sku_list.append(seller_sku_value)
                             if not product_dict.get(seller_sku_value):
                                 product_dict[seller_sku_value] = products
@@ -206,17 +207,19 @@ class lazada_import(models.TransientModel):
                                 
                         order = str(sheet.row_values(row_no)[order_number]).split('.')[0]
                         if not items_dict.get(order):
-                            items_dict[order] = [{'seller_sku' : seller_sku_value,
-                                                                                       'created_at' : sheet.row_values(row_no)[created_at],
-                                                                                       'unit_price' : sheet.row_values(row_no)[unit_price], 
-                                                                                       'status' : sheet.row_values(row_no)[status],
-                                                                                       'order_no' : order }]
+                            items_dict[order] = [{
+                                'seller_sku': seller_sku_value,
+                                'created_at': sheet.row_values(row_no)[created_at].strip(),
+                                'unit_price': sheet.row_values(row_no)[unit_price],
+                                'status': sheet.row_values(row_no)[status].strip(),
+                                'order_no': order }]
                         else:
-                            items_dict[order].append({'seller_sku' : seller_sku_value,
-                                                                                       'created_at' : sheet.row_values(row_no)[created_at],
-                                                                                       'unit_price' : sheet.row_values(row_no)[unit_price], 
-                                                                                       'status' : sheet.row_values(row_no)[status],
-                                                                                       'order_no' : order })
+                            items_dict[order].append({
+                                'seller_sku': seller_sku_value,
+                                'created_at': sheet.row_values(row_no)[created_at].strip(),
+                                'unit_price': sheet.row_values(row_no)[unit_price], 
+                                'status': sheet.row_values(row_no)[status].strip(),
+                                'order_no': order })
                 result ={}
                 import_date = time.strftime('%Y-%m-%d')
                 history_ids = []
@@ -444,7 +447,7 @@ class lazada_import(models.TransientModel):
                             'created_at':final_date,
                             'order_number':'',
                             'unit_price':sheet.row_values(row_no)[unit_price],
-                            'status':sheet.row_values(row_no)[status],
+                            'status':sheet.row_values(row_no)[status].strip(),
                             'import_time':import_date,
                             'user_id':self.env.user.id,
                             'order_status':'fail',
