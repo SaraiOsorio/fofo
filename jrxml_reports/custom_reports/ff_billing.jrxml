@@ -355,7 +355,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="221" y="1" width="55" height="21"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="11" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[เครดิต]]></text>
@@ -415,7 +415,7 @@
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="221" y="0" width="55" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="11" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{payment_term}]]></textFieldExpression>
