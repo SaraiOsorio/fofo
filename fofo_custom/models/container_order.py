@@ -117,7 +117,7 @@ class container_order_line(models.Model):
             self.total_purchase_qty = self.po_line_id.product_qty
 
     po_line_id = fields.Many2one('purchase.order.line', string='Purchase Order Line')
-    container_order_id = fields.Many2one('container.order', string='Container Order')
+    container_order_id = fields.Many2one('container.order', string='Container Order', ondelete='restrict')
     product_id = fields.Many2one('product.product', string='Product', related='po_line_id.product_id', readonly=True, store=True)
     product_qty = fields.Float('Container Quantity', digits=dp.get_precision('Product Unit of Measure'), required=True)
     total_purchase_qty = fields.Float(compute=_amount_purchase_qty, string='Total Purchase Quantity', digits=dp.get_precision('Product Unit of Measure'), required=True, help="Qty from purchase order line.")
