@@ -139,8 +139,11 @@ class stock_move(models.Model):
         res = super(stock_move, self).action_cancel(cr, uid, ids, context)
         for move in self.browse(cr, uid, ids, context):
             if move.co_line_id and move.purchase_line_id:
+                purchase_order = move.purchase_line_id.order_id
                 if move.purchase_line_id.state == 'contained':
                     self.pool.get('purchase.order.line').write(cr, uid, [move.purchase_line_id.id], {'state': 'confirmed'}) #If picking cancel then change the state of its related purchsae order lines to confirmed. This will alllow again selection of that purchase line in new container order.
+                if purchase_order.state == 'contained':
+                    self.pool.get('purchase.order').write(cr, uid, [purchase_order.id], {'state': 'approved'})
         return res
 
     @api.one
