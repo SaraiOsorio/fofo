@@ -69,7 +69,8 @@ class report_account_common(report_account_common):
                 if r['level'] == cogs_level:
                     #find the next account which contains the same level of  Cost of Good Sold account
                     cogs_lst_child_index = [i for i,a in enumerate(result) if r['name'] == a['name']][0]
-                    continue
+                    break
+            
             #insert the gross profit record after the  Cost of Good Sold's last child
             result.insert(cogs_lst_child_index, {'account_type': 'view', 
                          'balance': gross_profit,
