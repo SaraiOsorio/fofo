@@ -845,6 +845,9 @@ class container_order(models.Model):
 #        if order_line.po_line_id.order_id.currency_id.id != order_line.container_order_id.currency_id.id:
             #we don't round the price_unit, as we may want to store the standard price with more digits than allowed by the currency
 #            price_unit = order_line.po_line_id.order_id.currency_id.compute(price_unit, order_line.container_order_id.currency_id, round=False)
+        if order_line.po_line_id.order_id.company_id.currency_id.id != order_line.container_order_id.currency_id.id:
+            #we don't round the price_unit, as we may want to store the standard price with more digits than allowed by the currency
+            price_unit = order_line.container_order_id.currency_id.compute(price_unit, order_line.po_line_id.order_id.company_id.currency_id, round=False)
         res = []
         move_template = {
             'name': order_line.name or '',
