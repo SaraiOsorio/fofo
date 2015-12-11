@@ -114,7 +114,7 @@ class lazada_payment(models.TransientModel):
                 e = sys.exc_info()[0]
                 raise Warning(_('Import Error!'),_('Wrong file format. Please enter .xlsx file.'))
             
-            for sheet_name in lines.sheet_names(): 
+            for sheet_name in lines.sheet_names():
                 sheet = lines.sheet_by_name(sheet_name)
                 rows = sheet.nrows
                 columns = sheet.ncols
@@ -125,7 +125,7 @@ class lazada_payment(models.TransientModel):
                 len_rows = rows - 1
                 len_rows_counter = 0
                 for row_no in range(rows):
-                    order_row = sheet.row_values(0).index('Order No')
+                    order_row = sheet.row_values(0).index('Order No.')
                     order_no = False
                     try:
                         order_no = int(sheet.row_values(row_no)[order_row])
@@ -139,7 +139,7 @@ class lazada_payment(models.TransientModel):
                                 len_rows_counter += 1
                                 odoo_order_exception = True
                                 amount = sheet.row_values(row_no)[amount_row]
-                                sheet_date = sheet.row_values(row_no)[sheet.row_values(0).index('Date')]
+                                sheet_date = sheet.row_values(row_no)[sheet.row_values(0).index('Transaction Date')]
                                 if sheet_date:
                                     conv_date = time.strptime(sheet_date,"%d %b %Y")
                                     billing_date = time.strftime("%m/%d/%Y",conv_date)
@@ -153,7 +153,7 @@ class lazada_payment(models.TransientModel):
                                 seller_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Seller SKU')]
                                 lazada_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Lazada SKU')]
                                 details = sheet.row_values(row_no)[sheet.row_values(0).index('Details')]
-                                order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')]
+                                order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No.')]
                                 history_line_vals.update({
                                     'date': billing_date,
                                     'transaction_type': transaction_type,
@@ -176,7 +176,7 @@ class lazada_payment(models.TransientModel):
                                     history_id.reason = reason
                             else:
                                 amount = sheet.row_values(row_no)[amount_row]
-                                sheet_date = sheet.row_values(row_no)[sheet.row_values(0).index('Date')]
+                                sheet_date = sheet.row_values(row_no)[sheet.row_values(0).index('Transaction Date')]
                                 conv_date = time.strptime(sheet_date,"%d %b %Y")
                                 billing_date = time.strftime("%m/%d/%Y",conv_date)
                                 transaction_type = sheet.row_values(row_no)[sheet.row_values(0).index('Transaction Type')]
@@ -186,9 +186,9 @@ class lazada_payment(models.TransientModel):
                                 seller_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Seller SKU')]
                                 lazada_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Lazada SKU')]
                                 details = sheet.row_values(row_no)[sheet.row_values(0).index('Details')]
-                                order_item_no = int(sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')])
+                                order_item_no = int(sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No.')])
                                 if not transaction_type == "Item Price":
-                                    total_amount += amount
+                                    total_amount += float(amount)
                                 history_line_vals.update({
                                     'date': billing_date,
                                     'transaction_type': transaction_type,
@@ -236,7 +236,7 @@ class lazada_payment(models.TransientModel):
                                                                                   'order_no' : order_no})
                         else:
                             amount = sheet.row_values(row_no)[amount_row]
-                            sheet_date = sheet.row_values(row_no)[sheet.row_values(0).index('Date')]
+                            sheet_date = sheet.row_values(row_no)[sheet.row_values(0).index('Transaction Date')]
                             if sheet_date:
                                 conv_date = time.strptime(sheet_date,"%d %b %Y")
                                 billing_date = time.strftime("%m/%d/%Y",conv_date)
@@ -250,7 +250,7 @@ class lazada_payment(models.TransientModel):
                             seller_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Seller SKU')]
                             lazada_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Lazada SKU')]
                             details = sheet.row_values(row_no)[sheet.row_values(0).index('Details')]
-                            order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')]
+                            order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No.')]
                             history_line_vals.update({
                                 'date': billing_date,
                                 'transaction_type': transaction_type,
@@ -270,7 +270,7 @@ class lazada_payment(models.TransientModel):
                             reason = reason + '  ' + 'Empty Order Number in sheet  '
                             history_id.reason = reason
                     history_lines = self.env['payment.history.line'].create(history_line_vals)
-
+                break  # 1 sheet only
         order_exception = False
         for order_number in order_list:#This is loop for missing order number in excel file. Column of order number in excel is empty then we will not create any customer payment.
             if not order_number:
