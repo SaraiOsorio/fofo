@@ -25,12 +25,16 @@ import openerp.addons.decimal_precision as dp
 class stock_quant(models.Model):
     _inherit = 'stock.quant'
 
+    # http://......../issues/3159
     @api.v7 # Override here to pass partner_id from stock move since for container order case there is no partner on picking.!
     def _prepare_account_move_line(self, cr, uid, move, qty, cost, credit_account_id, debit_account_id, context=None):
         if context is None:
             context = {}
         currency_obj = self.pool.get('res.currency')
+
+        # Calling Super.
         res = super(stock_quant, self)._prepare_account_move_line(cr, uid, move, qty, cost, credit_account_id, debit_account_id, context=context)
+
         for line in res:
             if line[2] and 'partner_id' in line[2] and not line[2]['partner_id']:
                 if move.co_line_id:
@@ -42,7 +46,7 @@ class stock_quant(models.Model):
                 valuation_amount = context.get('force_valuation_amount')
             else:
                 if move.product_id.cost_method == 'average':
-                    valuation_amount = cost if move.location_id.usage != 'internal' and move.location_dest_id.usage == 'internal' else move.product_id.total_standard_landed #We use total_standard_landed instead of standard_price.
+                    valuation_amount = cost if move.location_id.usage == 'internal' and move.location_dest_id.usage == 'internal' else move.product_id.total_standard_landed #We use total_standard_landed instead of standard_price. # Only for Stock to Stock transfer we use "Cost" for other Incoming/Outgoing/Internal moves we use total_standard_landed(Total cost on product form.) #3532
                 else:
                     valuation_amount = cost if move.product_id.cost_method == 'real' else move.product_id.total_standard_landed #We use total_standard_landed instead of standard_price.
             valuation_amount = currency_obj.round(cr, uid, move.company_id.currency_id, valuation_amount * qty)
