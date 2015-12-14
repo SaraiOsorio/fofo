@@ -45,7 +45,8 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="transaction_type_id"/>
+                                <field name="transaction_type_id"/> 
+                                <field name="state_to_skip"/>
                             </group>
                             <group>
                                 <field name="account_id" domain="[('type','not in',['view', 'closed'])]"/>

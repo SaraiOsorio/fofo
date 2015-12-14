@@ -31,6 +31,7 @@ class lazada_payment_transaction_config(models.Model):
     
     transaction_type_id = fields.Many2one('lazada.payment.transaction.type', string='Transaction Type', required=True)
     account_id = fields.Many2one('account.account', string='Related Account')
+    state_to_skip = fields.Boolean('Transaction Type to Ignore', help='Tick this box if you do not want to force order reference while importing csv.')
     transaction_type_name = fields.Char(related='transaction_type_id.name', string="Transaction Type Name")
 
 

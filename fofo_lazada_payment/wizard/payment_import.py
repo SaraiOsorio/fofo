@@ -97,12 +97,16 @@ class lazada_payment(models.TransientModel):
                     'user_id': self.env.user.id,
                     'import_date' : date.today().strftime("%m/%d/%Y")}
         history_id = self.env['payment.history'].create(histoy_vals)
-        
         multiple_reconcile_dict = {}
         order_list = []
         cr_move_ids = []
         dr_move_ids = []
         total_amount = 0.0
+        STATE_TO_SKIP = []
+        state_to_skip_ids = self.env['lazada.payment.transaction.config'].search([('state_to_skip', '=', True)])
+        for state in state_to_skip_ids:
+            STATE_TO_SKIP.append(state.transaction_type_name)
+        
         for line in self:
             try:
                 lines = xlrd.open_workbook(file_contents=base64.decodestring(self.input_file))
@@ -114,7 +118,7 @@ class lazada_payment(models.TransientModel):
                 e = sys.exc_info()[0]
                 raise Warning(_('Import Error!'),_('Wrong file format. Please enter .xlsx file.'))
             
-            for sheet_name in lines.sheet_names():
+            for sheet_name in lines.sheet_names(): 
                 sheet = lines.sheet_by_name(sheet_name)
                 rows = sheet.nrows
                 columns = sheet.ncols
@@ -132,8 +136,9 @@ class lazada_payment(models.TransientModel):
                     except:
                         order_no = False
                     if row_no > 0:
-                        order_list.append(order_no)
-                        if order_no:
+                        transaction_type = sheet.row_values(row_no)[sheet.row_values(0).index('Transaction Type')]
+                        order_list.append({'order_no': order_no, 'transaction_type': transaction_type})
+                        if order_no or transaction_type in STATE_TO_SKIP:
                             line_move_ids = self.env['account.move.line'].search([('lazada_order_no' ,'=', order_no), ('debit', '>', 0.0)])
                             if not line_move_ids:#If order number exists in excel but is not available in Odoo then we will fail that import and not create any customer payment.
                                 len_rows_counter += 1
@@ -146,7 +151,7 @@ class lazada_payment(models.TransientModel):
                                 else:
                                     conv_date = False
                                     billing_date = False
-                                transaction_type = sheet.row_values(row_no)[sheet.row_values(0).index('Transaction Type')]
+                                
                                 transaction_number = sheet.row_values(row_no)[sheet.row_values(0).index('Transaction Number')]
                                 amount_vat = sheet.row_values(row_no)[sheet.row_values(0).index('VAT in Amount')]
                                 ref = sheet.row_values(row_no)[sheet.row_values(0).index('Reference')]
@@ -271,9 +276,11 @@ class lazada_payment(models.TransientModel):
                             history_id.reason = reason
                     history_lines = self.env['payment.history.line'].create(history_line_vals)
                 break  # 1 sheet only
+        
+
         order_exception = False
-        for order_number in order_list:#This is loop for missing order number in excel file. Column of order number in excel is empty then we will not create any customer payment.
-            if not order_number:
+        for order in order_list:#This is loop for missing order number in excel file. Column of order number in excel is empty then we will not create any customer payment.
+            if not order['order_no'] and order['transaction_type'] not in STATE_TO_SKIP:
                 order_exception = True
 
         if len_rows_counter >= len_rows:
@@ -282,6 +289,7 @@ class lazada_payment(models.TransientModel):
         if not order_exception and not odoo_order_exception:
             voucher_id = self.env['account.voucher'].create(voucher_vals)
             history_id.voucher_id = voucher_id.id
+            
             
             for order in multiple_reconcile_dict:
                 for line in multiple_reconcile_dict[order]:
@@ -306,7 +314,6 @@ class lazada_payment(models.TransientModel):
                         if line['move_line_id'] == move:
                             voucher_id.write({'pre_line': True,'line_dr_ids' : [(0, 0, line)]})
                             total_amount -= line['amount']
-            
             voucher_id.write({'is_lazada_payment' : True, 'amount' : total_amount})
         result = self.env.ref('fofo_lazada_payment.lazada_payment_import_history_action')
         result = result.read()[0]
