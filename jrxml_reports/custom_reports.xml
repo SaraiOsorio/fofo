@@ -63,6 +63,21 @@
         <field name="jasper_output">pdf</field>
     </record>
     
+    # Picking
+    <report string="Delivery"
+        model="account.invoice"
+        auto="True"
+        name="ff.picking"
+        rml="jrxml_reports/custom_reports/ff_picking.jrxml"
+        id="ff_picking" 
+        menu="True"
+        header="False" 
+        />
+    <record id="ff_picking" model="ir.actions.report.xml">
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">pdf</field>
+        <field name="copies">1</field>
+    </record>
     # Invoice
     <report string="Invoice"
         model="account.invoice"
