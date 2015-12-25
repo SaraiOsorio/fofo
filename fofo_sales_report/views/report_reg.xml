@@ -44,6 +44,7 @@
             name="fofo_sales_report.container_receiving_report" 
             file="fofo_sales_report.container_receiving_report" 
             header="False"
+            menu="False"
         />
         <record id="container_receiving_report_reg" model="ir.actions.report.xml">
             <field name="paperformat_id" ref="fofo_sales_report.paperformat_container_receiving"/>
