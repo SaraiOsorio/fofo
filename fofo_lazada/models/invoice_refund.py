@@ -28,7 +28,7 @@ class account_invoice_refund(models.TransientModel):
     
     @api.v7
     def compute_refund(self, cr, uid, ids, mode='refund', context=None):
-        res = super(account_invoice_refund, self).compute_refund(cr, uid, ids, mode='refund', context=context)
+        res = super(account_invoice_refund, self).compute_refund(cr, uid, ids, mode=mode, context=context)
         inv_obj = self.pool.get('account.invoice')
         new_inv_id = res['domain'][1][2]
         old_inv_id = context.get('active_id', False)
