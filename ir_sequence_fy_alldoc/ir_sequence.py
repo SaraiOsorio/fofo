@@ -28,11 +28,12 @@ class ir_sequence(osv.osv):
     def _next(self, cr, uid, seq_ids, context=None):
         if context is None:
             context = {}
+        c = context.copy()
         # If no fiscalyear_id passed in, get a default one from today
         if not context.get('fiscalyear_id', False):
             current_year = self.pool.get('account.fiscalyear').find(cr, uid)
-            context.update({'fiscalyear_id': current_year})
-        return super(ir_sequence, self)._next(cr, uid, seq_ids, context)
+            c.update({'fiscalyear_id': current_year})
+        return super(ir_sequence, self)._next(cr, uid, seq_ids, c)
     
 ir_sequence()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
