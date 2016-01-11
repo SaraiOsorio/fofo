@@ -158,7 +158,14 @@ class lazada_payment(models.TransientModel):
                                 seller_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Seller SKU')]
                                 lazada_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Lazada SKU')]
                                 details = sheet.row_values(row_no)[sheet.row_values(0).index('Details')]
-                                order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No.')]
+
+
+                                try: #3590
+                                   order_item_no = int(sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')])
+                               except:
+                                   order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')]
+
+#                                order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No.')]
                                 history_line_vals.update({
                                     'date': billing_date,
                                     'transaction_type': transaction_type,
@@ -191,7 +198,12 @@ class lazada_payment(models.TransientModel):
                                 seller_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Seller SKU')]
                                 lazada_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Lazada SKU')]
                                 details = sheet.row_values(row_no)[sheet.row_values(0).index('Details')]
-                                order_item_no = int(sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No.')])
+                                try: #3590
+                                   order_item_no = int(sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')])
+                               except:
+                                   order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')]
+
+#                                order_item_no = int(sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No.')])
                                 if not transaction_type == "Item Price":
                                     total_amount += float(amount)
                                 history_line_vals.update({
