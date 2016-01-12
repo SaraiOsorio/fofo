@@ -162,7 +162,7 @@ class lazada_payment(models.TransientModel):
 
                                 try: #3590
                                    order_item_no = int(sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')])
-                               except:
+                                except:
                                    order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')]
 
 #                                order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No.')]
