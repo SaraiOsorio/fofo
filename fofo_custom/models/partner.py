@@ -25,5 +25,6 @@ import openerp.addons.decimal_precision as dp
 class res_partner(models.Model):
     _inherit = 'res.partner'
     shipper = fields.Boolean('Shipper', copy=True)
+    route_id = fields.Many2one('stock.location.route', 'Route', domain=[('sale_selectable', '=', True)])
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

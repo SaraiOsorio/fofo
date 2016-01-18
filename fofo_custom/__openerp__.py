@@ -45,6 +45,7 @@
             'views/sale_view.xml'
             ],
     'depends':['sale','purchase','account', 'stock',
+               'sale_stock',
                'order_invoice_line_percentage'],
     'installable':True,
     'auto_install':False

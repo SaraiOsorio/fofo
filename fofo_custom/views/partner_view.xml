@@ -9,6 +9,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[@string='Sales &amp; Purchases']/group/group/field[@name='supplier']" position="after">
                     <field name="shipper" />
+                    <field name="route_id" string="Route on SO Line"/>                
                 </xpath>
             </field>
         </record>

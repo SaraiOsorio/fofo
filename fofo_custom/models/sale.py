@@ -28,6 +28,8 @@ class sale_order_line(models.Model):
     date_order = fields.Datetime(related='order_id.date_order', store=True, string='Order Date')
     product_tmpl_id_store = fields.Many2one(related='product_id.product_tmpl_id', store=True, string='Product Template', relation='product.template')
     sale_history_line_ids = fields.Many2many('sale.order.line', 'sale_line_history_rel', 'line_id1', 'line_id2', string='Sale History')
+    route_id = fields.Many2one(compute='_compute_route_id')
+
 
     @api.multi
     def product_id_change(self, pricelist, product, qty=0,
@@ -44,8 +46,14 @@ class sale_order_line(models.Model):
                     lines.append(line.id)
                 res['value'].update({'sale_history_line_ids': [(6, 0, lines)]})
         return res
-    
-    
+
+    @api.multi
+    @api.depends('order_id.partner_id')
+    def _compute_route_id(self):
+        for l in self:
+            l.route_id = l.order_id.partner_id.route_id
+
+
 class sale_order(models.Model):
     _inherit = 'sale.order'
     
