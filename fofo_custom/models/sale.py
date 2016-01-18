@@ -48,7 +48,7 @@ class sale_order_line(models.Model):
         return res
 
     @api.multi
-    @api.depends('order_id.partner_id')
+    @api.depends('product_id', 'order_id.partner_id')
     def _compute_route_id(self):
         for l in self:
             l.route_id = l.order_id.partner_id.route_id
