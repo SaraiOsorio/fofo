@@ -267,7 +267,7 @@ class lazada_payment(models.TransientModel):
                             seller_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Seller SKU')]
                             lazada_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Lazada SKU')]
                             details = sheet.row_values(row_no)[sheet.row_values(0).index('Details')]
-                            order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No.')]
+                            order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')]
                             history_line_vals.update({
                                 'date': billing_date,
                                 'transaction_type': transaction_type,
@@ -302,17 +302,25 @@ class lazada_payment(models.TransientModel):
             voucher_id = self.env['account.voucher'].create(voucher_vals)
             history_id.voucher_id = voucher_id.id
             
-            
+            transaction_type_group = []
+            transaction_type_group_dict = {}
             for order in multiple_reconcile_dict:
                 for line in multiple_reconcile_dict[order]:
-                    reconcile_vals = {
-                        'account_id': line['account_id'],
-                        'amount' : line['amount'],
-                        'comment' : line['transaction_type'],
-                        'voucher_id': voucher_id.id,
-                        'order_no': line['order_no']
-                    }
-                    self.env['account.voucher.multiple.reconcile'].create(reconcile_vals)
+                    if line['transaction_type'] not in transaction_type_group:
+                        reconcile_vals = {
+                            'account_id': line['account_id'],
+                            'amount' : line['amount'],
+                            'comment' : line['transaction_type'],
+                            'voucher_id': voucher_id.id,
+                            'order_no': line['order_no']
+                        }
+                        reconcile_id = self.env['account.voucher.multiple.reconcile'].create(reconcile_vals)
+                        transaction_type_group_dict[line['transaction_type']] = reconcile_id
+                    else:
+                        reconcile_id_brw = transaction_type_group_dict[line['transaction_type']]
+                        amt = reconcile_id_brw.amount + line['amount']
+                        reconcile_id_brw.write({'amount': amt})
+                    transaction_type_group.append(line['transaction_type'])
                     
             for move in cr_move_ids:
                 for line in partner_data['value']['line_cr_ids']:
