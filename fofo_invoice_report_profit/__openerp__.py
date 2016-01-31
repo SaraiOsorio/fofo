@@ -37,6 +37,7 @@
     'website': 'http://ecosoft.co.th',
     'depends': ['account_invoice_margin', 'fofo_custom'],
     'data': [
+        'account_invoice_report_view.xml',
     ],
     'installable': True,
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="view_account_invoice_report_graph" model="ir.ui.view">
+		    <field name="name">account.invoice.report.graph</field>
+		    <field name="model">account.invoice.report</field>
+		    <field name="inherit_id" ref="account.view_account_invoice_report_graph"/>
+		    <field name="arch" type="xml">
+		        <field name="price_total" position="after">
+	                 <field name="margin_total" type="measure"/>
+		        </field>
+		    </field>
+		</record>
+	</data>
+</openerp>
