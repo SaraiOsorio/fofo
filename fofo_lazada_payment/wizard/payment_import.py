@@ -189,7 +189,7 @@ class lazada_payment(models.TransientModel):
                         transaction_type = sheet.row_values(row_no)[sheet.row_values(0).index('Transaction Type')]
                         order_list.append({'order_no': order_no, 'transaction_type': transaction_type})
                         if order_no or transaction_type in STATE_TO_SKIP:
-                            line_move_ids = self.env['account.move.line'].search([('lazada_order_no' ,'=', order_no), ('debit', '>', 0.0)])
+                            line_move_ids = self.env['account.move.line'].search([('lazada_order_no', '=', order_no), ('debit', '>', 0.0)])
                             if not line_move_ids:  # If order number exists in excel but is not available in Odoo then we will fail that import and not create any customer payment.
                                 len_rows_counter += 1
                                 odoo_order_exception = True
@@ -247,7 +247,7 @@ class lazada_payment(models.TransientModel):
                                 seller_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Seller SKU')]
                                 lazada_sku = sheet.row_values(row_no)[sheet.row_values(0).index('Lazada SKU')]
                                 details = sheet.row_values(row_no)[sheet.row_values(0).index('Details')]
-                                try: #3590
+                                try:  # 3590
                                     order_item_no = int(sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')])
                                 except:
                                     order_item_no = sheet.row_values(row_no)[sheet.row_values(0).index('Order Item No')]
@@ -270,19 +270,37 @@ class lazada_payment(models.TransientModel):
                                     'status': 'Done',
                                     'details': details
                                 })
-                                if not amount < 0 and transaction_type == "Item Price Credit" or transaction_type == "Item Price":
-                                    move_ids = self.env['account.move.line'].search([('lazada_order_no' ,'=', order_no), ('debit', '>', 0.0)])
-                                    if move_ids:
-                                        for move in move_ids:
-                                            if move.id not in map(lambda x: x[0], cr_move_ids):
-                                                cr_move_ids.append((move.id, amount))
-                                    move_dr_ids = self.env['account.move.line'].search([('lazada_order_no' ,'=', order_no), ('credit', '>', 0.0)])
-                                    if move_dr_ids:
-                                        for move_dr in move_dr_ids:
-                                            if move_dr.id not in map(lambda x: x[0], dr_move_ids):
-                                                dr_move_ids.append((move_dr.id, amount))
-
-                                elif not transaction_type == "Item Price Credit" or not transaction_type == "Item Price":
+                                if transaction_type == "Item Price Credit":
+                                    move_ids = self.env['account.move.line'].\
+                                        search([('account_id.type', '=', 'receivable'),
+                                                ('lazada_order_no', '=', order_no),
+                                                ('debit', '>', 0.0)], limit=1)
+                                    for move in move_ids:
+                                        if move.id not in map(lambda x: x[0], cr_move_ids):
+                                            cr_move_ids.append((move.id, amount, order_no))
+                                        else:  # Case > line with same move_line_id, order_no
+                                            prev_cr = cr_move_ids[-1:] and cr_move_ids[-1:][0] or False
+                                            prev_cr_move_id = prev_cr and prev_cr[0] or False
+                                            prev_cr_order_no = prev_cr and prev_cr[2] or False
+                                            if order_no == prev_cr_order_no and move.id == prev_cr_move_id:
+                                                _, prev_amount, order_no = cr_move_ids.pop(-1)
+                                                cr_move_ids.append((move.id, prev_amount + amount, order_no))
+                                elif transaction_type == "Item Price":
+                                    move_dr_ids = self.env['account.move.line'].\
+                                        search([('account_id.type', '=', 'receivable'),
+                                                ('lazada_order_no', '=', order_no),
+                                                ('credit', '>', 0.0)], limit=1)
+                                    for move_dr in move_dr_ids:
+                                        if move_dr.id not in map(lambda x: x[0], dr_move_ids):
+                                            dr_move_ids.append((move_dr.id, amount, order_no))
+                                        else:  # Case > line with same move_line_id, order_no
+                                            prev_dr = dr_move_ids[-1:] and dr_move_ids[-1:][0] or False
+                                            prev_dr_move_id = prev_dr and prev_dr[0] or False
+                                            prev_dr_order_no = prev_dr and prev_dr[2] or False
+                                            if order_no == prev_dr_order_no and move_dr.id == prev_dr_move_id:
+                                                _, prev_amount, order_no = dr_move_ids.pop(-1)
+                                                dr_move_ids.append((move_dr.id, prev_amount + amount, order_no))
+                                else:
                                     transaction_id = self.env['lazada.payment.transaction.type'].search([('name', '=', str(transaction_type))])
                                     if not transaction_id:
                                         raise Warning(_('Please create transaction type for %s') %str(transaction_type) )
@@ -369,7 +387,6 @@ class lazada_payment(models.TransientModel):
                         amt = reconcile_id_brw.amount + line['amount']
                         reconcile_id_brw.write({'amount': amt})
                     transaction_type_group.append(line['transaction_type'])
-
             # Credit
             partner_data_cr = self.env['account.voucher'].\
                 with_context(with_move_ids=map(lambda x: x[0], cr_move_ids)).\
@@ -378,8 +395,8 @@ class lazada_payment(models.TransientModel):
 
             if partner_data_cr['value'].get('line_cr_ids'):
                 line_cr_ids = []
-                for move in cr_move_ids:
-                    for line in partner_data_cr['value']['line_cr_ids']:
+                for line in partner_data_cr['value']['line_cr_ids']:
+                    for move in cr_move_ids:
                         if line['move_line_id'] == move[0]:
                             line['amount'] = abs(move[1])
                             line['reconcile'] = (line['amount'] == line['amount_original'])
