@@ -137,7 +137,19 @@ class stock_picking(models.Model):
 
 class stock_move(models.Model):
     _inherit = 'stock.move'
-    
+
+    @api.v7
+    def get_price_unit(self, cr, uid, move, context=None):
+        """ Overwrite """
+        return move.price_unit or move.product_id.total_cost_call  # from standard_price
+
+    @api.v7
+    def attribute_price(self, cr, uid, move, context=None):
+        """ Overwrite """
+        if not move.price_unit:
+            price = move.product_id.total_cost_call  # from standard_price
+            self.write(cr, uid, [move.id], {'price_unit': price})
+
     @api.v7 #Override from base.
     def action_cancel(self, cr, uid, ids, context=None):
         res = super(stock_move, self).action_cancel(cr, uid, ids, context)
