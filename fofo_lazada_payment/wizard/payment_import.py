@@ -189,8 +189,8 @@ class lazada_payment(models.TransientModel):
                         transaction_type = sheet.row_values(row_no)[sheet.row_values(0).index('Transaction Type')]
                         order_list.append({'order_no': order_no, 'transaction_type': transaction_type})
                         if order_no or transaction_type in STATE_TO_SKIP:
-                            line_move_ids = self.env['account.move.line'].search([('lazada_order_no', '=', order_no), ('debit', '>', 0.0)])
-                            if not line_move_ids:  # If order number exists in excel but is not available in Odoo then we will fail that import and not create any customer payment.
+                            move_count = self.env['account.move.line'].search_count([('lazada_order_no', '=', order_no), ('debit', '>', 0.0)])
+                            if not move_count:  # If order number exists in excel but is not available in Odoo then we will fail that import and not create any customer payment.
                                 len_rows_counter += 1
                                 odoo_order_exception = True
                                 amount = sheet.row_values(row_no)[amount_row]
