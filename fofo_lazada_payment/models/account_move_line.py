@@ -18,8 +18,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import lazada_payment_transaction
-import payment_history
-import account_voucher
-import account_move_line
+
+from openerp import models, api
+
+
+class account_move_line(models.Model):
+    _inherit = 'account.move.line'
+
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None,
+               count=False):
+        if self._context.get('with_move_ids', False):
+            args.append(('id', 'in', self._context.get('with_move_ids')))
+        return super(account_move_line, self).search(
+            args, offset, limit, order, count=count)
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
