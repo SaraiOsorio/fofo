@@ -1021,7 +1021,8 @@ class container_order(models.Model):
                     #Important note: Below logic is based on when shipments related to CO is not still Transffered.
                     qty_available = co_line.product_id.qty_available - co_line.product_qty #since picking is already transfferd so it already updated qty avaialble so we need to subtract CO line qty from there.
                     amount_unit = co_line.product_id.landed_cost
-                    landed_cost = ((qty_available * amount_unit) + (((co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty) * co_line.product_qty)) / (qty_available + co_line.product_qty) # As per Average price formula in stock_account/stock_account.py => Difference is only that we are not considering Product template's available qty and its standard price.!
+                    if co_line.product_qty > 0.0:
+                        landed_cost = ((qty_available * amount_unit) + (((co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty) * co_line.product_qty)) / (qty_available + co_line.product_qty) # As per Average price formula in stock_account/stock_account.py => Difference is only that we are not considering Product template's available qty and its standard price.!
                 else:# First time update.
                     if co_line.product_qty > 0.0:
                         landed_cost = (co_line.container_order_id.shipping_cost_by_volume * co_line.volume) / co_line.product_qty #Formula => Landed Cost = (Shipping Cost/Volume x Volume) / Contained Quantity #http://128.199.123.133/issues/3188#note-8
